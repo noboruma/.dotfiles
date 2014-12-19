@@ -1,0 +1,16 @@
+# Saving this file will update the current colour scheme.
+Basis:default
+Light:
+	Comment:DarkGreen
+	Error:Yellow,Red
+	Class:Blue
+	DefinedName:Blue
+	EnumerationValue:#880000
+	EnumerationName:#880000
+	Member:DarkBlue
+	Union:DarkGreen
+	GlobalVariable:Red
+	LocalVariable:Red
+	GlobalConstant:Red
+
+# vim: ff=unix:noet:ft=EasyColour

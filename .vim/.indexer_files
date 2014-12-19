@@ -1,0 +1,8 @@
+[CSandBox] 
+
+   /home/zackel/workspace/c
+
+[C++SandBox] 
+   option:ctags_params = "--languages=c++" 
+
+   /home/zackel/workspace/c++

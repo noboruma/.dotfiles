@@ -1,0 +1,10 @@
+IncludeLocals:1
+DoNotGenerateTags:1
+
+TagFileDirModePriority:Explicit
+TagFileDirectory:/home/thomas/.indexer_files_tags
+TagFileName:C__SandBox
+
+TypesFileDirModePriority:Explicit
+TypesFileDirectory:/home/thomas/.indexer_files_tags/.C__SandBox_taghl
+

@@ -1,0 +1,15 @@
+# Saving this file will update the current colour scheme.
+Basis:desert
+Dark:
+	Class:#F0DDFF
+	DefinedName:#CCC0C0
+	EnumerationValue:#FFCCFF
+	EnumerationName:DarkKhaki
+	Member:#98FB98
+	Union:DarkKhaki
+	GlobalVariable:#F0E6CC
+	LocalVariable:#F0E6CC
+	GlobalConstant:#F0E6CC
+# No light colour scheme defined
+
+# vim: ff=unix:noet:ft=EasyColour

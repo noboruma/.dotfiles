@@ -1,0 +1,288 @@
+"For MacVim
+"set guioptions-=T
+"set guitablabel=%t
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Stuff I have decided I don't like
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set ignorecase " -- turns out, I like case sensitivity 
+"set list " turns out, I don't like listchars -- show chars on end of line, whitespace, etc
+"autocmd GUIEnter * :simalt ~x -- having it auto maximize the screen is annoying
+"autocmd BufEnter * :lcd %:p:h -- switch to current dir (breaks some scripts)
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible " get out of horrible vi-compatible mode
+filetype on " detect the type of file
+set history=1000 " How many lines of history to remember
+set cf " enable error files and error jumping
+set clipboard+=unnamed " turns out I do like is sharing windows clipboard
+set ffs=unix,mac,dos " support all three, in this order
+filetype plugin on " load filetype plugins
+set viminfo='50,\"250
+set viminfo+=! " make sure it can save viminfo
+set isk+=_,$,@,%,#,- " none of these should be word dividers, so make them not be
+"set textwidth=79
+set formatoptions="tcq"
+
+" Ced: for search what is in visual mode when pushing "/"
+vmap / y/<C-R>"<CR>
+
+" Ced: to open NERDTree when hitting F2
+map <F2> :NERDTree<CR>
+
+" Ced: From Allen
+set sw=2
+set title
+set titlelen=85
+set titleold=""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Theme/Colors
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+colorscheme desert256
+"set background=dark " we are using a dark background
+syntax on " syntax highlighting on
+"color torte " evening is not bad as well
+"A font not too big, not too nice unfortunately...
+set gfn=DejaVu\ Sans\ Mono\ 9
+
+" Ced: for auto-completion popup menu
+highlight Pmenu    guifg=grey  guibg=blue gui=bold
+highlight PmenuSel guifg=black guibg=grey gui=bold
+
+" Ced: for considering identifiers with _t or _p as types
+syntax match cType /[^ (]*_t[ )]/
+syntax match cType /[^ (]*_p[ )]/
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Files/Backups
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set backup " make backup file
+set backupdir=~/.vim/vimfiles/backup " where to put backup file
+set directory=~/.vim/vimfiles/temp " directory is the directory for temp file
+"set makeef=error.err " When using make, where should it dump the file
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim UI
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set lsp=0 " space it out a little more (easier to read)
+set wildmenu " turn on wild menu
+set ruler " Always show current positions along the bottom 
+set cmdheight=1 " the command bar is 2 high
+set number " turn on line numbers
+set lz " do not redraw while running macros (much faster) (LazyRedraw)
+set hid " you can change buffer without saving
+set backspace=2 " make backspace work normal
+set whichwrap+=<,>,h,l  " backspace and cursor keys wrap to
+set mouse=a " use mouse everywhere
+set shortmess=atI " shortens messages to avoid 'press a key' prompt 
+set report=0 " tell us when anything is changed via :...
+set noerrorbells " don't make noise
+" make the splitters between windows be blank
+set fillchars=vert:\ ,stl:\ ,stlnc:\
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Visual Cues
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set showmatch " show matching brackets
+set mat=5 " how many tenths of a second to blink matching brackets for
+set nohlsearch " do not highlight searched for phrases
+set incsearch " BUT do highlight as you type you search phrase
+set listchars=tab:\|\ ,trail:.,extends:>,precedes:<,eol:$ " what to show when I hit :set list
+set lines=50 " 50 lines tall
+set columns=80 " 80 cols wide
+set so=10 " Keep 10 lines (top/bottom) for scope
+set novisualbell " don't blink
+set noerrorbells " no noises
+"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+"set statusline=%F\ %3.3l,%-3.3v\ %3.3p%%
+"set laststatus=2 " always show the status line
+set rulerformat=%15.15f\ %4.4l,%-2.2v\ %2.2p%% " needs to set COL_RULER to 27 in vimxx/src/options.c
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Text Formatting/Layout
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set fo=tcrqn " See Help (complex)
+set ai " autoindent
+set si " smartindent 
+set cindent " do c-style indenting
+"set tabstop=2 " tab spacing (settings below are just to unify it)
+"set softtabstop=2 " unify
+"set shiftwidth=2 " unify 
+"set expandtab " real tabs please!
+set nowrap " do not wrap lines  
+set smarttab " use tabs at the start of a line, spaces elsewhere
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Folding
+"    Enable folding, but by default make it act like folding is off, because folding is annoying in anything but a few rare cases
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set foldenable " Turn on folding
+set foldmethod=indent " Make folding indent sensitive
+set foldlevel=100 " Don't autofold anything (but I can still fold manually)
+set foldopen-=search " don't open folds when you search into them
+set foldopen-=undo " don't open folds when you undo stuff
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" File Explorer
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:explVertical=1 " should I split verticially
+"let g:explWinSize=35 " width of 35 pixels
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Win Manager
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:winManagerWidth=35 " How wide should it be( pixels)
+"let g:winManagerWindowLayout = 'FileExplorer,TagsExplorer|BufExplorer' " What windows should it
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CTags
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let OmniCpp_MayCompleteDot = 1 " autocomplete with .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete with ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete with ::
+let OmniCpp_SelectFirstItem = 2 " select first item (but don't insert)
+let OmniCpp_NamespaceSearch = 2 " search namespaces in this and included files
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function prototype (i.e. parameters) in popup window
+let OmniCpp_LocalSearchDecl = 1 " don't require special style of function opening braces
+
+set completeopt=menu " to avoid the preview window
+"To close automatically the preview window:
+"autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+"autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+" Ced: let this be the default CTAGS file location
+set tags=~/.ctags
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Minibuf
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:miniBufExplTabWrap = 1 " make tabs show complete (no broken on two lines)
+let g:miniBufExplModSelTarget = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Matchit
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let b:match_ignorecase = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Perl
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let perl_extended_vars=1 " highlight advanced perl vars inside strings
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Custom Functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Select range, then hit :SuperRetab($width) - by p0g and FallingCow
+"function! SuperRetab(width) range
+"        silent! exe a:firstline . ',' . a:lastline . 's/\v%(^ *)@<= {'. a:width .'}/\t/g'
+"endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"map <right> <ESC>:MBEbn<RETURN> " right arrow (normal mode) switches buffers  (excluding minibuf)
+"map <left> <ESC>:MBEbp<RETURN> " left arrow (normal mode) switches buffers (excluding minibuf) 
+"map <up> <ESC>:Sex<RETURN><ESC><C-W><C-W> " up arrow (normal mode) brings up a file list
+"map <down> <ESC>:Tlist<RETURN> " down arrow  (normal mode) brings up the tag list
+"map <A-i> i <ESC>r " alt-i (normal mode) inserts a single char, and then switches back to normal
+"map <F2> <ESC>ggVG:call SuperRetab()<left>
+"map <F12> ggVGg? " encypt the file (toggle)
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Autocommands
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"autocmd BufEnter * :syntax sync fromstart " ensure every file does syntax highlighting (full)
+"au BufNewFile,BufRead *.asp :set ft=aspjscript " all my .asp files ARE jscript
+"au BufNewFile,BufRead *.tpl :set ft=html " all my .tpl files ARE html
+"au BufNewFile,BufRead *.hta :set ft=html " all my .tpl files ARE html
+
+" Ced: Always cd to the current file directory
+autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+
+" To ensure we will open the file at the line position we closed it
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+  au!
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+
+  augroup END
+
+endif " has("autocmd")
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Useful abbrevs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+iab xasp <%@language=jscript%><CR><%<CR><TAB><CR><BS>%><ESC><<O<TAB>
+iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vimgdb Stuff 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+set previewheight=12
+run macros/gdb_mappings.vim
+"
+" set asm=0
+"set gdbprg=gdb_invocation
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use Tab for completion if possible
+" see http://blogs.gnome.org/lharris/2008/07/20/code-completion-with-vim-7/
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! SuperCleverTab()
+   if strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$'
+       return "\<Tab>"
+   else
+       if &omnifunc != ''
+           return "\<C-X>\<C-O>"
+       elseif &dictionary != ''
+           return "\<C-K>"
+       else
+           return "\<C-N>"
+       endif
+   endif
+endfunction
+
+inoremap <Tab> <C-R>=SuperCleverTab()<cr>
+
+" Ced: c syntax for .cn
+au BufNewFile,BufRead *.cn set filetype=c
+au BufNewFile,BufRead *.y set filetype=c
+
+" Ced: from Allen to respect R-Stream coding styles
+au BufReadPost *.hpp set expandtab
+au BufReadPost *.cpp set expandtab
+au BufReadPost *.h set expandtab
+au BufReadPost *.c set expandtab
+au BufReadPost *.hh set expandtab
+au BufReadPost *.cc set expandtab
+au BufReadPost *.tex set expandtab
+au BufReadPost *.ir set filetype=java sw=4 expandtab
+au BufReadPost *.java set filetype=java sw=4 expandtab
+au BufReadPost *.java.in set filetype=java sw=4 expandtab
+au BufReadPost *.java.old set filetype=java sw=4 expandtab
+au BufReadPost *.java-in set filetype=java sw=4 expandtab
+au BufReadPost *.java.in-bak set filetype=java sw=4 expandtab
+au BufReadPost *.twig set filetype=java sw=3 expandtab
+au BufReadPost *.cup set filetype=java sw=4 expandtab
+au BufReadPost *.cu set filetype=cpp sw=3 expandtab
+au BufReadPost *.lex set filetype=java sw=4 expandtab
+au BufReadPost *.bsh set filetype=java sw=4 expandtab
+au BufReadPost *.sig set filetype=sml sw=3 expandtab
+au BufReadPost *.sml set filetype=sml sw=3 expandtab
+au BufReadPost *.grm set filetype=sml sw=3 expandtab
+au BufReadPost make.* set filetype=make sw=3
