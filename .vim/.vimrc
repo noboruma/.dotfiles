@@ -229,6 +229,8 @@ noremap <leader>2 "2 ; Register
 noremap <leader>3 "3 ; Register
 noremap <leader><cr> a<cr><esc>
 noremap <leader>; A;<esc>
+noremap <leader>> x<esc>wP
+noremap <leader>< x<esc>bep
 
 " Custom hard remap
 inoremap        [  []<Left>
