@@ -55,6 +55,7 @@ set autoindent
 set smartindent
 set cino+=(0,+0 "C file option
 set autoread
+set clipboard^=unnamed
 
 " xterm-debian est un terminal couleur
 if &term =~ "xterm-debian" || &term =~ "xterm-xfree86"

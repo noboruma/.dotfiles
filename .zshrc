@@ -18,7 +18,11 @@ export SAVEHIST=50000
 eval `dircolors -b`
 
 set -o vi
-autoload -U compinit compinit
+bindkey -v
+#kill the lag
+export KEYTIMEOUT=1
+
+autoload -Uz compinit 
 setopt autopushd pushdminus pushdsilent pushdtohome
 setopt autocd
 setopt cdablevars
@@ -36,11 +40,24 @@ export PS1="$(print '%{\e[1;31m%}[%{\e[0m%}%{\e[1;34m%}%n%{\e[0m%}%{\e[1;31m%}@%
 export PS2="$(print '%{\e[0;34m%}>%{\e[0m%}')"
 
 # Date at Prompt
-RPROMPT='[%D{%L:%M:%S %p}]'
-TMOUT=0
-TRAPALRM() {
-   zle reset-prompt
+#RPROMPT='[%D{%L:%M:%S %p}]'
+#TMOUT=0
+#TRAPALRM() {
+#   zle reset-prompt
+#}
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git svn
+precmd() {
+  vcs_info
 }
+# Mode at Prompt
+function zle-line-init zle-keymap-select {
+    RPS1="%{%F{red}%} ${vcs_info_msg_0_} %{%F{blue}%} ${${KEYMAP/vicmd/ -- NORMAL --}/(main|viins)/-- INSERT --}%f"
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
 
 # Vars used later on by Zsh
 export EDITOR="vim"
@@ -57,7 +74,7 @@ zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*:*:cd:*' tag-order local-directories
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-autoload -Uz compinit
+autoload -U colors && colors
 compinit
 
 # tab completion for PID :D
@@ -86,6 +103,8 @@ bindkey '^[[B' down-line-or-search
 bindkey '^[[C' forward-char 
 # completion in the middle of a line
 bindkey '^i' expand-or-complete-prefix
+bindkey '^r' history-incremental-search-backward
+bindkey '^w' backward-kill-word
 
 ##################################################################
 # My aliases
@@ -150,6 +169,7 @@ alias com='git commit -am'
 alias push='git push'
 alias pull='git pull'
 alias ocaml='rlwrap ocaml'
+alias gdb='rlwrap gdb'
 
 alias mount="sudo mount"
 alias umount="sudo umount"
