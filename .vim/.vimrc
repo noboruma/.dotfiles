@@ -214,6 +214,7 @@ noremap <leader>S :source ~/mysession.vim
 noremap <leader>t :vsp<cr>
 noremap <leader>T :sp<cr>
 noremap <leader>u :GundoToggle<cr>
+noremap <leader>v <C-v>
 " Update timestamp and copyright
 noremap <leader>w :Adapt<cr>:w<cr>
 noremap <leader>x :q<cr>
