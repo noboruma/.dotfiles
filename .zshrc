@@ -3,6 +3,8 @@
 # sed -r 's/.* token_start (.+) token_end .*/\1/'
 # sed ':a;N;$!ba;s/\n/ /g' merge two lines to check pattern
 
+#export TERM='screen-256color'
+
 
 # Let's reset caps lock (setxkbmap -option to re-enable)
 setxkbmap -option ctrl:nocaps
@@ -15,7 +17,7 @@ export HISTSIZE=50000
 export SAVEHIST=50000
 eval `dircolors -b`
 
-#set -o vi
+set -o vi
 autoload -U compinit compinit
 setopt autopushd pushdminus pushdsilent pushdtohome
 setopt autocd
