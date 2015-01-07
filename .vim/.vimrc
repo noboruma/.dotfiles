@@ -233,6 +233,7 @@ noremap <leader><cr> a<cr><esc>
 noremap <leader>; A;<esc>
 noremap <leader>> x<esc>wP
 noremap <leader>< x<esc>bep
+vmap <leader>{ Sb=i{
 
 " Custom hard remap
 inoremap        [  []<Left>
@@ -320,7 +321,7 @@ if ! exists('g:TagHighlightSettings')
 let g:TagHighlightSettings = {}
 endif
 
-let g:rainbow_active=1
+let g:rainbow_active = 1
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -361,6 +362,7 @@ let g:semanticColors = { 0x00: '#72d572', 0x01: '#c5e1a5', 0x02: '#e6ee9c', 0x03
 
 " Surround 
 let g:surround_{char2nr("c")} = "\/*\n\r\n*\/"
+let g:surround_{char2nr("b")} = "{\n\r\n}"
 
 " Backup part
 set nobackup
