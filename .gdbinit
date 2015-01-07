@@ -165,6 +165,11 @@
 #     Add more tips !
 
 # _____________default configs________________
+
+# Need to save history !
+set history save on
+set history size 256
+
 #### moar colors mean moar fun!
 set prompt \033[01;31m\n(gdb) > \033[0m
 
