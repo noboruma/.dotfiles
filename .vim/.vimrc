@@ -246,10 +246,18 @@ autocmd FileType c,cpp inoremap { {<CR>}<Esc>ko
 
 " Split naviguation
 " silent help to not ask anything in the command
-nnoremap <silent> <C-Right> <c-w>l
-nnoremap <silent> <C-Left> <c-w>h
-nnoremap <silent> <C-Up> <c-w>k
-nnoremap <silent> <C-Down> <c-w>j
+"nnoremap <silent> <M-Right> <c-w>l
+"nnoremap <silent> <M-Left> <c-w>h
+"nnoremap <silent> <M-Up> <c-w>k
+"nnoremap <silent> <M-Down> <c-w>j
+nnoremap <silent> <M-l> <c-w>l
+nnoremap <silent> <M-h> <c-w>h
+nnoremap <silent> <M-k> <c-w>k
+nnoremap <silent> <M-j> <c-w>j
+nnoremap <silent> <M-L> <c-w><
+nnoremap <silent> <M-H> <c-w>>
+nnoremap <silent> <M-K> <c-w>+
+nnoremap <silent> <M-J> <c-w>-
 
 
 " Simulate <down> after CTRL-N
