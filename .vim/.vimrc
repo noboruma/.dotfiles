@@ -374,11 +374,11 @@ let g:surround_{char2nr("b")} = "{\n\r\n}"
 
 " Backup part
 set nobackup
-"set backupdir=~/.vim/backup
+"set backupdir=~/.vim/vimfiles/backup
 
 " Swap file
 "set noswapfile
-"set directory=~/.vim/swap
+set directory=~/.vim/vimfiles/swap
 
 " start up message short
 set shortmess+=I 

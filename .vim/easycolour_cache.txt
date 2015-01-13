@@ -1,23 +1,11 @@
-	#CCC0C0:7
-	#555555:240
 	#C000C0:5
-	DarkKhaki:3
 	DarkYellow:1
-	Orange:3
-	#009966:29
 	Purple:5
-	Yellow:226
-	#8888AA:103
 	#88ffdd:7
-CT256
 	Blue:4
 	#00ff88:6
 	#BBBB00:3
 	DarkCyan:6
-	#AAA14C:143
-	#EE82EE:213
-	#4444ff:12
-	Green:2
 CT8
 	#8888AA:7
 	#008800:2
@@ -69,100 +57,45 @@ CT8
 	#FF8080:7
 	#8888FF:7
 	#FF4040:1
-	#00bb00:34
 	#698b22:3
 	#8888FF:7
 	#EE82EE:7
 	#334488:4
-	#8888FF:105
-	#ffff44:227
-	#96cdcd:116
 	#FF22FF:5
-	#007777:30
 	White:7
 	LightGrey:7
 	#222222:0
-	Cyan:51
-	#888888:102
 	#990033:1
-	#442206:52
-	DarkBlue:18
 	#00bb00:2
 	Grey:7
-	#9999DD:104
 	#008800:2
-	Blue:21
-	#FF8000:208
-	#008800:28
 	#9999DD:7
-	#CCCCFF:7
-	#F0DDFF:7
-	#777777:5
-	DarkYellow:124
-	#88ffdd:122
 	DarkBlue:4
 	#FFAA00:3
-	#FF4040:203
-	#BBBB00:142
 	#4444ff:4
-	Red:9
-	DarkGreen:0
-	white#DavysGrey:0
 	#AAA14C:3
-	Green#DavysGrey:0
-	#2222FF:4
 	#bfbf00:3
-	#ffff66:227
 	#5555AA:4
 	Yellow:3
 	#007777:6
-	#00ff88:48
 	#96cdcd:7
-	#990033:89
-	#996622:94
 	#AA0000:1
 	#442206:0
 	#FF8080:7
-	#AA0000:124
-	DarkRed:1
 	DarkGrey:7
-	Grey:250
-	DarkGrey:248
-	#ff2222:9
 	Black:0
 	#FF8000:3
-	#98FB98:7
 	#009966:2
-	#FF8080:210
 	Red:1
 	#888888:7
-	Purple:129
 	#ff2222:1
-	#FFAA00:214
-	#FFFF77:228
 	#666600:0
 	#FFFF77:7
 	Cyan:6
 	#FF4040:1
 	#ffff66:3
-	#FFCCFF:7
-	#5555FF:4
-	DarkCyan:30
-	#698b22:64
-	White:231
 	#8888AA:7
-	#666600:58
 	#ffff44:3
-	#F0E6CC:7
-	#334488:60
 	#8888ff:7
-	#00FF00:2
-	#8888ff:105
-	White#DavysGrey:0
-	LightGrey:252
-	#FF22FF:201
 	#996622:1
-	#5555AA:61
-	#222222:235
 	#555555:0
-	LightYellow:7

@@ -1,8 +1,0 @@
-#!/bin/sh
-
-for i in ./unitary/*.c
-do
-  ../source/clan -o $i".scop" $i
-done
-
-
