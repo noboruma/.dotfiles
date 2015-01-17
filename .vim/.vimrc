@@ -330,6 +330,15 @@ let g:TagHighlightSettings = {}
 endif
 
 let g:rainbow_active = 1
+let g:rainbow_conf = {
+   \ 'operators' : '_,\|=\|+\|\*\|-\|\.\|;\||\|&\|?\|:\|<\|>\|%\|/[^/]_',
+   \ 'separately': {
+   \   'cpp': {
+   \     'parentheses': [
+   \       'start=/(/ end=/)/ fold',
+   \       'start=/\[/ end=/\]/ fold',
+   \       'start=/{/ end=/}/ fold',
+   \       'start=/\(\(\<operator\>\)\@<!<\)\&[a-zA-Z0-9_]\@<=<\ze[^<]/ end=/>/'] } } }
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
