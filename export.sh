@@ -1,7 +1,9 @@
 #!/bin/sh
-
-ln -s ./.vim ~
-ln -s ./.vim/.vimrc ~
-ln -s ./.tmux.conf ~
-ln -s ./.zshrc ~
-ln -s ./.gdbinit ~
+DIR=$(cd $(dirname "$0"); pwd)
+cd $DIR 1>/dev/null
+ln -s $PWD/.vim ~
+ln -s $PWD/.vim/.vimrc ~
+ln -s $PWD/.tmux.conf ~
+ln -s $PWD/.zshrc ~
+ln -s $PWD/.gdbinit ~
+cd - 1>/dev/null
