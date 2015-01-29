@@ -335,7 +335,7 @@ endif
 
 let g:rainbow_active = 1
 let g:rainbow_conf = {
-   \ 'operators' : '_,\|=\|+\|\*\|-\|\.\|;\||\|&\|?\|:\|<\|>\|%\|/[^/]_',
+   \ 'operators' : '_,\|=\|+\|\*\|-\|\.\|;\||\|&\|?\|:\|<\|>\|%\|/[^/*]_',
    \ 'separately': {
    \   'cpp': {
    \     'parentheses': [
