@@ -210,6 +210,8 @@ noremap <leader>J <C-T>
 noremap <leader>l :TagbarToggle<cr>
 noremap <leader>m :mksession ~/mysession.vim
 noremap <leader>n :Explore<cr>
+noremap <leader>o o<esc> " Could use :m[ove] +1
+noremap <leader>O O<esc>
 noremap <leader>p "_dP
 noremap <leader>R /\<<C-r><C-w>\><cr>:%s//
 noremap <leader>s :SemanticHighlightToggle<cr>
@@ -274,7 +276,7 @@ syntax on
 
 " French spelling
 augroup filetypedetect
-au BufNewFile,BufRead *.tex setlocal spell spelllang=fr
+au BufNewFile,BufRead *.tex setlocal spell spelllang=en,fr
 augroup END
 set nospell
 
