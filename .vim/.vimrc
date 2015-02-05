@@ -188,6 +188,7 @@ endfun
 
 " Custom map
 map q: :q
+nnoremap Q <nop>
 noremap <S-Enter> O<Esc>
 
 let mapleader=" "
@@ -205,7 +206,7 @@ noremap <leader>h :call File_flip()<cr>
 ":e %:p:s,.hh$,.X123X,:s,.hxx$,.hh,:s,.X123X$,.hxx,<cr>
 " Insert Header
 noremap <leader>H :0r ~/.vim/.header_template<cr>
-noremap <leader>j :ts <C-r><C-w>
+noremap <leader>j :tj <C-r><C-w>
 noremap <leader>J <C-T>
 noremap <leader>l :TagbarToggle<cr>
 noremap <leader>m :mksession ~/mysession.vim
