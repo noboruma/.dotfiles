@@ -2,6 +2,11 @@
 " Useful regex stuff:
 " %s/\<word\>\C/new/g -> \< match begin \> match end \C case sensistiveness
 
+" Script Setting
+let use_arrow=0
+let use_gui=0
+let username="Thomas Legris"
+
 "  If you need infrmation on parameters, use :h param
 " Maximize GVim on start
 if has("gui_running")
@@ -9,21 +14,23 @@ if has("gui_running")
 endif
 
 " Start to be a good vimmer
-inoremap  <Left>   <NOP>
-inoremap  <Right>  <NOP>
-nnoremap  <Up>     <NOP>
-"<C-Y>
-nnoremap  <Down>   <NOP>
-"<C-E>
-nnoremap  <Left>   <NOP>
-nnoremap  <Right>  <NOP>
+if !use_arrow
+  inoremap  <Left>   <NOP>
+  inoremap  <Right>  <NOP>
+  nnoremap  <Up>     <NOP>
+  nnoremap  <Down>   <NOP>
+  nnoremap  <Left>   <NOP>
+  nnoremap  <Right>  <NOP>
+endif
  
 set guifont=Monospace\ 11
 
 set guioptions=
-"set guioptions+=m  "menu bar
-"set guioptions+=T  "toolbar
-"set guioptions+=r  "scrollbar
+if use_gui
+  set guioptions+=m  "menu bar
+  set guioptions+=T  "toolbar
+  set guioptions+=r  "scrollbar
+endif
 
 set vb " visual bell
 syntax on "enable
@@ -79,13 +86,15 @@ set smartcase
 augroup vimrc
   au BufReadPre * setlocal foldmethod=marker
   au BufWinEnter * if &fdm == 'marker' | setlocal foldmethod=manual | endif
+
+  autocmd FileType cpp setlocal foldlevel=1
+  autocmd FileType cpp setlocal foldnestmax=1
+  autocmd FileType cpp setlocal foldmarker={,}
+  autocmd FileType cpp setlocal foldminlines=5
 augroup END
+
 set foldlevel=99
 set foldnestmax=0
-autocmd FileType cpp setlocal foldlevel=1
-autocmd FileType cpp setlocal foldnestmax=1
-autocmd FileType cpp setlocal foldmarker={,}
-autocmd FileType cpp setlocal foldminlines=5
 
 set incsearch " Search as we type
 set hlsearch "Highlight
@@ -100,7 +109,6 @@ set ruler " Relative cursor position
 set is
 set cul " Highlight current line
 
-
 function! ToggleSpell()
         if &spell
                 set nospell
@@ -108,8 +116,16 @@ function! ToggleSpell()
                 set spell
         endif
 endfunction
+
 noremap <F10> :call ToggleSpell()<cr>
 inoremap <F10> <Esc> :call ToggleSpell()<cr>
+
+" French and English spelling
+augroup filetypedetect
+  au BufNewFile,BufRead *.tex setlocal spell spelllang=en,fr
+augroup END
+
+set nospell
 
 " Make options
 set makeprg=make
@@ -129,8 +145,10 @@ noremap <F7> :cn<cr>
 " Note: Normally, :cwindow jumps to the quickfix window if the command opens it
 " (but not if it's already open). However, as part of the autocmd, this doesn't
 " seem to happen.
-autocmd QuickFixCmdPost [^l]* nested botright cwindow " Botright to open widely
-autocmd QuickFixCmdPost    l* nested botright lwindow
+augroup vimrc
+  autocmd QuickFixCmdPost [^l]* nested botright cwindow " Botright to open widely
+  autocmd QuickFixCmdPost    l* nested botright lwindow
+augroup END
 
 
 if &term =~ "xterm"
@@ -187,15 +205,14 @@ function! File_flip()
 endfun
 
 " Custom map
-map q: :q
+nnoremap q: :q
 nnoremap Q <nop>
-noremap <S-Enter> O<Esc>
+nnoremap <S-Enter> O<Esc>
 
 let mapleader=" "
 noremap <leader>a :set scb<cr>
 noremap <leader>A :set scb!<cr>
 noremap <leader>b :FufBuffer<cr>
-"map <leader>b :ls<cr>:b<space><tab> "Roots
 noremap <leader>c lc^
 noremap <leader>C 0D
 noremap <leader>d "_d
@@ -203,8 +220,6 @@ noremap <leader>e :e<space>./
 noremap <leader>g :vimgrep /<C-r><C-w>/j ./*
 noremap <leader>G :e ~/.indexer_files<cr>
 noremap <leader>h :call File_flip()<cr>
-":e %:p:s,.hh$,.X123X,:s,.hxx$,.hh,:s,.X123X$,.hxx,<cr>
-" Insert Header
 noremap <leader>H :0r ~/.vim/.header_template<cr>
 noremap <leader>j :tj <C-r><C-w>
 noremap <leader>J <C-T>
@@ -245,16 +260,21 @@ inoremap        [  []<Left>
 inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
 inoremap        (  ()<Left>
 inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
-"autocmd FileType c,cpp inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
-autocmd FileType c,cpp inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
-autocmd FileType c,cpp inoremap { {<CR>}<Esc>ko
+
+augroup vimrc
+  "autocmd FileType c,cpp inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
+  autocmd FileType c,cpp inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
+  autocmd FileType c,cpp inoremap { {<CR>}<Esc>ko
+augroup END
 
 " Split naviguation
 " silent help to not ask anything in the command
-"nnoremap <silent> <M-Right> <c-w>l
-"nnoremap <silent> <M-Left> <c-w>h
-"nnoremap <silent> <M-Up> <c-w>k
-"nnoremap <silent> <M-Down> <c-w>j
+if use_arrow
+  nnoremap <silent> <M-Right> <c-w>l
+  nnoremap <silent> <M-Left> <c-w>h
+  nnoremap <silent> <M-Up> <c-w>k
+  nnoremap <silent> <M-Down> <c-w>j
+endif
 nnoremap <silent> <M-l> <c-w>l
 nnoremap <silent> <M-h> <c-w>h
 nnoremap <silent> <M-k> <c-w>k
@@ -271,17 +291,12 @@ inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 
 " Filetype define
 filetype on
-au BufNewFile,BufRead *.rs set filetype=rust
-au BufNewFile,BufRead,BufEnter *.cc set filetype=cpp
-
 filetype plugin on
-syntax on
 
-" French spelling
-augroup filetypedetect
-au BufNewFile,BufRead *.tex setlocal spell spelllang=en,fr
+augroup vimrc
+  au BufNewFile,BufRead *.rs set filetype=rust
+  au BufNewFile,BufRead,BufEnter *.cc set filetype=cpp
 augroup END
-set nospell
 
 " Explorer options
 """"""""""""""""""
@@ -332,6 +347,9 @@ let g:tagbar_compact = 1
 let g:tagbar_autofocus = 1
 
 hi CursosLine gui=underline
+
+"Remove TagHighlight & Easy translate
+let g:loaded_TagHighlight = 1
 if ! exists('g:TagHighlightSettings')
 let g:TagHighlightSettings = {}
 endif
@@ -350,7 +368,9 @@ let g:rainbow_conf = {
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
 if has("autocmd")
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  augroup vimrc
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  augroup END
 endif
 
 set hidden " Keep buffers hidden instead of closing it
@@ -373,7 +393,7 @@ let g:AutoAdapt_Rules = [
 \   {
 \       'name': 'Last Change notice',
 \       'pattern': '\v\C%(<Last %([uU]pdate?|[Mm]odified)\s+)@<=.*$',
-\       'replacement': strftime('%a %b %d %H:%M:%S %Y Thomas Legris'),
+\       'replacement': '\=strftime("%a %b %d %H:%M:%S %Y '.username.'")',
 \	    'range': '1,10'
 \   }
 \]
