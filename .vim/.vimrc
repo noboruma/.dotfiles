@@ -95,7 +95,7 @@ set hlsearch "Highlight
 
 set mouse=a
 "set tags+=~/.vim/tags/project1;~/.vim/tags/project2
-filetype plugin on
+"filetype plugin on
 set ruler " Relative cursor position
 set is
 set cul " Highlight current line
@@ -269,8 +269,10 @@ nnoremap <silent> <M-J> <c-w>-
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
   \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
+" Filetype define
 filetype on
 au BufNewFile,BufRead *.rs set filetype=rust
+au BufNewFile,BufRead,BufEnter *.cc set filetype=cpp
 
 filetype plugin on
 syntax on
