@@ -179,6 +179,7 @@ alias find="sudo find"
 alias rcconf="sudo rcconf"
 alias pwdb="pwman3"
 alias shut="sudo shutdown -h 0"
+alias hibern="sudo pm-hibernate"
 alias reboot="sudo reboot"
 
 alias arduino="arduino-asm&"

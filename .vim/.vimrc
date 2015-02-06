@@ -189,7 +189,7 @@ function! File_flip()
     exe ":find " s:flipname
   elseif match(expand("%"),"\\.hh") > 0
     let s:flipname = substitute(expand("%"),'\.hh\(.*\)','.cc\1',"")
-    if !empty(glob(s:flipname))
+    if exists(s:flipname)
       exe ":e " s:flipname
     else
       let s:flipname = substitute(expand("%"),'\.hh\(.*\)','.hxx\1',"")
