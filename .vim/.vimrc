@@ -13,6 +13,8 @@ if has("gui_running")
   " Gvim specific
 endif
 
+set path+=../**
+
 " Start to be a good vimmer
 if !use_arrow
   inoremap  <Left>   <NOP>
@@ -189,12 +191,12 @@ function! File_flip()
     exe ":find " s:flipname
   elseif match(expand("%"),"\\.hh") > 0
     let s:flipname = substitute(expand("%"),'\.hh\(.*\)','.cc\1',"")
-    if exists(s:flipname)
-      exe ":e " s:flipname
-    else
+    try 
+      exe ":find " s:flipname 
+    catch 
       let s:flipname = substitute(expand("%"),'\.hh\(.*\)','.hxx\1',"")
       exe ":e " s:flipname
-    endif
+    endtry
   elseif match(expand("%"),"\\.h") > 0
     let s:flipname = substitute(expand("%"),'\.h\(.*\)','.c\1',"")
     exe ":find " s:flipname
