@@ -22,7 +22,7 @@ if !use_arrow
   nnoremap  <Left>   <NOP>
   nnoremap  <Right>  <NOP>
 endif
- 
+
 set guifont=Monospace\ 11
 
 set guioptions=
@@ -237,7 +237,7 @@ noremap <leader>T :sp<cr>
 noremap <leader>u :GundoToggle<cr>
 noremap <leader>v <C-v>
 " Update timestamp and copyright
-noremap <leader>w :Adapt<cr>:w<cr>
+noremap <leader>w :up<cr>
 noremap <leader>x :q<cr>
 noremap <leader>X :bd<cr>
 noremap <leader>X! :bd!<cr>
