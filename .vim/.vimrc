@@ -87,11 +87,6 @@ set smartcase
 augroup vimrc
   au BufReadPre * setlocal foldmethod=marker
   au BufWinEnter * if &fdm == 'marker' | setlocal foldmethod=manual | endif
-
-  autocmd FileType cpp setlocal foldlevel=1
-  autocmd FileType cpp setlocal foldnestmax=1
-  autocmd FileType cpp setlocal foldmarker={,}
-  autocmd FileType cpp setlocal foldminlines=5
 augroup END
 
 set foldlevel=99
@@ -105,7 +100,8 @@ set hlsearch "Highlight
 
 set mouse=a
 "set tags+=~/.vim/tags/project1;~/.vim/tags/project2
-"filetype plugin on
+filetype on
+filetype plugin on
 set ruler " Relative cursor position
 set is
 set cul " Highlight current line
@@ -122,9 +118,7 @@ noremap <F10> :call ToggleSpell()<cr>
 inoremap <F10> <Esc> :call ToggleSpell()<cr>
 
 " French and English spelling
-augroup filetypedetect
-  au BufNewFile,BufRead *.tex setlocal spell spelllang=en,fr
-augroup END
+au BufNewFile,BufRead * setlocal spell spelllang=en,fr
 
 set nospell
 
@@ -261,12 +255,6 @@ inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]
 inoremap        (  ()<Left>
 inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
 
-augroup vimrc
-  autocmd FileType c,cpp inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
-  autocmd FileType c,cpp inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
-  autocmd FileType c,cpp inoremap { {<CR>}<Esc>ko
-augroup END
-
 " Split naviguation
 " silent help to not ask anything in the command
 if use_arrow
@@ -289,15 +277,6 @@ nnoremap <silent> <M-J> <c-w>-
 " Simulate <down> after CTRL-N
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
   \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-
-" Filetype define
-filetype on
-filetype plugin on
-
-augroup vimrc
-  au BufNewFile,BufRead *.rs set filetype=rust
-  au BufNewFile,BufRead,BufEnter *.cc set filetype=cpp
-augroup END
 
 " Explorer options
 """"""""""""""""""
@@ -369,13 +348,12 @@ let g:rainbow_conf = {
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
-if has("autocmd")
-  augroup vimrc
-    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-  augroup END
-endif
+augroup vimrc
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+augroup END
 
-set hidden " Keep buffers hidden instead of closing it
+" Keep buffers hidden instead of closing it
+set hidden 
 
 " More natural split opening
 set splitbelow 
