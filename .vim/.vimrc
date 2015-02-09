@@ -11,6 +11,12 @@ let username="Thomas Legris"
 " Maximize GVim on start
 if has("gui_running")
   " Gvim specific
+  set guioptions=
+  if use_gui
+    set guioptions+=m  "menu bar
+    set guioptions+=T  "toolbar
+    set guioptions+=r  "scrollbar
+  endif
 endif
 
 set path+=../**
@@ -26,13 +32,6 @@ if !use_arrow
 endif
 
 set guifont=Monospace\ 11
-
-set guioptions=
-if use_gui
-  set guioptions+=m  "menu bar
-  set guioptions+=T  "toolbar
-  set guioptions+=r  "scrollbar
-endif
 
 set vb " visual bell
 syntax on "enable
@@ -112,11 +111,11 @@ set is
 set cul " Highlight current line
 
 function! ToggleSpell()
-        if &spell
-                set nospell
-        else
-                set spell
-        endif
+  if &spell
+    set nospell
+  else
+    set spell
+  endif
 endfunction
 
 noremap <F10> :call ToggleSpell()<cr>
@@ -238,7 +237,6 @@ noremap <leader>t :vsp<cr>
 noremap <leader>T :sp<cr>
 noremap <leader>u :GundoToggle<cr>
 noremap <leader>v <C-v>
-" Update timestamp and copyright
 noremap <leader>w :up<cr>
 noremap <leader>x :q<cr>
 noremap <leader>X :bd<cr>
@@ -264,7 +262,7 @@ inoremap        (  ()<Left>
 inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
 
 augroup vimrc
-  "autocmd FileType c,cpp inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
+  autocmd FileType c,cpp inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
   autocmd FileType c,cpp inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
   autocmd FileType c,cpp inoremap { {<CR>}<Esc>ko
 augroup END
@@ -277,6 +275,7 @@ if use_arrow
   nnoremap <silent> <M-Up> <c-w>k
   nnoremap <silent> <M-Down> <c-w>j
 endif
+
 nnoremap <silent> <M-l> <c-w>l
 nnoremap <silent> <M-h> <c-w>h
 nnoremap <silent> <M-k> <c-w>k
@@ -308,6 +307,7 @@ let g:netrw_liststyle=3
 " Ced: for auto-completion popup menu
 highlight Pmenu    guifg=black  guibg=grey
 highlight PmenuSel guifg=grey guibg=black gui=bold
+
 " Thanks to Pablo !
 set completeopt+=longest 
 
