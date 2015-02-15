@@ -6,4 +6,5 @@ ln -s $PWD/.vim/.vimrc ~
 ln -s $PWD/.tmux.conf ~
 ln -s $PWD/.zshrc ~
 ln -s $PWD/.gdbinit ~
+ln -s $PWD/.colorgccrc ~
 cd - 1>/dev/null
