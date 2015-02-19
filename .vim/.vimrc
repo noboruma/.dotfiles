@@ -60,7 +60,6 @@ set showcmd " Show cmd on status bar
 set showmatch " Show paried symbols
 set nostartofline
 set wildmode=list:full:longest
-"set noautoindent
 set autoindent
 set smartindent
 set cino+=(0,+0 "C file option
@@ -118,7 +117,7 @@ noremap <F10> :call ToggleSpell()<cr>
 inoremap <F10> <Esc> :call ToggleSpell()<cr>
 
 " French and English spelling
-au BufNewFile,BufRead * setlocal spell spelllang=en,fr
+au BufNewFile,BufRead *.tex setlocal spell spelllang=en,fr
 
 set nospell
 
@@ -258,14 +257,14 @@ inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")
 " Split naviguation
 " silent help to not ask anything in the command
 if use_arrow
-  nnoremap <silent> <M-Right> <c-w>l
-  nnoremap <silent> <M-Left> <c-w>h
+  nnoremap <silent> <M-Right> <c-w>h
+  nnoremap <silent> <M-Left> <c-w>l
   nnoremap <silent> <M-Up> <c-w>k
   nnoremap <silent> <M-Down> <c-w>j
 endif
 
-nnoremap <silent> <M-l> <c-w>l
-nnoremap <silent> <M-h> <c-w>h
+nnoremap <silent> <M-h> <c-w>l
+nnoremap <silent> <M-l> <c-w>h
 nnoremap <silent> <M-k> <c-w>k
 nnoremap <silent> <M-j> <c-w>j
 nnoremap <silent> <M-L> <c-w><
