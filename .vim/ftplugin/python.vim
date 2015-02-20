@@ -9,3 +9,5 @@ setlocal shiftwidth=4
 setlocal textwidth=80
 setlocal smarttab
 setlocal expandtab
+
+noremap <F1> :w<cr>!python %<cr>
