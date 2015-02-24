@@ -10,4 +10,4 @@ inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\
 inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
 inoremap { {<CR>}<Esc>ko
 
-map <F1> :w<cr><f5><cr>
+map <F1> :update all<cr><f5><cr>
