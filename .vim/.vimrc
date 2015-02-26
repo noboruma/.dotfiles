@@ -8,7 +8,6 @@ let use_gui=0
 let username="Thomas Legris"
 
 "  If you need infrmation on parameters, use :h param
-" Maximize GVim on start
 if has("gui_running")
   " Gvim specific
   set guioptions=

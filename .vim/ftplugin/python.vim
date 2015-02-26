@@ -1,5 +1,10 @@
 autocmd BufWritePre <buffer> silent! :Adapt
 
+if has("gui_running")
+  au BufEnter,BufNewFile <buffer> :SemanticHighlightToggle
+endif
+
+
 inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
 inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
 
