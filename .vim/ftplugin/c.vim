@@ -1,6 +1,10 @@
 " Adapt on save hook
 autocmd BufWritePre <buffer> silent! :Adapt
 
+if has("gui_running")
+  au BufEnter <buffer> :SemanticHighlightToggle
+endif
+
 setlocal foldlevel=1
 setlocal foldnestmax=1
 setlocal foldmarker={,}

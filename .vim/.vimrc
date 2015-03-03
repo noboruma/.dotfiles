@@ -171,17 +171,20 @@ set timeoutlen=1000
 "      \ exec "set path^=".s:default_path
 
 
+
 function! File_flip()
+  let cpp_ext="cc"
+  let hpp_ext="hh"
   " Switch editing between .c* and .h* files (and more).
   " Since .h file can be in a different dir, call find.
   if match(expand("%"),'\.cc') > 0
-    let s:flipname = substitute(expand("%"),'\.cc\(.*\)','.hh\1',"")
+    let s:flipname = substitute(expand("%"),'\.'.cpp_ext.'\(.*\)','.'.hpp_ext.'\1',"")
     exe ":find " s:flipname
   elseif match(expand("%"),'\.hxx') > 0
-    let s:flipname = substitute(expand("%"),'\.hxx\(.*\)','.hh\1',"")
+    let s:flipname = substitute(expand("%"),'\.hxx\(.*\)','.'.hpp_ext.'\1',"")
     exe ":find " s:flipname
   elseif match(expand("%"),"\\.hh") > 0
-    let s:flipname = substitute(expand("%"),'\.hh\(.*\)','.cc\1',"")
+    let s:flipname = substitute(expand("%"),'\.'.hpp_ext.'\(.*\)','.'.cpp_ext.'\1',"")
     try 
       exe ":find " s:flipname 
     catch 

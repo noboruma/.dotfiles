@@ -2,7 +2,7 @@
 autocmd BufWritePre <buffer> silent! :Adapt
 
 if has("gui_running")
-  au BufEnter,BufNewFile <buffer> :SemanticHighlightToggle
+  au BufEnter <buffer> :SemanticHighlightToggle
 endif
 
 
