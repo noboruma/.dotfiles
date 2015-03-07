@@ -177,13 +177,13 @@ function! File_flip()
   let hpp_ext="hh"
   " Switch editing between .c* and .h* files (and more).
   " Since .h file can be in a different dir, call find.
-  if match(expand("%"),'\.cc') > 0
+  if match(expand("%"),'\.'.cpp_ext.'') > 0
     let s:flipname = substitute(expand("%"),'\.'.cpp_ext.'\(.*\)','.'.hpp_ext.'\1',"")
     exe ":find " s:flipname
   elseif match(expand("%"),'\.hxx') > 0
     let s:flipname = substitute(expand("%"),'\.hxx\(.*\)','.'.hpp_ext.'\1',"")
     exe ":find " s:flipname
-  elseif match(expand("%"),"\\.hh") > 0
+  elseif match(expand("%"),"\\.".hh_ext."") > 0
     let s:flipname = substitute(expand("%"),'\.'.hpp_ext.'\(.*\)','.'.cpp_ext.'\1',"")
     try 
       exe ":find " s:flipname 

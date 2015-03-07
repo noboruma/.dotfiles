@@ -2,6 +2,7 @@
 # find . -name "*" -exec grep -n hello /dev/null {} \; # {} is find file
 # sed -r 's/.* token_start (.+) token_end .*/\1/'
 # sed ':a;N;$!ba;s/\n/ /g' merge two lines to check pattern
+# <(cmd) <(cmd) For asynchron piping
 
 #export TERM='screen-256color'
 
@@ -119,12 +120,9 @@ alias -s torrent="qbittorrent"
 #alias -s png=feh
 #alias -s jpg=feh
 #alias -s gif=feg
-#alias -s sxw=soffice
 #alias -s doc=soffice
-#alias -s gz=tar -xzvf
+alias -s gz=tar -xzvf
 #alias -s bz2=tar -xjvf
-#alias -s java=$EDITOR
-#alias -s txt=$EDITOR
 alias -s PKGBUILD=$EDITOR
 
 # Normal aliases
@@ -135,17 +133,13 @@ alias f='find -type f |xargs grep'
 alias c="clear"
 alias gvim='gvim -geom 82x35'
 alias ..='cd ..'
-#alias nicotine='/home/paul/downloads/nicotine-1.0.8rc1/nicotine'
 #alias ppp-on=' /usr/sbin/ppp-on'
 #alias ppp-off=' /usr/sbin/ppp-off'
-#alias firestarter=' su -c firestarter'
 #alias mpg123='mpg123 -o oss'
 #alias mpg321='mpg123 -o oss'
-#alias vba='/home/paul/downloads/VisualBoyAdvance -f 4'
-alias hist="grep '$1' /home/paul/.zsh_history"
+alias hist="grep '$1' ~/.zsh_history"
 #alias irssi="irssi -c irc.freenode.net -n yyz"
 #alias mem="free -m"
-#alias msn="tmsnc -l hutchy@subdimension.com"
 
 # command L equivalent to command |less
 alias -g L='|less' 
@@ -162,7 +156,6 @@ alias aS='sudo aptitude search'
 alias aR='sudo aptitude remove'
 alias au='sudo aptitude update'
 alias aup='sudo aptitude update && sudo aptitude safe-upgrade'
-alias vem='$IDE -nw'
 alias e=$IDE
 alias v=$EDITOR
 alias com='git commit -am'
@@ -175,7 +168,6 @@ alias mount="sudo mount"
 alias umount="sudo umount"
 alias umount="sudo route"
 alias umount="sudo iwconfig"
-alias find="sudo find"
 alias rcconf="sudo rcconf"
 alias pwdb="pwman3"
 alias shut="sudo shutdown -h 0"
@@ -186,8 +178,6 @@ alias arduino="arduino-asm&"
 alias g++='g++ -std=c++0x'
 alias m='make -j2'
 alias mc='make -j2 check'
-#alias g++='~/usr/colorgcc/colorgcc.pl'
-#alias gcc='~/usr/colorgcc/colorgcc.pl'
 
 alias ll="ls -al"
 alias du="du -h"
@@ -199,20 +189,13 @@ set inc
 # Root allow X?
 xhost + > /dev/null 2> /dev/null || true
 
-# OPAM configuration
-. /home/zackel/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-CAML_LD_LIBRARY_PATH=/home/zackel/.opam/4.00.1/lib/stublibs; export CAML_LD_LIBRARY_PATH;
-OCAML_TOPLEVEL_PATH=/home/zackel/.opam/4.00.1/lib/toplevel; export OCAML_TOPLEVEL_PATH;
-MANPATH=/home/zackel/.opam/4.00.1/man:; export MANPATH;
-export PATH=$PATH:/home/zackel/.opam/4.00.1/bin
-#$PATH:/usr/local/bin:/usr/bin:/bin:/usr/bin/X11:/usr/games;
-
 export PATH=~/usr/bin:$PATH
 
 ## JAVA
 #export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-i386
 #export JAVA_HOME=/usr/lib/jvm/java-6-sun-1.6.0.26
-#
+
+
 # vim CTRL-Z helper
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
@@ -226,4 +209,9 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
-alias x=dolphin
+# OPAM configuration
+. /home/zackel/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+CAML_LD_LIBRARY_PATH=/home/zackel/.opam/4.00.1/lib/stublibs; export CAML_LD_LIBRARY_PATH;
+OCAML_TOPLEVEL_PATH=/home/zackel/.opam/4.00.1/lib/toplevel; export OCAML_TOPLEVEL_PATH;
+MANPATH=/home/zackel/.opam/4.00.1/man:; export MANPATH;
+export PATH=$PATH:/home/zackel/.opam/4.00.1/bin

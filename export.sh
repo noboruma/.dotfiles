@@ -7,4 +7,5 @@ ln -s $PWD/.tmux.conf ~
 ln -s $PWD/.zshrc ~
 ln -s $PWD/.gdbinit ~
 ln -s $PWD/.colorgccrc ~
+ln -s $PWD/.screenrc ~
 cd - 1>/dev/null
