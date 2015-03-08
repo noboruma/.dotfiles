@@ -27,7 +27,7 @@ function! File_flip()
     let s:flipname = substitute(expand("%"),'\.'.cpp_ext.'\(.*\)','.'.hpp_ext.'\1',"")
     exe ":find " s:flipname
   elseif match(expand("%"),'\.hxx') > 0
-    let s:flipname = substitute(expand("%"),'\.hxx\(.*\)','.'.hpp_ext.'\1',"")
+    let s:flipname = substitute(expand("%"),'\.hxx\(.*\)','.hh\1',"")
     exe ":find " s:flipname
   elseif match(expand("%"),"\\.".hpp_ext."") > 0
     let s:flipname = substitute(expand("%"),'\.'.hpp_ext.'\(.*\)','.'.cpp_ext.'\1',"")
