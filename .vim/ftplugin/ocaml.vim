@@ -16,3 +16,13 @@ set colorcolumn=80
 set shiftwidth=2
 set tabstop=2
 " ocp-indent with ocp-indent-vim
+
+function! File_flip()
+  if match(expand("%"),"\\.mli") > 0
+    let s:flipname = substitute(expand("%"),'\.mli\(.*\)','.ml\1',"")
+    exe ":find " s:flipname
+  elseif match(expand("%"),"\\.ml") > 0
+    let s:flipname = substitute(expand("%"),'\.ml\(.*\)','.mli\1',"")
+    exe ":find " s:flipname
+  endif
+endfun

@@ -8,7 +8,7 @@
 
 
 # Let's reset caps lock (setxkbmap -option to re-enable)
-setxkbmap -option ctrl:nocaps
+# setxkbmap -option ctrl:nocaps
 
 ###########################################################        
 # Options for Zsh
@@ -64,7 +64,6 @@ zle -N zle-keymap-select
 export EDITOR="vim"
 export IDE="gvim -geometry 500x500"
 export BROWSER="w3m"
-export XTERM="aterm +sb -geometry 80x29 -fg black -bg lightgoldenrodyellow -fn -xos4-terminus-medium-*-normal-*-14-*-*-*-*-*-iso8859-15"
 
 ##################################################################
 # Stuff to make my life easier
@@ -111,16 +110,8 @@ bindkey '^w' backward-kill-word
 # My aliases
 
 # Set up auto extension stuff
-#alias -s html=$BROWSER
-#alias -s org=$BROWSER
-#alias -s php=$BROWSER
-#alias -s com=$BROWSER
 alias -s net=$BROWSER
-alias -s torrent="qbittorrent"
-#alias -s png=feh
-#alias -s jpg=feh
-#alias -s gif=feg
-#alias -s doc=soffice
+# alias -s torrent="qbittorrent"
 alias -s gz=tar -xzvf
 #alias -s bz2=tar -xjvf
 alias -s PKGBUILD=$EDITOR
@@ -129,17 +120,14 @@ alias -s PKGBUILD=$EDITOR
 alias ls='ls --color=auto -Fh'
 #alias lsd='ls -ld *(-/DN)'
 #alias lsa='ls -ld .*'
-alias f='find -type f |xargs grep'
+alias f='find -type f | xargs grep'
 alias c="clear"
-alias gvim='gvim -geom 82x35'
 alias ..='cd ..'
 #alias ppp-on=' /usr/sbin/ppp-on'
 #alias ppp-off=' /usr/sbin/ppp-off'
-#alias mpg123='mpg123 -o oss'
-#alias mpg321='mpg123 -o oss'
 alias hist="grep '$1' ~/.zsh_history"
 #alias irssi="irssi -c irc.freenode.net -n yyz"
-#alias mem="free -m"
+alias mem="free -m"
 
 # command L equivalent to command |less
 alias -g L='|less' 
@@ -182,7 +170,6 @@ alias mc='make -j2 check'
 alias ll="ls -al"
 alias du="du -h"
 alias df="df -h"
-alias x="fg"
 
 set inc
 
@@ -190,11 +177,6 @@ set inc
 xhost + > /dev/null 2> /dev/null || true
 
 export PATH=~/usr/bin:$PATH
-
-## JAVA
-#export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-i386
-#export JAVA_HOME=/usr/lib/jvm/java-6-sun-1.6.0.26
-
 
 # vim CTRL-Z helper
 fancy-ctrl-z () {
