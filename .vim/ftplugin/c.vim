@@ -2,7 +2,7 @@
 autocmd BufWritePre <buffer> silent! :Adapt
 
 if has("gui_running")
-  au BufEnter <buffer> :SemanticHighlightToggle
+  au BufNewFile,BufEnter <buffer> :SemanticHighlight
 endif
 
 setlocal foldlevel=1

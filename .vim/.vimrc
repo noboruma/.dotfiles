@@ -30,7 +30,7 @@ if !use_arrow
   nnoremap  <Right>  <NOP>
 endif
 
-set guifont=Monospace\ 11
+set guifont=Monospace\ 9
 
 set vb " visual bell
 syntax on "enable
@@ -71,6 +71,10 @@ if &term =~ "xterm-debian" || &term =~ "xterm-xfree86"
     set t_Sf=[3%dm
     set t_Sb=[4%dm
 endif
+if &term =~ "xterm"
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
 
 " Show space and tab as blue
 "set list
@@ -97,7 +101,7 @@ set hlsearch "Highlight
 "set number
 
 set mouse=a
-"set tags+=~/.vim/tags/project1;~/.vim/tags/project2
+
 filetype on
 filetype plugin on
 set ruler " Relative cursor position
@@ -142,12 +146,6 @@ augroup vimrc
   autocmd QuickFixCmdPost [^l]* nested botright cwindow " Botright to open widely
   autocmd QuickFixCmdPost    l* nested botright lwindow
 augroup END
-
-
-if &term =~ "xterm"
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
 
 " Handle space and tabs
 set expandtab
@@ -290,8 +288,6 @@ set showbreak=↪
 set wrap
 set cpo+=n
 
-
-"cd %:p:h " change current directory at boot up *Not working*
 set autochdir
 
 " Tagbar options
@@ -304,7 +300,7 @@ hi CursosLine gui=underline
 "Remove TagHighlight & Easy translate
 let g:loaded_TagHighlight = 1
 if ! exists('g:TagHighlightSettings')
-let g:TagHighlightSettings = {}
+  let g:TagHighlightSettings = {}
 endif
 
 let g:rainbow_active = 1
@@ -365,7 +361,7 @@ set nobackup
 "set backupdir=~/.vim/vimfiles/backup
 
 " Swap file
-"set noswapfile
+set swapfile
 set directory=~/.vim/vimfiles/swap
 
 " start up message short
