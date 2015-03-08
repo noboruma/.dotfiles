@@ -171,35 +171,6 @@ set timeoutlen=1000
 "      \ exec "set path^=".s:default_path
 
 
-
-function! File_flip()
-  let cpp_ext="cc"
-  let hpp_ext="hh"
-  " Switch editing between .c* and .h* files (and more).
-  " Since .h file can be in a different dir, call find.
-  if match(expand("%"),'\.'.cpp_ext.'') > 0
-    let s:flipname = substitute(expand("%"),'\.'.cpp_ext.'\(.*\)','.'.hpp_ext.'\1',"")
-    exe ":find " s:flipname
-  elseif match(expand("%"),'\.hxx') > 0
-    let s:flipname = substitute(expand("%"),'\.hxx\(.*\)','.'.hpp_ext.'\1',"")
-    exe ":find " s:flipname
-  elseif match(expand("%"),"\\.".hh_ext."") > 0
-    let s:flipname = substitute(expand("%"),'\.'.hpp_ext.'\(.*\)','.'.cpp_ext.'\1',"")
-    try 
-      exe ":find " s:flipname 
-    catch 
-      let s:flipname = substitute(expand("%"),'\.hh\(.*\)','.hxx\1',"")
-      exe ":e " s:flipname
-    endtry
-  elseif match(expand("%"),"\\.h") > 0
-    let s:flipname = substitute(expand("%"),'\.h\(.*\)','.c\1',"")
-    exe ":find " s:flipname
-  elseif match(expand("%"),"\\.c") > 0
-    let s:flipname = substitute(expand("%"),'\.c\(.*\)','.h\1',"")
-    exe ":find " s:flipname
-  endif
-endfun
-
 " Custom map
 nnoremap q: :q
 nnoremap Q <nop>
