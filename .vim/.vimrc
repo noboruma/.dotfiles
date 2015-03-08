@@ -7,9 +7,13 @@ let use_arrow=0
 let use_gui=0
 let username="Thomas Legris"
 
+set nocompatible
+
 "  If you need infrmation on parameters, use :h param
 if has("gui_running")
   " Gvim specific
+  set lines=999
+  set columns=999
   set guioptions=
   if use_gui
     set guioptions+=m  "menu bar
@@ -35,7 +39,7 @@ set guifont=Monospace\ 9
 set vb " visual bell
 syntax on "enable
 set background=dark
-colorscheme bandit
+colorscheme myslate
 
 set ruler "Show cursor position, line, col"
 
@@ -47,7 +51,6 @@ set textwidth=0
 " Wrappe et justifie à 72 caractères avec la touche '@'
 "map @ {v}! par 72j
 
-set nocompatible
 "set columns=80
 set history=50 " History entries max number
 " ~/.viminfo's Options

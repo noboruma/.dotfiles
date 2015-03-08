@@ -62,7 +62,7 @@ zle -N zle-keymap-select
 
 # Vars used later on by Zsh
 export EDITOR="vim"
-export IDE="gvim -geometry 500x500"
+export IDE="gvim"
 export BROWSER="w3m"
 
 ##################################################################
