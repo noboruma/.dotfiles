@@ -213,7 +213,7 @@ setlocal textwidth=80
 setlocal smarttab
 setlocal expandtab
 
-noremap <F1> :update all<cr>:!ipython %<cr>
-noremap <F2> :update all<cr>:!ipython -i %<cr>
+noremap <F1>:w<cr>:!python %<cr>
+noremap <F2>:update all<cr>:!ipython -i %<cr>
 
 set complete-=i

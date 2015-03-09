@@ -5,6 +5,8 @@ if has("gui_running")
   au BufNewFile,BufEnter <buffer> :SemanticHighlight
 endif
 
+" Surround 
+let g:surround_{char2nr("c")} = "\/*\n\r\n*\/"
 
 setlocal foldlevel=1
 setlocal foldnestmax=1

@@ -3,6 +3,10 @@ execute "source " . "~/.vim/syntax/ocp-indent.vim"
 " Adapt on save hook
 autocmd BufWritePre <buffer> silent! :Adapt
 
+" Surround 
+let g:surround_{char2nr("c")} = "(*\r*)"
+let g:surround_{char2nr("C")} = "(*\n\r\n*)"
+
 setlocal foldlevel=1
 setlocal foldnestmax=1
 setlocal foldminlines=5
