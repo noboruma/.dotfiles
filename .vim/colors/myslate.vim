@@ -55,3 +55,4 @@ let colors_name = "myslate"
 :hi Underlined cterm=underline ctermfg=5
 :hi Error guifg=White guibg=Red cterm=bold ctermfg=7 ctermbg=1
 :hi SpellErrors guifg=White guibg=Red cterm=bold ctermfg=7 ctermbg=1
+:hi SignColumn ctermbg=black guibg=black
