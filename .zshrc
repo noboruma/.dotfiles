@@ -29,7 +29,7 @@ setopt autocd
 setopt cdablevars
 #setopt ignoreeof
 setopt interactivecomments
-setopt nobanghist
+#setopt nobanghist
 setopt noclobber
 setopt HIST_REDUCE_BLANKS
 setopt HIST_IGNORE_SPACE
