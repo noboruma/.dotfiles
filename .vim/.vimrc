@@ -246,6 +246,10 @@ nnoremap <silent> <M-H> <c-w>>
 nnoremap <silent> <M-K> <c-w>+
 nnoremap <silent> <M-J> <c-w>-
 
+" Make omnicompletion easier (Context based autocompletion)
+inoremap <C-Space> <C-x><C-o> " For gui
+inoremap <C-@> <C-Space> " For terminal
+
 
 " Simulate <down> after CTRL-N
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
@@ -297,6 +301,7 @@ set autochdir
 """"""""""""""""""
 let g:tagbar_compact = 1
 let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 1
 
 hi CursosLine gui=underline
 

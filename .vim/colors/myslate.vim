@@ -12,6 +12,7 @@ endif
 let colors_name = "myslate"
 :hi Normal guifg=White guibg=black
 :hi Cursor guibg=khaki guifg=slategrey
+:hi CursorLine   cterm=underline ctermbg=NONE guibg=grey15
 :hi VertSplit guibg=#c2bfa5 guifg=grey40 gui=none cterm=reverse
 :hi Folded guibg=black guifg=grey40 ctermfg=grey ctermbg=darkgrey
 :hi FoldColumn guibg=black guifg=grey20 ctermfg=4 ctermbg=7
@@ -54,3 +55,4 @@ let colors_name = "myslate"
 :hi Underlined cterm=underline ctermfg=5
 :hi Error guifg=White guibg=Red cterm=bold ctermfg=7 ctermbg=1
 :hi SpellErrors guifg=White guibg=Red cterm=bold ctermfg=7 ctermbg=1
+:hi SignColumn ctermbg=black guibg=black
