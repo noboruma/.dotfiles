@@ -21,6 +21,7 @@ set shiftwidth=2
 set tabstop=2
 " ocp-indent with ocp-indent-vim
 
+if !exists("*File_flip")
 function! File_flip()
   if match(expand("%"),"\\.mli") > 0
     let s:flipname = substitute(expand("%"),'\.mli\(.*\)','.ml\1',"")
@@ -30,3 +31,4 @@ function! File_flip()
     exe ":find " s:flipname
   endif
 endfun
+endif

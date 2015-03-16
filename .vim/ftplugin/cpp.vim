@@ -2,7 +2,7 @@
 autocmd BufWritePre <buffer> silent! :Adapt
 
 if has("gui_running")
-  au BufNewFile,BufEnter <buffer> :SemanticHighlight
+  au BufNewFile <buffer> :SemanticHighlight
 endif
 
 " Surround 
@@ -18,12 +18,13 @@ set complete-=i
 
 inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
 inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
-inoremap { {<CR>}<Esc>ko
+inoremap <expr> { strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "{}\<Left>"
+inoremap <expr> < strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : "<>\<Left>"
 
 map <F1> :update all<cr><f5><cr>
 
 if !exists("*File_flip")
-function! File_flip()
+  function! File_flip()
   let cpp_ext="cc"
   let hpp_ext="hh"
   " Switch editing between .c* and .h* files (and more).
@@ -31,23 +32,23 @@ function! File_flip()
   if match(expand("%"),'\.'.cpp_ext.'') > 0
     let s:flipname = substitute(expand("%"),'\.'.cpp_ext.'\(.*\)','.'.hpp_ext.'\1',"")
     exe ":find " s:flipname
-  elseif match(expand("%"),'\.hxx') > 0
+    elseif match(expand("%"),'\.hxx') > 0
     let s:flipname = substitute(expand("%"),'\.hxx\(.*\)','.hh\1',"")
     exe ":find " s:flipname
-  elseif match(expand("%"),"\\.".hpp_ext."") > 0
+    elseif match(expand("%"),"\\.".hpp_ext."") > 0
     let s:flipname = substitute(expand("%"),'\.'.hpp_ext.'\(.*\)','.'.cpp_ext.'\1',"")
     try 
-      exe ":find " s:flipname 
+    exe ":find " s:flipname 
     catch 
-      let s:flipname = substitute(expand("%"),'\.hh\(.*\)','.hxx\1',"")
-      exe ":e " s:flipname
+    let s:flipname = substitute(expand("%"),'\.hh\(.*\)','.hxx\1',"")
+    exe ":e " s:flipname
     endtry
-  elseif match(expand("%"),"\\.h") > 0
+    elseif match(expand("%"),"\\.h") > 0
     let s:flipname = substitute(expand("%"),'\.h\(.*\)','.c\1',"")
     exe ":find " s:flipname
-  elseif match(expand("%"),"\\.c") > 0
+    elseif match(expand("%"),"\\.c") > 0
     let s:flipname = substitute(expand("%"),'\.c\(.*\)','.h\1',"")
     exe ":find " s:flipname
-  endif
-endfun
+    endif
+    endfun
 endif

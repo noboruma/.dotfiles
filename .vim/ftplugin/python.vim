@@ -199,7 +199,7 @@ endfunction
 autocmd BufWritePre <buffer> silent! :Adapt
 
 if has("gui_running")
-  au BufEnter,BufNewFile <buffer> :SemanticHighlight
+  au BufNewFile <buffer> :SemanticHighlight
 endif
 
 
