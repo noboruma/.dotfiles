@@ -30,7 +30,7 @@ setopt cdablevars
 #setopt ignoreeof
 setopt interactivecomments
 #setopt nobanghist
-setopt noclobber
+setopt noclobber # Use >! to override file
 setopt HIST_REDUCE_BLANKS
 setopt HIST_IGNORE_SPACE
 setopt SH_WORD_SPLIT
@@ -190,6 +190,15 @@ fancy-ctrl-z () {
 }
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
+
+#plugin part
+source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
 # OPAM configuration
 . /home/zackel/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
