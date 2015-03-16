@@ -194,8 +194,11 @@ bindkey '^Z' fancy-ctrl-z
 #plugin part
 source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+bindkey '^P' up-line-or-search
+bindkey '^N' down-line-or-search
 
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
@@ -206,3 +209,5 @@ CAML_LD_LIBRARY_PATH=/home/zackel/.opam/4.00.1/lib/stublibs; export CAML_LD_LIBR
 OCAML_TOPLEVEL_PATH=/home/zackel/.opam/4.00.1/lib/toplevel; export OCAML_TOPLEVEL_PATH;
 MANPATH=/home/zackel/.opam/4.00.1/man:; export MANPATH;
 export PATH=$PATH:/home/zackel/.opam/4.00.1/bin
+
+setopt HIST_FIND_NO_DUPS
