@@ -17,7 +17,8 @@ set complete-=i
 
 inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
 inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
-inoremap { {<CR>}<Esc>ko
+inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "{}\<Left>"
+inoremap <expr> { strpart(getline('.'), col('.')-1, 1) == "{" ? "\<Right>" : "{}\<Left>"
 
 if !exists("*File_flip")
 function! File_flip()
