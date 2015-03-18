@@ -289,3 +289,9 @@ set directory=~/.vim/vimfiles/swap
 
 " start up message short
 set shortmess+=I 
+
+" Colorizer
+let g:colorizer_nomap = 1
+let g:colorizer_startup = 0
+
+
