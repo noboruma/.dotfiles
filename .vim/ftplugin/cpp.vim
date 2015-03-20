@@ -16,7 +16,7 @@ setlocal foldminlines=5
 " Stop parsing include files, use ctags instead
 set complete-=i
 
-inoremap <expr> < "<>\<Left>"
+"inoremap <expr> < "<>\<Left>"
 inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
 
 map <F1> :update all<cr><f5><cr>
