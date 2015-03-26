@@ -174,6 +174,10 @@ set timeoutlen=1000
 let mapleader=" "
 source ~/.vim/custmap.vim
 
+noremap ; :
+noremap! jj <esc>
+
+
 " Explorer options
 """"""""""""""""""
 let g:netrw_liststyle=3
@@ -283,9 +287,18 @@ let g:semanticColors = { 0x00: '#72d572', 0x01: '#c5e1a5', 0x02: '#e6ee9c', 0x03
 set nobackup
 "set backupdir=~/.vim/vimfiles/backup
 
-" Swap file
+" Swap files
 set swapfile
 set directory=~/.vim/vimfiles/swap
+
+" Undo files
+if (exists("&undodir"))
+    set undofile
+    set undodir=~/.vim/vimfiles/undo
+    "let &undodir=&directory
+    set undolevels=255
+    set undoreload=255
+endif
 
 " start up message short
 set shortmess+=I 
@@ -293,5 +306,3 @@ set shortmess+=I
 " Colorizer
 let g:colorizer_nomap = 1
 let g:colorizer_startup = 0
-
-
