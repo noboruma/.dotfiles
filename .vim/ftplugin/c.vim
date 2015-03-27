@@ -19,6 +19,8 @@ inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\
 inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
 inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
 inoremap <expr> { "{}\<Left>"
+inoremap ;; <esc>g_a;
+inoremap ;. <esc>g_a.
 
 if !exists("*File_flip")
 function! File_flip()

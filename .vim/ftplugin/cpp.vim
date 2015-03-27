@@ -18,6 +18,8 @@ set complete-=i
 
 "inoremap <expr> < "<>\<Left>"
 inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
+inoremap ;; <esc>g_a;
+inoremap ;. <esc>g_a.
 
 map <F1> :update all<cr><f5><cr>
 
