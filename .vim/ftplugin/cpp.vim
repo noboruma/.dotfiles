@@ -2,7 +2,7 @@
 autocmd BufWritePre <buffer> silent! :Adapt
 
 if has("gui_running")
-  au BufNewFile <buffer> :SemanticHighlight
+  au BufEnter <buffer> :SemanticHighlight
 endif
 
 " Surround 
