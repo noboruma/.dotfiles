@@ -10,12 +10,14 @@ noremap <leader>c lc^
 noremap <leader>C 0D
 noremap <leader>d "_d
 noremap <leader>e :e<space>./
+noremap <leader>f :pta <C-r><C-w><cr>
+noremap <leader>F <C-w>z
 noremap <leader>g :vimgrep /<C-r><C-w>/j ./*
 noremap <leader>G :e ~/.indexer_files<cr>
 noremap <leader>h :call File_flip()<cr>
 noremap <leader>H :0r ~/.vim/.header_template<cr>
-noremap <leader>j :tj <C-r><C-w>
-noremap <leader>J <C-T>
+noremap <leader>j :tj <C-r><C-w><cr>
+noremap <leader>J <C-O>
 noremap <leader>l :TagbarToggle<cr>
 noremap <leader>m :mksession ~/mysession.vim
 noremap <leader>n :Explore<cr>

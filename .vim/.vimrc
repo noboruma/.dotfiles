@@ -174,7 +174,7 @@ set timeoutlen=1000
 let mapleader=" "
 source ~/.vim/custmap.vim
 
-noremap ; :
+noremap , :
 noremap! jj <esc>
 
 
