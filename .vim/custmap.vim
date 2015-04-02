@@ -13,7 +13,7 @@ noremap <leader>e :e<space>./
 noremap <leader>f :pta <C-r><C-w><cr>
 noremap <leader>F <C-w>z
 noremap <leader>g :vimgrep /<C-r><C-w>/j ./*
-noremap <leader>G :e ~/.indexer_files<cr>
+noremap <leader>G :ccl<cr>
 noremap <leader>h :call File_flip()<cr>
 noremap <leader>H :0r ~/.vim/.header_template<cr>
 noremap <leader>j :tj <C-r><C-w><cr>

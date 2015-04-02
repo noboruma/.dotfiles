@@ -1,5 +1,6 @@
 " Adapt on save hook
 autocmd BufWritePre <buffer> silent! :Adapt
+au BufNewFile,BufRead,BufEnter <buffer> set omnifunc=omni#cpp#complete#Main
 
 if has("gui_running")
   au BufEnter <buffer> :SemanticHighlight
