@@ -130,8 +130,36 @@ set nospell
 " Make options
 set makeprg=make
 noremap <F5> :make -j -C <Up>
-noremap <F6> :cp<cr>
-noremap <F7> :cn<cr>
+fun! NextTagOrError()
+    try
+    for nr in range(1, winnr('$'))
+        if getwinvar(nr, "&pvw") == 1
+            " found a preview
+            :tnext
+            return 0
+        endif  
+    endfor
+    :cn
+    catch /.*/
+      echohl WarningMsg | echon v:exception | echohl None
+    endtry
+endfun
+fun! PrevTagOrError()
+  try
+    for nr in range(1, winnr('$'))
+        if getwinvar(nr, "&pvw") == 1
+            " found a preview
+            :tprev
+            return 0
+        endif  
+    endfor
+    :cp
+  catch /.*/
+      echohl WarningMsg | echon v:exception | echohl None
+  endtry
+endfun
+noremap <F6> :call PrevTagOrError()<cr>
+noremap <F7> :call NextTagOrError()<cr>
 
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>
@@ -188,7 +216,7 @@ highlight Pmenu    guifg=black  guibg=grey
 highlight PmenuSel guifg=grey guibg=black gui=bold
 
 " Thanks to Pablo !
-set completeopt+=longest 
+set completeopt=menu,menuone,longest 
 
 "To close automatically the preview window:
 "autocmd CursorMovedI * if pumvisible() == 0|pclose|endif

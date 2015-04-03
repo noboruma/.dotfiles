@@ -74,8 +74,10 @@ nnoremap <silent> <M-K> <c-w>+
 nnoremap <silent> <M-J> <c-w>-
 
 " Make omnicompletion easier (Context based autocompletion)
-inoremap <C-Space> <C-x><C-o> " For gui
-inoremap <C-@> <C-Space> " For terminal
+" For gui
+inoremap <C-Space> <C-x><C-o>
+" For terminal
+inoremap <C-@> <C-Space>
 
 
 " Simulate <down> after CTRL-N
