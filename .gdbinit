@@ -173,15 +173,15 @@ set history size 256
 #### moar colors mean moar fun!
 set prompt \033[01;31m\n(gdb) > \033[0m
 
-set disassembly-flavor intel
-set print pretty on
-set print array on
-set print repeats 25
-set disassemble-next-line off
-set confirm off
+#set disassembly-flavor intel
+#set print pretty on
+#set print array on
+#set print repeats 25
+#set disassemble-next-line off
+#set confirm off
 
-set output-radix 0x10
-set input-radix 0x10
+#set output-radix 0x10
+#set input-radix 0x10
 
 # These make gdb never pause in its output
 set height 0
