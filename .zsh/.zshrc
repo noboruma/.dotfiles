@@ -135,7 +135,7 @@ alias -g L='|less'
 # command S equivalent to command &> /dev/null &
 alias -g N='&> /dev/null &'
 
-alias sshfs='shfs -C -o reconnect -o workaround=all'
+alias sshfs='sshfs -C -o reconnect -o workaround=all'
 
 alias ifconfig='sudo ifconfig'
 alias iptables='sudo iptables'
@@ -192,13 +192,14 @@ zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
 #plugin part
+setopt HIST_FIND_NO_DUPS
 source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
 
-bindkey '^P' up-line-or-search
-bindkey '^N' down-line-or-search
+bindkey '^[[A'  up-line-or-search
+bindkey '^[[B'  down-line-or-search
 
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
@@ -209,5 +210,3 @@ CAML_LD_LIBRARY_PATH=/home/zackel/.opam/4.00.1/lib/stublibs; export CAML_LD_LIBR
 OCAML_TOPLEVEL_PATH=/home/zackel/.opam/4.00.1/lib/toplevel; export OCAML_TOPLEVEL_PATH;
 MANPATH=/home/zackel/.opam/4.00.1/man:; export MANPATH;
 export PATH=$PATH:/home/zackel/.opam/4.00.1/bin
-
-setopt HIST_FIND_NO_DUPS

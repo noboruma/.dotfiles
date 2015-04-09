@@ -1,7 +1,7 @@
 " .Vimrc from Thomas Legris 28/06/2014
 " Useful regex stuff:
 " %s/\<word\>\C/new/g -> \< match begin \> match end \C case sensistiveness
-
+set shell=/bin/zsh
 " Script Setting
 let use_arrow=0
 let use_gui=0
@@ -121,9 +121,6 @@ endfunction
 
 noremap <F10> :call ToggleSpell()<cr>
 inoremap <F10> <Esc> :call ToggleSpell()<cr>
-
-" French and English spelling
-au BufNewFile,BufRead *.tex setlocal spell spelllang=en,fr
 
 set nospell
 
