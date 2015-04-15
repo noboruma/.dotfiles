@@ -25,10 +25,10 @@ inoremap ;. <esc>g_a.
 if !exists("*File_flip")
 function! File_flip()
   if match(expand("%"),"\\.h") > 0
-    let s:flipname = substitute(expand("%"),'\.h\(.*\)','.c\1',"")
+    let s:flipname = substitute(expand("%"),'\.h','.c',"")
     exe ":find " s:flipname
   elseif match(expand("%"),"\\.c") > 0
-    let s:flipname = substitute(expand("%"),'\.c\(.*\)','.h\1',"")
+    let s:flipname = substitute(expand("%"),'\.c','.h',"")
     exe ":find " s:flipname
   endif
 endfun
