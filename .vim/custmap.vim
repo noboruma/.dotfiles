@@ -2,6 +2,7 @@
 nnoremap q: :q
 nnoremap Q <nop>
 nnoremap <S-Enter> O<Esc>
+nnoremap di "_di
 
 noremap <leader>a :set scb<cr>
 noremap <leader>A :set scb!<cr>
