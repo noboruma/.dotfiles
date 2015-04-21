@@ -69,7 +69,7 @@ export BROWSER="w3m"
 # Stuff to make my life easier
 
 # allow approximate
-zstyle ':completion:*' completer _complete _match _approximate
+#zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*:*:cd:*' tag-order local-directories
@@ -83,6 +83,9 @@ zstyle ':completion:*:kill:*' force-list always
 
 # cd not select parent dir
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
+
+zstyle ':completion:*' menu select
+setopt menu_complete
 
 ##################################################################
 # Key bindings
