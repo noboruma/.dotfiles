@@ -1,2 +1,1 @@
-ln -s ./.vimrc ~/.vimrc
-cd src/clewn-1.15/ && ./configure && make -j
+cd src/clewn-1.15/ && ./configure --prefix=$HOME/usr && make -j install
