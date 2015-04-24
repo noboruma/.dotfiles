@@ -13,7 +13,7 @@ ln -s $PWD/.vim/.vimrc ~
 ln -s $PWD/.tmux.conf ~
 ln -s $PWD/.zsh ~
 ln -s $PWD/.zsh/.zshrc ~
-ln -s $PWD/.gdbinit ~
+ln -s $PWD/.gdb/.gdbinit ~
 ln -s $PWD/.colorgccrc ~
 ln -s $PWD/.screenrc ~
 cd - 1>/dev/null
