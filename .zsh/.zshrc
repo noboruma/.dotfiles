@@ -206,10 +206,3 @@ bindkey '^[[B'  down-line-or-search
 
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
-
-# OPAM configuration
-. /home/zackel/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-CAML_LD_LIBRARY_PATH=/home/zackel/.opam/4.00.1/lib/stublibs; export CAML_LD_LIBRARY_PATH;
-OCAML_TOPLEVEL_PATH=/home/zackel/.opam/4.00.1/lib/toplevel; export OCAML_TOPLEVEL_PATH;
-MANPATH=/home/zackel/.opam/4.00.1/man:; export MANPATH;
-export PATH=$PATH:/home/zackel/.opam/4.00.1/bin
