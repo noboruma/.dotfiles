@@ -153,7 +153,7 @@ alias com='git commit -am'
 alias push='git push'
 alias pull='git pull'
 alias ocaml='rlwrap ocaml'
-alias gdb='rlwrap gdb'
+alias gdb='gdb'
 
 alias mount="sudo mount"
 alias umount="sudo umount"
