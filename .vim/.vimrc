@@ -199,10 +199,6 @@ set timeoutlen=1000
 let mapleader=" "
 source ~/.vim/custmap.vim
 
-noremap , :
-noremap! jj <esc>
-
-
 " Explorer options
 """"""""""""""""""
 let g:netrw_liststyle=3

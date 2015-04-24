@@ -4,6 +4,10 @@ nnoremap Q <nop>
 nnoremap <S-Enter> O<Esc>
 nnoremap di "_di
 nnoremap x "_x
+vnoremap x "_d
+noremap , :
+noremap! jj <esc>
+noremap! kk <esc>
 
 noremap <leader>a :set scb<cr>
 noremap <leader>A :set scb!<cr>
