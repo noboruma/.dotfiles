@@ -118,6 +118,7 @@ alias -s net=$BROWSER
 alias -s gz=tar -xzvf
 #alias -s bz2=tar -xjvf
 alias -s PKGBUILD=$EDITOR
+alias xterm='xterm -fg white -bg black'
 
 # Normal aliases
 alias ls='ls --color=auto -Fh'
