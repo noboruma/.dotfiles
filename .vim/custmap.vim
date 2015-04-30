@@ -45,6 +45,11 @@ noremap <leader>y "+y
 noremap <leader>Z zO
 noremap <leader>z zf
 
+vnoremap <leader>=, :Tab /,\zs<cr>gv=
+vnoremap <leader>== :Tab /=<cr>gv=
+vnoremap <leader>=<space> :Tab /\s\zs/l1r0<cr>gv=
+vnoremap <leader>=; :Tabularize /\S\+;$/l1<cr>gv=
+
 noremap <leader>/ :nohlsearch<cr>
 noremap <leader>1 "1 ; Register
 noremap <leader>2 "2 ; Register
