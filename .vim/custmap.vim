@@ -25,7 +25,7 @@ noremap <leader>H :0r ~/.vim/.header_template<cr>
 noremap <leader>j :tj <C-r><C-w><cr>
 noremap <leader>J <C-O>
 noremap <leader>l :TagbarToggle<cr>
-noremap <leader>m :mksession ~/mysession.vim
+"noremap <leader>mk :mksession ~/mysession.vim
 noremap <leader>n :Explore<cr>
 noremap <leader>o o<esc> " Could use :m[ove] +1
 noremap <leader>O O<esc>
@@ -45,10 +45,14 @@ noremap <leader>y "+y
 noremap <leader>Z zO
 noremap <leader>z zf
 
-vnoremap <leader>=, :Tab /,\zs<cr>gv=
+vnoremap <leader>=, :Tab /,\zs/l1r0<cr>gv=
 vnoremap <leader>== :Tab /=<cr>gv=
 vnoremap <leader>=<space> :Tab /\s\zs/l1r0<cr>gv=
 vnoremap <leader>=; :Tabularize /\S\+;$/l1<cr>gv=
+
+map <leader>m V<enter><c-e>
+noremap <leader>M :MSClear<cr>
+noremap <C-m> :MSExecCmd 
 
 noremap <leader>/ :nohlsearch<cr>
 noremap <leader>1 "1 ; Register
