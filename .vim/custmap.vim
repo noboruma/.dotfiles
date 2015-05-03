@@ -52,7 +52,7 @@ vnoremap <leader>=; :Tabularize /\S\+;$/l1<cr>gv=
 
 map <leader>m V<enter><c-e>
 noremap <leader>M :MSClear<cr>
-noremap <C-m> :MSExecCmd 
+"noremap <C-m> :MSExecCmd 
 
 noremap <leader>/ :nohlsearch<cr>
 noremap <leader>1 "1 ; Register
