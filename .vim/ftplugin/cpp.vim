@@ -11,7 +11,7 @@ let g:surround_{char2nr("c")} = "\/*\n\r\n*\/"
 setlocal foldlevel=1
 setlocal foldnestmax=1
 setlocal foldmarker={,}
-setlocal foldminlines=5
+setlocal foldminlines=1
 
 " Stop parsing include files, use ctags instead
 set complete-=i
