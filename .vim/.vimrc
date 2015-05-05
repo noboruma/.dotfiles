@@ -1,7 +1,7 @@
 " .Vimrc from Thomas Legris 28/06/2014
 " Useful regex stuff:
 " %s/\<word\>\C/new/g -> \< match begin \> match end \C case sensistiveness
-set shell=/bin/zsh
+set shell=zsh
 " Script Setting
 let use_arrow=0
 let use_gui=0
@@ -126,6 +126,7 @@ set nospell
 
 " Make options
 set makeprg=make
+
 noremap <F5> :make -j -C <Up>
 fun! NextTagOrError()
     try

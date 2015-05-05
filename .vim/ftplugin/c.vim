@@ -5,6 +5,9 @@ if has("gui_running")
   au BufEnter <buffer> :SemanticHighlight
 endif
 
+"Makeprg erroformat
+compiler gcc
+
 " Surround 
 let g:surround_{char2nr("c")} = "\/*\n\r\n*\/"
 

@@ -8,6 +8,9 @@ endif
 " Surround 
 let g:surround_{char2nr("c")} = "\/*\n\r\n*\/"
 
+"Makeprg erroformat
+compiler gcc
+
 setlocal foldlevel=1
 setlocal foldnestmax=1
 setlocal foldmarker={,}
