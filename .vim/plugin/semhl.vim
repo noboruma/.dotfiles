@@ -7,7 +7,8 @@
 let g:semanticColors = { 0x00: '72d572', 0x01: 'c5e1a5', 0x02: 'e6ee9c', 0x03: 'fff59d', 0x04: 'ffe082', 0x05: 'ffcc80', 0x06: 'ffab91', 0x07: 'bcaaa4', 0x08: 'b0bec5', 0x09: 'ffa726', 0x0a: 'ff8a65', 0x0b: 'f9bdbb', 0x0c: 'f9bdbb', 0x0d: 'f8bbd0', 0x0e: 'e1bee7', 0x0f: 'd1c4e9', 0x10: 'ffe0b2', 0x11: 'c5cae9', 0x12: 'd0d9ff', 0x13: 'b3e5fc', 0x14: 'b2ebf2', 0x15: 'b2dfdb', 0x16: 'a3e9a4', 0x17: 'dcedc8' , 0x18: 'f0f4c3', 0x19: 'ffb74d' }
 let g:semanticUseBackground = 0
 let s:hasBuiltColors = 0
-let s:blacklist = ['if', 'endif', 'for', 'endfor', 'while', 'endwhile', 'endfunction', 'break', 'goto', 'else', 'call', 'define', 'switch', 'namespace', 'template', 'struct', 'class', 'typename', 'typedef', 'void', 'const', 'int', 'unsigned', 'signed', 'char', 'float', 'double', 'long', 'short', 'inline', 'return', 'public', 'private', 'do', 'friend', 'bool', 'new', 'delete', 'sizeof']
+
+let s:blacklist = ['goto', 'break', 'return', 'continue', 'asm', 'case', 'default', 'if', 'else', 'switch', 'while', 'for', 'do', 'sizeof', '__asm__', 'typeof', '__real__', '__imag__', 'int', 'long', 'short', 'char', 'void', 'signed', 'unsigned', 'float', 'double', 'size_t', 'ssize_t', 'FILE', 'DIR', '_Bool', 'bool', '_Complex', 'complex', '_Imaginary', 'imaginary', 'int8_t', 'int16_t', 'int32_t', 'int64_t', 'uint8_t', 'uint16_t', 'uint32_t', 'uint64_t', 'struct', 'union', 'enum', 'typedef', 'static', 'register', 'auto', 'volatile', 'extern', 'const', 'inline', '__attribute__', '__LINE__', '__FILE__', '__DATE__', '__TIME__', '__STDC__', '__PRETTY_FUNCTION__', 'public', 'private', 'protected', 'class', 'template', 'typename', 'namespace', 'using', 'try', 'catch', 'delete', 'new', 'undef']
 
 command! SemanticHighlight call s:semHighlight()
 command! SemanticHighlightRevert call s:disableHighlight()

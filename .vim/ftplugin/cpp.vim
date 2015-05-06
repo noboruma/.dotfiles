@@ -2,7 +2,10 @@
 autocmd BufWritePre <buffer> silent! :Adapt
 
 if has("gui_running")
-  au BufEnter <buffer> :SemanticHighlight
+  au BufEnter <buffer> if (!exists('b:created')) | :execute "SemanticHighlight" | let b:created=1 | endif
+  "Triggered by :doautocmd
+  "au User <buffer> :SemanticHighlight 
+  au BufWritePost <buffer> :SemanticHighlight
 endif
 
 " Surround 

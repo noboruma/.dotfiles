@@ -11,6 +11,7 @@ set nocompatible
 
 "  If you need infrmation on parameters, use :h param
 if has("gui_running")
+  set shell=bash " better support
   " Gvim specific
   set lines=999
   set columns=999
@@ -162,7 +163,7 @@ noremap <F7> :call NextTagOrError()<cr>
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>
 "set tags+=./tags
-"
+
 " Automatically open, but do not go to (if there are errors) the quickfix /
 " location list window, or close it when is has become empty.
 "
