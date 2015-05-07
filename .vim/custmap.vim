@@ -8,6 +8,8 @@ vnoremap x "_d
 noremap , :
 noremap! jj <esc>
 noremap! kk <esc>
+vnoremap // y/<C-R>"<CR>
+nnoremap <leader>\ :ConqueGdb<cr>
 
 noremap <leader>a :set scb<cr>
 noremap <leader>A :set scb!<cr>
