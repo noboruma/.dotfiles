@@ -77,6 +77,9 @@ zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 autoload -U colors && colors
 compinit
 
+# This sets the case insensitivity
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
+
 # tab completion for PID :D
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:kill:*' force-list always
@@ -207,3 +210,4 @@ bindkey '^[[B'  down-line-or-search
 
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
+
