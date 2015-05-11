@@ -128,8 +128,9 @@ set nospell
 " Make options
 set makeprg=make
 
-noremap <F4> :make -j -C <Up>
-noremap <F5> :update all<cr>:make -j -C <Up><cr>
+noremap <F4> :make! -j -C <Up>
+nnoremap <F5> :up<cr>:make! -j -C <Up><cr>:redr<cr>
+inoremap <F5> <esc>:up<cr>:make! -j -C <Up><cr>:redr<cr>
 
 fun! NextTagOrError()
     try
