@@ -128,7 +128,9 @@ set nospell
 " Make options
 set makeprg=make
 
-noremap <F5> :make -j -C <Up>
+noremap <F4> :make -j -C <Up>
+noremap <F5> :update all<cr>:make -j -C <Up><cr>
+
 fun! NextTagOrError()
     try
     for nr in range(1, winnr('$'))
