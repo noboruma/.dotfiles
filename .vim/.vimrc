@@ -161,6 +161,7 @@ fun! PrevTagOrError()
 endfun
 noremap <F6> :call PrevTagOrError()<cr>
 noremap <F7> :call NextTagOrError()<cr>
+noremap <F8> :cc<cr>
 
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>

@@ -9,7 +9,6 @@ noremap , :
 noremap! jj <esc>
 noremap! kk <esc>
 vnoremap // y/<C-R>"<CR>
-nnoremap <leader>\ :ConqueGdb<cr>
 
 noremap <leader>a :set scb<cr>
 noremap <leader>A :set scb!<cr>
@@ -33,7 +32,8 @@ noremap <leader>o o<esc> " Could use :m[ove] +1
 noremap <leader>O O<esc>
 noremap <leader>p "_dP
 noremap <leader>R /\<<C-r><C-w>\><cr>:%s//
-noremap <leader>s :SemanticHighlightToggle<cr>
+"noremap <leader>s :SemanticHighlightToggle<cr>
+noremap <leader>s :%s/<C-R>"/
 noremap <leader>S :source ~/mysession.vim
 noremap <leader>t :vsp<cr>
 noremap <leader>T :sp<cr>
@@ -56,6 +56,7 @@ map <leader>m V<enter><c-e>
 noremap <leader>M :MSClear<cr>
 "noremap <C-m> :MSExecCmd 
 
+noremap <leader>\ :ConqueGdb<cr>
 noremap <leader>/ :nohlsearch<cr>
 noremap <leader>1 "1 ; Register
 noremap <leader>2 "2 ; Register
