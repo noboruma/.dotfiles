@@ -34,7 +34,8 @@ noremap <leader>p "_dP
 noremap <leader>q :q<cr>
 noremap <leader>R /\<<C-r><C-w>\><cr>:%s//
 "noremap <leader>s :SemanticHighlightToggle<cr>
-noremap <leader>s "sy:%s/<C-R>"/
+noremap <leader>s :SemanticHighlightToggle<cr>
+vnoremap <leader>s "sy:%s/<C-R>"/
 noremap <leader>S :source ~/mysession.vim
 noremap <leader>t :vsp<cr>
 noremap <leader>T :sp<cr>
