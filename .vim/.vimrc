@@ -224,7 +224,7 @@ set completeopt=menu,menuone,longest
 set laststatus=2 "status bar
 " Let us use arline instead
 "set statusline=%<%f%h%m%r:\ %{tagbar#currenttag('%s','')}%=%l,%c\ %P "status' bar content
-let g:airline_theme='simple'
+"let g:airline_theme='simple'
 let g:airline_detect_whitespace=0
   let g:airline_mode_map = {
       \ '__' : '',
@@ -338,3 +338,5 @@ let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 
 let g:ConqueGdb_Leader = '\'
 let g:ConqueTerm_CloseOnEnd = 1
+
+set modeline
