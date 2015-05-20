@@ -224,7 +224,7 @@ set completeopt=menu,menuone,longest
 set laststatus=2 "status bar
 " Let us use arline instead
 "set statusline=%<%f%h%m%r:\ %{tagbar#currenttag('%s','')}%=%l,%c\ %P "status' bar content
-let g:airline_theme='simple'
+let g:airline_theme='light'
 let g:airline_detect_whitespace=0
   let g:airline_mode_map = {
       \ '__' : '',
