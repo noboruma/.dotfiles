@@ -338,3 +338,5 @@ let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 
 let g:ConqueGdb_Leader = '\'
 let g:ConqueTerm_CloseOnEnd = 1
+
+set modeline
