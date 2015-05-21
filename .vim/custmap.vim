@@ -43,7 +43,7 @@ noremap <leader>u :GundoToggle<cr>
 noremap <leader>v <C-v>
 noremap <leader>w :up<cr>
 noremap <leader>x :bp\|bd #<cr>
-noremap <leader>X :bd!<cr>
+noremap <leader>X :bp\|bd! #<cr>
 noremap <leader>y "+y
 noremap <leader>Z zO
 noremap <leader>z zf
