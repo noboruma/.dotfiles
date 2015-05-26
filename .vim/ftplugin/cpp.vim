@@ -27,8 +27,6 @@ inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
 inoremap ;; <esc>g_a;
 inoremap ;. <esc>g_a.
 
-map <F1> :update all<cr><f5><cr>
-
 if !exists("*File_flip")
   function! File_flip()
     if match(expand("%"),'\.hh') > 0
