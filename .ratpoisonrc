@@ -28,5 +28,7 @@ bind c exec urxvt -tr
 bind g exec gftp
 bind f exec firefox
 
+exec setxkbmap -layout us -variant intl
+
 exec yakuake
 exec gvim

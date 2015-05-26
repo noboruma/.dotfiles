@@ -7,6 +7,7 @@ find ~ -maxdepth 1 -name ".tmux*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".gdb*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".colorgcc*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".screen*" -type l -exec rm -v {} \;
+find ~ -maxdepth 1 -name ".poisonrat*" -type l -exec rm -v {} \;
 
 ln -s $PWD/.vim ~
 ln -s $PWD/.vim/.vimrc ~
@@ -16,4 +17,5 @@ ln -s $PWD/.zsh/.zshrc ~
 ln -s $PWD/.gdb/.gdbinit ~
 ln -s $PWD/.colorgccrc ~
 ln -s $PWD/.screenrc ~
+ln -s $PWD/.poisonratrc ~
 cd - 1>/dev/null
