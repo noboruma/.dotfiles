@@ -35,17 +35,25 @@ snippet struct
 	struct ${1:`Filename('$1_t', 'name')`}
 	{
 		$1 (${2:arguments});
-		//virtual ~$1 ();
+		~$1 ();
 
 		private:
 			${3:/* data */}
 	};
 # For each i
 snippet fori
-	for (int ${2:i} = 0; $2 < ${1:count}; $2${3:++}) 
+	for (unsigned ${2:i} = 0; $2 < ${1:count}; $2${3:++}) 
 	{
 		${4:/* code */}
 	}
+
+# For each i as auto
+snippet fora
+	for (auto &${1:i} : $2) 
+	{
+		${3:/* code */}
+	}
+
 # Cout
 snippet cout
 	std::cout<<${1}<<std::endl;

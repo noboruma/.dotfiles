@@ -120,6 +120,7 @@ set inc
 xhost + > /dev/null 2> /dev/null || true
 
 export PATH=~/usr/bin:$PATH
+export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
 
 # vim CTRL-Z helper
 fancy-ctrl-z () {
@@ -138,14 +139,11 @@ bindkey '^Z' fancy-ctrl-z
 setopt HIST_FIND_NO_DUPS
 source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
+bindkey '^P' up-line-or-search  
+bindkey '^N' down-line-or-search
 
-bindkey '^[[A'  up-line-or-search
-bindkey '^[[B'  down-line-or-search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
-
-export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
-
