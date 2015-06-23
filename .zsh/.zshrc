@@ -147,3 +147,5 @@ bindkey '^[[B'  down-line-or-search
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
+export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
+
