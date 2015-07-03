@@ -54,6 +54,13 @@ snippet fora
 		${3:/* code */}
 	}
 
+# For each i as size_t
+snippet fors
+	for (unsigned ${1:i} = 0; $1 < ${2:.size()}; ${3:++}$1) 
+	{
+		${4}
+	}
+
 # Cout
 snippet cout
 	std::cout<<${1}<<std::endl;
