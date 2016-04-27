@@ -343,7 +343,11 @@ set shortmess+=I
 let g:colorizer_nomap = 1
 let g:colorizer_startup = 0
 
+let g:syntastic_tex_checkers = ['chktex']
+
 let g:ConqueGdb_Leader = '\'
 let g:ConqueTerm_CloseOnEnd = 1
 
 set modeline
+
+let g:atp_Compiler = "python"
