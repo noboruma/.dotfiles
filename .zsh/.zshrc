@@ -139,16 +139,11 @@ bindkey '^Z' fancy-ctrl-z
 setopt HIST_FIND_NO_DUPS
 source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-<<<<<<< HEAD
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
 bindkey '^[[A' up-line-or-search   
 bindkey '^[[B' down-line-or-search
-=======
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
->>>>>>> f3d1a05e5ff69059800403a03fbbb339c3f164ae
 
 bindkey '^P' up-line-or-search
 bindkey '^N' down-line-or-search
