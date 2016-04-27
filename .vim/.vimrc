@@ -35,7 +35,7 @@ if !use_arrow
   nnoremap  <Right>  <NOP>
 endif
 
-set guifont=Monospace\ 9
+set guifont=Monospace\ 8
 
 set vb " visual bell
 syntax on "enable
@@ -69,7 +69,7 @@ set cino+=(0,+0 "C file option
 set autoread
 set clipboard=unnamed "^=
 
-" xterm-debian est un terminal couleur
+" xterm-debian is a color terminal 
 if &term =~ "xterm-debian" || &term =~ "xterm-xfree86"
     set t_Co=16
     set t_Sf=[3%dm
@@ -222,6 +222,9 @@ let g:netrw_liststyle=3
 " Ced: for auto-completion popup menu
 highlight Pmenu    guifg=black  guibg=grey
 highlight PmenuSel guifg=grey guibg=black gui=bold
+"Thomas: let's change it for term as well
+highlight Pmenu    ctermbg=grey gui=bold
+highlight PmenuSel ctermbg=cyan gui=bold
 
 " Thanks to Pablo !
 set completeopt=menu,menuone,longest 
@@ -324,8 +327,8 @@ set nobackup
 "set backupdir=~/.vim/vimfiles/backup
 
 " Swap files
-set swapfile
-set directory=~/.vim/vimfiles/swap
+set noswapfile
+"set directory=~/.vim/vimfiles/swap
 
 " Undo files
 if (exists("&undodir"))

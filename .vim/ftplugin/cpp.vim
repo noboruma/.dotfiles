@@ -1,3 +1,4 @@
+" CPP config is shared with C one (c.vim)
 " Adapt on save hook
 autocmd BufWritePre <buffer> silent! :Adapt
 
@@ -36,8 +37,6 @@ set complete-=i
 
 "inoremap <expr> < "<>\<Left>"
 inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
-inoremap ;; <esc>g_a;
-inoremap ;. <esc>g_a.
 
 if !exists("*File_flip")
   function! File_flip()

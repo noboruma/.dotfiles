@@ -62,6 +62,7 @@ zle -N zle-keymap-select
 
 # Vars used later on by Zsh
 export EDITOR="vim"
+export GIT_EDITOR="$EDITOR"
 export IDE="gvim"
 export BROWSER="w3m"
 
@@ -120,6 +121,7 @@ set inc
 xhost + > /dev/null 2> /dev/null || true
 
 export PATH=~/usr/bin:$PATH
+export PATH=/usr/local/cuda-7.5/bin:$PATH
 export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
 
 # vim CTRL-Z helper

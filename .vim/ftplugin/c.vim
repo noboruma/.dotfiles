@@ -28,6 +28,10 @@ inoremap <expr> { "{}\<Left>"
 inoremap ;; <esc>g_a;
 inoremap ;. <esc>g_a.
 
+imap <expr> {<cr> "{<cr>}<esc>O"
+inoremap [<cr> [<cr>]<c-o>O<tab>
+inoremap (<cr> (<cr>)<c-o>O<tab>
+
 if !exists("*File_flip")
 function! File_flip()
   if match(expand("%"),"\\.h") > 0
