@@ -8,6 +8,18 @@ if has("gui_running")
   au BufWritePost <buffer> :SemanticHighlight
 endif
 
+let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler_options = '-std=c++1y'
+
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+
 " Surround 
 let g:surround_{char2nr("c")} = "\/*\n\r\n*\/"
 

@@ -39,6 +39,7 @@ alias au='sudo aptitude update'
 alias aup='sudo aptitude update && sudo aptitude safe-upgrade'
 alias e=$IDE
 alias v=$EDITOR
+alias sv='sudo $EDITOR'
 alias com='git commit -am'
 alias push='git push'
 alias pull='git pull'

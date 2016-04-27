@@ -139,11 +139,15 @@ bindkey '^Z' fancy-ctrl-z
 setopt HIST_FIND_NO_DUPS
 source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-bindkey '^P' up-line-or-search  
-bindkey '^N' down-line-or-search
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
 
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+bindkey '^[[A' up-line-or-search   
+bindkey '^[[B' down-line-or-search
 
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
+
+export NDK_ROOT='/home/zackel/workspace/android/android-ndk-r10e'
+export NDK_HOME='/home/zackel/workspace/android/android-ndk-r10e'
+export ANDROID_HOME='/home/zackel/usr/adt-bundle-linux-x86_64-20131030/sdk'
