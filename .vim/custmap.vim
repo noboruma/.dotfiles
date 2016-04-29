@@ -17,8 +17,8 @@ noremap <leader>c lc^
 noremap <leader>C 0D
 noremap <leader>d "_d
 noremap <leader>e :e<space>./
-noremap <leader>f :pta <C-r><C-w><cr>
-noremap <leader>F <C-w>z
+"noremap <leader>f :pta <C-r><C-w><cr>
+noremap <leader>f <C-w>z
 noremap <leader>g :vimgrep /<C-r><C-w>/j ./*
 noremap <leader>G :ccl<cr>
 noremap <leader>h :call File_flip()<cr>

@@ -227,7 +227,7 @@ highlight Pmenu    ctermbg=grey gui=bold
 highlight PmenuSel ctermbg=cyan gui=bold
 
 " Thanks to Pablo !
-set completeopt=menu,menuone,longest 
+set completeopt=menu,menuone,longest,preview
 
 "To close automatically the preview window:
 "autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
