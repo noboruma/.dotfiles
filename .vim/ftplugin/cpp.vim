@@ -45,8 +45,8 @@ if !exists("*File_flip")
       try
         exe ":find " s:flipname
       catch
-        let s:flipname = substitute(expand("%"),'\.hh','.cc',"")
-        exe ":find " s:flipname
+        let s:flipname = substitute(expand("%"),'\.h\(.*\)','.c',"")
+        exe ":find " s:flipname."*"
       endtry
     elseif match(expand("%"),'\.hxx') > 0
       let s:flipname = substitute(expand("%"),'\.hxx','.hh',"")
