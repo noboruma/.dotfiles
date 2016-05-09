@@ -30,13 +30,13 @@ alias -g N='&> /dev/null &'
 
 alias sshfs='sshfs -C -o reconnect -o workaround=all'
 
-alias ifconfig='sudo ifconfig'
-alias iptables='sudo iptables'
-alias ai='sudo aptitude install'
-alias aS='sudo aptitude search'
-alias aR='sudo aptitude remove'
-alias au='sudo aptitude update'
-alias aup='sudo aptitude update && sudo aptitude safe-upgrade'
+alias sifconfig='sudo ifconfig'
+alias siptables='sudo iptables'
+alias sai='sudo aptitude install'
+alias aS='aptitude search'
+alias saR='sudo aptitude remove'
+alias sau='sudo aptitude update'
+alias saup='sudo aptitude update && sudo aptitude safe-upgrade'
 alias e=$IDE
 alias v=$EDITOR
 alias sv='sudo $EDITOR'
@@ -45,16 +45,15 @@ alias push='git push'
 alias pull='git pull'
 alias ocaml='rlwrap ocaml'
 
-alias mount="sudo mount"
-alias umount="sudo umount"
-alias rcconf="sudo rcconf"
+alias smount="sudo mount"
+alias sumount="sudo umount"
+alias srcconf="sudo rcconf"
 alias pwdb="pwman3"
-alias shut="sudo shutdown -h 0"
-alias hibern="sudo pm-hibernate"
-alias reboot="sudo reboot"
+alias sshut="sudo shutdown -h 0"
+alias shibern="sudo pm-hibernate"
+alias sreboot="sudo reboot"
 
 alias arduino="arduino-asm&"
-alias g++='g++ -std=c++0x'
 alias m='make -j2'
 alias mc='make -j2 check'
 
@@ -64,3 +63,6 @@ alias df="df -h"
 
 alias vimrc="vim ~/.vimrc"
 alias zshrc="vim ~/.zshrc"
+
+alias gvir="gvim --remote"
+alias gvdev="gvim --servername dev --remote"
