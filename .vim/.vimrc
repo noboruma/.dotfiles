@@ -354,3 +354,6 @@ let g:ConqueTerm_CloseOnEnd = 1
 set modeline
 
 let g:atp_Compiler = "python"
+
+"word-motion setup
+" w/e/b/W replaced by default

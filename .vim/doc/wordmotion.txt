@@ -1,0 +1,110 @@
+*wordmotion.txt* Customizable word motions for Vim
+
+INTRODUCTION					*wordmotion*
+
+This is one word under Vim's definition:
+>
+	CamelCaseACRONYMWords_underscore1234
+	^
+<
+With this plugin, this becomes 9 words:
+>
+	CamelCaseACRONYMWords_under_score1234
+	^    ^   ^      ^    ^^    ^^    ^
+<
+MAPPINGS					*wordmotion-mappings*
+
+						*wordmotion-w*
+{prefix}w		[count] words forward. |exclusive| motion.
+
+						*wordmotion-e*
+{prefix}e		Forward to the end of word [count] |inclusive|.
+			Does not stop in an empty line.
+
+						*wordmotion-b*
+{prefix}b		[count] words backward. |exclusive| motion.
+
+						*wordmotion-ge*
+{prefix}ge		Backward to the end of word [count] |inclusive|.
+
+						*wordmotion-aw*
+a{prefix}w		"a word", select [count] words (see |wordmotion-word|).
+			Leading or trailing white space is included, but not
+			counted.
+			When used in Visual linewise mode "aw" switches to
+			Visual characterwise mode.
+
+						*wordmotion-iw*
+i{prefix}w		"inner word", select [count] words
+			(see |wordmotion-word|).
+			White space between words is counted too.
+			When used in Visual linewise mode "iw" switches to
+			Visual characterwise mode.
+
+						*wordmotion-word*
+A word is any of the following separated with white spaces
+(spaces, tabs, <EOL>):
+
+- Anything patterns defined in |g:wordmotion_extra|
+- An uppercase letter followed by one or more lowercase letters
+- One or more uppercase letters that does not immediately precede
+  a lowercase letter
+- One or more uppercase letters
+- One or more lowercase letters
+- A valid hexadecimal literal
+- A valid binary literal
+- One or more numeric digits
+- One or more non-letter and non-digit keywords (see 'iskeyword')
+- One or more of other non-blank characters
+- An empty line
+
+CUSTOMIZATION					*wordmotion-customization*
+
+The default word motion mappings are `w`, `b`, `e`, `ge`, `aw`, and `iw`.
+
+						*g:wordmotion_prefix*
+Use |g:wordmotion_prefix| to apply a common prefix to each of the default word
+motion mappings.
+E.g.,
+>
+	let g:wordmotion_prefix = '<Leader>'
+<
+						*g:wordmotion_mappings*
+Use |g:wordmotion_mappings| to replace individual word motion mappings.
+E.g.,
+>
+	let g:wordmotion_mappings = { 'w' : 'W', 'b' : 'B' }
+<
+NOTE: this overrides |g:wordmotion_prefix|.
+
+						*g:wordmotion_extra*
+Define additional `word`s with |g:wordmotion_extra|.
+E.g., to treat `<WordsInAngleBrackets>` and `|WordsInPipes|` as single words:
+>
+	let g:wordmotion_extra = [ '<\a\+>', '|\a\+|' ]
+<
+NOTE: this takes precedence over any existing word definitions.
+
+CAVEATS						*wordmotion-caveats*
+
+There are some special cases with how Vim's word motions work.
+E.g.,
+
+Vim:
+>
+	^foo [b]ar$ -> dw -> ^foo[ ]$
+	^ baz$               ^ baz$
+
+	^[f]oo bar$ -> cw -> ^[ ]bar$
+
+This plugin:
+>
+	^foo [b]ar$ -> dw -> ^foo [b]az$
+	^ baz$
+
+	^[f]oo bar$ -> cw -> ^[b]ar$
+<
+This plugin faithfully follows the motion of `w`, while Vim replaces these two
+special cases with the behavior of `de` and `ce`, respectively.
+
+ vim:tw=78:ts=8:ft=help:norl:
