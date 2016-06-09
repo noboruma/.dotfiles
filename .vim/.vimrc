@@ -37,37 +37,30 @@ endif
 
 set guifont=Monospace\ 8
 
-set vb " visual bell
-syntax on "enable
+set vb                         " visual bell
+syntax on                      " enable
 set background=dark
 colorscheme myslate
 
-set ruler "Show cursor position, line, col"
-
-" Max text width, 0 to disable it
-set textwidth=0
-
-" Wrappe à 72 caractères avec la touche '@#'
-"map @# gwap
-" Wrappe et justifie à 72 caractères avec la touche '@'
-"map @ {v}! par 72j
-
-"set columns=80
-set history=50 " History entries max number
-" ~/.viminfo's Options
-set viminfo='20,\"50
-set backspace=2 "Activate backspace
-set whichwrap=<,>,[,] " Ok let's use arrow to naviguate
-set scrolloff=1 " Keep one line after/before the cursor
-set showcmd " Show cmd on status bar
-set showmatch " Show paried symbols
+set ruler                      " Show cursor position, line, col
+set textwidth=0                " Max text width, 0 to disable it
+" map @# gwap                  " Wrappe à 72 caractères avec la touche '@#'
+" map @ {v}! par 72j           " Wrappe et justifie à 72 caractères avec la touche '@'
+" set columns=80
+set history=50                 " History entries max number
+set viminfo='20,\"50           " ~/.viminfo's Options
+set backspace=2                " Activate backspace
+set whichwrap=<,>,[,]          " Ok let's use arrow to naviguate
+set scrolloff=1                " Keep one line after/before the cursor
+set showcmd                    " Show cmd on status bar
+set showmatch                  " Show paried symbols
 set nostartofline
 set wildmode=list:full:longest
 set autoindent
 set smartindent
-set cino+=(0,+0 "C file option
+set cino+=(0,+0                " C file option
 set autoread
-set clipboard=unnamed "^=
+set clipboard=unnamed          " ^=
 
 " xterm-debian is a color terminal 
 if &term =~ "xterm-debian" || &term =~ "xterm-xfree86"
@@ -98,19 +91,19 @@ augroup END
 set foldlevel=99
 set foldnestmax=0
 
-set incsearch " Search as we type
-set hlsearch "Highlight
+set incsearch      " Search as we type
+set hlsearch       " Highlight
 
-" Line number
-"set number
+                   " Line number
+                   " set number
 
 set mouse=a
 
 filetype on
 filetype plugin on
-set ruler " Relative cursor position
+set ruler          " Relative cursor position
 set is
-set cul " Highlight current line
+set cul            " Highlight current line
 
 function! ToggleSpell()
   if &spell
@@ -355,5 +348,5 @@ set modeline
 
 let g:atp_Compiler = "python"
 
-"word-motion setup
+" word-motion setup
 " w/e/b/W replaced by default
