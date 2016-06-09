@@ -6,6 +6,8 @@
 
 #export TERM='screen-256color'
 
+# Root allow X?
+# xhost + > /dev/null 2> /dev/null || true
 
 # Let's reset caps lock (setxkbmap -option to re-enable)
 # setxkbmap -option ctrl:nocaps
@@ -21,7 +23,7 @@ eval `dircolors -b`
 set -o vi
 bindkey -v
 #kill the lag
-export KEYTIMEOUT=1
+#export KEYTIMEOUT=1
 
 autoload -Uz compinit 
 setopt autopushd pushdminus pushdsilent pushdtohome
@@ -35,13 +37,24 @@ setopt HIST_REDUCE_BLANKS
 setopt HIST_IGNORE_SPACE
 setopt SH_WORD_SPLIT
 setopt nohup
+setopt transientrprompt
+#setopt PRINT_EXIT_VALUE
+
+#print colors
+CREDOR='%{\e[1;31m%}'
+CBROWN='%{\e[0;33m%}'
+CCYAN='%{\e[1;30m%}'
+BOLDNOC='%{\e[1;0m%}'
+NOCOLOR='%{\e[0m%}'
+MCOLOR='%{\e[0;35m%}'
+CBLUE='%{\e[1;34m%}'
+CGREEN='%{\e[1;32m%}'
 
 # PS1 and PS2
-export PS1="$(print '%{\e[1;31m%}[%{\e[0m%}%{\e[1;34m%}%n%{\e[0m%}%{\e[1;31m%}@%{\e[0m%}%{\e[1;32m%}%M%{\e[0m%}%{\e[1;31m%}]%{\e[0m%}%'):$(print '%{\e[0;35m%}%~%{\e[0m%}$') "
-export PS2="$(print '%{\e[0;34m%}>%{\e[0m%}')"
+export PS1="$(print $CBROWN'(%D{%L:%M:%S %p})\n'$CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR']'$MCOLOR%~%b$CCYAN'\n$ ')"
+export PS2="$(print '%{\e[0;34m%}>'$NOCOLOR)"
 
-# Date at Prompt
-#RPROMPT='[%D{%L:%M:%S %p}]'
+#export RPROMPT='[%D{%L:%M:%S %p}]'
 #TMOUT=0
 #TRAPALRM() {
 #   zle reset-prompt
@@ -53,7 +66,8 @@ precmd() {
 }
 # Mode at Prompt
 function zle-line-init zle-keymap-select {
-    RPS1="%{%F{red}%} ${vcs_info_msg_0_} %{%F{blue}%} ${${KEYMAP/vicmd/ -- NORMAL --}/(main|viins)/-- INSERT --}%f"
+    # Show exit code on the right if it was != 0
+    RPS1="%(?..[%B%?%b])%{%F{red}%}${vcs_info_msg_0_}%{$fg_bold[yellow]%}${${KEYMAP/vicmd/ -- NORMAL --}/(main|viins)/}%f%b"
     zle reset-prompt
 }
 
@@ -67,7 +81,7 @@ export IDE="gvim"
 export BROWSER="w3m"
 
 ##################################################################
-# Stuff to make my life easier
+# Stuff to make life easier
 
 # allow approximate
 #zstyle ':completion:*' completer _complete _match _approximate
@@ -117,9 +131,6 @@ source ~/.zsh/custalias.zsh
 
 set inc
 
-# Root allow X?
-xhost + > /dev/null 2> /dev/null || true
-
 export PATH=~/usr/bin:$PATH
 export PATH=/usr/local/cuda-7.5/bin:$PATH
 export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
@@ -146,9 +157,6 @@ bindkey '^N' history-substring-search-down
 
 bindkey '^[[A' up-line-or-search   
 bindkey '^[[B' down-line-or-search
-
-bindkey '^P' up-line-or-search
-bindkey '^N' down-line-or-search
 
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
