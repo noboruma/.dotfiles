@@ -51,7 +51,7 @@ CBLUE='%{\e[1;34m%}'
 CGREEN='%{\e[1;32m%}'
 
 # PS1 and PS2
-export PS1="$(print $CBROWN'(%D{%L:%M:%S %p})\n'$CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR']'$MCOLOR%~%b$CCYAN'\n$ ')"
+export PS1="$(print $CBROWN'(%D{%L:%M:%S %p})\n'$CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR']'$MCOLOR%~%b$CCYAN'\n$ '%f%b)"
 export PS2="$(print '%{\e[0;34m%}>'$NOCOLOR)"
 
 #export RPROMPT='[%D{%L:%M:%S %p}]'
