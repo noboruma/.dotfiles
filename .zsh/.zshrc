@@ -164,3 +164,5 @@ bindkey -M vicmd 'j' history-substring-search-down
 export NDK_ROOT='/home/zackel/workspace/android/android-ndk-r10e'
 export NDK_HOME='/home/zackel/workspace/android/android-ndk-r10e'
 export ANDROID_HOME='/home/zackel/usr/adt-bundle-linux-x86_64-20131030/sdk'
+
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
