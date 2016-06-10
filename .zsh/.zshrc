@@ -162,6 +162,6 @@ bindkey '^[[B' down-line-or-search
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
-export NDK_ROOT='/home/zackel/workspace/android/android-ndk-r10e'
-export NDK_HOME='/home/zackel/workspace/android/android-ndk-r10e'
-export ANDROID_HOME='/home/zackel/usr/adt-bundle-linux-x86_64-20131030/sdk'
+export NDK_ROOT=$HOME'/workspace/android/android-ndk-r10e'
+export NDK_HOME=$HOME'/workspace/android/android-ndk-r10e'
+export ANDROID_HOME=$HOME'/usr/adt-bundle-linux-x86_64-20131030/sdk'
