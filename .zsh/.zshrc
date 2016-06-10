@@ -41,17 +41,18 @@ setopt transientrprompt
 #setopt PRINT_EXIT_VALUE
 
 #print colors
-CREDOR='%{\e[1;31m%}'
-CBROWN='%{\e[0;33m%}'
-CCYAN='%{\e[1;30m%}'
-BOLDNOC='%{\e[1;0m%}'
-NOCOLOR='%{\e[0m%}'
-MCOLOR='%{\e[0;35m%}'
-CBLUE='%{\e[1;34m%}'
-CGREEN='%{\e[1;32m%}'
+local CREDOR='%{\e[1;31m%}'
+local CBROWN='%{\e[0;33m%}'
+local BOLDNOC='%{\e[1;0m%}'
+local NOCOLOR='%{\e[0m%}'
+local MCOLOR='%{\e[0;35m%}'
+local CBLUE='%{\e[1;34m%}'
+local CGREEN='%{\e[1;32m%}'
 
 # PS1 and PS2
-export PS1="$(print $CBROWN'(%D{%L:%M:%S %p})\n'$CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR']'$MCOLOR%~%b$CCYAN'\n$ '%f%b)"
+export PS1="$(print $CBROWN'(%D{%L:%M:%S %p})\n'\
+$CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR']'$MCOLOR%~%b'\n'\
+$CREDOR'$ '%f%b)"
 export PS2="$(print '%{\e[0;34m%}>'$NOCOLOR)"
 
 #export RPROMPT='[%D{%L:%M:%S %p}]'
