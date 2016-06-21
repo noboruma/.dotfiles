@@ -185,12 +185,12 @@ augroup END
 
 " Handle space and tabs
 set expandtab
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 
 " Allow real tab in leader mapping
 set wildcharm=<tab>
-set timeoutlen=1000
+set timeoutlen=500
 
 " Path setting => No need as indexer plugin take care of that
 "let s:default_path = escape(&path, '\ ') " store default value of 'path'

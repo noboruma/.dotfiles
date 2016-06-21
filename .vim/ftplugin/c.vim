@@ -19,6 +19,11 @@ setlocal foldnestmax=1
 setlocal foldmarker={,}
 setlocal foldminlines=1
 
+
+set expandtab
+set tabstop=8
+set shiftwidth=8
+
 set complete-=i
 
 inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
