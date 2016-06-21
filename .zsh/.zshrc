@@ -80,6 +80,7 @@ export EDITOR="vim"
 export GIT_EDITOR="$EDITOR"
 export IDE="gvim"
 export BROWSER="w3m"
+export MANPAGER="less"
 
 ##################################################################
 # Stuff to make life easier
