@@ -1,0 +1,4 @@
+###
+1) set dwm-start.sh in ~/usr/bin
+2) update location in debian/desktop/dwm.desktop
+3) Update manually system's dwm.desktop

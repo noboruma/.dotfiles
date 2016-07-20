@@ -11,6 +11,8 @@
 
 # Let's reset caps lock (setxkbmap -option to re-enable)
 # setxkbmap -option ctrl:nocaps
+# Best layout ever:
+# setxkbmap -layout us -variant intl
 
 ###########################################################        
 # Options for Zsh
