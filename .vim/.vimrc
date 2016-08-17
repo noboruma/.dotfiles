@@ -348,5 +348,9 @@ set modeline
 
 let g:atp_Compiler = "python"
 
+" session
+set ssop-=options    " do not store global and local values in a session
+set ssop-=folds      " do not store folds
+
 " word-motion setup
 " w/e/b/W replaced by default
