@@ -79,10 +79,12 @@ zle -N zle-keymap-select
 
 # Vars used later on by Zsh
 export EDITOR="vim"
+export VISUAL="vim"
 export GIT_EDITOR="$EDITOR"
 export IDE="gvim"
 export BROWSER="w3m"
 export MANPAGER="less"
+export PAGER="less"
 
 ##################################################################
 # Stuff to make life easier
@@ -169,3 +171,5 @@ export NDK_ROOT=$HOME'/workspace/android/android-ndk-r10e'
 export NDK_HOME=$HOME'/workspace/android/android-ndk-r10e'
 export ANDROID_HOME=$HOME'/usr/adt-bundle-linux-x86_64-20131030/sdk'
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+export P4CONFIG=.perforce
