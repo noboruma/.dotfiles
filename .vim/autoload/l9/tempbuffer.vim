@@ -22,7 +22,7 @@ function s:onBufDelete(bufname)
   endif
   if bufnr('%') == s:dataMap[a:bufname].bufNr && winnr('#') != 0
     " if winnr('#') returns 0, "wincmd p" causes ringing the bell.
-    wincmd p
+    execute 'wincmd p'
   endif
 endfunction
 
@@ -99,6 +99,8 @@ function l9#tempbuffer#close(bufname)
     return
   endif
   execute printf('%dbdelete!', s:dataMap[a:bufname].bufNr)
+  "TODO: find a better/nicer solution
+  execute 'wincmd p' 
 endfunction
 
 "
