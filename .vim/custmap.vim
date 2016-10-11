@@ -98,6 +98,10 @@ inoremap <C-Space> <C-x><C-o>
 " For terminal
 inoremap <C-@> <C-Space>
 
+" scroll remap
+noremap <C-J> <C-E>
+noremap <C-K> <C-Y>
+
 
 " Simulate <down> after CTRL-N
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
