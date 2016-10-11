@@ -1,4 +1,5 @@
 " Adapt on save hook
+autocmd BufWritePre <buffer> %s/\s\+$//e
 autocmd BufWritePre <buffer> silent! :Adapt
 
 if has("gui_running")

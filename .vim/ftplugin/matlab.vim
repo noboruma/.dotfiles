@@ -2,6 +2,8 @@
 " Language:	matlab
 " Maintainer:	Fabrice Guy <fabrice.guy at gmail dot com>
 " Last Changed: 2010 May 19
+"
+autocmd BufWritePre <buffer> %s/\s\+$//e
 
 if exists("b:did_ftplugin")
   finish

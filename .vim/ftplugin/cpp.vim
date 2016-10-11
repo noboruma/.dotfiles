@@ -1,5 +1,6 @@
 " CPP config is shared with C one (c.vim)
 " Adapt on save hook
+autocmd BufWritePre <buffer> %s/\s\+$//e
 autocmd BufWritePre <buffer> silent! :Adapt
 
 if has("gui_running")
