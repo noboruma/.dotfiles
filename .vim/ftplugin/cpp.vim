@@ -41,36 +41,43 @@ inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
 
 if !exists("*File_flip")
   function! File_flip()
-    if match(expand("%"),'\.hh') > 0
-      let s:flipname = substitute(expand("%"),'\.hh','.hxx',"")
-      try
-        exe ":find " s:flipname
-      catch
-        let s:flipname = substitute(expand("%"),'\.hh','.c',"")
-        exe ":find " s:flipname."*"
-      endtry
-    elseif match(expand("%"),'\.hxx') > 0
-      let s:flipname = substitute(expand("%"),'\.hxx','.hh',"")
-      try
-        exe ":find " s:flipname
-      catch
-        let s:flipname = substitute(expand("%"),'\.hxx','.hpp',"")
-        exe ":find " s:flipname."*"
-      endtry
-    elseif match(expand("%"),'\.hpp') > 0
-      let s:flipname = substitute(expand("%"),'\.hpp','.hxx',"")
-      try
-        exe ":find " s:flipname
-      catch
-        let s:flipname = substitute(expand("%"),'\.hpp','.c',"")
-        exe ":find " s:flipname."*"
-      endtry
-    elseif match(expand("%"),'\.h\(.*\)') > 0
-      let s:flipname = substitute(expand("%"),'\.h\(.*\)','.c',"")
-      exe ":find " s:flipname."*"
+    if match(expand("%"),'\.h\(.*\)') > 0
+        if match(expand("%"),'\.hh') > 0
+          try
+            let s:flipname = substitute(expand("%"),'\.hh','\.hxx',"")
+            exe ":find " s:flipname
+          catch
+            let s:flipname = substitute(expand("%"),'\.hh','\.cc',"")
+            try
+              exe ":find " s:flipname
+            catch "buffer opened but not reachable from path
+              exe ":buffer " s:flipname
+            endtry
+          endtry
+        elseif match(expand("%"),'\.hxx') > 0
+          let s:flipname = substitute(expand("%"),'\.h\(.*\)','\.hh',"")
+          exe ":find " s:flipname
+        else
+          let s:flipname = substitute(expand("%"),'\.h\(.*\)','\.c\1',"")
+          try
+            exe ":find " s:flipname
+          catch "buffer opened but not reachable from path
+            exe ":buffer " s:flipname
+          endtry
+        endif
     elseif match(expand("%"),'\.c\(.*\)') > 0
-      let s:flipname = substitute(expand("%"),'\.c\(.*\)','.h',"")
-      exe ":find " s:flipname."*"
+        if match(expand("%"),'\.cc') > 0
+          try
+            let s:flipname = substitute(expand("%"),'\.cc','\.hh',"")
+            exe ":find " s:flipname
+          catch
+            let s:flipname = substitute(expand("%"),'\.cc','\.hpp',"")
+            exe ":find " s:flipname
+          endtry
+        else
+          let s:flipname = substitute(expand("%"),'\.c\(.*\)','\.h\1',"")
+          exe ":find " s:flipname
+        endif
     endif
   endfun
 endif
