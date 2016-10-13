@@ -374,3 +374,6 @@ endif
 
 " show msg when any other cscope db added
 set cscopeverbose 
+
+" No preview mode in fuzzy finder
+let g:fuf_previewHeight=0
