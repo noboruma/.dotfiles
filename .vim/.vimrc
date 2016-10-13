@@ -35,7 +35,7 @@ if !use_arrow
   nnoremap  <Right>  <NOP>
 endif
 
-set guifont=Monospace\ 8
+set guifont=Monospace\ 9
 
 set vb                         " visual bell
 syntax on                      " enable

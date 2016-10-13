@@ -41,6 +41,7 @@ inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
 
 if !exists("*File_flip")
   function! File_flip()
+    " The flip mechanism consider that path is properly set on headers
     if match(expand("%"),'\.h\(.*\)') > 0
         if match(expand("%"),'\.hh') > 0
           try
