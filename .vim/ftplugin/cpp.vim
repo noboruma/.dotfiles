@@ -46,38 +46,42 @@ if !exists("*File_flip")
         if match(expand("%"),'\.hh') > 0
           try
             let s:flipname = substitute(expand("%"),'\.hh','\.hxx',"")
-            exe ":find " s:flipname
+            exe ":find ".s:flipname
           catch
             let s:flipname = substitute(expand("%"),'\.hh','\.cc',"")
             try
-              exe ":find " s:flipname
+              exe ":find ".s:flipname
             catch "buffer opened but not reachable from path
-              exe ":buffer " s:flipname
+              exe ":buffer ".s:flipname
             endtry
           endtry
         elseif match(expand("%"),'\.hxx') > 0
           let s:flipname = substitute(expand("%"),'\.h\(.*\)','\.hh',"")
-          exe ":find " s:flipname
+          exe ":find ".s:flipname
         else
           let s:flipname = substitute(expand("%"),'\.h\(.*\)','\.c\1',"")
-          try
-            exe ":find " s:flipname
-          catch "buffer opened but not reachable from path
-            exe ":buffer " s:flipname
+          try "buffer opened but not reachable from path
+            exe ":buffer ".s:flipname
+            catch
+                try
+                  exe ":find ".s:flipname
+                catch 
+                  exe ":find ../../../src/".s:flipname
+                endtry
           endtry
         endif
     elseif match(expand("%"),'\.c\(.*\)') > 0
         if match(expand("%"),'\.cc') > 0
           try
             let s:flipname = substitute(expand("%"),'\.cc','\.hh',"")
-            exe ":find " s:flipname
+            exe ":find ".s:flipname
           catch
             let s:flipname = substitute(expand("%"),'\.cc','\.hpp',"")
-            exe ":find " s:flipname
+            exe ":find ".s:flipname
           endtry
         else
           let s:flipname = substitute(expand("%"),'\.c\(.*\)','\.h\1',"")
-          exe ":find " s:flipname
+          exe ":find ".s:flipname
         endif
     endif
   endfun
