@@ -61,6 +61,8 @@ set smartindent
 set cino+=j1,(0,+0                " C file option
 set autoread
 set clipboard=unnamed          " ^=
+" Prevent RO file editing: use 'set modifiable' manually if needed
+autocmd BufRead * let &modifiable = !&readonly
 
 " xterm-debian is a color terminal 
 if &term =~ "xterm-debian" || &term =~ "xterm-xfree86"
