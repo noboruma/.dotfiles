@@ -27,10 +27,12 @@ let g:surround_{char2nr("c")} = "\/*\n\r\n*\/"
 
 "Makeprg erroformat
 compiler gcc
-augroup changeQfCmdDir
-   au!
-   autocmd QuickFixCmdPre make cd `pwd`
-augroup END
+" Folding of (gnu)make output.
+"au BufReadPost quickfix setlocal foldmethod=marker
+"au BufReadPost quickfix setlocal foldmarker=Entering\ directory,Leaving\ directory
+"au BufReadPost quickfix map <buffer> <silent> zq zM:g/error:/normal zv<CR>
+"au BufReadPost quickfix map <buffer> <silent> zw zq:g/warning:/normal zv<CR>
+"au BufReadPost quickfix normal zq
 
 setlocal foldlevel=1
 setlocal foldnestmax=1
