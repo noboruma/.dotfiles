@@ -27,6 +27,10 @@ let g:surround_{char2nr("c")} = "\/*\n\r\n*\/"
 
 "Makeprg erroformat
 compiler gcc
+augroup changeQfCmdDir
+   au!
+   autocmd QuickFixCmdPre make cd `pwd`
+augroup END
 
 setlocal foldlevel=1
 setlocal foldnestmax=1
@@ -49,10 +53,10 @@ if !exists("*File_flip")
             exe ":find ".s:flipname
           catch
             let s:flipname = substitute(expand("%"),'\.hh','\.cc',"")
-            try
-              exe ":find ".s:flipname
-            catch "buffer opened but not reachable from path
+            try "buffer opened but not reachable from path
               exe ":buffer ".s:flipname
+            catch 
+              exe ":find ".s:flipname
             endtry
           endtry
         elseif match(expand("%"),'\.hxx') > 0

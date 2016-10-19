@@ -2,7 +2,6 @@
 nnoremap q: :q
 nnoremap Q <nop>
 nnoremap <S-Enter> O<Esc>
-nnoremap di "_di
 nnoremap x "_x
 vnoremap x "_d
 noremap , :
@@ -13,8 +12,8 @@ vnoremap // y/<C-R>"<CR>
 noremap <leader>a :set scb<cr>
 noremap <leader>A :set scb!<cr>
 noremap <leader>b :FufBuffer<cr>
-"noremap <leader>c lc^
-noremap <leader>c <esc>:cscope c <C-r><C-w>
+noremap <leader>c lc^
+"noremap <leader>c <esc>:cscope c <C-r><C-w>
 noremap <leader>C 0D
 noremap <leader>d "_d
 noremap <leader>e :e<space>./
@@ -24,7 +23,7 @@ noremap <leader>g :vimgrep /<C-r><C-w>/j ./*
 noremap <leader>G :ccl<cr>
 noremap <leader>h :call File_flip()<cr>
 noremap <leader>H :0r ~/.vim/.header_template<cr>
-noremap <leader>j :tj <C-r><C-w><cr>
+noremap <leader>j :exe "normal <c-w>w"<cr>:tj <C-r><C-w><cr>
 noremap <leader>J <C-O>
 noremap <leader>l :TagbarToggle<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
@@ -60,6 +59,7 @@ noremap <leader>M :MSClear<cr>
 
 noremap <leader>\ :ConqueGdb<cr>
 noremap <leader>/ :nohlsearch<cr>
+noremap <leader>* /<c-r><c-w>/n<cr>
 noremap <leader>1 "1 ; Register
 noremap <leader>2 "2 ; Register
 noremap <leader>3 "3 ; Register
