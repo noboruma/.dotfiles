@@ -86,8 +86,9 @@ set smartcase
 " Folding
 " Trigger manual after indent method
 augroup vimrc
-  au BufReadPre * setlocal foldmethod=marker
-  au BufWinEnter * if &fdm == 'marker' | setlocal foldmethod=manual | endif
+  au BufReadPre * setlocal foldmethod=expr
+  au BufReadPost * normal zM
+  au BufWinEnter * if &fdm == 'expr' | setlocal foldmethod=manual | normal "zM" | endif
 augroup END
 
 set foldlevel=99
@@ -135,7 +136,7 @@ norem <F1> :CaptureExtOutput <Up>
 "noremap <F4> :make! -j -C <Up>
 "nnoremap <F5> :up<cr>:make! -j -C <Up><cr>:redr<cr>
 "inoremap <F5> <esc>:up<cr>:make! -j -C <Up><cr>:redr<cr>
-noremap <F4> :lcd! . \|make! -j<Up>
+noremap <F4> :lcd! `pwd`/ \|make~/.vimrc
 nnoremap <F5> :up<cr>:lcd!<Up><cr>:redr<cr>
 inoremap <F5> <esc>:up<cr>:lcd!<Up><cr>:redr<cr>
 

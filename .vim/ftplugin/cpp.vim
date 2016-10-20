@@ -34,10 +34,30 @@ compiler gcc
 "au BufReadPost quickfix map <buffer> <silent> zw zq:g/warning:/normal zv<CR>
 "au BufReadPost quickfix normal zq
 
-setlocal foldlevel=1
-setlocal foldnestmax=1
-setlocal foldmarker={,}
-setlocal foldminlines=1
+let g:CFolderindent=0
+let g:CFolderClosed=1
+function! CFold1Lay()
+    if getline(v:lnum) =~? '^\s*}$'
+        if indent(v:lnum) == g:CFolderindent
+            let g:CFolderClosed=1
+            let g:CFolderindent=0
+            return '<1'
+        endif
+    elseif getline(v:lnum) =~? '^\s*{$'
+        if getline(v:lnum-1) =~? '^.*)$'
+            if g:CFolderClosed == 1
+                let g:CFolderClosed=0
+                let g:CFolderindent=indent(v:lnum)
+                return '>1'
+            endif
+        endif
+    endif
+    return '='
+endfunction
+setlocal foldmethod=expr
+setlocal foldexpr=CFold1Lay()
+setlocal foldlevel=0
+setlocal foldlevelstart=0
 
 " Stop parsing include files, use ctags instead
 set complete-=i
