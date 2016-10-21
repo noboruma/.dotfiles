@@ -121,7 +121,7 @@ inoremap <F10> <Esc> :call ToggleSpell()<cr>
 set nospell
 
 " Make options
-let &makeprg='make'
+let &makeprg='mw gmake'
 
 function! CaptureExtOutput(cmd)
   let out = system(a:cmd)
@@ -135,7 +135,7 @@ norem <F1> :CaptureExtOutput <Up>
 "noremap <F4> :make! -j -C <Up>
 "nnoremap <F5> :up<cr>:make! -j -C <Up><cr>:redr<cr>
 "inoremap <F5> <esc>:up<cr>:make! -j -C <Up><cr>:redr<cr>
-noremap <F4> :lcd! `pwd`/ \|make~/.vimrc
+noremap <F4> :lcd! `pwd`/ \|make! -j<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 nnoremap <F5> :up<cr>:lcd!<Up><cr>:redr<cr>
 inoremap <F5> <esc>:up<cr>:lcd!<Up><cr>:redr<cr>
 
@@ -383,3 +383,5 @@ set cscopeverbose
 
 " No preview mode in fuzzy finder
 let g:fuf_previewHeight=0
+
+let g:indexer_disableCtagsWarning=1

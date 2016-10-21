@@ -44,7 +44,7 @@ function! CFold1Lay()
             return '<1'
         endif
     elseif getline(v:lnum) =~? '^\s*{$'
-        if getline(v:lnum-1) =~? '^.*)$'
+        if getline(v:lnum-1) =~? '^.*)$' || getline(v:lnum-1) =~? '^.*)\s*const$' || getline(v:lnum-1) =~? '^.*)\s*volatile$'
             if g:CFolderClosed == 1
                 let g:CFolderClosed=0
                 let g:CFolderindent=indent(v:lnum)
