@@ -168,8 +168,10 @@ fun! PrevTagOrError()
       echohl WarningMsg | echon v:exception | echohl None
   endtry
 endfun
-noremap <F6> :call PrevTagOrError()<cr>
-noremap <F7> :call NextTagOrError()<cr>
+"noremap <F6> :call PrevTagOrError()<cr>
+"noremap <F7> :call NextTagOrError()<cr>
+noremap <F6> :call :cp
+noremap <F7> :call :cn
 noremap <F8> :cc<cr>
 
 " Ced: let this be the default CTAGS file location
