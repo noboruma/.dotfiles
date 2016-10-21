@@ -135,7 +135,7 @@ norem <F1> :CaptureExtOutput <Up>
 "noremap <F4> :make! -j -C <Up>
 "nnoremap <F5> :up<cr>:make! -j -C <Up><cr>:redr<cr>
 "inoremap <F5> <esc>:up<cr>:make! -j -C <Up><cr>:redr<cr>
-noremap <F4> :lcd! `pwd`/ \|make! -j<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+noremap <F4> :lcd! `pwd`/ \|make! -j<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Tab><Tab>
 nnoremap <F5> :up<cr>:lcd!<Up><cr>:redr<cr>
 inoremap <F5> <esc>:up<cr>:lcd!<Up><cr>:redr<cr>
 
