@@ -87,8 +87,7 @@ set smartcase
 " Trigger manual after indent method
 augroup vimrc
   au BufReadPre * setlocal foldmethod=expr
-  au BufReadPost * normal zM
-  au BufWinEnter * if &fdm == 'expr' | setlocal foldmethod=manual | normal "zM" | endif
+  au BufWinEnter * if &fdm == 'expr' | setlocal foldmethod=manual | normal zM | endif
 augroup END
 
 set foldlevel=99
