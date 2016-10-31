@@ -17,13 +17,17 @@ noremap <leader>c lc^
 noremap <leader>C 0D
 noremap <leader>d "_d
 noremap <leader>e :e<space>./
+noremap <leader>wh<leader>e :let @e=expand('%:p:h')<cr><c-w>h:e <c-r>e/<tab>
+noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
 "noremap <leader>f :pta <C-r><C-w><cr>
 noremap <leader>f <C-w>z
 noremap <leader>g :vimgrep /<C-r><C-w>/j ./*
 noremap <leader>G :ccl<cr>
 noremap <leader>h :call File_flip()<cr>
 noremap <leader>H :0r ~/.vim/.header_template<cr>
-noremap <leader>j :let @j='<C-r><C-w>'<cr><C-w>w:tj <C-r>j<cr>
+noremap <leader>j :tj <C-r><C-w><cr>
+noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>
+noremap <leader>wl<leader>j :let @j='<C-r><C-w>'<cr><C-w>l:tj <C-r>j<cr>
 noremap <leader>J <C-O>
 noremap <leader>l :TagbarToggle<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
@@ -42,7 +46,7 @@ noremap <leader>T :sp<cr>
 noremap <leader>u :GundoToggle<cr>
 noremap <leader>v <C-v>
 "noremap <leader>w :up<cr>
-noremap <leader>w <C-w>w
+noremap <leader>ww <C-w>w
 noremap <leader>x :bp\|bd #<cr>
 noremap <leader>X :bp\|bd! #<cr>
 noremap <leader>y "+y
