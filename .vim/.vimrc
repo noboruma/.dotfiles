@@ -169,8 +169,8 @@ fun! PrevTagOrError()
 endfun
 "noremap <F6> :call PrevTagOrError()<cr>
 "noremap <F7> :call NextTagOrError()<cr>
-noremap <F6> :call :cp
-noremap <F7> :call :cn
+noremap <F6> :cp<cr>
+noremap <F7> :cn<cr>
 noremap <F8> :cc<cr>
 
 " Ced: let this be the default CTAGS file location
@@ -387,3 +387,6 @@ set cscopeverbose
 let g:fuf_previewHeight=0
 
 let g:indexer_disableCtagsWarning=1
+
+" Add spaces in Makefile instead of tab
+autocmd FileType make set expandtab
