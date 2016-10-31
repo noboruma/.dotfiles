@@ -121,7 +121,7 @@ inoremap <F10> <Esc> :call ToggleSpell()<cr>
 set nospell
 
 " Make options
-let &makeprg='mw gmake'
+let &makeprg='make'
 
 function! CaptureExtOutput(cmd)
   let out = system(a:cmd)
