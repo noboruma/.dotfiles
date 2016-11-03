@@ -83,7 +83,7 @@ export VISUAL="vim"
 export GIT_EDITOR="$EDITOR"
 export IDE="gvim"
 export BROWSER="w3m"
-export MANPAGER="less"
+export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
 export PAGER="less"
 
 ##################################################################
