@@ -21,7 +21,7 @@ noremap <leader>wh<leader>e :let @e=expand('%:p:h')<cr><c-w>h:e <c-r>e/<tab>
 noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
 "noremap <leader>f :pta <C-r><C-w><cr>
 noremap <leader>f <C-w>z
-noremap <leader>g :vimgrep /<C-r><C-w>/j ./*
+noremap <leader>g :vimgrep /<C-r><C-w>/j ./**
 noremap <leader>G :ccl<cr>
 noremap <leader>h :call File_flip()<cr>
 noremap <leader>H :0r ~/.vim/.header_template<cr>
@@ -36,11 +36,11 @@ noremap <leader>o o<esc> " Could use :m[ove] +1
 noremap <leader>O O<esc>
 noremap <leader>p "_dP
 noremap <leader>q :q<cr>
-noremap <leader>R /\<<C-r><C-w>\><cr>:%s//
+noremap <leader>r /\<<C-r><C-w>\><cr>:%s//
 "noremap <leader>s :SemanticHighlightToggle<cr>
 noremap <leader>s :SemanticHighlightToggle<cr>
-vnoremap <leader>s "sy:%s/<C-R>"/
-noremap <leader>S /\<<C-r><C-w>\><cr>
+vnoremap <leader>s "sy/<C-R>"<cr>:%s//<C-R>"/g<left><left>
+noremap <leader>S /\<<C-r><C-w>\><cr>N
 noremap <leader>t :vsp<cr>
 noremap <leader>T :sp<cr>
 noremap <leader>u :GundoToggle<cr>
