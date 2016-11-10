@@ -51,16 +51,17 @@ set history=50                 " History entries max number
 set viminfo='20,\"50           " ~/.viminfo's Options
 set backspace=2                " Activate backspace
 set whichwrap=<,>,[,]          " Ok let's use arrow to naviguate
-set scrolloff=1                " Keep one line after/before the cursor
+set scrolloff=0                " Keep one line after/before the cursor
 set showcmd                    " Show cmd on status bar
 set showmatch                  " Show paried symbols
 set nostartofline
 set wildmode=list:full:longest
 set autoindent
 set smartindent
-set cino+=j1,(0,+0                " C file option
+set cino+=j1,(0,+0             " C file option
 set autoread
 set clipboard=unnamed          " ^=
+
 " Prevent RO file editing: use 'set modifiable' manually if needed
 autocmd BufRead * let &modifiable = !&readonly
 
@@ -104,7 +105,7 @@ set mouse=a
 filetype on
 filetype plugin on
 set ruler          " Relative cursor position
-set is
+set is             " inc search
 set cul            " Highlight current line
 
 function! ToggleSpell()
@@ -121,7 +122,7 @@ inoremap <F10> <Esc> :call ToggleSpell()<cr>
 set nospell
 
 " Make options
-let &makeprg='make'
+let &makeprg='mw gmake'
 
 function! CaptureExtOutput(cmd)
   let out = system(a:cmd)
@@ -318,6 +319,7 @@ let g:AutoAdapt_Rules = [
 
 " Language Tools
 let g:languagetool_jar='$HOME/usr/bin/languagetool-commandline.jar'
+set spelllang=en
 
 " Semantic Highlight
 let g:semanticGUIColors = ['#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082', '#ffcc80', '#ffab91', '#bcaaa4', '#b0bec5', '#ffa726', '#ff8a65', '#f9bdbb', '#f9bdbb', '#f8bbd0', '#e1bee7', '#d1c4e9', '#ffe0b2', '#c5cae9', '#d0d9ff', '#b3e5fc', '#b2ebf2', '#b2dfdb', '#a3e9a4', '#dcedc8' , '#f0f4c3', '#ffb74d' ]
