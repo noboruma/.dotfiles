@@ -12,22 +12,22 @@ vnoremap // y/<C-R>"<CR>
 noremap <leader>a :set scb<cr>
 noremap <leader>A :set scb!<cr>
 noremap <leader>b :FufBuffer<cr>
-noremap <leader>c lc^
+noremap <leader>c :ccl
 "noremap <leader>c <esc>:cscope c <C-r><C-w>
-noremap <leader>C 0D
+noremap <leader>C lc^
 noremap <leader>d "_d
 noremap <leader>e :e<space>./
-noremap <leader>wh<leader>e :let @e=expand('%:p:h')<cr><c-w>h:e <c-r>e/<tab>
-noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
+"noremap <leader>wh<leader>e :let @e=expand('%:p:h')<cr><c-w>h:e <c-r>e/<tab>
+"noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
 "noremap <leader>f :pta <C-r><C-w><cr>
 noremap <leader>f <C-w>z
 noremap <leader>g :vimgrep /<C-r><C-w>/j ./**
-noremap <leader>G :ccl<cr>
+noremap <leader>G :grep! "<C-r><C-w>" ./
 noremap <leader>h :call File_flip()<cr>
 noremap <leader>H :0r ~/.vim/.header_template<cr>
 noremap <leader>j :tj <C-r><C-w><cr>
-noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>
-noremap <leader>wl<leader>j :let @j='<C-r><C-w>'<cr><C-w>l:tj <C-r>j<cr>
+"noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>
+"noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>
 noremap <leader>J <C-O>
 noremap <leader>l :TagbarToggle<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
@@ -37,7 +37,6 @@ noremap <leader>O O<esc>
 noremap <leader>p "_dP
 noremap <leader>q :q<cr>
 noremap <leader>r /\<<C-r><C-w>\><cr>:%s//
-"noremap <leader>s :SemanticHighlightToggle<cr>
 noremap <leader>s :SemanticHighlightToggle<cr>
 vnoremap <leader>s "sy/<C-R>"<cr>:%s//<C-R>"/g<left><left>
 noremap <leader>S /\<<C-r><C-w>\><cr>N
@@ -46,6 +45,7 @@ noremap <leader>T :sp<cr>
 noremap <leader>u :GundoToggle<cr>
 noremap <leader>v <C-v>
 "noremap <leader>w :up<cr>
+noremap <leader>w <C-w>o:vsp<cr>
 noremap <leader>ww <C-w>w
 noremap <leader>x :bp\|bd #<cr>
 noremap <leader>X :bp\|bd! #<cr>
@@ -115,3 +115,62 @@ inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 
 nnoremap <silent> + <c-w>>
 nnoremap <silent> - <c-w><
+
+"function! CaptureExtOutput(cmd)
+"  let out = system(a:cmd)
+"  ene
+"  silent put=out
+"  set nomodified
+"endfunction
+"command! -nargs=+ -complete=command CaptureExtOutput call CaptureExtOutput(<q-args>)
+"norem <F1> :CaptureExtOutput <Up>
+"noremap <F4> :make! -j -C <Up>
+"nnoremap <F5> :up<cr>:make! -j -C <Up><cr>:redr<cr>
+"inoremap <F5> <esc>:up<cr>:make! -j -C <Up><cr>:redr<cr>
+noremap <F4> :lcd! `pwd`/ \|make! -j<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Tab><Tab>
+nnoremap <F5> :up<cr>:lcd!<Up><cr>:redr<cr>
+inoremap <F5> <esc>:up<cr>:lcd!<Up><cr>:redr<cr>
+
+"fun! NextTagOrError()
+"    try
+"    for nr in range(1, winnr('$'))
+"        if getwinvar(nr, "&pvw") == 1
+"            " found a preview
+"            :tnext
+"            return 0
+"        endif  
+"    endfor
+"    :cn
+"    catch /.*/
+"      echohl WarningMsg | echon v:exception | echohl None
+"    endtry
+"endfun
+"fun! PrevTagOrError()
+"  try
+"    for nr in range(1, winnr('$'))
+"        if getwinvar(nr, "&pvw") == 1
+"            " found a preview
+"            :tprev
+"            return 0
+"        endif  
+"    endfor
+"    :cp
+"  catch /.*/
+"      echohl WarningMsg | echon v:exception | echohl None
+"  endtry
+"endfun
+"noremap <F6> :call PrevTagOrError()<cr>
+"noremap <F7> :call NextTagOrError()<cr>
+noremap <F6> :cp<cr>
+noremap <F7> :cn<cr>
+noremap <F8> :cc<cr>
+
+function! ToggleSpell()
+  if &spell
+    set nospell
+  else
+    set spell
+  endif
+endfunction
+noremap <F10> :call ToggleSpell()<cr>
+inoremap <F10> <Esc> :call ToggleSpell()<cr>

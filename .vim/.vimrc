@@ -108,71 +108,13 @@ set ruler          " Relative cursor position
 set is             " inc search
 set cul            " Highlight current line
 
-function! ToggleSpell()
-  if &spell
-    set nospell
-  else
-    set spell
-  endif
-endfunction
-
-noremap <F10> :call ToggleSpell()<cr>
-inoremap <F10> <Esc> :call ToggleSpell()<cr>
-
+set spelllang=en
 set nospell
+" Language Tools
+let g:languagetool_jar='$HOME/usr/bin/languagetool-commandline.jar'
 
 " Make options
-let &makeprg='mw gmake'
-
-function! CaptureExtOutput(cmd)
-  let out = system(a:cmd)
-  ene
-  silent put=out
-  set nomodified
-endfunction
-command! -nargs=+ -complete=command CaptureExtOutput call CaptureExtOutput(<q-args>)
-
-norem <F1> :CaptureExtOutput <Up>
-"noremap <F4> :make! -j -C <Up>
-"nnoremap <F5> :up<cr>:make! -j -C <Up><cr>:redr<cr>
-"inoremap <F5> <esc>:up<cr>:make! -j -C <Up><cr>:redr<cr>
-noremap <F4> :lcd! `pwd`/ \|make! -j<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Tab><Tab>
-nnoremap <F5> :up<cr>:lcd!<Up><cr>:redr<cr>
-inoremap <F5> <esc>:up<cr>:lcd!<Up><cr>:redr<cr>
-
-fun! NextTagOrError()
-    try
-    for nr in range(1, winnr('$'))
-        if getwinvar(nr, "&pvw") == 1
-            " found a preview
-            :tnext
-            return 0
-        endif  
-    endfor
-    :cn
-    catch /.*/
-      echohl WarningMsg | echon v:exception | echohl None
-    endtry
-endfun
-fun! PrevTagOrError()
-  try
-    for nr in range(1, winnr('$'))
-        if getwinvar(nr, "&pvw") == 1
-            " found a preview
-            :tprev
-            return 0
-        endif  
-    endfor
-    :cp
-  catch /.*/
-      echohl WarningMsg | echon v:exception | echohl None
-  endtry
-endfun
-"noremap <F6> :call PrevTagOrError()<cr>
-"noremap <F7> :call NextTagOrError()<cr>
-noremap <F6> :cp<cr>
-noremap <F7> :cn<cr>
-noremap <F8> :cc<cr>
+let &makeprg='make'
 
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>
@@ -317,10 +259,6 @@ let g:AutoAdapt_Rules = [
 \   }
 \]
 
-" Language Tools
-let g:languagetool_jar='$HOME/usr/bin/languagetool-commandline.jar'
-set spelllang=en
-
 " Semantic Highlight
 let g:semanticGUIColors = ['#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082', '#ffcc80', '#ffab91', '#bcaaa4', '#b0bec5', '#ffa726', '#ff8a65', '#f9bdbb', '#f9bdbb', '#f8bbd0', '#e1bee7', '#d1c4e9', '#ffe0b2', '#c5cae9', '#d0d9ff', '#b3e5fc', '#b2ebf2', '#b2dfdb', '#a3e9a4', '#dcedc8' , '#f0f4c3', '#ffb74d' ]
 let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,19]
@@ -351,7 +289,7 @@ let g:colorizer_startup = 0
 
 let g:syntastic_tex_checkers = ['chktex']
 
-let g:ConqueGdb_Leader = '\'
+let g:ConqueGdb_Leader = '<A-Left>'
 let g:ConqueTerm_CloseOnEnd = 1
 
 set modeline
@@ -368,22 +306,22 @@ set ssop-=folds      " do not store folds
 """"""""""""" Standard cscope/vim boilerplate
 
 " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
-set cscopetag
-
-" check cscope for definition of a symbol before checking ctags: set to 1
-" if you want the reverse search order.
-set csto=0
-
-" add any cscope database in current directory
-if filereadable("cscope.out")
-    cs add cscope.out  
-" else add the database pointed to by environment variable 
-elseif $CSCOPE_DB != ""
-    cs add $CSCOPE_DB
-endif
-
+"set cscopetag
+"
+"" check cscope for definition of a symbol before checking ctags: set to 1
+"" if you want the reverse search order.
+"set csto=0
+"
+"" add any cscope database in current directory
+"if filereadable("cscope.out")
+"    cs add cscope.out  
+"" else add the database pointed to by environment variable 
+"elseif $CSCOPE_DB != ""
+"    cs add $CSCOPE_DB
+"endif
+"
 " show msg when any other cscope db added
-set cscopeverbose 
+"set cscopeverbose 
 
 " No preview mode in fuzzy finder
 let g:fuf_previewHeight=0
@@ -392,3 +330,10 @@ let g:indexer_disableCtagsWarning=1
 
 " Add spaces in Makefile instead of tab
 autocmd FileType make set expandtab
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --vimgrep\ $*
+  set grepformat=%f:%l:%c:%m
+endif
