@@ -173,4 +173,4 @@ function! ToggleSpell()
   endif
 endfunction
 noremap <F10> :call ToggleSpell()<cr>
-inoremap <F10> <Esc> :call ToggleSpell()<cr>
+inoremap <F10> <Esc>:call ToggleSpell()<cr>
