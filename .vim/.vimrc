@@ -110,12 +110,14 @@ set cul            " Highlight current line
 
 set spelllang=en
 set nospell
+" c-x c-k feature:
+set dictionary+=/usr/share/dict/words
 " Language Tools
 let g:languagetool_jar='$HOME/usr/bin/languagetool-commandline.jar'
 
 " Make options
-let &makeprg='make'
-
+let &makeprg='mw gmake'
+"
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>
 "set tags+=./tags
@@ -141,18 +143,6 @@ set shiftwidth=4
 " Allow real tab in leader mapping
 set wildcharm=<tab>
 set timeoutlen=500
-
-" Path setting => No need as indexer plugin take care of that
-"let s:default_path = escape(&path, '\ ') " store default value of 'path'
-"
-"" Always add the current file's directory to the path and tags list if not
-"" already there. Add it to the beginning to speed up searches.
-"autocmd BufRead *
-"      \ let s:tempPath=escape(escape(expand("%:p:h"), ' '), '\ ') |
-"      \ exec "set path-=".s:tempPath |
-"      \ exec "set path-=".s:default_path |
-"      \ exec "set path^=".s:tempPath |
-"      \ exec "set path^=".s:default_path
 
 let mapleader=" "
 source ~/.vim/custmap.vim
