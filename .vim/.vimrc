@@ -46,7 +46,7 @@ set ruler                      " Show cursor position, line, col
 set textwidth=0                " Max text width, 0 to disable it
 " map @# gwap                  " Wrappe à 72 caractères avec la touche '@#'
 " map @ {v}! par 72j           " Wrappe et justifie à 72 caractères avec la touche '@'
-set columns=80
+"set columns=80
 set history=50                 " History entries max number
 set viminfo='20,\"50           " ~/.viminfo's Options
 set backspace=2                " Activate backspace
