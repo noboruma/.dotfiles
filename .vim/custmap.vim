@@ -21,7 +21,7 @@ noremap <leader>e :e<space>./
 "noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
 "noremap <leader>f :pta <C-r><C-w><cr>
 noremap <leader>f <C-w>z
-noremap <leader>g :vimgrep /<C-r><C-w>/j ./**
+noremap <leader>g :vimgrep /<C-r><C-w>/j ./**/*.[ch]*<left><left><left><left><left><left><left><left><left><left>
 noremap <leader>G :grep! "<C-r><C-w>" ./
 noremap <leader>h :call File_flip()<cr>
 noremap <leader>H :0r ~/.vim/.header_template<cr>

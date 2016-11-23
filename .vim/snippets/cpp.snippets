@@ -23,7 +23,7 @@ snippet std::array
 
 # Namespace
 snippet ns
-	namespace ${1:`Filename('', 'my')`} {
+	namespace ${1:`Filename('', 'ns')`} {
 		${2}
 	} //!$1
 
@@ -31,12 +31,12 @@ snippet ns
 snippet class
 	class ${1:`Filename('$1', 'name')`} 
 	{
-	public:
-		$1 (${2:arguments});
-		~$1 ();
+		public:
+		    $1 (${2:arguments});
+		    ~$1 ();
 
-	private:
-		${3:/* data */}
+		private:
+	        ${3:/* data */}
 	};
 snippet struct
 	struct ${1:`Filename('$1', 'name')`}
@@ -49,7 +49,7 @@ snippet struct
 	};
 # For each i
 snippet fi
-	for (auto ${2:i}=0; $2 < ${1:count}; ${3:++}$2) {
+	for (auto ${2:i}(0); $2 < ${1:count}; ${3:++}$2) {
 		${4}
 	}
 
@@ -67,11 +67,8 @@ snippet fs
 
 # Cout
 snippet cout
-	std::cout<<"${1}"<<std::endl;
+	std::cout<<${1}<<std::endl;
 
 # auto const &
 snippet ac
 	auto const &${1};
-
-snippet f
-	${1:fun}(${2:arg});

@@ -13,7 +13,7 @@ endif
 compiler gcc
 
 " Surround 
-let g:surround_{char2nr("c")} = "\/*\n\r\n*\/"
+let g:surround_{char2nr("c")} = "\/****\n\r\n****\/"
 
 setlocal foldlevel=1
 setlocal foldnestmax=1
@@ -32,11 +32,15 @@ inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\
 inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
 inoremap <expr> { "{}\<Left>"
 inoremap ;; <esc>g_a;
+inoremap ,, <esc>g_a,
 inoremap ;. <esc>g_a.
 
 imap <expr> {<cr> "{<cr>}<esc>O"
 inoremap [<cr> [<cr>]<c-o>O<tab>
 inoremap (<cr> (<cr>)<c-o>O<tab>
+
+inoremap <expr> <> "<>\<Left>"
+inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
 
 if !exists("*File_flip")
 function! File_flip()

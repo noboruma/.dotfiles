@@ -12,6 +12,7 @@ endif
 
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = '-std=c++1y'
+let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
 
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
@@ -23,7 +24,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 
 " Surround 
-let g:surround_{char2nr("c")} = "\/*\n\r\n*\/"
+let g:surround_{char2nr("t")} = "\1template: \1<\r>"
 
 "Makeprg erroformat
 compiler gcc
@@ -61,9 +62,6 @@ setlocal foldlevelstart=0
 
 " Stop parsing include files, use ctags instead
 set complete-=i
-
-"inoremap <expr> < "<>\<Left>"
-inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
 
 if !exists("*File_flip")
   function! File_flip()
