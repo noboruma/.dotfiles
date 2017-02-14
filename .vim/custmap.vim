@@ -20,11 +20,14 @@ noremap <leader>e :e<space>./
 "noremap <leader>wh<leader>e :let @e=expand('%:p:h')<cr><c-w>h:e <c-r>e/<tab>
 "noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
 "noremap <leader>f :pta <C-r><C-w><cr>
-noremap <leader>f <C-w>z
+"what was that command?
+"noremap <leader>f <C-w>z
+noremap <leader>f :cs find  <C-r><C-w><C-b><Right><Right><Right><Right><Right><Right><Right><Right><Tab>
 noremap <leader>g :vimgrep /<C-r><C-w>/j ./**/*.[ch]*<left><left><left><left><left><left><left><left><left><left>
 noremap <leader>G :grep! "<C-r><C-w>" ./
 noremap <leader>h :call File_flip()<cr>
 noremap <leader>H :0r ~/.vim/.header_template<cr>
+noremap <leader>j :tj <C-r><C-w><cr>
 noremap <leader>j :tj <C-r><C-w><cr>
 "noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>
 "noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>
@@ -130,7 +133,7 @@ nnoremap <silent> - <c-w><
 "noremap <F4> :make! -j -C <Up>
 "nnoremap <F5> :up<cr>:make! -j -C <Up><cr>:redr<cr>
 "inoremap <F5> <esc>:up<cr>:make! -j -C <Up><cr>:redr<cr>
-noremap <F4> :lcd! `pwd`/ \|make! -j<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Tab><Tab>
+noremap <F4> :lcd! `pwd`/ \|make! -j4<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Tab><Tab>
 nnoremap <F5> :up<cr>:lcd!<Up><cr>:redr<cr>
 inoremap <F5> <esc>:up<cr>:lcd!<Up><cr>:redr<cr>
 
