@@ -28,12 +28,6 @@ let g:surround_{char2nr("t")} = "\1template: \1<\r>"
 
 "Makeprg erroformat
 compiler gcc
-" Folding of (gnu)make output.
-"au BufReadPost quickfix setlocal foldmethod=marker
-"au BufReadPost quickfix setlocal foldmarker=Entering\ directory,Leaving\ directory
-"au BufReadPost quickfix map <buffer> <silent> zq zM:g/error:/normal zv<CR>
-"au BufReadPost quickfix map <buffer> <silent> zw zq:g/warning:/normal zv<CR>
-"au BufReadPost quickfix normal zq
 
 let g:CFolderindent=0
 let g:CFolderClosed=1
@@ -66,24 +60,24 @@ set complete-=i
 if !exists("*File_flip")
   function! File_flip()
     " The flip mechanism consider that path is properly set on headers
-    if match(expand("%"),'\.h\(.*\)') > 0
-        if match(expand("%"),'\.hh') > 0
+    if match(expand("%:t"),'\.h\(.*\)') > 0
+        if match(expand("%:t"),'\.hh') > 0
           try
-            let s:flipname = substitute(expand("%"),'\.hh','\.hxx',"")
+            let s:flipname = substitute(expand("%:t"),'\.hh','\.hxx',"")
             exe ":find ".s:flipname
           catch
-            let s:flipname = substitute(expand("%"),'\.hh','\.cc',"")
+            let s:flipname = substitute(expand("%:t"),'\.hh','\.cc',"")
             try "buffer opened but not reachable from path
               exe ":buffer ".s:flipname
             catch 
               exe ":find ".s:flipname
             endtry
           endtry
-        elseif match(expand("%"),'\.hxx') > 0
-          let s:flipname = substitute(expand("%"),'\.h\(.*\)','\.hh',"")
+        elseif match(expand("%:t"),'\.hxx') > 0
+          let s:flipname = substitute(expand("%:t"),'\.h\(.*\)','\.hh',"")
           exe ":find ".s:flipname
         else
-          let s:flipname = substitute(expand("%"),'\.h\(.*\)','\.c\1',"")
+          let s:flipname = substitute(expand("%:t"),'\.h\(.*\)','\.c\1',"")
           try "buffer opened but not reachable from path
             exe ":buffer ".s:flipname
             catch
@@ -94,17 +88,17 @@ if !exists("*File_flip")
                 endtry
           endtry
         endif
-    elseif match(expand("%"),'\.c\(.*\)') > 0
-        if match(expand("%"),'\.cc') > 0
+    elseif match(expand("%:t"),'\.c\(.*\)') > 0
+        if match(expand("%:t"),'\.cc') > 0
           try
-            let s:flipname = substitute(expand("%"),'\.cc','\.hh',"")
+            let s:flipname = substitute(expand("%:t"),'\.cc','\.hh',"")
             exe ":find ".s:flipname
           catch
-            let s:flipname = substitute(expand("%"),'\.cc','\.hpp',"")
+            let s:flipname = substitute(expand("%:t"),'\.cc','\.hpp',"")
             exe ":find ".s:flipname
           endtry
         else
-          let s:flipname = substitute(expand("%"),'\.c\(.*\)','\.h\1',"")
+          let s:flipname = substitute(expand("%:t"),'\.c\(.*\)','\.h\1',"")
           exe ":find ".s:flipname
         endif
     endif

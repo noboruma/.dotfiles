@@ -12,13 +12,40 @@ endif
 "Makeprg erroformat
 compiler gcc
 
+let g:syntastic_c_compiler = 'gcc'
+let g:syntastic_cpp_config_file = '.syntastic_c_config'
+
 " Surround 
 let g:surround_{char2nr("c")} = "\/****\n\r\n****\/"
 
-setlocal foldlevel=1
-setlocal foldnestmax=1
-setlocal foldmarker={,}
-setlocal foldminlines=1
+"setlocal foldlevel=1
+"setlocal foldnestmax=1
+"setlocal foldmarker={,}
+"setlocal foldminlines=1
+let g:CFolderindent=0
+let g:CFolderClosed=1
+function! CFold1Lay()
+    if getline(v:lnum) =~? '^\s*}$'
+        if indent(v:lnum) == g:CFolderindent
+            let g:CFolderClosed=1
+            let g:CFolderindent=0
+            return '<1'
+        endif
+    elseif getline(v:lnum) =~? '^\s*{$'
+        if getline(v:lnum-1) =~? '^.*)$' || getline(v:lnum-1) =~? '^.*)\s*const$' || getline(v:lnum-1) =~? '^.*)\s*volatile$'
+            if g:CFolderClosed == 1
+                let g:CFolderClosed=0
+                let g:CFolderindent=indent(v:lnum)
+                return '>1'
+            endif
+        endif
+    endif
+    return '='
+endfunction
+setlocal foldmethod=expr
+setlocal foldexpr=CFold1Lay()
+setlocal foldlevel=0
+setlocal foldlevelstart=1
 
 
 set expandtab
@@ -44,11 +71,11 @@ inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
 
 if !exists("*File_flip")
 function! File_flip()
-  if match(expand("%"),"\\.h") > 0
-    let s:flipname = substitute(expand("%"),'\.h','.c',"")
+  if match(expand("%:t"),"\\.h") > 0
+    let s:flipname = substitute(expand("%:t"),'\.h','.c',"")
     exe ":find " s:flipname
-  elseif match(expand("%"),"\\.c") > 0
-    let s:flipname = substitute(expand("%"),'\.c','.h',"")
+  elseif match(expand("%:t"),"\\.c") > 0
+    let s:flipname = substitute(expand("%:t"),'\.c','.h',"")
     exe ":find " s:flipname
   endif
 endfun
