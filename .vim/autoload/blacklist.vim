@@ -423,6 +423,7 @@ let s:blacklist = {
     \   'uint8_t',
     \   'uint16_t',
     \   'uint32_t',
+    \   'uint64_t',
     \   'union',
     \   'unsigned',
     \   'undef',
