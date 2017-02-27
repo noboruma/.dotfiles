@@ -43,6 +43,7 @@ let s:_DEFAULT_CHECKERS = {
         \ 'handlebars':    ['handlebars'],
         \ 'haskell':       ['hdevtools', 'hlint'],
         \ 'haxe':          ['haxe'],
+        \ 'help':          [],
         \ 'hss':           ['hss'],
         \ 'html':          ['tidy'],
         \ 'jade':          ['jade_lint'],
@@ -211,7 +212,7 @@ function! g:SyntasticRegistry.getCheckers(ftalias, hints_list) abort " {{{2
             let defs =
                 \ exists('g:syntastic_' . ft . '_checkers') ? g:syntastic_{ft}_checkers :
                 \ get(s:_DEFAULT_CHECKERS, ft, [])
-            call extend(cnames, map(copy(defs), 'ft . "/" . v:val' ))
+            call extend(cnames, map(copy(defs), 'stridx(v:val, "/") < 0 ? ft . "/" . v:val : v:val' ))
         endfor
     endif
     let cnames = syntastic#util#unique(cnames)
@@ -276,8 +277,8 @@ function! g:SyntasticRegistry.echoInfoFor(ftalias_list) abort " {{{2
     else
         let ft = ft_list[0]
         let available = self.getNamesOfAvailableCheckers(ft)
-        let active = map(self.getCheckersAvailable(ft, []), 'v:val.getName()')
-        let disabled = map(self.getCheckersDisabled(ft, []), 'v:val.getName()')
+        let active = map(self.getCheckersAvailable(ft, []), 'ft ==# v:val.getFiletype() ? v:val.getName() : v:val.getCName()')
+        let disabled = map(self.getCheckersDisabled(ft, []), 'ft ==# v:val.getFiletype() ? v:val.getName() : v:val.getCName()')
     endif
 
     let cnt = len(available)
@@ -293,7 +294,7 @@ function! g:SyntasticRegistry.echoInfoFor(ftalias_list) abort " {{{2
     let cnt = len(disabled)
     let plural = cnt != 1 ? 's' : ''
     if len(disabled)
-        let cklist = join(sort(disabled))
+        let cklist = join(sort(disabled, 's:_compare_checker_names'))
         echomsg 'Checker' . plural . ' disabled for security reasons: ' . cklist
     endif
 
@@ -411,6 +412,26 @@ endfunction " }}}2
 
 function! s:_disabled_by_ycm(filetype) abort " {{{2
     return index(s:_YCM_TYPES, a:filetype) >= 0
+endfunction " }}}2
+
+function! s:_compare_checker_names(a, b) abort " {{{2
+    if a:a ==# a:b
+        return 0
+    endif
+
+    if stridx(a:a, '/') < 0
+        if stridx(a:b, '/') < 0
+            return a:a < a:b ? -1 : 1
+        else
+            return -1
+        endif
+    else
+        if stridx(a:b, '/') < 0
+            return 1
+        else
+            return a:a < a:b ? -1 : 1
+        endif
+    endif
 endfunction " }}}2
 
 " }}}1
