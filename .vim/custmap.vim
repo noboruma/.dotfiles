@@ -23,8 +23,9 @@ noremap <leader>e :e<space>./
 "what was that command?
 "noremap <leader>f <C-w>z
 noremap <leader>f :cs find  <C-r><C-w><C-b><Right><Right><Right><Right><Right><Right><Right><Right><Tab>
-noremap <leader>g :vimgrep /<C-r><C-w>/j ./**/*.[ch]*<left><left><left><left><left><left><left><left><left><left>
-noremap <leader>G :grep! "<C-r><C-w>" ./
+"noremap <leader>g :vimgrep /<C-r><C-w>/j ./**/*.[ch]*<left><left><left><left><left><left><left><left><left><left>
+noremap <leader>g :grep! --cpp "<C-r><C-w>" `pwd`<tab>
+noremap <leader>G :grep! "<C-r><C-w>" `pwd`<tab>
 noremap <leader>h :call File_flip()<cr>
 noremap <leader>H :0r ~/.vim/.header_template<cr>
 noremap <leader>j :tj <C-r><C-w><cr>
