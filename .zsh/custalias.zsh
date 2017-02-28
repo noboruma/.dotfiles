@@ -63,6 +63,7 @@ alias df="df -h"
 
 alias vimrc="vim ~/.vimrc"
 alias zshrc="vim ~/.zshrc"
+alias indrc="vim ~/.indexer_files"
 
 alias gvir="gvim --remote"
 alias gvdev="gvim --servername dev --remote"

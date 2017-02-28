@@ -138,39 +138,67 @@ noremap <F4> :lcd! `pwd`/ \|make! -j4<Left><Left><Left><Left><Left><Left><Left><
 nnoremap <F5> :up<cr>:lcd!<Up><cr>:redr<cr>
 inoremap <F5> <esc>:up<cr>:lcd!<Up><cr>:redr<cr>
 
-"fun! NextTagOrError()
-"    try
-"    for nr in range(1, winnr('$'))
-"        if getwinvar(nr, "&pvw") == 1
-"            " found a preview
-"            :tnext
-"            return 0
-"        endif  
-"    endfor
-"    :cn
-"    catch /.*/
-"      echohl WarningMsg | echon v:exception | echohl None
-"    endtry
-"endfun
-"fun! PrevTagOrError()
-"  try
-"    for nr in range(1, winnr('$'))
-"        if getwinvar(nr, "&pvw") == 1
-"            " found a preview
-"            :tprev
-"            return 0
-"        endif  
-"    endfor
-"    :cp
-"  catch /.*/
-"      echohl WarningMsg | echon v:exception | echohl None
-"  endtry
-"endfun
-"noremap <F6> :call PrevTagOrError()<cr>
-"noremap <F7> :call NextTagOrError()<cr>
-noremap <F6> :cp<cr>
-noremap <F7> :cn<cr>
-noremap <F8> :cc<cr>
+fun! NextWinOrQFError()
+  try
+    for winnr in range(1, winnr('$'))
+        if getwinvar(winnr, '&syntax') == 'qf'
+            :cn
+            return 0
+        endif
+    endfor
+    :ln
+    "for nr in range(1, winnr('$'))
+    "    if getwinvar(nr, "&pvw") == 1
+    "        " found a preview
+    "        :tnext
+    "        return 0
+    "    endif  
+    "endfor
+    ":cn
+  catch /.*/
+      echohl WarningMsg | echon v:exception | echohl None
+  endtry
+endfun
+fun! PrevWinOrQFError()
+  try
+    for winnr in range(1, winnr('$'))
+        if getwinvar(winnr, '&syntax') == 'qf'
+            :cp
+            return 0
+        endif
+    endfor
+    :lp
+    "for nr in range(1, winnr('$'))
+    "    if getwinvar(nr, "&pvw") == 1
+    "        " found a preview
+    "        :tprev
+    "        return 0
+    "    endif  
+    "endfor
+    ":cp
+  catch /.*/
+      echohl WarningMsg | echon v:exception | echohl None
+  endtry
+endfun
+fun! CurrWinOrQFError()
+  try
+    for winnr in range(1, winnr('$'))
+        if getwinvar(winnr, '&syntax') == 'qf'
+            :cc
+            return 0
+        endif
+    endfor
+    :ll
+  catch /.*/
+      echohl WarningMsg | echon v:exception | echohl None
+  endtry
+endfun
+noremap <F6> :call PrevWinOrQFError()<cr>
+noremap <F7> :call NextWinOrQFError()<cr>
+noremap <F8> :call CurrWinOrQFError()<cr>
+"noremap <F6> :cp<cr>
+"noremap <F7> :cn<cr>
+"noremap <F8> :cc<cr>
 
 function! ToggleSpell()
   if &spell

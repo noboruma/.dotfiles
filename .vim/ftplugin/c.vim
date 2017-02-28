@@ -13,7 +13,7 @@ endif
 compiler gcc
 
 let g:syntastic_c_compiler = 'gcc'
-let g:syntastic_cpp_config_file = '.syntastic_c_config'
+let g:syntastic_c_config_file = '.syntastic_c_config'
 
 " Surround 
 let g:surround_{char2nr("c")} = "\/****\n\r\n****\/"

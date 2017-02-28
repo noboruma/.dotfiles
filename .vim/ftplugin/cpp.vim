@@ -10,18 +10,22 @@ if has("gui_running")
   au BufWritePost <buffer> :SemanticHighlight
 endif
 
+let g:syntastic_cpp_checkers = [ "cppcheck", "gcc"]
+let g:syntastic_cpp_cppcheck_args = '--std=c++11 --inconclusive'
 let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = '-std=c++1y'
-let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
+let g:syntastic_cpp_compiler_options = "-Wall -Wpedantic -Wextra -std=c++1y"
+"let g:syntastic_debug = 1
+"let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
 
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
 
-"let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_auto_loc_list = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_aggregate_errors = 1
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
+let g:syntastic_check_on_wq = 0
 
 " Surround 
 let g:surround_{char2nr("t")} = "\1template: \1<\r>"
