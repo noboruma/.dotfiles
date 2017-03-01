@@ -103,6 +103,43 @@ set hlsearch       " Highlight
 
 set mouse=a
 
+filetype off
+
+" Syntastic
+"let &runtimepath.=',~/.vim/bundle/syntastic'
+"
+"let g:syntastic_cpp_checkers = ["cppcheck", "clang_tidy"]
+"let g:syntastic_cpp_cppcheck_args = '--std=c++11'
+"let g:syntastic_cpp_compiler = 'g++'
+"let g:syntastic_cpp_compiler_options = "-Wall -Wpedantic -Wextra -std=c++1y"
+"let g:syntastic_cpp_include_dirs = ['../export' ]
+"let g:syntastic_cpp_check_header = 0
+"let g:syntastic_cpp_remove_include_errors = 1
+"let g:syntastic_cpp_config_file = '.syntastic_cpp_config'
+"let g:syntastic_clang_tidy_config_file = '.syntastic_clang_tidy_config'
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_aggregate_errors = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"
+"let g:syntastic_debug = 0
+"!Syntastic
+
+" Ale
+let &runtimepath.=',~/.vim/bundle/ale'
+let g:ale_linters = {
+\   'cpp': ['clangtidy', 'cppcheck'],
+\}
+let g:ale_cpp_clangtidy_options = '
+\ -I../../sol2
+\ -I.
+\ -std=c++14'
+let g:ale_echo_msg_error_str = 'Error'
+let g:ale_echo_msg_warning_str = 'Warning'
+let g:ale_echo_msg_format = '%s [%linter%|%severity%]'
+"!Ale
+
 filetype on
 filetype plugin on
 set ruler          " Relative cursor position

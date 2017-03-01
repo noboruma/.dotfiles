@@ -3,6 +3,7 @@
 # sed -r 's/.* token_start (.+) token_end .*/\1/'
 # sed ':a;N;$!ba;s/\n/ /g' merge two lines to check pattern
 # <(cmd) <(cmd) For asynchron piping
+# fdupes A/ --recurse: B | grep ^A/ | xargs rm
 
 #export TERM='screen-256color'
 
