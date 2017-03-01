@@ -131,10 +131,7 @@ let &runtimepath.=',~/.vim/bundle/ale'
 let g:ale_linters = {
 \   'cpp': ['clangtidy', 'cppcheck'],
 \}
-let g:ale_cpp_clangtidy_options = '
-\ -I../../sol2
-\ -I.
-\ -std=c++14'
+let g:ale_cpp_clangtidy_options = '$(cat ~/.clang-tidy_options)'
 let g:ale_echo_msg_error_str = 'Error'
 let g:ale_echo_msg_warning_str = 'Warning'
 let g:ale_echo_msg_format = '%s [%linter%|%severity%]'
