@@ -12,7 +12,7 @@ vnoremap // y/<C-R>"<CR>
 noremap <leader>a :set scb<cr>
 noremap <leader>A :set scb!<cr>
 noremap <leader>b :FufBuffer<cr>
-noremap <leader>c :ccl<cr>
+noremap <leader>c :ccl<cr>:lcl<cr>
 "noremap <leader>c <esc>:cscope c <C-r><C-w>
 noremap <leader>C lc^
 noremap <leader>d "_d

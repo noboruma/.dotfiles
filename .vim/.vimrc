@@ -36,6 +36,7 @@ if !use_arrow
 endif
 
 set guifont=Monospace\ 9
+set cmdheight=1
 
 set vb                         " visual bell
 syntax on                      " enable
@@ -116,7 +117,7 @@ set dictionary+=/usr/share/dict/words
 let g:languagetool_jar='$HOME/usr/bin/languagetool-commandline.jar'
 
 " Make options
-let &makeprg='make'
+let &makeprg='mw gmake'
 "
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>
@@ -296,22 +297,22 @@ set ssop-=folds      " do not store folds
 """"""""""""" Standard cscope/vim boilerplate
 
 " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
-"set cscopetag
-"
-"" check cscope for definition of a symbol before checking ctags: set to 1
-"" if you want the reverse search order.
-"set csto=0
-"
-"" add any cscope database in current directory
-"if filereadable("cscope.out")
-"    cs add cscope.out  
-"" else add the database pointed to by environment variable 
-"elseif $CSCOPE_DB != ""
-"    cs add $CSCOPE_DB
-"endif
-"
+set cscopetag
+
+" check cscope for definition of a symbol before checking ctags: set to 1
+" if you want the reverse search order.
+set csto=0
+
+" add any cscope database in current directory
+if filereadable("cscope.out")
+    cs add cscope.out  
+" else add the database pointed to by environment variable 
+elseif $CSCOPE_DB != ""
+    cs add $CSCOPE_DB
+endif
+
 " show msg when any other cscope db added
-"set cscopeverbose 
+set cscopeverbose 
 
 " No preview mode in fuzzy finder
 let g:fuf_previewHeight=0
