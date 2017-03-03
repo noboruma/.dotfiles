@@ -12,7 +12,7 @@ vnoremap // y/<C-R>"<CR>
 noremap <leader>a :set scb<cr>
 noremap <leader>A :set scb!<cr>
 noremap <leader>b :FufBuffer<cr>
-noremap <leader>c :ccl<cr>:lcl<cr>
+noremap <leader>c :ccl\|lcl<cr>
 "noremap <leader>c <esc>:cscope c <C-r><C-w>
 noremap <leader>C lc^
 noremap <leader>d "_d
@@ -20,7 +20,6 @@ noremap <leader>e :e<space>./
 "noremap <leader>wh<leader>e :let @e=expand('%:p:h')<cr><c-w>h:e <c-r>e/<tab>
 "noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
 "noremap <leader>f :pta <C-r><C-w><cr>
-"what was that command?
 "noremap <leader>f <C-w>z
 noremap <leader>f :cs find  <C-r><C-w><C-b><Right><Right><Right><Right><Right><Right><Right><Right><Tab>
 "noremap <leader>g :vimgrep /<C-r><C-w>/j ./**/*.[ch]*<left><left><left><left><left><left><left><left><left><left>
@@ -29,15 +28,16 @@ noremap <leader>G :grep! "<C-r><C-w>" `pwd`<tab>
 noremap <leader>h :call File_flip()<cr>
 noremap <leader>H :0r ~/.vim/.header_template<cr>
 noremap <leader>j :tj <C-r><C-w><cr>
-noremap <leader>j :tj <C-r><C-w><cr>
 "noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>
 "noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>
-noremap <leader>J <C-O>
+"noremap <leader>J <C-O>
+noremap <leader><bs> <C-O>
 noremap <leader>l :TagbarToggle<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
 noremap <leader>n :Explore<cr>
-noremap <leader>o o<esc> " Could use :m[ove] +1
-noremap <leader>O O<esc>
+"noremap <leader>o o<esc> " Could use :m[ove] +1
+noremap <leader>o <c-w>w
+"noremap <leader>O O<esc>
 noremap <leader>p "_dP
 noremap <leader>q :q<cr>
 noremap <leader>r /\<<C-r><C-w>\><cr>:%s//
@@ -50,7 +50,6 @@ noremap <leader>u :GundoToggle<cr>
 noremap <leader>v <C-v>
 "noremap <leader>w :up<cr>
 noremap <leader>w <C-w>o:vsp<cr>
-noremap <leader>ww <C-w>w
 noremap <leader>x :bp\|bd #<cr>
 noremap <leader>X :bp\|bd! #<cr>
 noremap <leader>y "+y
