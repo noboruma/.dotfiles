@@ -138,6 +138,45 @@ let g:ale_echo_msg_warning_str = 'Warning'
 let g:ale_echo_msg_format = '%s [%linter%|%severity%]'
 "!Ale
 
+" airline plugin
+set laststatus=2 "status bar
+let &runtimepath.=',~/.vim/bundle/airline'
+let &runtimepath.=',~/.vim/bundle/airline-themes'
+" Let us use arline instead
+"set statusline=%<%f%h%m%r:\ %{tagbar#currenttag('%s','')}%=%l,%c\ %P "status' bar content
+let g:airline_theme='light'
+let g:airline_detect_whitespace=0
+  let g:airline_mode_map = {
+      \ '__' : '',
+      \ 'n'  : '',
+      \ 'i'  : '',
+      \ 'R'  : '',
+      \ 'c'  : '',
+      \ 'v'  : '',
+      \ 'V'  : '',
+      \ '' : '',
+      \ 's'  : '',
+      \ 'S'  : '',
+      \ '' : '',
+      \ }
+"!Airline
+"Rainbow plugin
+let &runtimepath.=',~/.vim/bundle/rainbow'
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+   \ 'operators' : '_,\|=\|+\|\*\|-\|\.\|;\||\|&\|?\|:\|<\|>\|%\|/[^/*]_',
+   \ 'separately': {
+   \   'cpp': {
+   \     'parentheses': [
+   \       'start=/(/ end=/)/ fold',
+   \       'start=/\[/ end=/\]/ fold',
+   \       'start=/{/ end=/}/ fold',
+   \       'start=/\(\(\<operator\>\)\@<!<\)\&[a-zA-Z0-9_]\@<=<\ze[^<]/ end=/>/'] } } }
+"!Rainbow
+"Slime plugin
+let &runtimepath.=',~/.vim/bundle/slime'
+let g:slime_target = "tmux"
+"!Slime
 filetype on
 filetype plugin on
 set ruler          " Relative cursor position
@@ -202,26 +241,6 @@ set completeopt=menu,menuone,longest,preview
 "autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 "autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
-set laststatus=2 "status bar
-" Let us use arline instead
-"set statusline=%<%f%h%m%r:\ %{tagbar#currenttag('%s','')}%=%l,%c\ %P "status' bar content
-let g:airline_theme='light'
-let g:airline_detect_whitespace=0
-  let g:airline_mode_map = {
-      \ '__' : '',
-      \ 'n'  : '',
-      \ 'i'  : '',
-      \ 'R'  : '',
-      \ 'c'  : '',
-      \ 'v'  : '',
-      \ 'V'  : '',
-      \ '' : '',
-      \ 's'  : '',
-      \ 'S'  : '',
-      \ '' : '',
-      \ }
-
-
 set showbreak=↪
 set wrap
 set cpo+=n
@@ -241,17 +260,6 @@ let g:loaded_TagHighlight = 1
 if ! exists('g:TagHighlightSettings')
   let g:TagHighlightSettings = {}
 endif
-
-let g:rainbow_active = 1
-let g:rainbow_conf = {
-   \ 'operators' : '_,\|=\|+\|\*\|-\|\.\|;\||\|&\|?\|:\|<\|>\|%\|/[^/*]_',
-   \ 'separately': {
-   \   'cpp': {
-   \     'parentheses': [
-   \       'start=/(/ end=/)/ fold',
-   \       'start=/\[/ end=/\]/ fold',
-   \       'start=/{/ end=/}/ fold',
-   \       'start=/\(\(\<operator\>\)\@<!<\)\&[a-zA-Z0-9_]\@<=<\ze[^<]/ end=/>/'] } } }
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -315,7 +323,7 @@ let g:colorizer_startup = 0
 
 let g:syntastic_tex_checkers = ['chktex']
 
-let g:ConqueGdb_Leader = '<A-Left>'
+let g:ConqueGdb_Leader = '\'
 let g:ConqueTerm_CloseOnEnd = 1
 
 set modeline

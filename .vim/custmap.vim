@@ -1,5 +1,5 @@
 " Custom map
-nnoremap q: :q
+"nnoremap q: :q
 nnoremap Q <nop>
 nnoremap <S-Enter> O<Esc>
 nnoremap x "_x
@@ -21,7 +21,9 @@ noremap <leader>e :e<space>./
 "noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
 "noremap <leader>f :pta <C-r><C-w><cr>
 "noremap <leader>f <C-w>z
-noremap <leader>f :cs find  <C-r><C-w><C-b><Right><Right><Right><Right><Right><Right><Right><Right><Tab>
+noremap <leader>fi :grep! --cpp "class(\w\\|\s\\|\n)+\w(\s\\|\n)*:(\s\\|\w\\|\n)*<C-r><C-w>(\s\\|\n)+" `pwd`<tab>
+noremap <leader>fc :grep! --cpp "<C-r><C-w>(\s\\|\n)*\((.\\|\n)*\);" `pwd`<tab>
+"noremap <leader>f :cs find  <C-r><C-w><C-b><Right><Right><Right><Right><Right><Right><Right><Right><Tab>
 "noremap <leader>g :vimgrep /<C-r><C-w>/j ./**/*.[ch]*<left><left><left><left><left><left><left><left><left><left>
 noremap <leader>g :grep! --cpp "<C-r><C-w>" `pwd`<tab>
 noremap <leader>G :grep! "<C-r><C-w>" `pwd`<tab>
