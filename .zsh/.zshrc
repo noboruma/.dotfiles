@@ -36,12 +36,17 @@ setopt cdablevars
 setopt interactivecomments
 #setopt nobanghist
 setopt noclobber # Use >! to override file
-setopt HIST_REDUCE_BLANKS
-setopt HIST_IGNORE_SPACE
 setopt SH_WORD_SPLIT
 setopt nohup
 setopt transientrprompt
 #setopt PRINT_EXIT_VALUE
+#history
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_SPACE
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
 
 #print colors
 local CREDOR='%{\e[1;31m%}'
