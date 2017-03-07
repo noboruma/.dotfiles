@@ -315,7 +315,7 @@ let g:colorizer_startup = 0
 
 let g:syntastic_tex_checkers = ['chktex']
 
-let g:ConqueGdb_Leader = '<A-Left>'
+let g:ConqueGdb_Leader = '<Control>'
 let g:ConqueTerm_CloseOnEnd = 1
 
 set modeline
