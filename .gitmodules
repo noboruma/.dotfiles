@@ -1,0 +1,15 @@
+[submodule ".vim/bundle/airline"]
+	path = .vim/bundle/airline
+	url = https://github.com/vim-airline/vim-airline
+[submodule ".vim/bundle/airline-themes"]
+	path = .vim/bundle/airline-themes
+	url = https://github.com/vim-airline/vim-airline-themes
+[submodule ".vim/bundle/ale"]
+	path = .vim/bundle/ale
+	url = https://github.com/w0rp/ale
+[submodule ".vim/bundle/rainbow"]
+	path = .vim/bundle/rainbow
+	url = https://github.com/luochen1990/rainbow
+[submodule ".vim/bundle/slime"]
+	path = .vim/bundle/slime
+	url = https://github.com/jpalardy/vim-slime
