@@ -52,7 +52,7 @@ set history=50                 " History entries max number
 set viminfo='20,\"50           " ~/.viminfo's Options
 set backspace=2                " Activate backspace
 set whichwrap=<,>,[,]          " Ok let's use arrow to naviguate
-set scrolloff=999                " Keep one line after/before the cursor
+set scrolloff=10              " Keep one line after/before the cursor
 set showcmd                    " Show cmd on status bar
 set showmatch                  " Show paried symbols
 set nostartofline
@@ -128,9 +128,9 @@ filetype off
 
 " Ale
 let &runtimepath.=',~/.vim/bundle/ale'
-let g:ale_linters = {
-\   'cpp': ['g++', 'cppcheck'],
-\}
+"let g:ale_linters = {
+"\   'cpp': ['g++', 'cppcheck'],
+"\}
 let g:ale_cpp_gcc_options = '$(cat ~/.clangtidy_options)'
 let g:ale_cpp_clangtidy_options = '$(cat ~/.clangtidy_options)'
 let g:ale_echo_msg_error_str = 'Error'
@@ -333,6 +333,7 @@ let g:atp_Compiler = "python"
 " session
 set ssop-=options    " do not store global and local values in a session
 set ssop-=folds      " do not store folds
+set ssop+=localoptions
 
 " word-motion setup
 " w/e/b/W replaced by default

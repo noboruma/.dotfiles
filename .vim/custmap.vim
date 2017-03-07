@@ -43,9 +43,9 @@ noremap <leader>o <c-w>w
 noremap <leader>p "_dP
 noremap <leader>q :q<cr>
 noremap <leader>r /\<<C-r><C-w>\><cr>:%s//
-noremap <leader>s :SemanticHighlightToggle<cr>
+noremap <leader>S :SemanticHighlightToggle<cr>
 vnoremap <leader>s "sy/<C-R>"<cr>:%s//<C-R>"/g<left><left>
-noremap <leader>S /\<<C-r><C-w>\><cr>N
+noremap <leader>s /\<<C-r><C-w>\><cr>``
 noremap <leader>t :vsp<cr>
 noremap <leader>T :sp<cr>
 noremap <leader>u :GundoToggle<cr>
