@@ -9,6 +9,16 @@ noremap! jj <esc>
 noremap! kk <esc>
 vnoremap // y/<C-R>"<CR>
 
+function! IsLeftMostWindow()
+    let curNr = winnr()
+    wincmd h
+    if winnr() == curNr
+        return 1
+    endif
+    wincmd p " Move back.
+    return 0
+endfunction
+
 noremap <leader>a :set scb<cr>
 noremap <leader>A :set scb!<cr>
 noremap <leader>b :FufBuffer<cr>
@@ -34,7 +44,7 @@ noremap <leader>j :tj <C-r><C-w><cr>
 "noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>
 "noremap <leader>J <C-O>
 noremap <leader><bs> <C-O>
-noremap <leader>l :TagbarOpen -j<cr>
+noremap <leader>l :let g:tagbar_left=IsLeftMostWindow()<cr>:TagbarOpen -j<cr>
 noremap <leader>L :TagbarClose<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
 noremap <leader>n :Explore<cr>
