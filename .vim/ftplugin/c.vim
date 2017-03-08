@@ -18,10 +18,6 @@ let g:syntastic_c_config_file = '.syntastic_c_config'
 " Surround 
 let g:surround_{char2nr("c")} = "\/****\n\r\n****\/"
 
-"setlocal foldlevel=1
-"setlocal foldnestmax=1
-"setlocal foldmarker={,}
-"setlocal foldminlines=1
 let g:CFolderindent=0
 let g:CFolderClosed=1
 function! CFold1Lay()
@@ -45,7 +41,7 @@ endfunction
 setlocal foldmethod=expr
 setlocal foldexpr=CFold1Lay()
 setlocal foldlevel=0
-setlocal foldlevelstart=1
+setlocal foldlevelstart=0
 
 
 set expandtab
