@@ -177,6 +177,15 @@ let g:rainbow_conf = {
 let &runtimepath.=',~/.vim/bundle/slime'
 let g:slime_target = "tmux"
 "!Slime
+" Tagbar options
+""""""""""""""""""
+let &runtimepath.=',~/.vim/bundle/tagbar'
+let g:tagbar_compact = 1
+let g:tagbar_autofocus = 1
+let g:tagbar_autoclose = 0
+let g:tagbar_sort = 0
+" !Tagbar
+
 filetype on
 filetype plugin on
 set ruler          " Relative cursor position
@@ -188,7 +197,7 @@ set nospell
 " c-x c-k feature:
 set dictionary+=/usr/share/dict/words
 " Language Tools
-let g:languagetool_jar='$HOME/usr/bin/languagetool-commandline.jar'
+"let g:languagetool_jar='$HOME/usr/bin/languagetool-commandline.jar'
 
 " Make options
 let &makeprg='mw gmake'
@@ -246,13 +255,6 @@ set wrap
 set cpo+=n
 
 set autochdir
-
-" Tagbar options
-""""""""""""""""""
-let g:tagbar_compact = 1
-let g:tagbar_autofocus = 1
-let g:tagbar_autoclose = 1
-let g:tagbar_sort = 0
 
 hi CursosLine gui=underline
 
