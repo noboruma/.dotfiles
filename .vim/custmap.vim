@@ -132,8 +132,11 @@ noremap <C-K> <C-Y>
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
   \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
-nnoremap <silent> + <c-w>>
-nnoremap <silent> - <c-w><
+nmap <kPlus> zo
+nmap <kMinus> zc
+map <kEnter> <cr>
+nmap + zo
+nmap - zc
 
 "function! CaptureExtOutput(cmd)
 "  let out = system(a:cmd)

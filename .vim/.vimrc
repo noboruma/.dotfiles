@@ -21,6 +21,9 @@ if has("gui_running")
     set guioptions+=T  "toolbar
     set guioptions+=r  "scrollbar
   endif
+  set scrolloff=25 " Keep some lines after/before the cursor
+else
+  set scrolloff=8 " Usually smaller screen on terminal
 endif
 
 set path+=../**
@@ -52,7 +55,6 @@ set history=50                 " History entries max number
 set viminfo='20,\"50           " ~/.viminfo's Options
 set backspace=2                " Activate backspace
 set whichwrap=<,>,[,]          " Ok let's use arrow to naviguate
-set scrolloff=10              " Keep one line after/before the cursor
 set showcmd                    " Show cmd on status bar
 set showmatch                  " Show paried symbols
 set nostartofline
@@ -131,8 +133,8 @@ let &runtimepath.=',~/.vim/bundle/ale'
 "let g:ale_linters = {
 "\   'cpp': ['g++', 'cppcheck'],
 "\}
-let g:ale_cpp_gcc_options = '$(cat ~/.clangtidy_options)'
-let g:ale_cpp_clangtidy_options = '$(cat ~/.clangtidy_options)'
+let g:ale_cpp_gcc_options = '$(cat ~/.compiler_options)' "Options can be easily retrieved using 'bear' (github)
+let g:ale_cpp_clangtidy_options = '$(cat ~/.compiler_options)'
 let g:ale_echo_msg_error_str = 'Error'
 let g:ale_echo_msg_warning_str = 'Warning'
 let g:ale_echo_msg_format = '%s [%linter%|%severity%]'
