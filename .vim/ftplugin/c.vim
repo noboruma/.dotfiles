@@ -49,6 +49,7 @@ set tabstop=4
 set shiftwidth=4
 
 set complete-=i
+set complete-=t
 
 inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
 inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"

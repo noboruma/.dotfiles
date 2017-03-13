@@ -1,6 +1,8 @@
 " .Vimrc from Thomas Legris 28/06/2014
 " Useful regex stuff:
 " %s/\<word\>\C/new/g -> \< match begin \> match end \C case sensistiveness
+" copy command output:
+" redir @* | cmd | redir END
 set shell=zsh
 " Script Setting
 let use_arrow=0
@@ -57,7 +59,7 @@ set backspace=2                " Activate backspace
 set whichwrap=<,>,[,]          " Ok let's use arrow to naviguate
 set showcmd                    " Show cmd on status bar
 set showmatch                  " Show paried symbols
-set nostartofline
+set startofline
 set wildmode=list:full:longest
 set autoindent
 set smartindent
@@ -130,9 +132,9 @@ filetype off
 
 " Ale
 let &runtimepath.=',~/.vim/bundle/ale'
-"let g:ale_linters = {
-"\   'cpp': ['g++', 'cppcheck'],
-"\}
+let g:ale_linters = {
+\   'cpp': ['g++', 'cppcheck'],
+\}
 let g:ale_cpp_gcc_options = '$(cat ~/.compiler_options)' "Options can be easily retrieved using 'bear' (github)
 let g:ale_cpp_clangtidy_options = '$(cat ~/.compiler_options)'
 let g:ale_echo_msg_error_str = 'Error'
@@ -236,6 +238,7 @@ source ~/.vim/custmap.vim
 " Explorer options
 """"""""""""""""""
 let g:netrw_liststyle=3
+autocmd FileType netrw setl bufhidden=delete
 "set winfixwidth
 
 " Ced: for auto-completion popup menu

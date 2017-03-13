@@ -41,8 +41,10 @@ setlocal foldexpr=CFold1Lay()
 setlocal foldlevel=0
 setlocal foldlevelstart=0
 
-" Stop parsing include files, use ctags instead
+" Stop parsing include files
 set complete-=i
+" stop use ctags, only used for jump
+set complete-=t
 
 if !exists("*File_flip")
   function! File_flip()

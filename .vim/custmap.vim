@@ -1,13 +1,11 @@
 " Custom map
-"nnoremap q: :q
 nnoremap Q <nop>
-nnoremap <S-Enter> O<Esc>
 nnoremap x "_x
 vnoremap x "_d
 noremap , :
 noremap! jj <esc>
 noremap! kk <esc>
-vnoremap // y/<C-R>"<CR>
+vnoremap // y/<C-R>"<CR>``
 
 function! IsLeftMostWindow()
     let curNr = winnr()
@@ -27,12 +25,15 @@ noremap <leader>c :ccl\|lcl<cr>
 noremap <leader>C lc^
 noremap <leader>d "_d
 noremap <leader>e :e<space>./
+noremap <leader>E :Explore<cr>
 "noremap <leader>wh<leader>e :let @e=expand('%:p:h')<cr><c-w>h:e <c-r>e/<tab>
 "noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
 "noremap <leader>f :pta <C-r><C-w><cr>
 "noremap <leader>f <C-w>z
-noremap <leader>fi :grep! --cpp "class(\w\\|\s\\|\n)+\w(\s\\|\n)*:(\s\\|\w\\|\n)*<C-r><C-w>(\s\\|\n)+" `pwd`<tab>
-noremap <leader>fc :grep! --cpp "<C-r><C-w>(\s\\|\n)*\((.\\|\n)*\);" `pwd`<tab>
+noremap <leader>f f(l
+noremap <leader>F T(
+"noremap <leader>fi :grep! --cpp "class(\w\\|\s\\|\n)+\w(\s\\|\n)*:(\s\\|\w\\|\n)*<C-r><C-w>(\s\\|\n)+" `pwd`<tab>
+"noremap <leader>fc :grep! --cpp "<C-r><C-w>(\s\\|\n)*\((.\\|\n)*\);" `pwd`<tab>
 "noremap <leader>f :cs find  <C-r><C-w><C-b><Right><Right><Right><Right><Right><Right><Right><Right><Tab>
 "noremap <leader>g :vimgrep /<C-r><C-w>/j ./**/*.[ch]*<left><left><left><left><left><left><left><left><left><left>
 noremap <leader>g :grep! --cpp "<C-r><C-w>" `pwd`<tab>
@@ -42,21 +43,20 @@ noremap <leader>H :0r ~/.vim/.header_template<cr>
 noremap <leader>j :tj <C-r><C-w><cr>
 "noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>
 "noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>
-"noremap <leader>J <C-O>
+noremap <leader><tab> <C-I>
 noremap <leader><bs> <C-O>
 noremap <leader>l :let g:tagbar_left=IsLeftMostWindow()<cr>:TagbarOpen -j<cr>
 noremap <leader>L :TagbarClose<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
-noremap <leader>n :Explore<cr>
-"noremap <leader>o o<esc> " Could use :m[ove] +1
+nmap <leader>n via<esc>f,l
+nmap <leader>N viao<esc>F,h
 noremap <leader>o <c-w>w
-"noremap <leader>O O<esc>
 noremap <leader>p "_dP
 noremap <leader>q :q<cr>
 noremap <leader>r /\<<C-r><C-w>\><cr>:%s//
+noremap <leader>s /\<<C-r><C-w>\><cr>``
 noremap <leader>S :SemanticHighlightToggle<cr>
 vnoremap <leader>s "sy/<C-R>"<cr>:%s//<C-R>"/g<left><left>
-noremap <leader>s /\<<C-r><C-w>\><cr>``
 noremap <leader>t :vsp<cr>
 noremap <leader>T :sp<cr>
 noremap <leader>u :GundoToggle<cr>
@@ -66,8 +66,6 @@ noremap <leader>w <C-w>o:vsp<cr>
 noremap <leader>x :bp\|bd #<cr>
 noremap <leader>X :bp\|bd! #<cr>
 noremap <leader>y "+y
-noremap <leader>Z zO
-noremap <leader>z zf
 
 vnoremap <leader>=, :Tab /,\zs/l1r0<cr>gv=
 vnoremap <leader>== :Tab /=<cr>gv=
@@ -89,7 +87,7 @@ noremap <leader>; A;<esc>
 noremap <leader>> x<esc>wP
 noremap <leader>< x<esc>bep
 vmap <leader>{ Sb=i{
-  
+
 " Custom hard remap
 inoremap        [  []<Left>
 inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
@@ -132,11 +130,10 @@ noremap <C-K> <C-Y>
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
   \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
-nmap <kPlus> zo
-nmap <kMinus> zc
-map <kEnter> <cr>
-nmap + zo
-nmap - zc
+"nmap <kPlus> zo
+"nmap <kMinus> zc
+"nmap + zo
+"nmap - zc
 
 "function! CaptureExtOutput(cmd)
 "  let out = system(a:cmd)
