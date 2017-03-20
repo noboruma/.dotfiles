@@ -16,3 +16,6 @@
 [submodule ".vim/bundle/tagbar"]
 	path = .vim/bundle/tagbar
 	url = https://github.com/majutsushi/tagbar
+[submodule ".vim/bundle/asyncrun"]
+	path = .vim/bundle/asyncrun
+	url = https://github.com/skywind3000/asyncrun.vim

@@ -24,7 +24,7 @@ noremap <leader>c :ccl\|lcl<cr>
 "noremap <leader>c <esc>:cscope c <C-r><C-w>
 noremap <leader>C lc^
 noremap <leader>d "_d
-noremap <leader>e :e<space>./
+noremap <leader>e :e<space>`pwd`<tab>
 noremap <leader>E :Explore<cr>
 "noremap <leader>wh<leader>e :let @e=expand('%:p:h')<cr><c-w>h:e <c-r>e/<tab>
 "noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
@@ -45,7 +45,7 @@ noremap <leader>j :tj <C-r><C-w><cr>
 "noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>
 noremap <leader><tab> <C-I>
 noremap <leader><bs> <C-O>
-noremap <leader>l :let g:tagbar_left=IsLeftMostWindow()<cr>:TagbarOpen -j<cr>
+noremap <leader>l :let g:tagbar_left=IsLeftMostWindow()<cr>:TagbarOpen j<cr>
 noremap <leader>L :TagbarClose<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
 nmap <leader>n via<esc>f,l
@@ -146,7 +146,7 @@ inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 "noremap <F4> :make! -j -C <Up>
 "nnoremap <F5> :up<cr>:make! -j -C <Up><cr>:redr<cr>
 "inoremap <F5> <esc>:up<cr>:make! -j -C <Up><cr>:redr<cr>
-noremap <F4> :lcd! `pwd`/ \|make! -j4<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Tab><Tab>
+noremap <F4> :lcd! `pwd`/ \|AsyncRun -program=make @ -j4<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Tab><Tab>
 nnoremap <F5> :up<cr>:lcd!<Up><cr>:redr<cr>
 inoremap <F5> <esc>:up<cr>:lcd!<Up><cr>:redr<cr>
 

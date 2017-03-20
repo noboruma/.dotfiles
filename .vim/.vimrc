@@ -136,7 +136,7 @@ let g:ale_linters = {
 \   'cpp': ['g++', 'cppcheck'],
 \}
 let g:ale_cpp_gcc_options = '$(cat ~/.compiler_options)' "Options can be easily retrieved using 'bear' (github)
-let g:ale_cpp_clangtidy_options = '$(cat ~/.compiler_options)'
+let g:ale_cpp_clangtidy_options = '$(cat `~/usr/bin/upfind . -name ".compiler_options"`)'
 let g:ale_echo_msg_error_str = 'Error'
 let g:ale_echo_msg_warning_str = 'Warning'
 let g:ale_echo_msg_format = '%s [%linter%|%severity%]'
@@ -190,6 +190,11 @@ let g:tagbar_autoclose = 0
 let g:tagbar_sort = 0
 " !Tagbar
 
+" AsyncRun
+let &runtimepath.=',~/.vim/bundle/asyncrun'
+
+" !AsyncRun
+
 filetype on
 filetype plugin on
 set ruler          " Relative cursor position
@@ -219,8 +224,9 @@ let &makeprg='mw gmake'
 " (but not if it's already open). However, as part of the autocmd, this doesn't
 " seem to happen.
 augroup vimrc
-  autocmd QuickFixCmdPost [^l]* nested botright cwindow " Botright to open widely
-  autocmd QuickFixCmdPost    l* nested botright lwindow
+  "autocmd QuickFixCmdPost [^l]* nested botright cwindow " Botright to open widely
+  "autocmd QuickFixCmdPost    l* nested botright lwindow
+  autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
 augroup END
 
 " Handle space and tabs
@@ -378,5 +384,5 @@ autocmd FileType make set expandtab
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --vimgrep\ $*
-  set grepformat=%f:%l:%c:%m
+  "set grepformat=%f:%l:%c:%m
 endif
