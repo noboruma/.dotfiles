@@ -227,6 +227,7 @@ augroup vimrc
   "autocmd QuickFixCmdPost [^l]* nested botright cwindow " Botright to open widely
   "autocmd QuickFixCmdPost    l* nested botright lwindow
   autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
+  autocmd User AsyncRunStop botright copen|normal zM
 augroup END
 
 " Handle space and tabs
@@ -384,5 +385,5 @@ autocmd FileType make set expandtab
 if executable('ag')
   " Use ag over grep
   set grepprg=ag\ --vimgrep\ $*
-  "set grepformat=%f:%l:%c:%m
+  set grepformat=%f:%l:%c:%m
 endif
