@@ -270,14 +270,7 @@ set autochdir
 
 hi CursosLine gui=underline
 
-"Remove TagHighlight & Easy translate
-let g:loaded_TagHighlight = 1
-if ! exists('g:TagHighlightSettings')
-  let g:TagHighlightSettings = {}
-endif
-
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
+" Jump to the last position when reopening a file
 augroup vimrc
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 augroup END
@@ -325,8 +318,8 @@ if (exists("&undodir"))
     set undofile
     set undodir=~/.vim/vimfiles/undo
     "let &undodir=&directory
-    set undolevels=255
-    set undoreload=255
+    set undolevels=1024
+    set undoreload=1024
 endif
 
 " start up message short
@@ -354,32 +347,25 @@ set ssop+=localoptions
 " w/e/b/W replaced by default
 
 """"""""""""" Standard cscope/vim boilerplate
-
 " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
-set cscopetag
-
-" check cscope for definition of a symbol before checking ctags: set to 1
-" if you want the reverse search order.
-set csto=0
-
-" add any cscope database in current directory
-if filereadable("cscope.out")
-    cs add cscope.out  
-" else add the database pointed to by environment variable 
-elseif $CSCOPE_DB != ""
-    cs add $CSCOPE_DB
-endif
-
-" show msg when any other cscope db added
-set cscopeverbose 
+"set cscopetag
+"" check cscope for definition of a symbol before checking ctags: set to 1
+"" if you want the reverse search order.
+"set csto=0
+"" add any cscope database in current directory
+"if filereadable("cscope.out")
+"    cs add cscope.out  
+"" else add the database pointed to by environment variable 
+"elseif $CSCOPE_DB != ""
+"    cs add $CSCOPE_DB
+"endif
+"" show msg when any other cscope db added
+"set cscopeverbose 
 
 " No preview mode in fuzzy finder
 let g:fuf_previewHeight=0
 
 let g:indexer_disableCtagsWarning=1
-
-" Add spaces in Makefile instead of tab
-autocmd FileType make set expandtab
 
 " The Silver Searcher
 if executable('ag')

@@ -20,7 +20,7 @@ endfunction
 noremap <leader>a :set scb<cr>
 noremap <leader>A :set scb!<cr>
 noremap <leader>b :FufBuffer<cr>
-noremap <leader>c :ccl\|lcl<cr>
+noremap <leader>c :ccl\|lcl\|pcl<cr>
 "noremap <leader>c <esc>:cscope c <C-r><C-w>
 noremap <leader>C lc^
 noremap <leader>d "_d
@@ -28,10 +28,10 @@ noremap <leader>e :e<space>`pwd`<tab>
 noremap <leader>E :Explore<cr>
 "noremap <leader>wh<leader>e :let @e=expand('%:p:h')<cr><c-w>h:e <c-r>e/<tab>
 "noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
-"noremap <leader>f :pta <C-r><C-w><cr>
+noremap <leader>f :botright pta <C-r><C-w><cr>
 "noremap <leader>f <C-w>z
-noremap <leader>f f(l
-noremap <leader>F T(
+"noremap <leader>f f(l
+"noremap <leader>F T(
 "noremap <leader>fi :grep! --cpp "class(\w\\|\s\\|\n)+\w(\s\\|\n)*:(\s\\|\w\\|\n)*<C-r><C-w>(\s\\|\n)+" `pwd`<tab>
 "noremap <leader>fc :grep! --cpp "<C-r><C-w>(\s\\|\n)*\((.\\|\n)*\);" `pwd`<tab>
 "noremap <leader>f :cs find  <C-r><C-w><C-b><Right><Right><Right><Right><Right><Right><Right><Right><Tab>
@@ -156,17 +156,14 @@ fun! NextWinOrQFError()
         if getwinvar(winnr, '&syntax') == 'qf'
             :cn
             return 0
-        endif
+        elseif getwinvar(winnr, "&pvw") == 1
+            " found a preview
+            :ptn
+            return 0
+        endif  
     endfor
     :ln
-    "for nr in range(1, winnr('$'))
-    "    if getwinvar(nr, "&pvw") == 1
-    "        " found a preview
-    "        :tnext
-    "        return 0
-    "    endif  
-    "endfor
-    ":cn
+    return 0
   catch /.*/
       echohl WarningMsg | echon v:exception | echohl None
   endtry
@@ -177,17 +174,14 @@ fun! PrevWinOrQFError()
         if getwinvar(winnr, '&syntax') == 'qf'
             :cp
             return 0
+        elseif getwinvar(winnr, "&pvw") == 1
+            " found a preview
+            :ptp
+            return 0
         endif
     endfor
     :lp
-    "for nr in range(1, winnr('$'))
-    "    if getwinvar(nr, "&pvw") == 1
-    "        " found a preview
-    "        :tprev
-    "        return 0
-    "    endif  
-    "endfor
-    ":cp
+    return 0
   catch /.*/
       echohl WarningMsg | echon v:exception | echohl None
   endtry
@@ -198,9 +192,13 @@ fun! CurrWinOrQFError()
         if getwinvar(winnr, '&syntax') == 'qf'
             :cc
             return 0
+        elseif getwinvar(winnr, "&pvw") == 1
+            :ptr
+            return 0
         endif
     endfor
     :ll
+    return 0
   catch /.*/
       echohl WarningMsg | echon v:exception | echohl None
   endtry
@@ -208,9 +206,6 @@ endfun
 noremap <F6> :call PrevWinOrQFError()<cr>
 noremap <F7> :call NextWinOrQFError()<cr>
 noremap <F8> :call CurrWinOrQFError()<cr>
-"noremap <F6> :cp<cr>
-"noremap <F7> :cn<cr>
-"noremap <F8> :cc<cr>
 
 function! ToggleSpell()
   if &spell
