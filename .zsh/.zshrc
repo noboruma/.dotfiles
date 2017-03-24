@@ -138,6 +138,9 @@ bindkey '^i' expand-or-complete-prefix
 bindkey '^r' history-incremental-search-backward
 bindkey '^w' backward-kill-word
 
+autoload -U select-word-style
+select-word-style bash
+
 source ~/.zsh/custalias.zsh
 
 set inc
@@ -178,3 +181,8 @@ export ANDROID_HOME=$HOME'/usr/adt-bundle-linux-x86_64-20131030/sdk'
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 export P4CONFIG=.perforce
+
+export NPM_PACKAGES="${HOME}/usr/npm-packages"
+export PATH="$NPM_PACKAGES/bin:$PATH"
+
+source /usr/share/autojump/autojump.zsh
