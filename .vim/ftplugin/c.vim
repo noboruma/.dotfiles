@@ -16,7 +16,7 @@ let g:syntastic_c_compiler = 'gcc'
 let g:syntastic_c_config_file = '.syntastic_c_config'
 
 " Surround 
-let g:surround_{char2nr("c")} = "\/****\n\r\n****\/"
+let g:surround_{char2nr("c")} = "\/*\r*\/"
 
 let g:CFolderindent=0
 let g:CFolderClosed=1

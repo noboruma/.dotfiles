@@ -146,9 +146,10 @@ inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 "noremap <F4> :make! -j -C <Up>
 "nnoremap <F5> :up<cr>:make! -j -C <Up><cr>:redr<cr>
 "inoremap <F5> <esc>:up<cr>:make! -j -C <Up><cr>:redr<cr>
+"noremap <F4> :lcd! `pwd`/ \|AsyncRun -program=make -j4<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Tab><Tab>
 noremap <F4> :lcd! `pwd`/ \|AsyncRun -program=make -j4<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Tab><Tab>
-nnoremap <F5> :up<cr>:lcd!<Up><cr>:redr<cr>
-inoremap <F5> <esc>:up<cr>:lcd!<Up><cr>:redr<cr>
+nnoremap <F5> :up<cr>:lcd!<Up>
+inoremap <F5> <esc>:up<cr>:lcd!<Up>
 
 fun! NextWinOrQFError()
   try
