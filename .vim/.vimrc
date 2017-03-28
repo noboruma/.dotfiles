@@ -193,7 +193,6 @@ let g:tagbar_sort = 0
 
 " AsyncRun
 let &runtimepath.=',~/.vim/bundle/asyncrun'
-
 " !AsyncRun
 
 filetype on
@@ -210,7 +209,7 @@ set dictionary+=/usr/share/dict/words
 "let g:languagetool_jar='$HOME/usr/bin/languagetool-commandline.jar'
 
 " Make options
-let &makeprg='mw gmake'
+let &makeprg='make'
 "
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>
@@ -227,9 +226,10 @@ let &makeprg='mw gmake'
 augroup vimrc
   "autocmd QuickFixCmdPost [^l]* nested botright cwindow " Botright to open widely
   "autocmd QuickFixCmdPost    l* nested botright lwindow
-  autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
-  autocmd User AsyncRunStart set foldlevel=99
-  autocmd User AsyncRunStop botright copen
+  "autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
+  " The pre is to counter the copen from leaders aliases
+  autocmd User AsyncRunPre setl foldlevelstart=99 | wincmd k
+  autocmd User AsyncRunStop botright copen | normal zM
 augroup END
 
 " Handle space and tabs
@@ -375,4 +375,4 @@ if executable('ag')
   set grepprg=ag\ --vimgrep\ $*
   set grepformat=%f:%l:%c:%m
 endif
-set errorformat^=%-GIn\ file\ included\ %.%#
+

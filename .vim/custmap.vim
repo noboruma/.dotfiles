@@ -36,8 +36,8 @@ noremap <leader>f :botright pta <C-r><C-w><cr>
 "noremap <leader>fc :grep! --cpp "<C-r><C-w>(\s\\|\n)*\((.\\|\n)*\);" `pwd`<tab>
 "noremap <leader>f :cs find  <C-r><C-w><C-b><Right><Right><Right><Right><Right><Right><Right><Right><Tab>
 "noremap <leader>g :vimgrep /<C-r><C-w>/j ./**/*.[ch]*<left><left><left><left><left><left><left><left><left><left>
-noremap <leader>g :AsyncRun -program=grep --cpp "<C-r><C-w>" `pwd`<tab>
-noremap <leader>G :AsyncRun -program=grep "<C-r><C-w>" `pwd`<tab>
+noremap <leader>g :botright copen\|AsyncRun -program=grep --cpp "<C-r><C-w>" `pwd`<tab>
+noremap <leader>G :botright copen\|AsyncRun -program=grep "<C-r><C-w>" `pwd`<tab>
 noremap <leader>h :call File_flip()<cr>
 noremap <leader>H :0r ~/.vim/.header_template<cr>
 noremap <leader>j :tj <C-r><C-w><cr>
@@ -146,9 +146,11 @@ inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 "noremap <F4> :make! -j -C <Up>
 "nnoremap <F5> :up<cr>:make! -j -C <Up><cr>:redr<cr>
 "inoremap <F5> <esc>:up<cr>:make! -j -C <Up><cr>:redr<cr>
-noremap <F4> :AsyncRun -program=make -cwd=`pwd`/ @ -j4<left><left><left><left><left><left><tab><tab>
-nnoremap <F5> :up<cr>:AsyncRun -program=make<Up><cr>
-inoremap <F5> <esc>:up<cr>:AsyncRun -program=make<Up><cr>
+" Need to manually call copen first so that directories are correctly set
+" (issue with asyncrun?)
+noremap <F4>  :botright copen\|AsyncRun -program=make @ -j4 -C `pwd`/<tab><tab>
+nnoremap <F5> :up<cr>:botright copen\|AsyncRun -program=make<Up><cr>
+inoremap <F5> <esc>:up<cr>:botright copen\|AsyncRun -program=make<Up><cr>
 
 fun! NextWinOrQFError()
   try
