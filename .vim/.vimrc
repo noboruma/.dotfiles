@@ -163,6 +163,7 @@ let g:airline_detect_whitespace=0
       \ 'S'  : '',
       \ '' : '',
       \ }
+let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 "!Airline
 "Rainbow plugin
 let &runtimepath.=',~/.vim/bundle/rainbow'
@@ -209,7 +210,7 @@ set dictionary+=/usr/share/dict/words
 "let g:languagetool_jar='$HOME/usr/bin/languagetool-commandline.jar'
 
 " Make options
-let &makeprg='make'
+let &makeprg='mw gmake'
 "
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>
@@ -227,8 +228,8 @@ augroup vimrc
   "autocmd QuickFixCmdPost [^l]* nested botright cwindow " Botright to open widely
   "autocmd QuickFixCmdPost    l* nested botright lwindow
   autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
-  autocmd User AsyncRunStart set foldlevel=1
-  autocmd User AsyncRunStop botright cwindow|normal zM
+  autocmd User AsyncRunStart set foldlevel=99
+  autocmd User AsyncRunStop botright copen
 augroup END
 
 " Handle space and tabs
