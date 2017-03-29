@@ -209,7 +209,7 @@ set dictionary+=/usr/share/dict/words
 "let g:languagetool_jar='$HOME/usr/bin/languagetool-commandline.jar'
 
 " Make options
-let &makeprg='mw gmake'
+let &makeprg='make'
 "
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>
@@ -228,8 +228,8 @@ augroup vimrc
   "autocmd QuickFixCmdPost    l* nested botright lwindow
   "autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
   " The pre is to counter the copen from leaders aliases
-  autocmd User AsyncRunPre setl nomodifiable | setl foldlevelstart=99 | normal zR | wincmd k
-  autocmd User AsyncRunStop botright copen | normal zM
+  autocmd User AsyncRunStart setl nomodifiable | setl foldlevel=99 | wincmd k
+  autocmd User AsyncRunStop botright copen | setl foldlevel=0
 augroup END
 
 " Handle space and tabs
