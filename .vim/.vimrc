@@ -107,6 +107,8 @@ set hlsearch       " Highlight
 
 set mouse=a
 
+set matchpairs+=<:>
+
 filetype off
 
 " Syntastic
@@ -375,4 +377,3 @@ if executable('ag')
   set grepprg=ag\ --vimgrep\ $*
   set grepformat=%f:%l:%c:%m
 endif
-
