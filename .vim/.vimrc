@@ -62,7 +62,7 @@ set startofline
 set wildmode=list:full:longest
 set autoindent
 set smartindent
-set cino+=j1,(0,+0             " C file option
+set cino+=j1,(0,b1             " C file option
 set autoread
 set clipboard=unnamed          " ^=
 
