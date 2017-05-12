@@ -38,7 +38,7 @@ noremap <leader>f :botright pta <C-r><C-w><cr>
 "noremap <leader>g :vimgrep /<C-r><C-w>/j ./**/*.[ch]*<left><left><left><left><left><left><left><left><left><left>
 noremap <leader>g :botright copen\|AsyncRun -program=grep --cpp "<C-r><C-w>" `pwd`<tab>
 noremap <leader>G :botright copen\|AsyncRun -program=grep "<C-r><C-w>" `pwd`<tab>
-noremap <leader>h :call File_flip()<cr>
+noremap <leader>h :call File_flip()<cr>zz
 noremap <leader>H :0r ~/.vim/.header_template<cr>
 noremap <leader>j :tj <C-r><C-w><cr>
 "noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>

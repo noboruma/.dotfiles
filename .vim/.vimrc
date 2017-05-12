@@ -23,10 +23,9 @@ if has("gui_running")
     set guioptions+=T  "toolbar
     set guioptions+=r  "scrollbar
   endif
-  set scrolloff=25 " Keep some lines after/before the cursor
-else
-  set scrolloff=8 " Usually smaller screen on terminal
 endif
+
+set scrolloff=0 " Keep no lines after/before the cursor
 
 set path+=../**
 
@@ -211,7 +210,7 @@ set dictionary+=/usr/share/dict/words
 "let g:languagetool_jar='$HOME/usr/bin/languagetool-commandline.jar'
 
 " Make options
-let &makeprg='make'
+let &makeprg='mw gmake'
 "
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>
