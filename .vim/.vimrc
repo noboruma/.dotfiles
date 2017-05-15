@@ -26,6 +26,8 @@ if has("gui_running")
 endif
 set scrolloff=0 " Usually smaller screen on terminal
 
+set scrolloff=0 " Keep no lines after/before the cursor
+
 set path+=../**
 
 " Start to be a good vimmer
@@ -61,7 +63,7 @@ set startofline
 set wildmode=list:full:longest
 set autoindent
 set smartindent
-set cino+=j1,(0,+0             " C file option
+set cino+=j1,(0,b1             " C file option
 set autoread
 set clipboard=unnamed          " ^=
 
@@ -104,6 +106,8 @@ set hlsearch       " Highlight
                    " set number
 
 set mouse=a
+
+set matchpairs+=<:>
 
 filetype off
 
@@ -207,7 +211,7 @@ set dictionary+=/usr/share/dict/words
 "let g:languagetool_jar='$HOME/usr/bin/languagetool-commandline.jar'
 
 " Make options
-let &makeprg='make'
+let &makeprg='mw gmake'
 "
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>
@@ -373,4 +377,3 @@ if executable('ag')
   set grepprg=ag\ --vimgrep\ $*
   set grepformat=%f:%l:%c:%m
 endif
-
