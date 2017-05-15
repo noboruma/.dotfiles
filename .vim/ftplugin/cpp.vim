@@ -42,9 +42,9 @@ setlocal foldlevel=0
 setlocal foldlevelstart=0
 
 " Stop parsing include files
-set complete-=i
+setlocal complete-=i
 " stop use ctags, only used for jump
-set complete-=t
+setlocal complete-=t
 
 if !exists("*File_flip")
   function! File_flip()
@@ -93,4 +93,6 @@ if !exists("*File_flip")
     endif
   endfun
 endif
-
+setlocal errorformat^=%-GIn\ file\ included\ from\ %f:%l:%c:,%-GIn\ file
+\\ included\ from\ %f:%l:%c\\,,%-GIn\ file\ included\ from\ %f
+\:%l:%c,%-GIn\ file\ included\ from\ %f:%l

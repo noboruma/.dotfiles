@@ -23,10 +23,8 @@ if has("gui_running")
     set guioptions+=T  "toolbar
     set guioptions+=r  "scrollbar
   endif
-  set scrolloff=25 " Keep some lines after/before the cursor
-else
-  set scrolloff=8 " Usually smaller screen on terminal
 endif
+set scrolloff=0 " Usually smaller screen on terminal
 
 set path+=../**
 
@@ -228,8 +226,8 @@ augroup vimrc
   "autocmd QuickFixCmdPost    l* nested botright lwindow
   "autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
   " The pre is to counter the copen from leaders aliases
-  autocmd User AsyncRunStart setl nomodifiable | setl foldlevel=99 | wincmd k
-  autocmd User AsyncRunStop botright copen | setl foldlevel=0
+  "autocmd User AsyncRunStart setl foldlevel=99 | wincmd k
+  autocmd User AsyncRunStop botright copen "| setl foldlevel=0
 augroup END
 
 " Handle space and tabs

@@ -149,8 +149,8 @@ inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 " Need to manually call copen first so that directories are correctly set
 " (issue with asyncrun?)
 noremap <F4>  :botright copen\|AsyncRun -program=make @ -j4 -C `pwd`/<tab><tab>
-nnoremap <F5> :up<cr>:botright copen\|AsyncRun -program=make<Up><cr>
-inoremap <F5> <esc>:up<cr>:botright copen\|AsyncRun -program=make<Up><cr>
+nnoremap <F5> :ccl<cr>:up<cr>:botright copen\|AsyncRun -program=make<Up><cr>
+inoremap <F5> <esc>:ccl<cr>:up<cr>:botright copen\|AsyncRun -program=make<Up><cr>
 
 fun! NextWinOrQFError()
   try
