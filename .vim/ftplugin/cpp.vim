@@ -1,7 +1,4 @@
 " CPP config is shared with C one (c.vim)
-" Adapt on save hook
-autocmd BufWritePre <buffer> %s/\s\+$//e
-autocmd BufWritePre <buffer> silent! :Adapt
 
 if has("gui_running")
   au BufEnter <buffer> if (!exists('b:created')) | :execute "SemanticHighlight" | let b:created=1 | endif
@@ -94,3 +91,4 @@ if !exists("*File_flip")
   endfun
 endif
 
+set errorformat-=%f:%l:%m
