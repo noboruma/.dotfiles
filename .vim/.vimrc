@@ -135,6 +135,7 @@ filetype off
 let &runtimepath.=',~/.vim/bundle/ale'
 let g:ale_linters = {
 \   'cpp': ['g++', 'cppcheck', 'clangtidy'],
+\   'rust': ['rustc'],
 \}
 let g:ale_cpp_gcc_options = '$(cat ~/.compiler_options)' "Options can be easily retrieved using 'bear' (github)
 let g:ale_cpp_clangtidy_options = '$(cat ~/.compiler_options)'
