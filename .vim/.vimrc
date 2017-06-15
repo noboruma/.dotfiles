@@ -197,6 +197,13 @@ let g:tagbar_sort = 0
 let &runtimepath.=',~/.vim/bundle/asyncrun'
 " !AsyncRun
 
+
+" No preview mode in fuzzy finder
+let g:fuf_previewHeight=0
+
+let g:indexer_disableCtagsWarning=1
+let g:indexer_debugLogLevel=10
+
 filetype on
 filetype plugin on
 set ruler          " Relative cursor position
@@ -365,11 +372,6 @@ set ssop+=localoptions
 "endif
 "" show msg when any other cscope db added
 "set cscopeverbose
-
-" No preview mode in fuzzy finder
-let g:fuf_previewHeight=0
-
-let g:indexer_disableCtagsWarning=1
 
 " The Silver Searcher
 if executable('ag')

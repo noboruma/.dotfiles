@@ -54,8 +54,8 @@ alias shibern="sudo pm-hibernate"
 alias sreboot="sudo reboot"
 
 alias arduino="arduino-asm&"
-alias m='make -j2'
-alias mc='make -j2 check'
+alias m='mw gmake -j4'
+alias mc='mw gmake -j4 check'
 
 alias ll="ls -al"
 alias du="du -h"
@@ -70,3 +70,5 @@ alias gvdev="gvim --servername dev --remote"
 
 alias alert_helper='history|tail -n1|sed -e "s/^\s*[0-9]\+\s*//" -e "s/;\s*alert$//"'
 alias alert='notify-send -i /usr/share/icons/gnome/32x32/apps/gnome-terminal.png "[$?] $(alert_helper)"'
+
+alias p4v="p4v&"
