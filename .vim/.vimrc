@@ -63,14 +63,14 @@ set startofline
 set wildmode=list:full:longest
 set autoindent
 set smartindent
-set cino+=j1,(0,b1             " C file option
+set cino+=j1,(0,b1,t0          " C file option
 set autoread
 set clipboard=unnamed          " ^=
 
 " Prevent RO file editing: use 'set modifiable' manually if needed
 autocmd BufRead * let &modifiable = !&readonly
 
-" xterm-debian is a color terminal 
+" xterm-debian is a color terminal
 if &term =~ "xterm-debian" || &term =~ "xterm-xfree86"
     set t_Co=16
     set t_Sf=[3%dm
@@ -136,6 +136,7 @@ filetype off
 let &runtimepath.=',~/.vim/bundle/ale'
 let g:ale_linters = {
 \   'cpp': ['g++', 'cppcheck', 'clangtidy'],
+\   'rust': ['rustc'],
 \}
 let g:ale_cpp_gcc_options = '$(cat ~/.compiler_options)' "Options can be easily retrieved using 'bear' (github)
 let g:ale_cpp_clangtidy_options = '$(cat ~/.compiler_options)'
@@ -280,10 +281,10 @@ augroup vimrc
 augroup END
 
 " Keep buffers hidden instead of closing it
-set hidden 
+set hidden
 
 " More natural split opening
-set splitbelow 
+set splitbelow
 set splitright
 
 "Timestamp
@@ -327,7 +328,7 @@ if (exists("&undodir"))
 endif
 
 " start up message short
-set shortmess+=I 
+set shortmess+=I
 
 " Colorizer
 let g:colorizer_nomap = 1
@@ -358,13 +359,13 @@ set ssop+=localoptions
 "set csto=0
 "" add any cscope database in current directory
 "if filereadable("cscope.out")
-"    cs add cscope.out  
-"" else add the database pointed to by environment variable 
+"    cs add cscope.out
+"" else add the database pointed to by environment variable
 "elseif $CSCOPE_DB != ""
 "    cs add $CSCOPE_DB
 "endif
 "" show msg when any other cscope db added
-"set cscopeverbose 
+"set cscopeverbose
 
 " No preview mode in fuzzy finder
 let g:fuf_previewHeight=0
@@ -377,3 +378,7 @@ if executable('ag')
   set grepprg=ag\ --vimgrep\ $*
   set grepformat=%f:%l:%c:%m
 endif
+
+" Adapt on save hook
+autocmd BufWritePre <buffer> %s/\s\+$//e
+autocmd BufWritePre <buffer> silent! :Adapt

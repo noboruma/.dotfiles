@@ -53,7 +53,7 @@ nmap <leader>N viao<esc>F,h
 noremap <leader>o <c-w>w
 noremap <leader>p "_dP
 noremap <leader>q :q<cr>
-noremap <leader>r /\<<C-r><C-w>\><cr>:%s//
+noremap <leader>r /\<<C-r><C-w>\><cr>:%s//<C-r><C-w>/g<left><left>
 noremap <leader>s /\<<C-r><C-w>\><cr>``
 noremap <leader>S :SemanticHighlightToggle<cr>
 vnoremap <leader>s "sy/<C-R>"<cr>:%s//<C-R>"/g<left><left>
@@ -205,6 +205,9 @@ fun! CurrWinOrQFError()
       echohl WarningMsg | echon v:exception | echohl None
   endtry
 endfun
+noremap <F1> <esc><c-=>
+inoremap <F1> <esc><c-=>
+
 noremap <F6> :call PrevWinOrQFError()<cr>
 noremap <F7> :call NextWinOrQFError()<cr>
 noremap <F8> :call CurrWinOrQFError()<cr>

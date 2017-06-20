@@ -1,16 +1,13 @@
 " CPP config is shared with C one (c.vim)
-" Adapt on save hook
-autocmd BufWritePre <buffer> %s/\s\+$//e
-autocmd BufWritePre <buffer> silent! :Adapt
 
 if has("gui_running")
   au BufEnter <buffer> if (!exists('b:created')) | :execute "SemanticHighlight" | let b:created=1 | endif
   "Triggered by :doautocmd
-  "au User <buffer> :SemanticHighlight 
+  "au User <buffer> :SemanticHighlight
   au BufWritePost <buffer> :SemanticHighlight
 endif
 
-" Surround 
+" Surround
 let g:surround_{char2nr("t")} = "\1template: \1<\r>"
 
 "Makeprg erroformat
@@ -58,7 +55,7 @@ if !exists("*File_flip")
             let s:flipname = substitute(expand("%:t"),'\.hh','\.cc',"")
             try "buffer opened but not reachable from path
               exe ":buffer ".s:flipname
-            catch 
+            catch
               exe ":find ".s:flipname
             endtry
           endtry
@@ -72,7 +69,7 @@ if !exists("*File_flip")
             catch
                 try
                   exe ":find ".s:flipname
-                catch 
+                catch
                   exe ":find ../../../src/".s:flipname
                 endtry
           endtry
@@ -93,6 +90,3 @@ if !exists("*File_flip")
     endif
   endfun
 endif
-setlocal errorformat^=%-GIn\ file\ included\ from\ %f:%l:%c:,%-GIn\ file
-\\ included\ from\ %f:%l:%c\\,,%-GIn\ file\ included\ from\ %f
-\:%l:%c,%-GIn\ file\ included\ from\ %f:%l

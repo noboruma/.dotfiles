@@ -19,3 +19,6 @@
 [submodule ".vim/bundle/asyncrun"]
 	path = .vim/bundle/asyncrun
 	url = https://github.com/skywind3000/asyncrun.vim
+[submodule ".vim/bundle/rust"]
+	path = .vim/bundle/rust
+	url = https://github.com/rust-lang/rust.vim
