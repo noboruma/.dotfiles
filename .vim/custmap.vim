@@ -2,6 +2,7 @@
 nnoremap Q <nop>
 nnoremap x "_x
 vnoremap x "_d
+nnoremap X "_X
 noremap , :
 noremap! jj <esc>
 noremap! kk <esc>
@@ -43,8 +44,8 @@ noremap <leader>H :0r ~/.vim/.header_template<cr>
 noremap <leader>j :tj <C-r><C-w><cr>
 "noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>
 "noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>
-noremap <leader><tab> <C-I>
 noremap <leader><bs> <C-O>
+noremap <leader><leader><bs> <C-I>
 noremap <leader>l :let g:tagbar_left=IsLeftMostWindow()<cr>:TagbarOpen j<cr>
 noremap <leader>L :TagbarClose<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
@@ -72,8 +73,8 @@ vnoremap <leader>== :Tab /=<cr>gv=
 vnoremap <leader>=<space> :Tab /\s\zs/l1r0<cr>gv=
 vnoremap <leader>=; :Tabularize /\S\+;$/l1<cr>gv=
 
-map <leader>m V<enter><c-e>
-noremap <leader>M :MSClear<cr>
+"map <leader>m V<enter><c-e>
+"noremap <leader>M :MSClear<cr>
 "noremap <C-m> :MSExecCmd 
 
 noremap <leader>\ :ConqueGdb<cr>
