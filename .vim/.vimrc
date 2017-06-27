@@ -23,6 +23,9 @@ if has("gui_running")
     set guioptions+=T  "toolbar
     set guioptions+=r  "scrollbar
   endif
+else
+    "disable indexer
+    let g:loaded_indexer=1
 endif
 
 set scrolloff=0 " Keep no lines after/before the cursor

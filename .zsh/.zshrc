@@ -15,7 +15,7 @@
 # Best layout ever:
 # setxkbmap -layout us -variant intl
 
-###########################################################        
+###########################################################
 # Options for Zsh
 
 export HISTFILE=~/.zsh_history
@@ -28,7 +28,7 @@ bindkey -v
 #kill the lag
 #export KEYTIMEOUT=1
 
-autoload -Uz compinit 
+autoload -Uz compinit
 setopt autopushd pushdminus pushdsilent pushdtohome
 setopt autocd
 setopt cdablevars
@@ -132,7 +132,7 @@ bindkey '^[[6~' down-line-or-history
 bindkey '^[[A' up-line-or-search
 bindkey '^[[D' backward-char
 bindkey '^[[B' down-line-or-search
-bindkey '^[[C' forward-char 
+bindkey '^[[C' forward-char
 # completion in the middle of a line
 bindkey '^i' expand-or-complete-prefix
 bindkey '^r' history-incremental-search-backward
@@ -169,7 +169,7 @@ source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
-bindkey '^[[A' up-line-or-search   
+bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 
 bindkey -M vicmd 'k' history-substring-search-up
@@ -186,3 +186,8 @@ export NPM_PACKAGES="${HOME}/usr/npm-packages"
 export PATH="$NPM_PACKAGES/bin:$PATH"
 
 source /usr/share/autojump/autojump.zsh
+
+# Enable v inside command
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
