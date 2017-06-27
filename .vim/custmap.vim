@@ -41,7 +41,8 @@ noremap <leader>g :botright copen\|AsyncRun -program=grep --cpp "<C-r><C-w>" `pw
 noremap <leader>G :botright copen\|AsyncRun -program=grep "<C-r><C-w>" `pwd`<tab>
 noremap <leader>h :call File_flip()<cr>zz
 noremap <leader>H :0r ~/.vim/.header_template<cr>
-noremap <leader>j :tj <C-r><C-w><cr>
+noremap <leader>j :tj /<C-r><C-w><C-b><right><right><right><right>
+noremap <leader>J :tj <C-r><C-w><cr>
 "noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>
 "noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>
 noremap <leader><bs> <C-O>
@@ -55,7 +56,7 @@ noremap <leader>o <c-w>w
 noremap <leader>p "_dP
 noremap <leader>q :q<cr>
 noremap <leader>r /\<<C-r><C-w>\><cr>:%s//<C-r><C-w>/g<left><left>
-noremap <leader>s /\<<C-r><C-w>\><cr>``
+noremap <leader>s /\<<C-r><C-w>\><cr>``zz
 noremap <leader>S :SemanticHighlightToggle<cr>
 vnoremap <leader>s "sy/<C-R>"<cr>:%s//<C-R>"/g<left><left>
 noremap <leader>t :vsp<cr>
@@ -219,3 +220,7 @@ function! ToggleSpell()
 endfunction
 noremap <F10> :call ToggleSpell()<cr>
 inoremap <F10> <Esc>:call ToggleSpell()<cr>
+
+
+noremap <F1>  :!p4 edit %<cr>
+noremap <F2>  :set modifiable<cr>
