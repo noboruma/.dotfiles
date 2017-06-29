@@ -24,8 +24,8 @@ if has("gui_running")
     set guioptions+=r  "scrollbar
   endif
 else
-    "disable indexer
-    let g:loaded_indexer=1
+  "disable indexer
+  let g:loaded_indexer=1
 endif
 
 set scrolloff=0 " Keep no lines after/before the cursor
@@ -198,6 +198,7 @@ let g:tagbar_sort = 0
 
 " AsyncRun
 let &runtimepath.=',~/.vim/bundle/asyncrun'
+let g:asyncrun_bell=1
 " !AsyncRun
 
 
@@ -241,7 +242,7 @@ augroup vimrc
   "autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
   " The pre is to counter the copen from leaders aliases
   autocmd User AsyncRunStart setl nomodifiable | setl foldlevel=99 | wincmd k
-  autocmd User AsyncRunStop botright copen | setl foldlevel=0
+  "autocmd User AsyncRunStop botright copen | setl foldlevel=0
 augroup END
 
 " Handle space and tabs
