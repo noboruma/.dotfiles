@@ -23,6 +23,9 @@ if has("gui_running")
     set guioptions+=T  "toolbar
     set guioptions+=r  "scrollbar
   endif
+else
+  "disable indexer
+  let g:loaded_indexer=1
 endif
 set scrolloff=0 " Usually smaller screen on terminal
 
@@ -196,7 +199,15 @@ let g:tagbar_sort = 0
 
 " AsyncRun
 let &runtimepath.=',~/.vim/bundle/asyncrun'
+let g:asyncrun_bell=1
 " !AsyncRun
+
+
+" No preview mode in fuzzy finder
+let g:fuf_previewHeight=0
+
+let g:indexer_disableCtagsWarning=1
+let g:indexer_debugLogLevel=10
 
 filetype on
 filetype plugin on
@@ -231,8 +242,8 @@ augroup vimrc
   "autocmd QuickFixCmdPost    l* nested botright lwindow
   "autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
   " The pre is to counter the copen from leaders aliases
-  "autocmd User AsyncRunStart setl foldlevel=99 | wincmd k
-  autocmd User AsyncRunStop botright copen "| setl foldlevel=0
+  autocmd User AsyncRunStart setl nomodifiable | setl foldlevel=99 | wincmd k
+  "autocmd User AsyncRunStop botright copen | setl foldlevel=0
 augroup END
 
 " Handle space and tabs
@@ -366,11 +377,6 @@ set ssop+=localoptions
 "endif
 "" show msg when any other cscope db added
 "set cscopeverbose
-
-" No preview mode in fuzzy finder
-let g:fuf_previewHeight=0
-
-let g:indexer_disableCtagsWarning=1
 
 " The Silver Searcher
 if executable('ag')
