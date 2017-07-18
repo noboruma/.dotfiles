@@ -51,6 +51,7 @@ noremap <leader><leader><bs> <C-I>
 noremap <leader>l :let g:tagbar_left=IsLeftMostWindow()<cr>:TagbarOpen j<cr>
 noremap <leader>L :TagbarClose<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
+noremap <leader>m <esc>:SlimeSend1 cppman <C-r><C-w>
 nmap <leader>n via<esc>f,l
 nmap <leader>N viao<esc>F,h
 noremap <leader>o <c-w>w
