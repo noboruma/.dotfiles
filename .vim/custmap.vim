@@ -77,7 +77,7 @@ vnoremap <leader>=; :Tabularize /\S\+;$/l1<cr>gv=
 
 "map <leader>m V<enter><c-e>
 "noremap <leader>M :MSClear<cr>
-"noremap <C-m> :MSExecCmd 
+"noremap <C-m> :MSExecCmd
 
 noremap <leader>\ :ConqueGdb<cr>
 noremap <leader>/ :nohlsearch<cr>
@@ -165,7 +165,7 @@ fun! NextWinOrQFError()
             " found a preview
             :ptn
             return 0
-        endif  
+        endif
     endfor
     :ln
     return 0
@@ -225,6 +225,7 @@ endfunction
 noremap <F10> :call ToggleSpell()<cr>
 inoremap <F10> <Esc>:call ToggleSpell()<cr>
 
+noremap <F11> <esc>:up<cr>:!!<cr>
 
 noremap <F1>  :!p4 edit %<cr>
 noremap <F2>  :set modifiable<cr>
