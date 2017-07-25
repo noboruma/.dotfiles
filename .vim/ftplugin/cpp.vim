@@ -91,4 +91,10 @@ if !exists("*File_flip")
   endfun
 endif
 
-set errorformat-=%f:%l:%m
+inoremap <expr> < "<>\<Left>"
+inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
+
+imap <expr> {<cr> "{<cr>}<esc>O"
+inoremap [<cr> [<cr>]<c-o>O<tab>
+inoremap (<cr> (<cr>)<c-o>O<tab>
+inoremap <<cr> <<cr>><c-o>O<tab>
