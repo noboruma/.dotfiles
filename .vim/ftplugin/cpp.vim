@@ -90,3 +90,11 @@ if !exists("*File_flip")
     endif
   endfun
 endif
+
+inoremap <expr> < "<>\<Left>"
+inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
+
+imap <expr> {<cr> "{<cr>}<esc>O"
+inoremap [<cr> [<cr>]<c-o>O<tab>
+inoremap (<cr> (<cr>)<c-o>O<tab>
+inoremap <<cr> <<cr>><c-o>O<tab>
