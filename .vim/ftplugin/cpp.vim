@@ -3,12 +3,20 @@
 if has("gui_running")
   au BufEnter <buffer> if (!exists('b:created')) | :execute "SemanticHighlight" | let b:created=1 | endif
   "Triggered by :doautocmd
-  "au User <buffer> :SemanticHighlight 
+  "au User <buffer> :SemanticHighlight
   au BufWritePost <buffer> :SemanticHighlight
 endif
 
-" Surround 
+" Surround
 let g:surround_{char2nr("t")} = "\1template: \1<\r>"
+
+inoremap <expr> < "<>\<Left>"
+inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
+
+imap <expr> {<cr> "{<cr>}<esc>O"
+inoremap [<cr> [<cr>]<c-o>O<tab>
+inoremap (<cr> (<cr>)<c-o>O<tab>
+inoremap <<cr> <<cr>><c-o>O<tab>
 
 "Makeprg erroformat
 compiler gcc
@@ -39,9 +47,9 @@ setlocal foldlevel=0
 setlocal foldlevelstart=0
 
 " Stop parsing include files
-set complete-=i
+setlocal complete-=i
 " stop use ctags, only used for jump
-set complete-=t
+setlocal complete-=t
 
 if !exists("*File_flip")
   function! File_flip()
@@ -55,7 +63,7 @@ if !exists("*File_flip")
             let s:flipname = substitute(expand("%:t"),'\.hh','\.cc',"")
             try "buffer opened but not reachable from path
               exe ":buffer ".s:flipname
-            catch 
+            catch
               exe ":find ".s:flipname
             endtry
           endtry
@@ -69,7 +77,7 @@ if !exists("*File_flip")
             catch
                 try
                   exe ":find ".s:flipname
-                catch 
+                catch
                   exe ":find ../../../src/".s:flipname
                 endtry
           endtry
@@ -91,10 +99,60 @@ if !exists("*File_flip")
   endfun
 endif
 
-inoremap <expr> < "<>\<Left>"
-inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
+function! GoogleCppIndent()
+    let l:cline_num = line('.')
 
-imap <expr> {<cr> "{<cr>}<esc>O"
-inoremap [<cr> [<cr>]<c-o>O<tab>
-inoremap (<cr> (<cr>)<c-o>O<tab>
-inoremap <<cr> <<cr>><c-o>O<tab>
+    let l:orig_indent = cindent(l:cline_num)
+
+    if l:orig_indent == 0 | return 0 | endif
+
+    let l:pline_num = prevnonblank(l:cline_num - 1)
+    let l:pline = getline(l:pline_num)
+    if l:pline =~# '^\s*template' | return l:pline_indent | endif
+
+    " TODO: I don't know to correct it:
+    " namespace test {
+    " void
+    " ....<-- invalid cindent pos
+    "
+    " void test() {
+    " }
+    "
+    " void
+    " <-- cindent pos
+    if l:orig_indent != &shiftwidth | return l:orig_indent | endif
+
+    let l:in_comment = 0
+    let l:pline_num = prevnonblank(l:cline_num - 1)
+    while l:pline_num > -1
+        let l:pline = getline(l:pline_num)
+        let l:pline_indent = indent(l:pline_num)
+
+        if l:in_comment == 0 && l:pline =~ '^.\{-}\(/\*.\{-}\)\@<!\*/'
+            let l:in_comment = 1
+        elseif l:in_comment == 1
+            if l:pline =~ '/\*\(.\{-}\*/\)\@!'
+                let l:in_comment = 0
+            endif
+        elseif l:pline_indent == 0
+            if l:pline !~# '\(#define\)\|\(^\s*//\)\|\(^\s*{\)'
+                if l:pline =~# '^\s*namespace.*'
+                    return 0
+                else
+                    return l:orig_indent
+                endif
+            elseif l:pline =~# '\\$'
+                return l:orig_indent
+            endif
+        else
+            return l:orig_indent
+        endif
+
+        let l:pline_num = prevnonblank(l:pline_num - 1)
+    endwhile
+
+    return l:orig_indent
+endfunction
+setlocal cinoptions=h0,l0,g0,t0,i0,+0,(0,w0,W0
+setlocal indentexpr=GoogleCppIndent()
+

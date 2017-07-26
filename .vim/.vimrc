@@ -27,6 +27,7 @@ else
   "disable indexer
   let g:loaded_indexer=1
 endif
+set scrolloff=0 " Usually smaller screen on terminal
 
 set scrolloff=0 " Keep no lines after/before the cursor
 
@@ -65,7 +66,7 @@ set startofline
 set wildmode=list:full:longest
 set autoindent
 set smartindent
-set cino+=j1,(0,b1,t0,g1,h2    " C file option
+set cino+=j1,(0,b1,t0,i0       " C file option
 set autoread
 set clipboard=unnamed          " ^=
 
@@ -222,7 +223,7 @@ set dictionary+=/usr/share/dict/words
 "let g:languagetool_jar='$HOME/usr/bin/languagetool-commandline.jar'
 
 " Make options
-let &makeprg='mw gmake'
+let &makeprg='make'
 "
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>
