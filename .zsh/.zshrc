@@ -23,8 +23,13 @@ export HISTSIZE=50000
 export SAVEHIST=50000
 eval `dircolors -b`
 
-set -o vi
-bindkey -v
+#set -o vi
+#bindkey -v
+#bindkey -M vicmd 'u' undo
+#bindkey -M vicmd '^r' redo
+autoload -Uz copy-earlier-word
+zle -N copy-earlier-word
+bindkey "^[m" copy-earlier-word
 #kill the lag
 #export KEYTIMEOUT=1
 
