@@ -121,6 +121,10 @@ function! CppNoNamespaceAndTemplateIndent()
         let l:retv = l:pindent - strlen('template<')
     elseif l:pline =~# '^\s*namespace.*'
         let l:retv = 0
+    elseif l:pline =~# '^\s*:\s*.*)\s*$'
+        let l:retv = l:pindent
+    elseif l:cline =~# '^\s*,\s*.*)\s*$'
+        let l:retv = l:pindent
     endif
     return l:retv
 endfunction
