@@ -104,23 +104,59 @@ function! CppNoNamespaceAndTemplateIndent()
     let l:cline = getline(l:cline_num)
     let l:pline_num = prevnonblank(l:cline_num - 1)
     let l:pline = getline(l:pline_num)
-    while l:pline =~# '\(^\s*{\s*\|^\s*//\|^\s*/\*\|\*/\s*$\)'
+    while l:pline =~# '\(^\s*//\|^\s*/\*\|\*/\s*$\)'
         let l:pline_num = prevnonblank(l:pline_num - 1)
         let l:pline = getline(l:pline_num)
     endwhile
     let l:retv = cindent('.')
     let l:pindent = indent(l:pline_num)
-    if l:pline =~# '^\s*.*\s*<\s*.*\s*,\s*.*\s*$'
-        let l:match = matchstr(l:pline,'^\s*\(.*\)\s*<')
-        let l:retv = strlen(l:match)
-    elseif l:pline =~# '^\s*template\s*<\s*.*\s*$'
-        let l:retv = l:pindent + strlen('template<') "template length, not stricly correct as we avoid extra spaces
-    elseif l:cline =~# '^\s*>\s*$'
-        let l:retv = l:pindent - strlen('template<')
-    elseif l:pline =~# '\s*typename\s*.*>\s*$'
-        let l:retv = l:pindent - strlen('template<')
-    elseif l:pline =~# '^\s*namespace.*'
-        let l:retv = 0
+    if l:pline =~# '^\s*.*\s*(\s*.*\s*,\s*$'
+        let l:left= strlen(substitute(l:pline, "[^(]", "","g"))
+        let l:right = strlen(substitute(l:pline, "[^)]", "","g"))
+        if l:left > l:right
+            let l:match = matchstr(l:pline,'^\s*\(.*\)\s*(')
+            let l:retv = strlen(l:match)
+        else
+            let l:retv = l:pindent
+        endif
+    elseif l:pline =~# '^\s*.*\s*<\s*.*\s*,\s*$'
+        let l:left= strlen(substitute(l:pline, "[^<]", "","g"))
+        let l:right = strlen(substitute(l:pline, "[^>]", "","g"))
+        if l:left > l:right
+            let l:match = matchstr(l:pline,'^\s*\(.*\)\s*<')
+            let l:retv = strlen(l:match)
+        else
+            let l:retv = l:pindent
+        endif
+    elseif l:pline =~# '^\s*.*\s*>\s*\(,\|\)\s*$'
+        "Ok let search for the indent before the template
+        let l:left= strlen(substitute(l:pline, "[^<]", "","g"))
+        let l:right = strlen(substitute(l:pline, "[^>]", "","g"))
+        if l:left == l:right
+            let l:retv = l:pindent
+        else
+            let l:pline_num = prevnonblank(l:pline_num - 1)
+            let l:pline = getline(l:pline_num)
+            let l:ppindent = indent(l:pline_num)
+            if l:pindent == 0
+                let l:retv = l:pindent
+            else
+                while (l:pindent <= l:ppindent)
+                    let l:pline_num = prevnonblank(l:pline_num - 1)
+                    let l:pline = getline(l:pline_num)
+                    let l:ppindent = indent(l:pline_num)
+                endwhile
+                let l:retv = l:ppindent
+            endif
+        endif
+    elseif l:pline =~# '^\s*.*\s*,\s*$'
+        let l:retv = l:pindent
+    elseif l:pline =~# '^\s*.*\s*namespace\s*.*\s*$'
+        let l:retv = l:pindent
+    elseif l:pline =~# '^\s*.*\s*\{\s*.*\s*$'
+        let l:retv = l:pindent
+    elseif l:pline =~# '^\s*.*\s*\{\s*$'
+        let l:retv = l:pindent + &shiftwidth
     elseif l:pline =~# '^\s*:\s*.*)\s*$'
         let l:retv = l:pindent
     elseif l:cline =~# '^\s*,\s*.*)\s*$'

@@ -196,3 +196,5 @@ source /usr/share/autojump/autojump.zsh
 autoload edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
+
+xkbset nullify lock
