@@ -135,6 +135,9 @@ filetype off
 "let g:syntastic_debug = 0
 "!Syntastic
 
+" ctrlp
+let &runtimepath.=',~/.vim/bundle/ctrlp.vim'
+
 " Ale
 let &runtimepath.=',~/.vim/bundle/ale'
 let g:ale_linters = {

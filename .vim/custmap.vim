@@ -20,7 +20,8 @@ endfunction
 
 noremap <leader>a :set scb<cr>
 noremap <leader>A :set scb!<cr>
-noremap <leader>b :FufBuffer<cr>
+"noremap <leader>b :FufBuffer<cr>
+noremap <leader>b :CtrlPBuffer<cr>
 noremap <leader>c :ccl\|lcl\|pcl<cr>
 "noremap <leader>c <esc>:cscope c <C-r><C-w>
 noremap <leader>C lc^
