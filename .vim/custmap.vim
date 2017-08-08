@@ -229,4 +229,4 @@ inoremap <F10> <Esc>:call ToggleSpell()<cr>
 noremap <F11> <esc>:up<cr>:!!<cr>
 
 noremap <F1>  :!p4 edit %<cr>
-noremap <F2>  :set modifiable<cr>
+noremap <F2>  :set modifiable<cr>:set noro<cr>
