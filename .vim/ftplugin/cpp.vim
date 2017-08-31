@@ -110,70 +110,13 @@ function! CppNoNamespaceAndTemplateIndent()
     endwhile
     let l:retv = cindent('.')
     let l:pindent = indent(l:pline_num)
-    if l:pline =~# '^\s*.*\s*(\s*.*\s*,\s*$'
-        let l:left= strlen(substitute(l:pline, "[^(]", "","g"))
-        let l:right = strlen(substitute(l:pline, "[^)]", "","g"))
-        if l:left > l:right
-            let l:matchpos = matchend(l:pline,'(', 0, l:left-l:right)
-            let l:retv = l:matchpos
-        elseif l:left < l:right
-            let l:pline_num = prevnonblank(l:pline_num - 1)
-            let l:pline = getline(l:pline_num)
-            let l:ppindent = indent(l:pline_num)
-            if l:pindent == 0
-                let l:retv = l:pindent
-            else
-                while (l:pindent <= l:ppindent)
-                    let l:pline_num = prevnonblank(l:pline_num - 1)
-                    let l:pline = getline(l:pline_num)
-                    let l:ppindent = indent(l:pline_num)
-                endwhile
-                let l:retv = matchend(l:pline,'(', 0, 0)
-            endif
-        else
-            let l:retv = l:pindent
-        endif
-    elseif l:cline =~# '^\s*.*\s*)\s*\(;\|\)\s*$'
-        " For ) alone (lisp style)
-        "Ok let search for the indent before the template
-        let l:left= strlen(substitute(l:pline, "[^(]", "","g"))
-        let l:right = strlen(substitute(l:pline, "[^)]", "","g"))
-        let l:right += 1
-        if l:left == l:right
-            let l:retv = l:pindent
-        else
-            while (l:left < l:right)
-                let l:pline_num = prevnonblank(l:pline_num - 1)
-                let l:pline = getline(l:pline_num)
-                let l:left  += strlen(substitute(l:pline, "[^(]", "","g"))
-                let l:right += strlen(substitute(l:pline, "[^)]", "","g"))
-            endwhile
-            let l:matchpos = matchend(l:pline,'(', 0, l:left-l:right)
-            let l:retv = l:matchpos - 1
-        endif
-        echom l:retv
-    elseif l:pline =~# '^\s*.*\s*)\s*\(,\|\)\s*$'
-        "Ok let search for the indent before the template
-        let l:left= strlen(substitute(l:pline, "[^(]", "","g"))
-        let l:right = strlen(substitute(l:pline, "[^)]", "","g"))
-        if l:left == l:right
-            let l:retv = l:pindent
-        else
-            while (l:left < l:right)
-                let l:pline_num = prevnonblank(l:pline_num - 1)
-                let l:pline = getline(l:pline_num)
-                let l:left  += strlen(substitute(l:pline, "[^(]", "","g"))
-                let l:right += strlen(substitute(l:pline, "[^)]", "","g"))
-            endwhile
-            let l:matchpos = matchend(l:pline,'(', 0, l:left-l:right)
-            let l:retv = l:matchpos
-        endif
-    elseif l:pline =~# '^\s*.*\s*<\s*.*\s*,\s*$'
+    if l:pline =~# '^\s*.*\s*<\s*.*\s*,\s*$'
+        echom 'first'
         let l:left= strlen(substitute(l:pline, "[^<]", "","g"))
         let l:right = strlen(substitute(l:pline, "[^>]", "","g"))
         if l:left > l:right
-            let l:match = matchstr(l:pline,'^\s*\(.*\)\s*<')
-            let l:retv = strlen(l:match)
+            let l:match = matchstrpos(l:pline,'<')
+            let l:retv = l:match[2]
         else
             let l:retv = l:pindent
         endif
@@ -198,18 +141,6 @@ function! CppNoNamespaceAndTemplateIndent()
                 let l:retv = l:ppindent
             endif
         endif
-    elseif l:pline =~# '^\s*.*\s*,\s*$'
-        let l:retv = l:pindent
-    elseif l:pline =~# '^\s*.*\s*namespace\s*.*\s*$'
-        let l:retv = l:pindent
-    elseif l:pline =~# '^\s*.*\s*\{\s*.*\s*$'
-        let l:retv = l:pindent
-    elseif l:pline =~# '^\s*.*\s*\{\s*$'
-        let l:retv = l:pindent + &shiftwidth
-    elseif l:pline =~# '^\s*:\s*.*)\s*$'
-        let l:retv = l:pindent
-    elseif l:cline =~# '^\s*,\s*.*)\s*$'
-        let l:retv = l:pindent
     endif
     return l:retv
 endfunction
