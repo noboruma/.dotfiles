@@ -66,7 +66,7 @@ set startofline
 set wildmode=list:full:longest
 set autoindent
 set smartindent
-set cino+=j1,(0,b1,+0,t0      " C file option
+set cino+=j1,(0,b1,+0,t0,<0      " C file option
 set autoread
 set clipboard=unnamed          " ^=
 
@@ -137,11 +137,14 @@ filetype off
 
 " ctrlp
 let &runtimepath.=',~/.vim/bundle/ctrlp.vim'
+let g:ctrlp_by_filename = 1
+"let g:ctrlp_working_path_mode = 'c'
+let g:ctrlp_working_path_mode = 0
 
 " Ale
 let &runtimepath.=',~/.vim/bundle/ale'
 let g:ale_linters = {
-\   'cpp': ['g++', 'cppcheck', 'clangtidy'],
+\   'cpp': ['g++', 'cppcheck', 'clangtidy', 'clangcheck', 'clang'],
 \   'rust': ['rustc'],
 \}
 let g:ale_cpp_gcc_options = '$(cat ~/.compiler_options)' "Options can be easily retrieved using 'bear' (github)
@@ -205,12 +208,8 @@ let &runtimepath.=',~/.vim/bundle/asyncrun'
 let g:asyncrun_bell=1
 " !AsyncRun
 
-
-" No preview mode in fuzzy finder
-let g:fuf_previewHeight=0
-
 let g:indexer_disableCtagsWarning=1
-let g:indexer_debugLogLevel=10
+let g:indexer_debugLogLevel=0
 
 filetype on
 filetype plugin on
@@ -226,7 +225,7 @@ set dictionary+=/usr/share/dict/words
 "let g:languagetool_jar='$HOME/usr/bin/languagetool-commandline.jar'
 
 " Make options
-let &makeprg='make'
+let &makeprg='mw gmake'
 "
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>
@@ -270,7 +269,7 @@ autocmd FileType netrw setl bufhidden=delete
 " Ced: for auto-completion popup menu
 highlight Pmenu    guifg=black  guibg=grey
 highlight PmenuSel guifg=grey guibg=black gui=bold
-"Thomas: let's change it for term as well
+" Thomas: let's change it for term as well
 highlight Pmenu    ctermbg=grey gui=bold
 highlight PmenuSel ctermbg=cyan gui=bold
 

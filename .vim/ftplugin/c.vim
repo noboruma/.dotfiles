@@ -74,6 +74,3 @@ function! File_flip()
   endif
 endfun
 endif
-"set errorformat^=%-GIn\ file\ included\ from\ %f:%l:%c:,%-GIn\ file
-\\ included\ from\ %f:%l:%c\\,,%-GIn\ file\ included\ from\ %f
-\:%l:%c,%-GIn\ file\ included\ from\ %f:%l

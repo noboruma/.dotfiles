@@ -4,7 +4,7 @@ snippet inc
 # Read File Into Vector
 snippet readfile
 	std::vector<char> v;
-	if (FILE *${2:fp} = fopen(${1:"filename"}, "r")) 
+	if (FILE *${2:fp} = fopen(${1:"filename"}, "r"))
 	{
 		char buf[1024];
 		while (size_t len = fread(buf, 1, sizeof(buf), $2))
@@ -32,7 +32,7 @@ snippet ns
 
 # Class
 snippet class
-	class ${1:`Filename('$1', 'name')`} 
+	class ${1:`Filename('$1', 'name')`}
 	{
 		public:
 		    $1 (${2:arguments});
@@ -74,4 +74,10 @@ snippet cout
 
 # auto const &
 snippet ac
-	auto const &${1};
+	auto const &${1}
+
+snippet str
+	std::string ${1}
+
+snippet strc
+	std::string const &${1}

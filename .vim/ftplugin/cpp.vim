@@ -10,7 +10,7 @@ endif
 " Surround
 let g:surround_{char2nr("t")} = "\1template: \1<\r>"
 
-inoremap <expr> < "<>\<Left>"
+"inoremap <expr> < "<>\<Left>"
 inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
 
 imap <expr> {<cr> "{<cr>}<esc>O"
@@ -146,4 +146,6 @@ function! CppNoNamespaceAndTemplateIndent()
 endfunction
 
 setlocal indentexpr=CppNoNamespaceAndTemplateIndent()
-
+set efm=%f:%l:%c:%m
+set efm+=%Dgmake[%*\\d]:\ Entering\ directory\ '%f'
+set efm+=%Xgmake[%*\\d]:\ Leaving\ directory\ '%f'
