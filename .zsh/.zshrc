@@ -36,7 +36,7 @@ bindkey "^[m" copy-earlier-word
 autoload -Uz compinit
 setopt autopushd pushdminus pushdsilent pushdtohome
 setopt autocd
-setopt cdablevars
+#setopt cdablevars
 #setopt ignoreeof
 setopt interactivecomments
 #setopt nobanghist
@@ -63,7 +63,7 @@ local CGREEN='%{\e[1;32m%}'
 
 # PS1 and PS2
 export PS1="$(print $CBROWN'(%D{%L:%M:%S %p})\n'\
-$CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR']'$MCOLOR%~%b'\n'\
+$CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR']'$MCOLOR%d%b'\n'\
 $CREDOR'$ '%f%b)"
 export PS2="$(print '%{\e[0;34m%}>'$NOCOLOR)"
 
