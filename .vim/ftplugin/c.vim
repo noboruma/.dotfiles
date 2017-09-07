@@ -74,3 +74,11 @@ function! File_flip()
   endif
 endfun
 endif
+
+set efm=%f:%l:%c:\ %m
+set efm+=%f:%l:%c:%m
+set efm+=%Dgmake:\ Entering\ directory\ '%f'
+set efm+=%Xgmake:\ Leaving\ directory\ '%f'
+"set efm+=%Dgmake[%*\\d]:\ Entering\ directory\ '%f'
+"set efm+=%Xgmake[%*\\d]:\ Leaving\ directory\ '%f'
+set grepformat=%f:%l:%c:%m

@@ -19,7 +19,8 @@ inoremap (<cr> (<cr>)<c-o>O<tab>
 inoremap <<cr> <<cr>><c-o>O<tab>
 
 "Makeprg erroformat
-compiler gcc
+"compiler gcc
+"! see c.vim for efm
 
 let g:CFolderindent=0
 let g:CFolderClosed=1
@@ -146,6 +147,3 @@ function! CppNoNamespaceAndTemplateIndent()
 endfunction
 
 setlocal indentexpr=CppNoNamespaceAndTemplateIndent()
-set efm=%f:%l:%c:%m
-set efm+=%Dgmake[%*\\d]:\ Entering\ directory\ '%f'
-set efm+=%Xgmake[%*\\d]:\ Leaving\ directory\ '%f'
