@@ -140,6 +140,20 @@ let &runtimepath.=',~/.vim/bundle/ctrlp.vim'
 let g:ctrlp_by_filename = 1
 "let g:ctrlp_working_path_mode = 'c'
 let g:ctrlp_working_path_mode = 0
+let g:ctrlp_max_files = 0
+let g:ctrlp_match_window = 'max:50,results:100' " overcome limit imposed by max height
+let g:ctrlp_buffer_func = { 'enter': 'CtrlPMappings' }
+
+function! CtrlPMappings()
+  nnoremap <buffer> <silent> <C-@> :call <sid>DeleteBuffer()<cr>
+endfunction
+
+function! s:DeleteBuffer()
+  let path = fnamemodify(getline('.')[2:], ':p')
+  let bufn = matchstr(path, '\v\d+\ze\*No Name')
+  exec "bd" bufn ==# "" ? path : bufn
+  exec "norm \<F5>"
+endfunction
 
 " Ale
 let &runtimepath.=',~/.vim/bundle/ale'
