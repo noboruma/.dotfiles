@@ -222,6 +222,10 @@ let &runtimepath.=',~/.vim/bundle/asyncrun'
 let g:asyncrun_bell=1
 " !AsyncRun
 
+" Restful-console
+let &runtimepath.=',~/.vim/bundle/vim-rest-console'
+"! Restful-console
+
 let g:indexer_disableCtagsWarning=1
 let g:indexer_debugLogLevel=0
 
