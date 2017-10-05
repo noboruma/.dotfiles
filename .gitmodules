@@ -22,9 +22,9 @@
 [submodule ".vim/bundle/rust"]
 	path = .vim/bundle/rust
 	url = https://github.com/rust-lang/rust.vim
-[submodule ".vim/.vim/bundle/ctrlp.vim"]
-	path = .vim/.vim/bundle/ctrlp.vim
-	url = https://github.com/kien/ctrlp.vim
 [submodule ".vim/bundle/vim-rest-console"]
 	path = .vim/bundle/vim-rest-console
 	url = https://github.com/diepm/vim-rest-console
+[submodule ".vim/bundle/unite.vim"]
+	path = .vim/bundle/unite.vim
+	url = https://github.com/Shougo/unite.vim
