@@ -135,15 +135,6 @@ filetype off
 "let g:syntastic_debug = 0
 "!Syntastic
 
-" ctrlp
-let &runtimepath.=',~/.vim/bundle/ctrlp.vim'
-let g:ctrlp_by_filename = 1
-"let g:ctrlp_working_path_mode = 'c'
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_max_files = 0
-let g:ctrlp_match_window = 'max:50,results:100' " overcome limit imposed by max height
-let g:ctrlp_buffer_func = { 'enter': 'CtrlPMappings' }
-
 function! CtrlPMappings()
   nnoremap <buffer> <silent> <C-@> :call <sid>DeleteBuffer()<cr>
 endfunction
@@ -221,6 +212,19 @@ let g:tagbar_sort = 0
 let &runtimepath.=',~/.vim/bundle/asyncrun'
 let g:asyncrun_bell=1
 " !AsyncRun
+
+" Restful-console
+let &runtimepath.=',~/.vim/bundle/vim-rest-console'
+"! Restful-console
+
+" Unite.vim
+let &runtimepath.=',~/.vim/bundle/unite.vim'
+call unite#custom#profile('default', 'context', {
+	\   'start_insert': 1,
+	\   'winheight': 10,
+	\   'direction': 'botright',
+\ })
+"! Unite.vim
 
 let g:indexer_disableCtagsWarning=1
 let g:indexer_debugLogLevel=0
