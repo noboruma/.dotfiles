@@ -121,6 +121,10 @@ zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*' menu select
 setopt menu_complete
 
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
 ##################################################################
 # Key bindings
 # http://mundy.yazzy.org/unix/zsh.php

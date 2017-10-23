@@ -181,6 +181,8 @@ let g:airline_detect_whitespace=0
       \ '' : '',
       \ }
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#ale#enabled = 1
 "!Airline
 "Rainbow plugin
 let &runtimepath.=',~/.vim/bundle/rainbow'
@@ -377,6 +379,12 @@ let g:syntastic_tex_checkers = ['chktex']
 
 let g:ConqueGdb_Leader = '\'
 let g:ConqueTerm_CloseOnEnd = 1
+" vim --cmd 'let debug=1'
+if exists('debug')
+let g:ConqueGdb_Disable = 0
+else
+let g:ConqueGdb_Disable = 1
+endif
 
 set modeline
 

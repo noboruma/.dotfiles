@@ -15,7 +15,7 @@
 "        во-первых, нужно выдавать error, если ctags вообще не установлен.
 "
 "        во-вторых, х3, нужно выдавать варнинг, если ctags не пропатчен.
-"           чтобы не надоедать юзеру, если он все равно не хочет патчить, 
+"           чтобы не надоедать юзеру, если он все равно не хочет патчить,
 "           нужно сделать возможность убрать этот варнинг.
 "           Пока что только приходит в голову сделать специальную опцию
 "           для заглушивания этого варнинга.
@@ -81,7 +81,10 @@
 "     ["versionFirstLine"] - output for ctags --version, but first line only.
 "
 "
-"  
+"
+if exists("g:loaded_indexer")
+    finish
+end
 
 if v:version < 700
    call confirm("indexer error: You need Vim 7.0 or higher")
@@ -141,9 +144,9 @@ catch
 endtry
 
 let s:sVimprjCompatibility = <SID>CheckCompatibility(
-         \     "Indexer", 
-         \     "Vimprj", 
-         \     "g:vimprj#version", 
+         \     "Indexer",
+         \     "Vimprj",
+         \     "g:vimprj#version",
          \     s:iVimprj_min_version
          \  )
 
@@ -163,9 +166,9 @@ catch
 endtry
 
 let s:sDfrankUtilCompatibility = <SID>CheckCompatibility(
-         \     "Indexer", 
-         \     "DfrankUtil", 
-         \     "g:dfrank#util#version", 
+         \     "Indexer",
+         \     "DfrankUtil",
+         \     "g:dfrank#util#version",
          \     s:iDfrankUtil_min_version
          \  )
 
@@ -240,7 +243,7 @@ function! g:vimprj#dHooks['NeedSkipBuffer']['indexer'](dParams)
       "if exists("a:dParams['dVimprjRootParams']")
          "let sTmp = a:dParams['dVimprjRootParams'].projectsSettingsFilename
       "endif
-      
+
       "if l:sFilename == lTmp
          "return 1
       "endif
@@ -366,21 +369,21 @@ function! g:vimprj#dHooks['OnFileOpen']['indexer'](dParams)
       " ( опция g:indexer_projectName )
       " то
       " надо выяснить, какие проекты включать в список проиндексированных.
-      " тут два варианта: 
+      " тут два варианта:
       " 1) мы включаем проект, если открытый файл находится в
       "    любой его поддиректории
-      " 2) мы включаем проект, если открытый файл прямо указан 
+      " 2) мы включаем проект, если открытый файл прямо указан
       "    в списке файлов проекта
-      "    
+      "
       " есть опция: g:indexer_enableWhenProjectDirFound, она прямо указывает,
       "             нужно ли включать любой файл из поддиректории, или нет.
       "             Но еще есть опция g:indexer_ctagsDontSpecifyFilesIfPossible, и если
-      "             она установлена, то плагин вообще не знает ничего про 
+      "             она установлена, то плагин вообще не знает ничего про
       "             конкретные файлы, поэтому мы должны себя вести также, как
       "             если установлена первая опция.
       "
       " Еще один момент: если включаем проект только если открыт файл именно
-      "                  из этого проекта, то просто сравниваем имя файла 
+      "                  из этого проекта, то просто сравниваем имя файла
       "                  со списком файлов из проекта.
       "
       "                  А вот если включаем проект, если открыт файл из
@@ -390,7 +393,7 @@ function! g:vimprj#dHooks['OnFileOpen']['indexer'](dParams)
       "                  проекта, но не перечислена явно в файле проекта.
       "
       "                  In Indexer 4.11 this algorithm was optimized:
-      "                  just paths beginning are compared, without 
+      "                  just paths beginning are compared, without
       "                  going up by tree.
       "
       "
@@ -410,7 +413,7 @@ function! g:vimprj#dHooks['OnFileOpen']['indexer'](dParams)
 
                for l:sCurPath in l:dCurProject.pathsRoot
                   if dfrank#util#IsFileInSubdirSimple(l:sFilename, l:sCurPath)
-                     " user just opened file from subdir of project l:sCurProjName. 
+                     " user just opened file from subdir of project l:sCurProjName.
                      " We should add it to result lists
 
                      "if l:iProjectsAddedCnt == 0
@@ -529,7 +532,7 @@ function! g:vimprj#dHooks['OnFileOpen']['indexer'](dParams)
 
 
 
-         " COMMENTED: because i don't remember why did i disallow to index 
+         " COMMENTED: because i don't remember why did i disallow to index
          " several projects for one file.
          if 0
             if (l:iProjectsAddedCnt > 1)
@@ -552,10 +555,10 @@ function! g:vimprj#dHooks['OnFileOpen']['indexer'](dParams)
             endif
          endfor
 
-      endif 
+      endif
 
 
-      " теперь запускаем ctags для каждого непроиндексированного проекта, 
+      " теперь запускаем ctags для каждого непроиндексированного проекта,
       " в который входит файл
       for l:sCurProj in g:vimprj#dFiles[ l:iFileNum ].projects
          if (!s:dProjFilesParsed[ l:sCurProj.file ]["projects"][ l:sCurProj.name ].boolIndexed)
@@ -591,7 +594,7 @@ function! g:vimprj#dHooks['OnAddNewVimprjRoot']['indexer'](dParams)
    let g:vimprj#dRoots[ l:sVimprjKey ]['indexer']["ctagsWriteFilelist"]               = g:indexer_ctagsWriteFilelist
    let g:vimprj#dRoots[ l:sVimprjKey ]['indexer']["mode"]                             = ""
    let g:vimprj#dRoots[ l:sVimprjKey ]['indexer']["getAllSubdirsFromIndexerListFile"] = g:indexer_getAllSubdirsFromIndexerListFile
-   
+
    " remember default tags after sourcing .vimprj
    let g:vimprj#dRoots[ l:sVimprjKey ]['indexer']["sTagsDefault"]                     = &tags
    let g:vimprj#dRoots[ l:sVimprjKey ]['indexer']["sPathDefault"]                     = &path
@@ -790,7 +793,7 @@ function! Indexer_OnAsyncCommandComplete(temp_file_name)
    call <SID>Indexer_ParseCommandOutput(l:sCmdOutput)
 
    if !has("gui_running")
-      " clear and redraw to remove screen clear 
+      " clear and redraw to remove screen clear
       " after running external program
       redraw!
    endif
@@ -972,19 +975,19 @@ endfunction
 function! <SID>DeleteFile(filename)
    call <SID>AddNewAsyncTask({
             \     'mode' : 'AsyncModeDelete',
-            \     'data' : { 
-            \        'filename' : a:filename 
-            \     } 
+            \     'data' : {
+            \        'filename' : a:filename
+            \     }
             \  })
 endfunction
 
 function! <SID>RenameFile(filename_old, filename_new)
    call <SID>AddNewAsyncTask({
-            \     'mode' : 'AsyncModeRename', 
-            \     'data' : { 
+            \     'mode' : 'AsyncModeRename',
+            \     'data' : {
             \        'filename_old' : a:filename_old,
-            \        'filename_new' : a:filename_new 
-            \     } 
+            \        'filename_new' : a:filename_new
+            \     }
             \  })
 endfunction
 
@@ -995,12 +998,12 @@ endfunction
 function! <SID>IndexerFilesList()
    if len(g:vimprj#dFiles[ g:vimprj#iCurFileNum ]["projects"]) > 0
 
-      let lFiles = 
+      let lFiles =
                \s:dProjFilesParsed
                   \[ g:vimprj#dFiles[ g:vimprj#iCurFileNum ]["projects"][0]["file"] ]
                   \[ "projects" ]
                   \[ g:vimprj#dFiles[ g:vimprj#iCurFileNum ]["projects"][0]["name"] ]
-                  \["files"] 
+                  \["files"]
 
       if (len(lFiles) == 0)
          echo "Indexer knows nothing about files passed to ctags. Type :IndexerInfo for more info."
@@ -1082,11 +1085,11 @@ function! <SID>IndexerInfo()
          endif
       endif
       echo '* At file save: '.
-               \ (g:vimprj#dRoots[ g:vimprj#sCurVimprjKey ]['indexer'].ctagsJustAppendTagsAtFileSave 
-               \     ? (g:vimprj#dRoots[ g:vimprj#sCurVimprjKey ]['indexer'].useSedWhenAppend 
-               \           ? 'remove tags for saved file by SED, and ' 
+               \ (g:vimprj#dRoots[ g:vimprj#sCurVimprjKey ]['indexer'].ctagsJustAppendTagsAtFileSave
+               \     ? (g:vimprj#dRoots[ g:vimprj#sCurVimprjKey ]['indexer'].useSedWhenAppend
+               \           ? 'remove tags for saved file by SED, and '
                \           : ''
-               \       ).'just append tags' 
+               \       ).'just append tags'
                \     : 'rebuild tags for whole project'
                \ )
       if <SID>_IsBackgroundEnabled()
@@ -1099,7 +1102,7 @@ function! <SID>IndexerInfo()
       echo "* Paths for ctags: ".l:sPathsForCtags
       echo "* Files for ctags: ".l:sFilesForCtags
       if (!<SID>_UseDirsInsteadOfFiles(g:vimprj#dRoots[ g:vimprj#sCurVimprjKey ]['indexer']))
-         echo "* Files not found: there's ".l:iFilesNotFoundCnt.' non-existing files. ' 
+         echo "* Files not found: there's ".l:iFilesNotFoundCnt.' non-existing files. '
       endif
 
 
@@ -1130,7 +1133,7 @@ endfunction
 "                                 Will be passed to ctags with -f key.
 "      sFiles,          // ".." - just string with filenames to be indexed.
 "                                 Will be passed to ctags literally.
-"      sFilelistFile,   // ".." - file with list of files to be indexed. 
+"      sFilelistFile,   // ".." - file with list of files to be indexed.
 "                                 Will be passed to ctags with -L key.
 "      sAddParams,      // ".." - Any additional params to ctags.
 "                                 Will be passed to ctags literally.
@@ -1377,7 +1380,7 @@ function! <SID>Indexer_DetectCtags()
 endfunction
 
 " update tags for one project.
-" 
+"
 " params:
 "     sProjFileKey - key for s:dProjFilesParsed
 "     sProjName - project name in this projects file
@@ -1417,8 +1420,8 @@ function! <SID>UpdateTagsForProject(sProjFileKey, sProjName, sSavedFile, dIndexe
 
          " generating tags for files
          " if sFilelistFile is present, then l:dCurProject.files is ignored
-         let l:lFiles = (empty(l:dCurProject.sFilelistFile) 
-                  \     ? l:dCurProject.files 
+         let l:lFiles = (empty(l:dCurProject.sFilelistFile)
+                  \     ? l:dCurProject.files
                   \     : []
                   \  )
 
@@ -1460,7 +1463,7 @@ function! <SID>UpdateTagsForProject(sProjFileKey, sProjName, sSavedFile, dIndexe
    call <SID>_AddToDebugLog(s:DEB_LEVEL__PARSE, 'function end: __UpdateTagsForProject__', {'sProjName' : a:sProjName, 'sSavedFile' : a:sSavedFile})
 endfunction
 
-" re-read projects from given file, 
+" re-read projects from given file,
 " update all tags for every project that is already indexed
 "
 function! <SID>UpdateTagsForEveryNeededProjectFromFile(sProjFileKey)
@@ -1517,7 +1520,7 @@ endfunction
 "                               [options]
 " ...
 "
-" параметры:                             
+" параметры:
 " param aLines все строки файла (т.е. файл надо сначала прочитать)
 " param indexerFile имя файла (используется только для того, чтобы распарсить
 " названия проектов типа [%dir_name(..)%])
@@ -1664,7 +1667,7 @@ function! <SID>GetDirsAndFilesFromIndexerList(aLines, indexerFile, dExistsResult
                               call add(l:lIndexerFilesList, l:sPrj)
                            endif
                         endfor
-                        
+
                         call add(l:lIndexerFilesList, '')
                      endif
 
@@ -1709,7 +1712,7 @@ function! <SID>GetDirsAndFilesFromIndexerList(aLines, indexerFile, dExistsResult
                         let l:sValue = substitute(l:sValue, '\\', '\\\\', "g")
                         " changing $BLABLA to its value (doubleslashed)
                         let l:sLine = substitute(l:sLine, l:sPatt, l:sValue, "")
-                     else 
+                     else
                         break
                      endif
                   endwhile
@@ -1805,7 +1808,7 @@ function! <SID>GetDirsAndFilesFromIndexerList(aLines, indexerFile, dExistsResult
                   if (!<SID>_UseDirsInsteadOfFiles(a:dIndexerParams))
                      " adding every file.
                      "let l:dResult[l:sCurProjName].files = dfrank#util#ConcatLists(
-                     "\     l:dResult[l:sCurProjName].files, 
+                     "\     l:dResult[l:sCurProjName].files,
                      "\     split(expand(l:sCurWildcard), '\n')
                      "\  )
                   else
@@ -1840,7 +1843,7 @@ function! <SID>ExpandAllWildcards(dProject)
 
       for l:sCurWildcard in a:dProject.wildcards
          let a:dProject.files = dfrank#util#ConcatLists(
-                  \     a:dProject.files, 
+                  \     a:dProject.files,
                   \     split(expand(l:sCurWildcard), '\n')
                   \  )
       endfor
@@ -2017,7 +2020,7 @@ function! <SID>ParseProjectSettingsFile(sProjFileKey)
 
    if (s:dProjFilesParsed[ a:sProjFileKey ]["type"] == 'IndexerFile')
 
-      let s:dProjFilesParsed[a:sProjFileKey]["projects"] = 
+      let s:dProjFilesParsed[a:sProjFileKey]["projects"] =
                \  <SID>GetDirsAndFilesFromIndexerFile(
                \     s:dProjFilesParsed[ a:sProjFileKey ]["filename"],
                \     g:vimprj#dRoots[ l:sVimprjKey ]['indexer']
@@ -2025,7 +2028,7 @@ function! <SID>ParseProjectSettingsFile(sProjFileKey)
 
    elseif (s:dProjFilesParsed[ a:sProjFileKey ]["type"] == 'ProjectFile')
 
-      let s:dProjFilesParsed[a:sProjFileKey]["projects"] = 
+      let s:dProjFilesParsed[a:sProjFileKey]["projects"] =
                \  <SID>GetDirsAndFilesFromProjectFile(
                \     s:dProjFilesParsed[ a:sProjFileKey ]["filename"],
                \     g:vimprj#dRoots[ l:sVimprjKey ]['indexer']
@@ -2103,7 +2106,7 @@ endfunction
 " param a:sFile - string like '%' or '<afile>' or something like that.
 " param a:dParams - dict:
 "     'full_rebuild': 0 or 1
-" 
+"
 function! <SID>UpdateTagsForFile(iFileNum, dParams)
 
    let l:iFileNum           = a:iFileNum
