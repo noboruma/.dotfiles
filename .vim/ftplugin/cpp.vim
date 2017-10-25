@@ -21,9 +21,13 @@ inoremap <<cr> <<cr>><c-o>O<tab>
 "Makeprg erroformat
 "compiler gcc
 "! see c.vim for efm
-
 let g:CFolderindent=0
+if exists('debug')
+let g:CFolderClosed=99
+else
 let g:CFolderClosed=1
+endif
+
 function! CFold1Lay()
     if getline(v:lnum) =~? '^\s*}$'
         if indent(v:lnum) == g:CFolderindent
@@ -44,8 +48,6 @@ function! CFold1Lay()
 endfunction
 setlocal foldmethod=expr
 setlocal foldexpr=CFold1Lay()
-setlocal foldlevel=0
-setlocal foldlevelstart=0
 
 " Stop parsing include files
 setlocal complete-=i

@@ -27,8 +27,6 @@ else
   "disable indexer
   let g:loaded_indexer=1
 endif
-set scrolloff=0 " Usually smaller screen on terminal
-
 set scrolloff=0 " Keep no lines after/before the cursor
 
 set path+=../**
@@ -134,17 +132,6 @@ filetype off
 "
 "let g:syntastic_debug = 0
 "!Syntastic
-
-function! CtrlPMappings()
-  nnoremap <buffer> <silent> <C-@> :call <sid>DeleteBuffer()<cr>
-endfunction
-
-function! s:DeleteBuffer()
-  let path = fnamemodify(getline('.')[2:], ':p')
-  let bufn = matchstr(path, '\v\d+\ze\*No Name')
-  exec "bd" bufn ==# "" ? path : bufn
-  exec "norm \<F5>"
-endfunction
 
 " Ale
 let &runtimepath.=',~/.vim/bundle/ale'
@@ -379,6 +366,8 @@ let g:syntastic_tex_checkers = ['chktex']
 
 let g:ConqueGdb_Leader = '\'
 let g:ConqueTerm_CloseOnEnd = 1
+let g:ConqueTerm_ReadUnfocused=1
+let g:ConqueTerm_Color = 2
 " vim --cmd 'let debug=1'
 if exists('debug')
 let g:ConqueGdb_Disable = 0

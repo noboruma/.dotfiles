@@ -150,7 +150,7 @@ define color
  if $USECOLOR == 1
  	# BLACK
  	if $arg0 == 0
- 		echo \033[30m
+        echo \033[37m
  	else
  		# RED
 	 	if $arg0 == 1

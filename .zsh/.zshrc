@@ -51,6 +51,7 @@ setopt INC_APPEND_HISTORY
 setopt HIST_IGNORE_SPACE
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
+setopt CORRECT
 
 #print colors
 local CREDOR='%{\e[1;31m%}'
@@ -193,6 +194,8 @@ export P4CONFIG=.perforce
 
 export NPM_PACKAGES="${HOME}/usr/npm-packages"
 export PATH="$NPM_PACKAGES/bin:$PATH"
+
+export ZBEEP=''
 
 source /usr/share/autojump/autojump.zsh
 
