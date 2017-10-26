@@ -367,10 +367,17 @@ let g:syntastic_tex_checkers = ['chktex']
 let g:ConqueGdb_Leader = '\'
 let g:ConqueTerm_CloseOnEnd = 1
 let g:ConqueTerm_ReadUnfocused=1
-let g:ConqueTerm_Color = 2
+let g:ConqueTerm_Color = 1
+let g:ConqueGdb_SaveHistory = 1
+let g:ConqueTerm_InsertOnEnter = 1
+let g:ConqueTerm_CWInsert = 1
+
 " vim --cmd 'let debug=1'
 if exists('debug')
 let g:ConqueGdb_Disable = 0
+nnoremap <silent> <bslash>R :ConqueGdbCommand record<CR>
+nnoremap <silent> <bslash>rn :ConqueGdbCommand reverse-next<CR>
+nnoremap <silent> <bslash>rn :ConqueGdbCommand reverse-next<CR>
 else
 let g:ConqueGdb_Disable = 1
 endif
