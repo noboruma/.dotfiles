@@ -205,3 +205,9 @@ zle -N edit-command-line
 bindkey -M vicmd v edit-command-line
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+echo 'running on '$TTY
+
+
+setxkbmap -option ctrl:nocaps
+#setxkbmap -option to enable

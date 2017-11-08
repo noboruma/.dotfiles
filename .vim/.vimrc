@@ -24,9 +24,14 @@ if has("gui_running")
     set guioptions+=r  "scrollbar
   endif
 else
-  "disable indexer
-  let g:loaded_indexer=1
+    " vim --cmd 'let indexing=1'
+    if !exists('indexing')
+        "disable indexer
+        let g:loaded_indexer=1
+    endif
 endif
+
+set ttyfast
 set scrolloff=0 " Keep no lines after/before the cursor
 
 set path+=../**
