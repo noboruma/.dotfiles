@@ -13,15 +13,15 @@ snippet readfile
 	}${3}
 
 # std::map
-snippet std::map
+snippet map
 	std::map<${1:key}, ${2:value}> ${3}Map;
 
 # std::vector
-snippet std::vector
+snippet vec
 	std::vector<${1:char}> ${2};
 
 # std::array
-snippet std::array
+snippet arr
 	std::array<${1:type}, ${2:N}> ${3};
 
 # Namespace
@@ -41,6 +41,7 @@ snippet class
 		private:
 	        ${3:/* data */}
 	};
+
 snippet struct
 	struct ${1:`Filename('$1', 'name')`}
 	{
@@ -50,20 +51,30 @@ snippet struct
 		private:
 			${3:/* data */}
 	};
-# For each i
-snippet fi
-	for (auto ${2:i}(0); $2 < ${1:count}; ${3:++}$2) {
-		${4}
+
+# For each it
+snippet forit
+	auto it = ${1:con};
+	for (; it != std::end($1); ++it) {
+		${2}
+	}
+
+# While it
+snippet whileit
+	auto it = ${1:con};
+	while (it != std::end($1)) {
+		${2}
+		++it;
 	}
 
 # For each i as auto
-snippet fe
+snippet forauto
 	for (auto const &${1:e} : ${2}) {
 		${3}
 	}
 
 # For each i as size_t
-snippet fs
+snippet forsize
 	for (size_t ${1:i}=0; $1 < ${2:.size()}; ${3:++}$1) {
 		${4}
 	}
@@ -74,10 +85,16 @@ snippet cout
 
 # auto const &
 snippet ac
-	auto const &${1}
+	auto const &
 
+#std::string
 snippet str
-	std::string ${1}
+	std::string
 
+#std::string const
 snippet strc
-	std::string const &${1}
+	std::string const &
+
+#range
+snippet range
+	std::begin(${1:con}), std::end($1)
