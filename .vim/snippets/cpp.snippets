@@ -1,6 +1,5 @@
 snippet inc
 	#include <${1:iostream}>
-
 # Read File Into Vector
 snippet readfile
 	std::vector<char> v;
@@ -11,25 +10,20 @@ snippet readfile
 			v.insert(v.end(), buf, buf + len);
 		fclose($2);
 	}${3}
-
 # std::map
 snippet map
 	std::map<${1:key}, ${2:value}> ${3}Map;
-
 # std::vector
 snippet vec
 	std::vector<${1:char}> ${2};
-
 # std::array
 snippet arr
 	std::array<${1:type}, ${2:N}> ${3};
-
 # Namespace
 snippet ns
 	namespace ${1:`Filename('', 'ns')`} {
 		${2}
 	} //!$1
-
 # Class
 snippet class
 	class ${1:`Filename('$1', 'name')`}
@@ -41,7 +35,6 @@ snippet class
 		private:
 	        ${3:/* data */}
 	};
-
 snippet struct
 	struct ${1:`Filename('$1', 'name')`}
 	{
@@ -51,14 +44,12 @@ snippet struct
 		private:
 			${3:/* data */}
 	};
-
 # For each it
 snippet forit
 	auto it = ${1:con};
 	for (; it != std::end($1); ++it) {
 		${2}
 	}
-
 # While it
 snippet whileit
 	auto it = ${1:con};
@@ -66,35 +57,28 @@ snippet whileit
 		${2}
 		++it;
 	}
-
 # For each i as auto
 snippet forauto
 	for (auto const &${1:e} : ${2}) {
 		${3}
 	}
-
 # For each i as size_t
 snippet forsize
 	for (size_t ${1:i}=0; $1 < ${2:.size()}; ${3:++}$1) {
 		${4}
 	}
-
 # Cout
 snippet cout
 	std::cout<<${1}<<std::endl;
-
 # auto const &
 snippet ac
 	auto const &
-
 #std::string
 snippet str
 	std::string
-
 #std::string const
 snippet strc
 	std::string const &
-
 #range
 snippet range
 	std::begin(${1:con}), std::end($1)
