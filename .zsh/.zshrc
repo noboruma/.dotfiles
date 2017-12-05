@@ -208,6 +208,8 @@ bindkey -M vicmd v edit-command-line
 
 echo 'running on '$TTY
 
-
 setxkbmap -option ctrl:nocaps
 #setxkbmap -option to enable
+
+# zsh-bd
+source $HOME/.zsh/plugins/bd/bd.zsh
