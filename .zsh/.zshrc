@@ -202,7 +202,7 @@ source /usr/share/autojump/autojump.zsh
 # Enable v inside command
 autoload edit-command-line
 zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
+bindkey '^x^e' edit-command-line
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
