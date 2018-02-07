@@ -220,11 +220,14 @@ call unite#custom#profile('default', 'context', {
 \ })
 "! Unite.vim
 
+let &runtimepath.=',~/.vim/bundle/vim-javascript'
+
 let g:indexer_disableCtagsWarning=1
 let g:indexer_debugLogLevel=0
 
 filetype on
 filetype plugin on
+filetype indent on
 set ruler          " Relative cursor position
 set is             " inc search
 set cul            " Highlight current line
@@ -237,7 +240,7 @@ set dictionary+=/usr/share/dict/words
 "let g:languagetool_jar='$HOME/usr/bin/languagetool-commandline.jar'
 
 " Make options
-let &makeprg='make'
+let &makeprg='mw gmake'
 "
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>

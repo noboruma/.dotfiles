@@ -31,3 +31,6 @@
 [submodule ".tmux/tpm"]
 	path = .tmux/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule ".vim/bundle/vim-javascript"]
+	path = .vim/bundle/vim-javascript
+	url = https://github.com/pangloss/vim-javascript
