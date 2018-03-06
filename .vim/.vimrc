@@ -31,7 +31,7 @@ else
     endif
 endif
 
-set ttyfast
+"set ttyfast
 set scrolloff=0 " Keep no lines after/before the cursor
 
 set path+=../**

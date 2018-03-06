@@ -30,6 +30,8 @@ eval `dircolors -b`
 autoload -Uz copy-earlier-word
 zle -N copy-earlier-word
 bindkey "^[m" copy-earlier-word
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
 #kill the lag
 #export KEYTIMEOUT=1
 
