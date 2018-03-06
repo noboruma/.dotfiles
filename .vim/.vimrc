@@ -240,7 +240,7 @@ set dictionary+=/usr/share/dict/words
 "let g:languagetool_jar='$HOME/usr/bin/languagetool-commandline.jar'
 
 " Make options
-let &makeprg='mw gmake'
+let &makeprg='make'
 "
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>
