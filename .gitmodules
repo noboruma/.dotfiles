@@ -27,7 +27,7 @@
 	url = https://github.com/diepm/vim-rest-console
 [submodule ".vim/bundle/unite.vim"]
 	path = .vim/bundle/unite.vim
-	url = https://github.com/Shougo/unite.vim
+	url = https://github.com/noboruma/unite.vim
 [submodule ".tmux/tpm"]
 	path = .tmux/tpm
 	url = https://github.com/tmux-plugins/tpm
