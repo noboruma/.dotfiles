@@ -5,14 +5,14 @@ autocmd BufWritePre <buffer> silent! :Adapt
 if has("gui_running")
   au BufEnter <buffer> if (!exists('b:created')) | :execute "SemanticHighlight" | let b:created=1 | endif
   "Triggered by :doautocmd
-  "au User <buffer> :SemanticHighlight 
+  "au User <buffer> :SemanticHighlight
   au BufWritePost <buffer> :SemanticHighlight
 endif
 
 "Makeprg erroformat
 compiler gcc
 
-" Surround 
+" Surround
 let g:surround_{char2nr("c")} = "\/*\r*\/"
 
 let g:CFolderindent=0
