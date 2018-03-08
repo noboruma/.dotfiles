@@ -25,9 +25,6 @@
 [submodule ".vim/bundle/vim-rest-console"]
 	path = .vim/bundle/vim-rest-console
 	url = https://github.com/diepm/vim-rest-console
-[submodule ".vim/bundle/unite.vim"]
-	path = .vim/bundle/unite.vim
-	url = https://github.com/noboruma/unite.vim
 [submodule ".tmux/tpm"]
 	path = .tmux/tpm
 	url = https://github.com/tmux-plugins/tpm
