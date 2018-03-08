@@ -222,6 +222,11 @@ call unite#custom#profile('default', 'context', {
 
 let &runtimepath.=',~/.vim/bundle/vim-javascript'
 
+let &runtimepath.=',~/.vim/bundle/vim-clang-format'
+let g:clang_format#command="clang-format-3.5"
+let g:clang_format#detect_style_file=1
+autocmd FileType c,cpp,objc noremap <buffer><leader>= :<C-u>ClangFormat<CR>
+
 let g:indexer_disableCtagsWarning=1
 let g:indexer_debugLogLevel=0
 
