@@ -187,8 +187,8 @@ bindkey '^[[B' down-line-or-search
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
-export NDK_ROOT=$HOME'/workspace/android/android-ndk-r10e'
-export NDK_HOME=$HOME'/workspace/android/android-ndk-r10e'
+export ANDROID_NDK_ROOT=$HOME'/workspace/android/android-ndk-r16b'
+export ANDROID_NDK_HOME=$HOME'/workspace/android/android-ndk-r16b'
 export ANDROID_HOME=$HOME'/usr/adt-bundle-linux-x86_64-20131030/sdk'
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
@@ -215,3 +215,7 @@ setxkbmap -option ctrl:nocaps
 
 # zsh-bd
 source $HOME/.zsh/plugins/bd/bd.zsh
+
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
