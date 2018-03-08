@@ -246,7 +246,7 @@ let g:clang_format#style_options = {
             \"BreakBeforeBraces": "Linux",
             \"ColumnLimit": 140,
             \"NamespaceIndentation": "All"}
-autocmd FileType c,cpp,objc noremap <buffer><leader>= :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>= :ClangFormat<CR>
 
 let g:indexer_disableCtagsWarning=1
 let g:indexer_debugLogLevel=0
