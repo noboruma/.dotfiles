@@ -104,21 +104,12 @@ inoremap <c-l> <c-x><c-l>
 
 " Split naviguation
 " silent help to not ask anything in the command
-if use_arrow
-  nnoremap <silent> <M-Right> <c-w>l
-  nnoremap <silent> <M-Left> <c-w>h
-  nnoremap <silent> <M-Up> <c-w>k
-  nnoremap <silent> <M-Down> <c-w>j
-endif
+nnoremap <silent> <C-h> <c-w><
+nnoremap <silent> <C-l> <c-w>>
+nnoremap <silent> <C-k> <c-w>+
+nnoremap <silent> <C-j> <c-w>-
 
-nnoremap <silent> <M-h> <c-w>h
-nnoremap <silent> <M-l> <c-w>l
-nnoremap <silent> <M-k> <c-w>k
-nnoremap <silent> <M-j> <c-w>j
-nnoremap <silent> <M-L> <c-w><
-nnoremap <silent> <M-H> <c-w>>
-nnoremap <silent> <M-K> <c-w>+
-nnoremap <silent> <M-J> <c-w>-
+"ALT: M-xxx
 
 " Make omnicompletion easier (Context based autocompletion)
 " For gui
