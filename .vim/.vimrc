@@ -222,6 +222,32 @@ call unite#custom#profile('default', 'context', {
 
 let &runtimepath.=',~/.vim/bundle/vim-javascript'
 
+let &runtimepath.=',~/.vim/bundle/vim-clang-format'
+let g:clang_format#command="clang-format-3.5"
+let g:clang_format#detect_style_file=0
+let g:clang_format#style_options = {
+            \ "AlwaysBreakTemplateDeclarations" : "true",
+            \ "Standard" : "C++11",
+            \ "BasedOnStyle": "Google",
+            \"IndentWidth": 4,
+            \"AccessModifierOffset": -2,
+            \"IndentCaseLabels": "false",
+            \"MaxEmptyLinesToKeep": 3,
+            \"KeepEmptyLinesAtTheStartOfBlocks": "true",
+            \"SpacesBeforeTrailingComments": 1,
+            \"AllowShortFunctionsOnASingleLine": "None",
+            \"DerivePointerAlignment": "false",
+            \"BinPackParameters": "false",
+            \"AllowAllParametersOfDeclarationOnNextLine": "false",
+            \"BreakConstructorInitializersBeforeComma": "true",
+            \"ConstructorInitializerAllOnOneLineOrOnePerLine": "false",
+            \"AllowShortIfStatementsOnASingleLine": "false",
+            \"AllowShortLoopsOnASingleLine": "false",
+            \"BreakBeforeBraces": "Linux",
+            \"ColumnLimit": 140,
+            \"NamespaceIndentation": "All"}
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>= :ClangFormat<CR>
+
 let g:indexer_disableCtagsWarning=1
 let g:indexer_debugLogLevel=0
 
