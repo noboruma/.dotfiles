@@ -64,7 +64,7 @@ noremap <leader>S :SemanticHighlightToggle<cr>
 vnoremap <leader>s "sy/<C-R>"<cr>:%s//<C-R>"/g<left><left>
 noremap <leader>t :vsp<cr>
 noremap <leader>T :sp<cr>
-noremap <leader>u :GundoToggle<cr>
+noremap <leader>u :UndotreeToggle<cr>
 noremap <leader>v <C-v>
 "noremap <leader>w :up<cr>
 noremap <leader>w <C-w>o:vsp<cr>

@@ -264,8 +264,13 @@ let g:gutentags_file_list_command = {
             \ },
             \ }
 set statusline+=%{gutentags#statusline()}
-set tags+=b:gutentags_files["ctags"]
+set tags=
+" /!\ Change plugin from setlocal to set
 " !Gutentags
+
+" Undotree
+let &runtimepath.=',~/.vim/bundle/undotree'
+" !Undotree
 
 filetype on
 filetype plugin on
@@ -398,8 +403,8 @@ set noswapfile
 
 " Undo files
 if (exists("&undodir"))
-    set undofile
     set undodir=~/.vim/vimfiles/undo
+    set undofile
     "let &undodir=&directory
     set undolevels=1024
     set undoreload=1024
@@ -473,4 +478,7 @@ endif
 " Adapt on save hook
 autocmd BufWritePre <buffer> %s/\s\+$//e
 autocmd BufWritePre <buffer> silent! :Adapt
-set tags=
+
+"set tags=
+
+let g:gundo_prefer_python3 = 1
