@@ -220,8 +220,10 @@ call unite#custom#profile('default', 'context', {
 \ })
 "! Unite.vim
 
+" javascript
 let &runtimepath.=',~/.vim/bundle/vim-javascript'
 
+" Clang-format
 let &runtimepath.=',~/.vim/bundle/vim-clang-format'
 let g:clang_format#command="clang-format-3.5"
 let g:clang_format#detect_style_file=0
@@ -247,6 +249,9 @@ let g:clang_format#style_options = {
             \"ColumnLimit": 140,
             \"NamespaceIndentation": "All"}
 autocmd FileType c,cpp,objc vnoremap <buffer><Leader>= :ClangFormat<CR>
+
+" Kotlin
+let &runtimepath.=',~/.vim/bundle/kotlin-vim'
 
 let g:indexer_disableCtagsWarning=1
 let g:indexer_debugLogLevel=0
