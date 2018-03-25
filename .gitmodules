@@ -37,3 +37,9 @@
 [submodule ".vim/bundle/vim-clang-format"]
 	path = .vim/bundle/vim-clang-format
 	url = https://github.com/rhysd/vim-clang-format
+[submodule ".vim/bundle/kotlin-vim"]
+	path = .vim/bundle/kotlin-vim
+	url = https://github.com/udalov/kotlin-vim
+[submodule ".vim/bundle/vim-gutentags"]
+	path = .vim/bundle/vim-gutentags
+	url = https://github.com/ludovicchabant/vim-gutentags

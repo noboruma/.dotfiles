@@ -31,6 +31,7 @@ else
     endif
 endif
 
+let g:loaded_indexer=1
 "set ttyfast
 set scrolloff=0 " Keep no lines after/before the cursor
 
@@ -220,8 +221,10 @@ call unite#custom#profile('default', 'context', {
 \ })
 "! Unite.vim
 
+" javascript
 let &runtimepath.=',~/.vim/bundle/vim-javascript'
 
+" Clang-format
 let &runtimepath.=',~/.vim/bundle/vim-clang-format'
 let g:clang_format#command="clang-format-3.5"
 let g:clang_format#detect_style_file=0
@@ -248,8 +251,25 @@ let g:clang_format#style_options = {
             \"NamespaceIndentation": "All"}
 autocmd FileType c,cpp,objc vnoremap <buffer><Leader>= :ClangFormat<CR>
 
-let g:indexer_disableCtagsWarning=1
-let g:indexer_debugLogLevel=0
+" Kotlin
+let &runtimepath.=',~/.vim/bundle/kotlin-vim'
+
+" Gutentags
+let &runtimepath.=',~/.vim/bundle/vim-gutentags'
+let g:gutentags_project_root=['.perforce', '.git']
+let g:gutentags_file_list_command = {
+            \ 'markers': {
+            \ '.git': 'git ls-files',
+            \ '.hg': 'hg files',
+            \ '.perforce': 'p4 have | cut -f1 -d\# | cut -f5-100 -d/',
+            \ },
+            \ }
+"execute 'set tags^=' . fnameescape(gutentags#get_cachefile(a:project_root, l:tagfile))
+set statusline+=%{gutentags#statusline()}
+set tags+=b:gutentags_files["ctags"]
+
+"let g:indexer_disableCtagsWarning=1
+"let g:indexer_debugLogLevel=0
 
 filetype on
 filetype plugin on
@@ -457,3 +477,4 @@ endif
 " Adapt on save hook
 autocmd BufWritePre <buffer> %s/\s\+$//e
 autocmd BufWritePre <buffer> silent! :Adapt
+set tags=
