@@ -31,6 +31,7 @@ else
     endif
 endif
 
+let g:loaded_indexer=1
 "set ttyfast
 set scrolloff=0 " Keep no lines after/before the cursor
 
@@ -253,8 +254,24 @@ autocmd FileType c,cpp,objc vnoremap <buffer><Leader>= :ClangFormat<CR>
 " Kotlin
 let &runtimepath.=',~/.vim/bundle/kotlin-vim'
 
-let g:indexer_disableCtagsWarning=1
-let g:indexer_debugLogLevel=0
+" Gutentags
+set tags=
+let &runtimepath.=',~/.vim/bundle/vim-gutentags'
+let g:gutentags_project_root=['.perforce']
+let g:gutentags_file_list_command = {
+            \ 'markers': {
+            \ '.git': 'git ls-files',
+            \ '.hg': 'hg files',
+            \ '.perforce': 'p4 have | cut -f1 -d\# | cut -f5-100 -d/',
+            \ },
+            \ }
+"execute 'set tags^=' . fnameescape(gutentags#get_cachefile(a:project_root, l:tagfile))
+set statusline+=%{gutentags#statusline()}
+
+
+
+"let g:indexer_disableCtagsWarning=1
+"let g:indexer_debugLogLevel=0
 
 filetype on
 filetype plugin on
