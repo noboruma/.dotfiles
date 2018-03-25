@@ -255,9 +255,8 @@ autocmd FileType c,cpp,objc vnoremap <buffer><Leader>= :ClangFormat<CR>
 let &runtimepath.=',~/.vim/bundle/kotlin-vim'
 
 " Gutentags
-set tags=
 let &runtimepath.=',~/.vim/bundle/vim-gutentags'
-let g:gutentags_project_root=['.perforce']
+let g:gutentags_project_root=['.perforce', '.git']
 let g:gutentags_file_list_command = {
             \ 'markers': {
             \ '.git': 'git ls-files',
@@ -267,8 +266,7 @@ let g:gutentags_file_list_command = {
             \ }
 "execute 'set tags^=' . fnameescape(gutentags#get_cachefile(a:project_root, l:tagfile))
 set statusline+=%{gutentags#statusline()}
-
-
+set tags+=b:gutentags_files["ctags"]
 
 "let g:indexer_disableCtagsWarning=1
 "let g:indexer_debugLogLevel=0
@@ -479,3 +477,4 @@ endif
 " Adapt on save hook
 autocmd BufWritePre <buffer> %s/\s\+$//e
 autocmd BufWritePre <buffer> silent! :Adapt
+set tags=
