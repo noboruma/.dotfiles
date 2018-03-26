@@ -280,6 +280,8 @@ let OmniCpp_GlobalScopeSearch = 1
 let OmniCpp_ShowAccess = 1
 let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
 au BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.hxx,*.hh,*.cc set omnifunc=omni#cpp#complete#Main
+" automatically open and close the popup menu / preview window
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 " !OCC
 
 " tagfinder
