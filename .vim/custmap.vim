@@ -228,8 +228,8 @@ function! s:close_paren() abort
     augroup close_paren
         " use 'fire once' auto command tech
         autocmd!
-        autocmd CompleteDone <buffer> if v:completed_item.word =~# '($'
-                    \|     call feedkeys(")\<Left>", 'in')
+        autocmd CompleteDone <buffer> silent! if v:completed_item.word =~# '($'
+                    \|      call feedkeys(")\<Left>", 'in')
                     \| endif
                     \| autocmd! close_paren
                     \| augroup! close_paren
