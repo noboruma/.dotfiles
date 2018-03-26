@@ -260,7 +260,7 @@ let g:gutentags_file_list_command = {
             \ 'markers': {
             \ '.git': 'git ls-files',
             \ '.hg': 'hg files',
-            \ '.perforce': 'p4 have | cut -f1 -d\# | cut -f5-100 -d/',
+            \ '.perforce': 'bash -c \"cat <(p4 opened) <(p4 have)\" | cut -f1 -d\# | cut -f5-100 -d/ | grep \"\.[c|h][a-zA-Z]*$\" | grep \"matlab/src\\|matlab/foundation\\|matlab/toolbox\"',
             \ },
             \ }
 set statusline+=%{gutentags#statusline()}
