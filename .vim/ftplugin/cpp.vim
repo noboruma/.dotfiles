@@ -149,3 +149,5 @@ function! CppNoNamespaceAndTemplateIndent()
 endfunction
 
 setlocal indentexpr=CppNoNamespaceAndTemplateIndent()
+set nocp
+set omnifunc=omni#cpp#complete#Main
