@@ -288,13 +288,6 @@ set ruler          " Relative cursor position
 set is             " inc search
 set cul            " Highlight current line
 
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
-
-
 set spelllang=en
 set nospell
 " c-x c-k feature:
