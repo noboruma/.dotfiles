@@ -276,6 +276,10 @@ let &runtimepath.=',~/.vim/bundle/undotree'
 let &runtimepath.=',~/.vim/bundle/OmniCppComplete'
 " !OCC
 
+" tagfinder
+let &runtimepath.=',~/.vim/bundle/tagfinder'
+" !tagfinder
+
 filetype on
 filetype plugin on
 filetype indent on
