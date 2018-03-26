@@ -26,12 +26,9 @@ if has("gui_running")
 else
     " vim --cmd 'let indexing=1'
     if !exists('indexing')
-        "disable indexer
-        let g:loaded_indexer=1
     endif
 endif
 
-let g:loaded_indexer=1
 "set ttyfast
 set scrolloff=0 " Keep no lines after/before the cursor
 
@@ -250,9 +247,11 @@ let g:clang_format#style_options = {
             \"ColumnLimit": 140,
             \"NamespaceIndentation": "All"}
 autocmd FileType c,cpp,objc vnoremap <buffer><Leader>= :ClangFormat<CR>
+" !Clang-format
 
 " Kotlin
 let &runtimepath.=',~/.vim/bundle/kotlin-vim'
+" !Kotlin
 
 " Gutentags
 let &runtimepath.=',~/.vim/bundle/vim-gutentags'
@@ -264,12 +263,14 @@ let g:gutentags_file_list_command = {
             \ '.perforce': 'p4 have | cut -f1 -d\# | cut -f5-100 -d/',
             \ },
             \ }
-"execute 'set tags^=' . fnameescape(gutentags#get_cachefile(a:project_root, l:tagfile))
 set statusline+=%{gutentags#statusline()}
-set tags+=b:gutentags_files["ctags"]
+set tags=
+" /!\ Change plugin from setlocal to set
+" !Gutentags
 
-"let g:indexer_disableCtagsWarning=1
-"let g:indexer_debugLogLevel=0
+" Undotree
+let &runtimepath.=',~/.vim/bundle/undotree'
+" !Undotree
 
 filetype on
 filetype plugin on
@@ -402,8 +403,8 @@ set noswapfile
 
 " Undo files
 if (exists("&undodir"))
-    set undofile
     set undodir=~/.vim/vimfiles/undo
+    set undofile
     "let &undodir=&directory
     set undolevels=1024
     set undoreload=1024
@@ -477,4 +478,7 @@ endif
 " Adapt on save hook
 autocmd BufWritePre <buffer> %s/\s\+$//e
 autocmd BufWritePre <buffer> silent! :Adapt
-set tags=
+
+"set tags=
+
+let g:gundo_prefer_python3 = 1

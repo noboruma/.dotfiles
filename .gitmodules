@@ -43,3 +43,6 @@
 [submodule ".vim/bundle/vim-gutentags"]
 	path = .vim/bundle/vim-gutentags
 	url = https://github.com/ludovicchabant/vim-gutentags
+[submodule ".vim/bundle/undotree"]
+	path = .vim/bundle/undotree
+	url = https://github.com/mbbill/undotree

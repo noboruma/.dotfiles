@@ -64,7 +64,7 @@ noremap <leader>S :SemanticHighlightToggle<cr>
 vnoremap <leader>s "sy/<C-R>"<cr>:%s//<C-R>"/g<left><left>
 noremap <leader>t :vsp<cr>
 noremap <leader>T :sp<cr>
-noremap <leader>u :GundoToggle<cr>
+noremap <leader>u :UndotreeToggle<cr>
 noremap <leader>v <C-v>
 "noremap <leader>w :up<cr>
 noremap <leader>w <C-w>o:vsp<cr>
@@ -201,8 +201,6 @@ fun! CurrWinOrQFError()
       echohl WarningMsg | echon v:exception | echohl None
   endtry
 endfun
-noremap <F1> <esc><c-=>
-inoremap <F1> <esc><c-=>
 
 noremap <F6> :call PrevWinOrQFError()<cr>
 noremap <F7> :call NextWinOrQFError()<cr>
@@ -220,5 +218,7 @@ inoremap <F10> <Esc>:call ToggleSpell()<cr>
 
 noremap <F11> <esc>:up<cr>:!!<cr>
 
+"noremap <F1> <esc><c-=>
+"inoremap <F1> <esc><c-=>
 noremap <F1>  :!p4 edit %<cr>
 noremap <F2>  :set modifiable<cr>:set noro<cr>
