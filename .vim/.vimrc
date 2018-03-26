@@ -274,6 +274,12 @@ let &runtimepath.=',~/.vim/bundle/undotree'
 
 " OCC
 let &runtimepath.=',~/.vim/bundle/OmniCppComplete'
+set nocp
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 " !OCC
 
 filetype on
