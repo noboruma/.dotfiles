@@ -275,12 +275,11 @@ let &runtimepath.=',~/.vim/bundle/undotree'
 " OCC
 let &runtimepath.=',~/.vim/bundle/OmniCppComplete'
 set nocp
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 " !OCC
+
+" tagfinder
+let &runtimepath.=',~/.vim/bundle/tagfinder'
+" !tagfinder
 
 filetype on
 filetype plugin on
@@ -288,6 +287,13 @@ filetype indent on
 set ruler          " Relative cursor position
 set is             " inc search
 set cul            " Highlight current line
+
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
+
 
 set spelllang=en
 set nospell

@@ -149,3 +149,10 @@ function! CppNoNamespaceAndTemplateIndent()
 endfunction
 
 setlocal indentexpr=CppNoNamespaceAndTemplateIndent()
+<<<<<<< HEAD
+=======
+set nocp
+set omnifunc=omni#cpp#complete#Main
+
+DefineLocalTagFinder TagFindClass c,class
+>>>>>>> master
