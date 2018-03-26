@@ -272,6 +272,10 @@ set tags=
 let &runtimepath.=',~/.vim/bundle/undotree'
 " !Undotree
 
+" OCC
+let &runtimepath.=',~/.vim/bundle/OmniCppComplete'
+" !OCC
+
 filetype on
 filetype plugin on
 filetype indent on
