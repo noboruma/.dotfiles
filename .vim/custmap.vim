@@ -113,7 +113,7 @@ nnoremap <silent> <C-j> <c-w>-
 
 " Make omnicompletion easier (Context based autocompletion)
 " For gui
-inoremap <C-Space> <C-x><C-o>
+inoremap <C-Space> <C-r>=<SID>close_paren()<CR><C-x><C-o>
 " For terminal
 inoremap <C-@> <C-Space>
 
@@ -121,10 +121,14 @@ inoremap <C-@> <C-Space>
 noremap <C-J> <C-E>
 noremap <C-K> <C-Y>
 
-
 " Simulate <down> after CTRL-N
-inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+"inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+"  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+inoremap <expr> <tab>      pumvisible() ? "\<C-n>" : "\<C-r>=\<SID>close_paren()\<CR>\<c-r>=Smart_TabComplete()\<CR>"
+inoremap <expr> <s-tab>    pumvisible() ? "\<C-p>" : "\<s-tab>"
 
 "nmap <kPlus> zo
 "nmap <kMinus> zc
@@ -223,7 +227,7 @@ noremap <F11> <esc>:up<cr>:!!<cr>
 noremap <F1>  :!p4 edit %<cr>
 noremap <F2>  :set modifiable<cr>:set noro<cr>
 
-inoremap <C-x><C-o> <C-r>=<SID>close_paren()<CR><C-x><C-o>
+"inoremap <C-x><C-o> <C-r>=<SID>close_paren()<CR><C-x><C-o>
 function! s:close_paren() abort
     augroup close_paren
         " use 'fire once' auto command tech
@@ -237,7 +241,6 @@ function! s:close_paren() abort
     return ''
 endfunction
 
-inoremap <tab> <c-r>=Smart_TabComplete()<CR>
 function! Smart_TabComplete()
     let line = getline('.')                         " current line
 
