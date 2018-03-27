@@ -265,7 +265,6 @@ let g:gutentags_file_list_command = {
             \ }
 set statusline+=%{gutentags#statusline()}
 set tags=./tags;,tags;
-set tags+=$HOME/.tags/boost,$HOME/.tags/std
 " /!\ Change plugin from setlocal to set
 " !Gutentags
 
