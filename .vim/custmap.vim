@@ -237,6 +237,7 @@ function! s:close_paren() abort
     return ''
 endfunction
 
+inoremap <tab> <c-r>=Smart_TabComplete()<CR>
 function! Smart_TabComplete()
     let line = getline('.')                         " current line
 
@@ -249,7 +250,8 @@ function! Smart_TabComplete()
     endif
     let has_period = match(substr, '\.') != -1      " position of period, if any
     let has_slash = match(substr, '\/') != -1       " position of slash, if any
-    if (!has_period && !has_slash)
+    let has_colon = match(substr, '::') != -1     " position of ::, if any
+    if (!has_period && !has_slash && !has_colon)
         return "\<C-X>\<C-P>"                         " existing text matching
     elseif ( has_slash )
         return "\<C-X>\<C-F>"                         " file matching
@@ -257,4 +259,3 @@ function! Smart_TabComplete()
         return "\<C-X>\<C-O>"                         " plugin matching
     endif
 endfunction
-inoremap <tab> <c-r>=Smart_TabComplete()<CR>
