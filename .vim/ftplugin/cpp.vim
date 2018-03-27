@@ -151,3 +151,6 @@ endfunction
 setlocal indentexpr=CppNoNamespaceAndTemplateIndent()
 
 DefineLocalTagFinder TagFindClass c,class
+
+set tags+=$HOME/.tags/boost
+set tags+=$HOME/.tags/cppstd
