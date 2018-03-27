@@ -154,3 +154,5 @@ DefineLocalTagFinder TagFindClass c,class
 
 set tags+=$HOME/.tags/boost
 set tags+=$HOME/.tags/cppstd
+set tags+=$HOME/.tags/poco
+set tags+=$HOME/.tags/cppus
