@@ -222,3 +222,17 @@ noremap <F11> <esc>:up<cr>:!!<cr>
 "inoremap <F1> <esc><c-=>
 noremap <F1>  :!p4 edit %<cr>
 noremap <F2>  :set modifiable<cr>:set noro<cr>
+
+inoremap <C-x><C-o> <C-r>=<SID>close_paren()<CR><C-x><C-o>
+function! s:close_paren() abort
+    augroup close_paren
+        " use 'fire once' auto command tech
+        autocmd!
+        autocmd CompleteDone <buffer> silent! if v:completed_item.word =~# '($'
+                    \|      call feedkeys(")\<Left>", 'in')
+                    \| endif
+                    \| autocmd! close_paren
+                    \| augroup! close_paren
+    augroup END
+    return ''
+endfunction

@@ -1,0 +1,34 @@
+--- /tmp/toto	2018-03-26 21:35:05.343560475 +0100
++++ ./bundle/vim-gutentags/autoload/gutentags/ctags.vim	2018-03-26 21:05:55.000000000 +0100
+@@ -39,19 +39,19 @@
+ let s:runner_exe = gutentags#get_plat_file('update_tags')
+ let s:unix_redir = (&shellredir =~# '%s') ? &shellredir : &shellredir . ' %s'
+ 
+-function! gutentags#ctags#init(project_root)
++function! gutentags#ctags#init(project_root) 
+     " Figure out the path to the tags file.
+     " Check the old name for this option, too, before falling back to the
+     " globally defined name.
+     let l:tagfile = getbufvar("", 'gutentags_ctags_tagfile',
+-                \getbufvar("", 'gutentags_tagfile',
++                \getbufvar("", 'gutentags_tagfile', 
+                 \g:gutentags_ctags_tagfile))
+     let b:gutentags_files['ctags'] = gutentags#get_cachefile(
+                 \a:project_root, l:tagfile)
+ 
+     " Set the tags file for Vim to use.
+     if g:gutentags_ctags_auto_set_tags
+-        execute 'setlocal tags^=' . fnameescape(b:gutentags_files['ctags'])
++        execute 'set tags^=' . fnameescape(b:gutentags_files['ctags'])
+     endif
+ 
+     " Check if the ctags executable exists.
+@@ -88,7 +88,7 @@
+         "
+         " Note that if we don't do this and pass a full path for the project
+         " root, some `ctags` implementations like Exhuberant Ctags can get
+-        " confused if the paths have spaces -- but not if you're *in* the root
++        " confused if the paths have spaces -- but not if you're *in* the root 
+         " directory, for some reason... (which we are, our caller in
+         " `autoload/gutentags.vim` changed it).
+         let l:actual_proj_dir = '.'

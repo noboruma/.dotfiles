@@ -264,7 +264,8 @@ let g:gutentags_file_list_command = {
             \ },
             \ }
 set statusline+=%{gutentags#statusline()}
-set tags=
+set tags=./tags;,tags;
+set tags+=$HOME/.tags/boost,$HOME/.tags/std
 " /!\ Change plugin from setlocal to set
 " !Gutentags
 
@@ -280,6 +281,7 @@ let OmniCpp_GlobalScopeSearch = 1
 let OmniCpp_ShowAccess = 1
 let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
 au BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.hxx,*.hh,*.cc set omnifunc=omni#cpp#complete#Main
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 " !OCC
 
 " tagfinder
@@ -492,7 +494,3 @@ endif
 " Adapt on save hook
 autocmd BufWritePre <buffer> %s/\s\+$//e
 autocmd BufWritePre <buffer> silent! :Adapt
-
-"set tags=
-
-let g:gundo_prefer_python3 = 1
