@@ -46,9 +46,9 @@
 [submodule ".vim/bundle/undotree"]
 	path = .vim/bundle/undotree
 	url = https://github.com/mbbill/undotree
-[submodule ".vim/bundle/OmniCppComplete"]
-	path = .vim/bundle/OmniCppComplete
-	url = https://github.com/vim-scripts/OmniCppComplete
 [submodule ".vim/bundle/tagfinder"]
 	path = .vim/bundle/tagfinder
 	url = https://github.com/AndrewRadev/tagfinder.vim
+[submodule ".vim/bundle/OmniCppComplete"]
+	path = .vim/bundle/OmniCppComplete
+	url = https://github.com/FromtonRouge/OmniCppComplete
