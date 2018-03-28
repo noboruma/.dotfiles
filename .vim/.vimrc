@@ -409,7 +409,7 @@ set noswapfile
 "set directory=~/.vim/vimfiles/swap
 
 " Undo files
-if (exists("&undodir"))
+if has('persistent_undo')
     set undodir=~/.vim/vimfiles/undo
     set undofile
     "let &undodir=&directory
