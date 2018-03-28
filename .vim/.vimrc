@@ -74,16 +74,8 @@ set clipboard=unnamed          " ^=
 " Prevent RO file editing: use 'set modifiable' manually if needed
 autocmd BufRead * let &modifiable = !&readonly
 
-" xterm-debian is a color terminal
-if &term =~ "xterm-debian" || &term =~ "xterm-xfree86"
-    set t_Co=16
-    set t_Sf=[3%dm
-    set t_Sb=[4%dm
-endif
-if &term =~ "xterm"
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
+" set terminal as tmux
+set term=screen-256color
 
 " Show space and tab as blue
 "set list
@@ -417,7 +409,7 @@ set noswapfile
 "set directory=~/.vim/vimfiles/swap
 
 " Undo files
-if (exists("&undodir"))
+if has('persistent_undo')
     set undodir=~/.vim/vimfiles/undo
     set undofile
     "let &undodir=&directory
