@@ -2,6 +2,15 @@ diff --git a/autoload/omni/cpp/items.vim b/autoload/omni/cpp/items.vim
 index fd79131..0e752b9 100644
 --- a/autoload/omni/cpp/items.vim
 +++ b/autoload/omni/cpp/items.vim
+@@ -2,7 +2,7 @@
+ "
+ " This file is a part of the omnicppcomplete plugin for vim
+ "
+-" Copyright (C) 2006-2012 by Vissale Neang<fromtonrouge at gmail dot com>
++" Copyright (C) 2006-2018 by Vissale Neang<fromtonrouge at gmail dot com>
+ "
+ " This program is free software; you can redistribute it and/or
+ " modify it under the terms of the GNU General Public License as
 @@ -241,9 +241,14 @@ function! omni#cpp#items#ResolveItemsTypeInfo(contextStack, items)
              " struct and use it instead
              let tagItem = s:ResolveSymbol(tmpContextStack, typeInfo.value, "v:val.kind=='t'")
@@ -18,7 +27,7 @@ index fd79131..0e752b9 100644
 +                    let typeInfo.value = typename
                  endif
              endif
-
+ 
 @@ -392,11 +397,12 @@ endfunc
  " Gets the first symbol found in the context stack
  function! s:ResolveSymbol(contextStack, szSymbol, szTagFilter)
@@ -32,5 +41,59 @@ index fd79131..0e752b9 100644
 -            let szTagQuery = a:szSymbol
 +            let szTagQuery = szSymbol
          endif
-
+ 
          let tagList = omni#common#utils#TagListNoThrow('^'.szTagQuery.'$')
+diff --git a/autoload/omni/cpp/namespaces.vim b/autoload/omni/cpp/namespaces.vim
+index c2adef4..fc46a2a 100644
+--- a/autoload/omni/cpp/namespaces.vim
++++ b/autoload/omni/cpp/namespaces.vim
+@@ -25,7 +25,7 @@
+ let g:omni#cpp#namespaces#CacheResolve = {}
+ let g:omni#cpp#namespaces#CacheUsing = {}
+ " TODO: For the next release
+-"let g:omni#cpp#namespaces#CacheAlias = {}
++let g:omni#cpp#namespaces#CacheAlias = {}
+ 
+ " Get the using namespace list from a line
+ function! s:GetNamespaceAliasListFromLine(szLine)
+@@ -523,8 +523,8 @@ function! omni#cpp#namespaces#GetUsingNamespaces()
+ 
+     " Resolving alias in the namespace list
+     " TODO: For the next release
+-    "let g:omni#cpp#namespaces#CacheAlias= s:GetNamespaceAliasMap()
+-    "call s:ResolveAliasInNamespaceList(g:omni#cpp#namespaces#CacheAlias, result)
++    let g:omni#cpp#namespaces#CacheAlias= s:GetNamespaceAliasMap()
++    call s:ResolveAliasInNamespaceList(g:omni#cpp#namespaces#CacheAlias, result)
+ 
+     return ['::'] + result
+ endfunc
+diff --git a/autoload/omni/cpp/utils.vim b/autoload/omni/cpp/utils.vim
+index 31aac8b..f6985e2 100644
+--- a/autoload/omni/cpp/utils.vim
++++ b/autoload/omni/cpp/utils.vim
+@@ -2,7 +2,7 @@
+ "
+ " This file is a part of the omnicppcomplete plugin for vim
+ "
+-" Copyright (C) 2006-2012 by Vissale Neang<fromtonrouge at gmail dot com>
++" Copyright (C) 2006-2018 by Vissale Neang<fromtonrouge at gmail dot com>
+ "
+ " This program is free software; you can redistribute it and/or
+ " modify it under the terms of the GNU General Public License as
+@@ -341,7 +341,7 @@ function! omni#cpp#utils#GetResolvedTagItem(namespaces, typeInfo)
+ 
+     " Resolving namespace alias
+     " TODO: For the next release
+-    "let szTypeInfo = omni#cpp#namespaces#ResolveAlias(g:omni#cpp#namespaces#CacheAlias, szTypeInfo)
++    let szTypeInfo = omni#cpp#namespaces#ResolveAlias(g:omni#cpp#namespaces#CacheAlias, szTypeInfo)
+ 
+     if szTypeInfo=='::'
+         return result
+@@ -417,6 +417,7 @@ function! omni#cpp#utils#GetResolvedTagItem(namespaces, typeInfo)
+                 let szTypeInfo = omni#cpp#utils#ExtractTypeInfoFromTokens(omni#cpp#tokenizer#Tokenize(szCode))
+                 let result = omni#cpp#utils#GetResolvedTagItem(namespaces, omni#cpp#utils#CreateTypeInfo(szTypeInfo))
+                 " TODO: Namespace resolution for result
++                let result = omni#cpp#namespaces#ResolveAlias(g:omni#cpp#namespaces#CacheAlias, result)
+             endif
+         endif
+     endif
