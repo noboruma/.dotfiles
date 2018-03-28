@@ -1,0 +1,458 @@
+diff --git a/after/ftplugin/c.vim b/after/ftplugin/c.vim
+index 66dfc5e..4eaf967 100644
+--- a/after/ftplugin/c.vim
++++ b/after/ftplugin/c.vim
+@@ -1,2 +1,22 @@
++" ============================================================
++"
++" This file is a part of the omnicppcomplete plugin for vim
++"
++" Copyright (C) 2006-2012 by Vissale Neang<fromtonrouge at gmail dot com>
++"
++" This program is free software; you can redistribute it and/or
++" modify it under the terms of the GNU General Public License as
++" published by the Free Software Foundation; either version 2 of
++" the License or (at your option) version 3 or any later version
++"
++" This program is distributed in the hope that it will be useful,
++" but WITHOUT ANY WARRANTY; without even the implied warranty of
++" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++" GNU General Public License for more details.
++"
++" You should have received a copy of the GNU General Public License
++" along with this program.  If not, see <http://www.gnu.org/licenses/>.
++"
++" ============================================================
+ " OmniCppComplete initialization
+ call omni#cpp#complete#Init()
+diff --git a/after/ftplugin/cpp.vim b/after/ftplugin/cpp.vim
+index 66dfc5e..4eaf967 100644
+--- a/after/ftplugin/cpp.vim
++++ b/after/ftplugin/cpp.vim
+@@ -1,2 +1,22 @@
++" ============================================================
++"
++" This file is a part of the omnicppcomplete plugin for vim
++"
++" Copyright (C) 2006-2012 by Vissale Neang<fromtonrouge at gmail dot com>
++"
++" This program is free software; you can redistribute it and/or
++" modify it under the terms of the GNU General Public License as
++" published by the Free Software Foundation; either version 2 of
++" the License or (at your option) version 3 or any later version
++"
++" This program is distributed in the hope that it will be useful,
++" but WITHOUT ANY WARRANTY; without even the implied warranty of
++" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++" GNU General Public License for more details.
++"
++" You should have received a copy of the GNU General Public License
++" along with this program.  If not, see <http://www.gnu.org/licenses/>.
++"
++" ============================================================
+ " OmniCppComplete initialization
+ call omni#cpp#complete#Init()
+diff --git a/autoload/omni/common/debug.vim b/autoload/omni/common/debug.vim
+index eded649..6b26766 100644
+--- a/autoload/omni/common/debug.vim
++++ b/autoload/omni/common/debug.vim
+@@ -1,3 +1,23 @@
++" ============================================================
++"
++" This file is a part of the omnicppcomplete plugin for vim
++"
++" Copyright (C) 2006-2012 by Vissale Neang<fromtonrouge at gmail dot com>
++"
++" This program is free software; you can redistribute it and/or
++" modify it under the terms of the GNU General Public License as
++" published by the Free Software Foundation; either version 2 of
++" the License or (at your option) version 3 or any later version
++"
++" This program is distributed in the hope that it will be useful,
++" but WITHOUT ANY WARRANTY; without even the implied warranty of
++" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++" GNU General Public License for more details.
++"
++" You should have received a copy of the GNU General Public License
++" along with this program.  If not, see <http://www.gnu.org/licenses/>.
++"
++" ============================================================
+ " Description: Omni completion debug functions
+ " Maintainer:  Vissale NEANG
+ " Last Change: 26 sept. 2007
+diff --git a/autoload/omni/common/utils.vim b/autoload/omni/common/utils.vim
+index c880ad2..d4215c6 100644
+--- a/autoload/omni/common/utils.vim
++++ b/autoload/omni/common/utils.vim
+@@ -1,3 +1,23 @@
++" ============================================================
++"
++" This file is a part of the omnicppcomplete plugin for vim
++"
++" Copyright (C) 2006-2012 by Vissale Neang<fromtonrouge at gmail dot com>
++"
++" This program is free software; you can redistribute it and/or
++" modify it under the terms of the GNU General Public License as
++" published by the Free Software Foundation; either version 2 of
++" the License or (at your option) version 3 or any later version
++"
++" This program is distributed in the hope that it will be useful,
++" but WITHOUT ANY WARRANTY; without even the implied warranty of
++" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++" GNU General Public License for more details.
++"
++" You should have received a copy of the GNU General Public License
++" along with this program.  If not, see <http://www.gnu.org/licenses/>.
++"
++" ============================================================
+ " Description: Omni completion utils
+ " Maintainer:  Vissale NEANG
+ " Last Change: 26 sept. 2007
+diff --git a/autoload/omni/cpp/complete.vim b/autoload/omni/cpp/complete.vim
+index a7e4edc..be579d8 100644
+--- a/autoload/omni/cpp/complete.vim
++++ b/autoload/omni/cpp/complete.vim
+@@ -1,3 +1,23 @@
++" ============================================================
++"
++" This file is a part of the omnicppcomplete plugin for vim
++"
++" Copyright (C) 2006-2012 by Vissale Neang<fromtonrouge at gmail dot com>
++"
++" This program is free software; you can redistribute it and/or
++" modify it under the terms of the GNU General Public License as
++" published by the Free Software Foundation; either version 2 of
++" the License or (at your option) version 3 or any later version
++"
++" This program is distributed in the hope that it will be useful,
++" but WITHOUT ANY WARRANTY; without even the implied warranty of
++" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++" GNU General Public License for more details.
++"
++" You should have received a copy of the GNU General Public License
++" along with this program.  If not, see <http://www.gnu.org/licenses/>.
++"
++" ============================================================
+ " Description: Omni completion script for cpp files
+ " Maintainer:  Vissale NEANG
+ " Last Change: 27 sept. 2007
+diff --git a/autoload/omni/cpp/includes.vim b/autoload/omni/cpp/includes.vim
+index 10a89bc..c33afd7 100644
+--- a/autoload/omni/cpp/includes.vim
++++ b/autoload/omni/cpp/includes.vim
+@@ -1,3 +1,23 @@
++" ============================================================
++"
++" This file is a part of the omnicppcomplete plugin for vim
++"
++" Copyright (C) 2006-2012 by Vissale Neang<fromtonrouge at gmail dot com>
++"
++" This program is free software; you can redistribute it and/or
++" modify it under the terms of the GNU General Public License as
++" published by the Free Software Foundation; either version 2 of
++" the License or (at your option) version 3 or any later version
++"
++" This program is distributed in the hope that it will be useful,
++" but WITHOUT ANY WARRANTY; without even the implied warranty of
++" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++" GNU General Public License for more details.
++"
++" You should have received a copy of the GNU General Public License
++" along with this program.  If not, see <http://www.gnu.org/licenses/>.
++"
++" ============================================================
+ " Description: Omni completion script for cpp files
+ " Maintainer:  Vissale NEANG
+ " Last Change: 26 sept. 2007
+diff --git a/autoload/omni/cpp/items.vim b/autoload/omni/cpp/items.vim
+index b943ad4..5c57f92 100644
+--- a/autoload/omni/cpp/items.vim
++++ b/autoload/omni/cpp/items.vim
+@@ -1,3 +1,23 @@
++" ============================================================
++"
++" This file is a part of the omnicppcomplete plugin for vim
++"
++" Copyright (C) 2006-2018 by Vissale Neang<fromtonrouge at gmail dot com>
++"
++" This program is free software; you can redistribute it and/or
++" modify it under the terms of the GNU General Public License as
++" published by the Free Software Foundation; either version 2 of
++" the License or (at your option) version 3 or any later version
++"
++" This program is distributed in the hope that it will be useful,
++" but WITHOUT ANY WARRANTY; without even the implied warranty of
++" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++" GNU General Public License for more details.
++"
++" You should have received a copy of the GNU General Public License
++" along with this program.  If not, see <http://www.gnu.org/licenses/>.
++"
++" ============================================================
+ " Description: Omni completion script for cpp files
+ " Maintainer:  Vissale NEANG
+ " Last Change: 26 sept. 2007
+@@ -216,6 +236,20 @@ function! omni#cpp#items#ResolveItemsTypeInfo(contextStack, items)
+                 let typeInfo = s:GetTypeInfoOfReturnedType(tmpContextStack, szSymbol)
+             endif
+ 
++            " typeinfo could be a type that's a typeref. CTAGS uses typeref for tagging structs.
++            " Before it gets assigned as context, check if typeref is
++            " struct and use it instead
++            let tagItem = s:ResolveSymbol(tmpContextStack, typeInfo.value, "v:val.kind=='t'")
++            if has_key(tagItem,'typeref')
++                "if matchstr(tagItem.typeref,'struct') > 0
++                    " Hack typeInfo.value
++                    let typeInfo.value = substitute(tagItem.typeref,'struct:','','')
++                    let typeInfo.value = substitute(typeInfo.value,'typename:','','')
++                    let typeInfo.value = substitute(typeInfo.value,'<.*>','','')
++                    let typeInfo.value = substitute(typeInfo.value, 'class:','','')
++                "endif
++            endif
++
+         elseif curItem.kind == 'itemThis'
+             if len(a:contextStack)
+                 let typeInfo = omni#cpp#utils#CreateTypeInfo(substitute(a:contextStack[0], '^::', '', 'g'))
+@@ -304,7 +338,7 @@ function! s:GetTypeInfoOfVariable(contextStack, szVariable, bSearchDecl)
+ 
+         if result != {} && result.value==''
+             " result.value==''
+-            " eg: 
++            " eg:
+             " struct
+             " {
+             " }gVariable;
+@@ -396,7 +430,7 @@ function! s:SearchTypeInfoOfDecl(szVariable)
+     let origPos = originalPos[1:2]
+     let curPos = origPos
+     let stopPos = origPos
+-    
++
+     while curPos !=[0,0]
+         " We go to the start of the current scope
+         let curPos = searchpairpos('{', '', '}', 'bW', g:omni#cpp#utils#expIgnoreComments)
+@@ -550,7 +584,7 @@ function! s:ResolveCast(tokens, startChar, endChar)
+ 
+     let countItem=0
+     let startIndex = -1
+-    let endIndex = -1 
++    let endIndex = -1
+     let i = 0
+     for token in tokens
+         if startIndex==-1
+@@ -602,7 +636,7 @@ function! s:LocalSearchDecl(name)
+     let lastfoldenable = &foldenable
+     let &foldenable = 0
+ 
+-    " We add \C (noignorecase) to 
++    " We add \C (noignorecase) to
+     " avoid bug when, for example, if we have a declaration like this : "A a;"
+     let varname = "\\C\\<" . a:name . "\\>"
+ 
+diff --git a/autoload/omni/cpp/maycomplete.vim b/autoload/omni/cpp/maycomplete.vim
+index 610526b..13afd26 100644
+--- a/autoload/omni/cpp/maycomplete.vim
++++ b/autoload/omni/cpp/maycomplete.vim
+@@ -1,3 +1,23 @@
++" ============================================================
++"
++" This file is a part of the omnicppcomplete plugin for vim
++"
++" Copyright (C) 2006-2012 by Vissale Neang<fromtonrouge at gmail dot com>
++"
++" This program is free software; you can redistribute it and/or
++" modify it under the terms of the GNU General Public License as
++" published by the Free Software Foundation; either version 2 of
++" the License or (at your option) version 3 or any later version
++"
++" This program is distributed in the hope that it will be useful,
++" but WITHOUT ANY WARRANTY; without even the implied warranty of
++" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++" GNU General Public License for more details.
++"
++" You should have received a copy of the GNU General Public License
++" along with this program.  If not, see <http://www.gnu.org/licenses/>.
++"
++" ============================================================
+ " Description: Omni completion script for cpp files
+ " Maintainer:  Vissale NEANG
+ " Last Change: 26 sept. 2007
+diff --git a/autoload/omni/cpp/namespaces.vim b/autoload/omni/cpp/namespaces.vim
+index 386b3f9..c2adef4 100644
+--- a/autoload/omni/cpp/namespaces.vim
++++ b/autoload/omni/cpp/namespaces.vim
+@@ -1,3 +1,23 @@
++" ============================================================
++"
++" This file is a part of the omnicppcomplete plugin for vim
++"
++" Copyright (C) 2006-2012 by Vissale Neang<fromtonrouge at gmail dot com>
++"
++" This program is free software; you can redistribute it and/or
++" modify it under the terms of the GNU General Public License as
++" published by the Free Software Foundation; either version 2 of
++" the License or (at your option) version 3 or any later version
++"
++" This program is distributed in the hope that it will be useful,
++" but WITHOUT ANY WARRANTY; without even the implied warranty of
++" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++" GNU General Public License for more details.
++"
++" You should have received a copy of the GNU General Public License
++" along with this program.  If not, see <http://www.gnu.org/licenses/>.
++"
++" ============================================================
+ " Description: Omni completion script for cpp files
+ " Maintainer:  Vissale NEANG
+ " Last Change: 26 sept. 2007
+diff --git a/autoload/omni/cpp/settings.vim b/autoload/omni/cpp/settings.vim
+index 6683d3a..b752a60 100644
+--- a/autoload/omni/cpp/settings.vim
++++ b/autoload/omni/cpp/settings.vim
+@@ -1,3 +1,23 @@
++" ============================================================
++"
++" This file is a part of the omnicppcomplete plugin for vim
++"
++" Copyright (C) 2006-2012 by Vissale Neang<fromtonrouge at gmail dot com>
++"
++" This program is free software; you can redistribute it and/or
++" modify it under the terms of the GNU General Public License as
++" published by the Free Software Foundation; either version 2 of
++" the License or (at your option) version 3 or any later version
++"
++" This program is distributed in the hope that it will be useful,
++" but WITHOUT ANY WARRANTY; without even the implied warranty of
++" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++" GNU General Public License for more details.
++"
++" You should have received a copy of the GNU General Public License
++" along with this program.  If not, see <http://www.gnu.org/licenses/>.
++"
++" ============================================================
+ " Description: Omni completion script for cpp files
+ " Maintainer:  Vissale NEANG
+ " Last Change: 26 sept. 2007
+diff --git a/autoload/omni/cpp/tokenizer.vim b/autoload/omni/cpp/tokenizer.vim
+index 16e0be2..cf0e745 100644
+--- a/autoload/omni/cpp/tokenizer.vim
++++ b/autoload/omni/cpp/tokenizer.vim
+@@ -1,3 +1,23 @@
++" ============================================================
++"
++" This file is a part of the omnicppcomplete plugin for vim
++"
++" Copyright (C) 2006-2012 by Vissale Neang<fromtonrouge at gmail dot com>
++"
++" This program is free software; you can redistribute it and/or
++" modify it under the terms of the GNU General Public License as
++" published by the Free Software Foundation; either version 2 of
++" the License or (at your option) version 3 or any later version
++"
++" This program is distributed in the hope that it will be useful,
++" but WITHOUT ANY WARRANTY; without even the implied warranty of
++" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++" GNU General Public License for more details.
++"
++" You should have received a copy of the GNU General Public License
++" along with this program.  If not, see <http://www.gnu.org/licenses/>.
++"
++" ============================================================
+ " Description: Omni completion tokenizer
+ " Maintainer:  Vissale NEANG
+ " Last Change: 26 sept. 2007
+diff --git a/autoload/omni/cpp/utils.vim b/autoload/omni/cpp/utils.vim
+index 5d74d34..31aac8b 100644
+--- a/autoload/omni/cpp/utils.vim
++++ b/autoload/omni/cpp/utils.vim
+@@ -1,3 +1,23 @@
++" ============================================================
++"
++" This file is a part of the omnicppcomplete plugin for vim
++"
++" Copyright (C) 2006-2012 by Vissale Neang<fromtonrouge at gmail dot com>
++"
++" This program is free software; you can redistribute it and/or
++" modify it under the terms of the GNU General Public License as
++" published by the Free Software Foundation; either version 2 of
++" the License or (at your option) version 3 or any later version
++"
++" This program is distributed in the hope that it will be useful,
++" but WITHOUT ANY WARRANTY; without even the implied warranty of
++" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++" GNU General Public License for more details.
++"
++" You should have received a copy of the GNU General Public License
++" along with this program.  If not, see <http://www.gnu.org/licenses/>.
++"
++" ============================================================
+ " Description: Omni completion script for cpp files
+ " Maintainer:  Vissale NEANG
+ " Last Change: 26 sept. 2007
+@@ -468,7 +488,9 @@ endfunc
+ " Extract the cmd of a tag item without regexp
+ function! omni#cpp#utils#ExtractCmdFromTagItem(tagItem)
+     let line = a:tagItem.cmd
+-    let re = '\(\/\^\)\|\(\$\/\)'
++	" The following regexp allows the function to match 
++	" either a / or a ? when searching for the tag command
++	let re = '\([/?]\^\)\|\(\$[/?]\)'
+     if match(line, re)!=-1
+         let line = substitute(line, re, '', 'g')
+         return line
+diff --git a/doc/omnicppcomplete.txt b/doc/omnicppcomplete.txt
+index b11e006..6854e4b 100644
+--- a/doc/omnicppcomplete.txt
++++ b/doc/omnicppcomplete.txt
+@@ -2,7 +2,7 @@
+ *omnicppcomplete*
+ 
+ Author: Vissale NEANG (fromtonrouge AT gmail DOT com)
+-Last Change: 26 sept. 2007       
++Last Change: 24 mai 2012       
+ 
+ OmniCppComplete version 0.41
+ 
+@@ -19,6 +19,7 @@ For Vim version 7.0 and above
+ 7. FAQ & TIPS                                   |omnicpp-faq|
+ 8. History                                      |omnicpp-history|
+ 9. Thanks                                       |omnicpp-thanks|
++10. License                                     |omnicpp-license|
+ 
+ ==============================================================================
+ 1. Overview~
+@@ -883,7 +884,7 @@ templates. That's why the script does not handle templates.
+ ==============================================================================
+ 8. History~
+                                                              *omnicpp-history*
+-Version O.41
++Version 0.41
+     -   It's recommended to update ctags to version 5.7 or higher
+     -   The plugin is now activated for C files
+     -   New value for OmniCpp_SelectFirstItem when the option is equal to
+@@ -1075,4 +1076,25 @@ Version 0.1:
+ 
+ ==============================================================================
+ 
++10. License~
++                                                              *omnicpp-license*
++This file is a part of the omnicppcomplete plugin for vim
++
++Copyright (C) 2006-2012 by Vissale Neang<fromtonrouge at gmail dot com>
++
++This program is free software; you can redistribute it and/or
++modify it under the terms of the GNU General Public License as
++published by the Free Software Foundation; either version 2 of
++the License or (at your option) version 3 or any later version
++
++This program is distributed in the hope that it will be useful,
++but WITHOUT ANY WARRANTY; without even the implied warranty of
++MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++GNU General Public License for more details.
++
++You should have received a copy of the GNU General Public License
++along with this program.  If not, see <http://www.gnu.org/licenses/>.
++
++==============================================================================
++
+  vim:tw=78:fo=tcq2:isk=!-~,^*,^\|,^\":ts=8:ft=help:norl:
