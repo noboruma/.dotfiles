@@ -68,7 +68,7 @@ index c2adef4..fc46a2a 100644
      return ['::'] + result
  endfunc
 diff --git a/autoload/omni/cpp/utils.vim b/autoload/omni/cpp/utils.vim
-index 31aac8b..f6985e2 100644
+index 31aac8b..8bd3bbd 100644
 --- a/autoload/omni/cpp/utils.vim
 +++ b/autoload/omni/cpp/utils.vim
 @@ -2,7 +2,7 @@
@@ -97,3 +97,12 @@ index 31aac8b..f6985e2 100644
              endif
          endif
      endif
+@@ -537,7 +538,7 @@ function! omni#cpp#utils#ExtractTypeInfoFromTokens(tokens)
+                 elseif token.kind == 'cppWord'
+                     let szResult = token.value.szResult
+                     let state=2
+-                elseif index(['*', '&'], token.value)<0
++                elseif token.value != 'const' && index(['*', '&'], token.value)<0
+                     break
+                 endif
+             elseif state==1
