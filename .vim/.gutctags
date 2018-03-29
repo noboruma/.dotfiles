@@ -1,4 +1,5 @@
---c++-kinds=+plA
+--sort=true
+--c++-kinds=+plAUz+{template}
 --fields=+iaS
 --extra=+q
---languages=c++
+--language-force=C++
