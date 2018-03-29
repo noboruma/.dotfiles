@@ -31,7 +31,9 @@ noremap <leader>E :Explore<cr>
 "noremap <leader>wh<leader>e :let @e=expand('%:p:h')<cr><c-w>h:e <c-r>e/<tab>
 "noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
 noremap <leader>f :botright pta <C-r><C-w><cr>
-vnoremap <leader>f "sy:botright pta <C-R>"<cr>
+noremap <leader>F "sy:botright pta /<C-R>"
+vnoremap <leader>f "sy:botright pta /<C-R>"<cr>
+vnoremap <leader>F "sy:botright pta /<C-R>"
 "noremap <leader>f <C-w>z
 "noremap <leader>f f(l
 "noremap <leader>F T(
@@ -46,8 +48,9 @@ noremap <leader>gg :botright copen\|AsyncRun -program=grep "<C-r><C-w>" `pwd`<ta
 noremap <leader>h :call File_flip()<cr>zz
 noremap <leader>H :0r ~/.vim/.header_template<cr>
 noremap <leader>j :tj <C-r><C-w><cr>
-vnoremap <leader>j "sy:tj <C-R>"<cr>
 noremap <leader>J :tj /<C-r><C-w><C-b><right><right><right><right>
+vnoremap <leader>j "sy:tj /<C-R>"<cr>
+vnoremap <leader>J "sy:tj /<C-R>"
 "noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>
 "noremap <leader>wh<leader>j :let @j='<C-r><C-w>'<cr><C-w>h:tj <C-r>j<cr>
 noremap <leader><bs> <C-O>
