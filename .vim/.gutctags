@@ -1,4 +1,4 @@
---c++-kinds=+pl
+--c++-kinds=+plA
 --fields=+iaS
 --extra=+q
 --languages=c++
