@@ -92,7 +92,7 @@ alias p4v="p4v&"
 alias p4lsdefault="p4 opened | grep default"
 alias p4lschanges="p4 changes -s pending -c \`p4 client -o | sed -n 's/^Client:\(.*\)$/\1/p'\`"
 alias lsp4sanbox="p4lsdefault; p4lschanges"
-function p4listfiles () { p4 opened -c ${@:$#} | sed 's/.*\/matlab/\./g' | sed 's/#[0-9]\+//g' | GREP_COLOR='01;36' grep --color=always 'move\|$' | GREP_COLOR='01;32' grep --color=always 'add\|$' | GREP_COLOR='01;32' grep --color=always 'edit\|$' | GREP_COLOR='01;31' grep --color=always '^.*delete.*$\|$' | GREP_COLOR='01;31' grep --color=always 'delete.*\|$'}
+function p4listfiles () { p4 opened -c ${@:$#} | sed 's/.*\/matlab/\./g' | sed 's/\(#[0-9]\+\)/ \1/g' | GREP_COLOR='01;36' grep --color=always 'move\|$' | GREP_COLOR='01;32' grep --color=always 'add\|$' | GREP_COLOR='01;32' grep --color=always 'edit\|$' | GREP_COLOR='01;31' grep --color=always '^.*delete.*$\|$' | GREP_COLOR='01;31' grep --color=always 'delete.*\|$'}
 alias lsp4change="p4listfiles"
 function p4discardshevle () { p4 shelve -d -c $1; p4 shelve -c $1 }
 alias p4shelve="p4discardshevle"
