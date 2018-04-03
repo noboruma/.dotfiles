@@ -33,7 +33,7 @@ alias hist="grep '$1' ~/.zsh_history"
 alias mem="free -m"
 
 # command L equivalent to command |less
-alias -g L='|less' 
+alias -g L='|less'
 
 # command S equivalent to command &> /dev/null &
 alias -g N='&> /dev/null &'
@@ -86,3 +86,6 @@ alias alert_helper='history|tail -n1|sed -e "s/^\s*[0-9]\+\s*//" -e "s/;\s*alert
 alias alert='notify-send -i /usr/share/icons/gnome/32x32/apps/gnome-terminal.png "[$?] $(alert_helper)"'
 
 alias p4v="p4v&"
+if type "colordiff" > /dev/null; then
+  alias diff="colordiff"
+fi
