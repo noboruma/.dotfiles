@@ -21,7 +21,18 @@
 export HISTFILE=~/.zsh_history
 export HISTSIZE=50000
 export SAVEHIST=50000
+case `uname` in
+  Darwin)
+  ;;
+  Linux)
 eval `dircolors -b`
+setxkbmap -option ctrl:nocaps
+#setxkbmap -option to enable
+  ;;
+  FreeBSD)
+    # commands for FreeBSD go here
+  ;;
+esac
 
 #set -o vi
 #bindkey -v
@@ -209,9 +220,6 @@ bindkey '^x^e' edit-command-line
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 echo 'running on '$TTY
-
-setxkbmap -option ctrl:nocaps
-#setxkbmap -option to enable
 
 # zsh-bd
 source $HOME/.zsh/plugins/bd/bd.zsh

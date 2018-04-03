@@ -1,5 +1,5 @@
 diff --git a/autoload/omni/cpp/items.vim b/autoload/omni/cpp/items.vim
-index fd79131..0e752b9 100644
+index fd79131..5f79671 100644
 --- a/autoload/omni/cpp/items.vim
 +++ b/autoload/omni/cpp/items.vim
 @@ -2,7 +2,7 @@
@@ -11,7 +11,20 @@ index fd79131..0e752b9 100644
  "
  " This program is free software; you can redistribute it and/or
  " modify it under the terms of the GNU General Public License as
-@@ -241,9 +241,14 @@ function! omni#cpp#items#ResolveItemsTypeInfo(contextStack, items)
+@@ -236,14 +236,27 @@ function! omni#cpp#items#ResolveItemsTypeInfo(contextStack, items)
+                 let typeInfo = s:GetTypeInfoOfReturnedType(tmpContextStack, szSymbol)
+             endif
+ 
++            " handle the auto case
++            if typeInfo.value == 'auto'
++                let tagList = omni#common#utils#TagListNoThrow('^'.szSymbol.'$')
++                let functionName = substitute(tagList[0].cmd,  '^.*=\s*', '', '')
++                let functionName = substitute(functionName,  '(.*$', '', '')
++                let typeInfo = s:GetTypeInfoOfReturnedType(tmpContextStack, functionName)
++            endif
++
+             " typeinfo could be a type that's a typeref. CTAGS uses typeref for tagging structs.
+             " Before it gets assigned as context, check if typeref is
              " struct and use it instead
              let tagItem = s:ResolveSymbol(tmpContextStack, typeInfo.value, "v:val.kind=='t'")
              if has_key(tagItem,'typeref')
@@ -28,7 +41,7 @@ index fd79131..0e752b9 100644
                  endif
              endif
  
-@@ -392,11 +397,12 @@ endfunc
+@@ -392,11 +405,12 @@ endfunc
  " Gets the first symbol found in the context stack
  function! s:ResolveSymbol(contextStack, szSymbol, szTagFilter)
      let tagItem = {}
@@ -68,7 +81,7 @@ index c2adef4..fc46a2a 100644
      return ['::'] + result
  endfunc
 diff --git a/autoload/omni/cpp/utils.vim b/autoload/omni/cpp/utils.vim
-index 31aac8b..f6985e2 100644
+index 31aac8b..8bd3bbd 100644
 --- a/autoload/omni/cpp/utils.vim
 +++ b/autoload/omni/cpp/utils.vim
 @@ -2,7 +2,7 @@
@@ -97,3 +110,12 @@ index 31aac8b..f6985e2 100644
              endif
          endif
      endif
+@@ -537,7 +538,7 @@ function! omni#cpp#utils#ExtractTypeInfoFromTokens(tokens)
+                 elseif token.kind == 'cppWord'
+                     let szResult = token.value.szResult
+                     let state=2
+-                elseif index(['*', '&'], token.value)<0
++                elseif token.value != 'const' && index(['*', '&'], token.value)<0
+                     break
+                 endif
+             elseif state==1

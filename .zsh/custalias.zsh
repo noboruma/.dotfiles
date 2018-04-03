@@ -10,7 +10,17 @@ alias -s PKGBUILD=$EDITOR
 alias xterm='xterm -fg white -bg black'
 
 # Normal aliases
+case `uname` in
+  Darwin)
+alias ls='ls -GFh'
+  ;;
+  Linux)
 alias ls='ls --color=auto -Fh'
+  ;;
+  FreeBSD)
+    # commands for FreeBSD go here
+  ;;
+esac
 #alias lsd='ls -ld *(-/DN)'
 #alias lsa='ls -ld .*'
 alias f='find -type f | xargs grep'
