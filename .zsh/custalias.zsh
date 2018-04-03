@@ -96,3 +96,9 @@ function p4listfiles () { p4 opened -c ${@:$#} | sed 's/.*\/matlab/\./g' | sed '
 alias lsp4change="p4listfiles"
 function p4discardshevle () { p4 shelve -d -c $1; p4 shelve -c $1 }
 alias p4shelve="p4discardshevle"
+alias cdp4root="cd \`p4 client -o | sed -n 's/^Root:\(.*\)$/\1/p'\`"
+alias diffp4="P4DIFF=colordiff p4 diff"
+alias vdiffp4="P4DIFF=vimdiff p4 diff"
+alias p4delshelve="p4 shelve -d -c"
+alias p4addshelve="p4 shelve -c"
+alias p4submit="p4 submit -c"
