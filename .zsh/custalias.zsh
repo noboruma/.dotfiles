@@ -85,7 +85,14 @@ alias vimdev="vim --cmd 'let indexing=1' --servername VIM"
 alias alert_helper='history|tail -n1|sed -e "s/^\s*[0-9]\+\s*//" -e "s/;\s*alert$//"'
 alias alert='notify-send -i /usr/share/icons/gnome/32x32/apps/gnome-terminal.png "[$?] $(alert_helper)"'
 
-alias p4v="p4v&"
 if type "colordiff" > /dev/null; then
   alias diff="colordiff"
 fi
+alias p4v="p4v&"
+alias p4lsdefault="p4 opened | grep default"
+alias p4lschanges="p4 changes -s pending -c \`p4 client -o | sed -n 's/^Client:\(.*\)$/\1/p'\`"
+alias lsp4sanbox="p4lsdefault; p4lschanges"
+function p4listfiles () { p4 opened -c $1 | sed 's/.*\/matlab/\./g' | sed 's/#[0-9]\+//g' | GREP_COLOR='01;36' grep --color=always 'move\|$' | GREP_COLOR='01;32' grep --color=always 'add\|$' | GREP_COLOR='01;32' grep --color=always 'edit\|$' | GREP_COLOR='01;31' grep --color=always '^.*delete.*$\|$' | GREP_COLOR='01;31' grep --color=always 'delete.*\|$'}
+alias lsp4change="p4listfiles"
+function p4discardshevle () { p4 shelve -d -c $1; p4 shelve -c $1 }
+alias p4shelve="p4discardshevle"
