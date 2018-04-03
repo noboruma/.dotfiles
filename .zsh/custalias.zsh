@@ -101,4 +101,5 @@ alias diffp4="P4DIFF=colordiff p4 diff"
 alias vdiffp4="P4DIFF=vimdiff p4 diff"
 alias p4delshelve="p4 shelve -d -c"
 alias p4addshelve="p4 shelve -c"
-alias p4submit="p4 submit -c"
+function p4reviewNsubmit() { p4 change -u $1; p4 submit -c $1 }
+alias p4submit="p4reviewNsubmit"
