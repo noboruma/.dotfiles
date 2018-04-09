@@ -92,14 +92,20 @@ alias p4v="p4v&"
 alias p4lsdefault="p4 opened | grep default"
 alias p4lschanges="p4 changes -s pending -c \`p4 client -o | sed -n 's/^Client:\(.*\)$/\1/p'\`"
 alias lsp4sanbox="p4lsdefault; p4lschanges"
-function p4listfiles () { p4 opened -c ${@:$#} | sed 's/.*\/matlab/\./g' | sed 's/\(#[0-9]\+\)/ \1/g' | GREP_COLOR='01;36' grep --color=always 'move\|$' | GREP_COLOR='01;32' grep --color=always 'add\|$' | GREP_COLOR='01;32' grep --color=always 'edit\|$' | GREP_COLOR='01;31' grep --color=always '^.*delete.*$\|$' | GREP_COLOR='01;31' grep --color=always 'delete.*\|$'}
+function p4listfiles () { p4 opened -c ${@:$#} | sed 's/.*\/matlab/\./g' | sed 's/\(#[0-9]\+\)/ \1/g' | sed 's/move\//move|/g' | GREP_COLOR='01;36' grep --color=always 'move\|$' | GREP_COLOR='01;32' grep --color=always 'add\|$' | GREP_COLOR='01;32' grep --color=always 'edit\|$' | GREP_COLOR='01;31' grep --color=always '^.*delete.*$\|$' | GREP_COLOR='01;31' grep --color=always 'delete.*\|$' | column -ts\# }
 alias lsp4change="p4listfiles"
 function p4discardshevle () { p4 shelve -d -c $1; p4 shelve -c $1 }
 alias p4shelve="p4discardshevle"
 alias cdp4root="cd \`p4 client -o | sed -n 's/^Root:\(.*\)$/\1/p'\`"
 alias diffp4="P4DIFF=colordiff p4 diff"
 alias vdiffp4="P4DIFF=vimdiff p4 diff"
+alias diff2p4="P4DIFF=colordiff p4 diff2"
+alias vdiff2p4="P4DIFF=vimdiff p4 diff2"
 alias p4delshelve="p4 shelve -d -c"
 alias p4addshelve="p4 shelve -c"
 function p4reviewNsubmit() { p4 change -u $1; p4 submit -c $1 }
 alias p4submit="p4reviewNsubmit"
+
+function mwfindPath () {
+    mw ch findPath -c $1 $2 -f DOT | dot -Tx11
+}
