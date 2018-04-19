@@ -409,6 +409,7 @@ let s:blacklist = {
     \   'static',
     \   'static_assert',
     \   'static_cast',
+    \   'std',
     \   'struct',
     \   'switch',
     \   'template',

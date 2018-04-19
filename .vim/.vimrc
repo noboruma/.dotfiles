@@ -142,6 +142,7 @@ let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 "!Airline
+
 "Rainbow plugin
 let &runtimepath.=',~/.vim/bundle/rainbow'
 let g:rainbow_active = 1
@@ -155,12 +156,13 @@ let g:rainbow_conf = {
    \       'start=/{/ end=/}/ fold',
    \       'start=/\(\(\<operator\>\)\@<!<\)\&[a-zA-Z0-9_]\@<=<\ze[^<]/ end=/>/'] } } }
 "!Rainbow
+
 "Slime plugin
 let &runtimepath.=',~/.vim/bundle/slime'
 let g:slime_target = "tmux"
 "!Slime
+
 " Tagbar options
-""""""""""""""""""
 let &runtimepath.=',~/.vim/bundle/tagbar'
 let g:tagbar_compact = 1
 let g:tagbar_autofocus = 1
@@ -175,7 +177,7 @@ let g:asyncrun_bell=1
 
 " Restful-console
 let &runtimepath.=',~/.vim/bundle/vim-rest-console'
-"! Restful-console
+"!Restful-console
 
 " Unite.vim
 let &runtimepath.=',~/.vim/bundle/unite.vim'
@@ -184,10 +186,11 @@ call unite#custom#profile('default', 'context', {
 	\   'winheight': 10,
 	\   'direction': 'botright',
 \ })
-"! Unite.vim
+"!Unite.vim
 
 " javascript
 let &runtimepath.=',~/.vim/bundle/vim-javascript'
+" !javascript
 
 " Clang-format
 let &runtimepath.=',~/.vim/bundle/vim-clang-format'
@@ -271,7 +274,7 @@ set dictionary+=/usr/share/dict/words
 
 " Make options
 let &makeprg='mw gmake'
-"
+
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>
 "set tags+=./tags
