@@ -210,8 +210,6 @@ export PATH="$NPM_PACKAGES/bin:$PATH"
 
 export ZBEEP=''
 
-source /usr/share/autojump/autojump.zsh
-
 # Enable v inside command
 autoload edit-command-line
 zle -N edit-command-line
@@ -230,3 +228,5 @@ export QT_IM_MODULE=ibus
 
 #source ~/usr/emsdk-portable/emsdk_env.sh
 #source ~/.sdkman/bin/sdkman-init.sh
+
+source /usr/share/autojump/autojump.zsh
