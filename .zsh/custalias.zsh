@@ -64,7 +64,7 @@ alias shibern="sudo pm-hibernate"
 alias sreboot="sudo reboot"
 
 alias arduino="arduino-asm&"
-alias m='mw gmake -j4'
+alias mc='mw gmake -j4'
 alias mc='mw gmake -j4 check'
 
 alias ll="ls -al"
@@ -108,4 +108,8 @@ alias p4submit="p4reviewNsubmit"
 
 function mwfindPath () {
     mw ch findPath -c $1 $2 -f DOT | dot -Tx11
+}
+
+function mwctb () {
+    mw gmake -j4 COMPONENTS_TO_BUILD=$1
 }
