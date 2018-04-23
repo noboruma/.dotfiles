@@ -7,6 +7,8 @@ if has("gui_running")
   au BufWritePost <buffer> :SemanticHighlight
 endif
 
+" set keywordprg=cppman
+
 " Surround
 let g:surround_{char2nr("t")} = "\1template: \1<\r>"
 
