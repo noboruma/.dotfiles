@@ -26,9 +26,9 @@ if has("gui_running")
 else
     " vim --cmd 'let indexing=""'
     if exists('indexing')
-let l:perforcecmd='bash -c "cat <(p4 opened) <(p4 have)" | cut -f1 -d\# | cut -f5-100 -d/ | grep "\.[c|h][a-zA-Z]*$" | grep "'.indexing.'"'
+let perforcecmd='bash -c "cat <(p4 opened) <(p4 have)" | cut -f1 -d\# | cut -f5-100 -d/ | grep "\.[c|h][a-zA-Z]*$" | grep "'.indexing.'"'
     else
-let l:perforcecmd='bash -c "cat <(p4 opened) <(p4 have)" | cut -f1 -d\# | cut -f5-100 -d/ | grep "\.[c|h][a-zA-Z]*$" | grep "matlab/src\\|matlab/foundation\\|matlab/toolbox"'
+let perforcecmd='bash -c "cat <(p4 opened) <(p4 have)" | cut -f1 -d\# | cut -f5-100 -d/ | grep "\.[c|h][a-zA-Z]*$" | grep "matlab/src\\|matlab/foundation\\|matlab/toolbox"'
     endif
 endif
 
@@ -238,7 +238,7 @@ let g:gutentags_file_list_command = {
             \ 'markers': {
             \ '.git': 'git ls-files',
             \ '.hg': 'hg files',
-            \ '.perforce': l:perforcecmd,
+            \ '.perforce': perforcecmd,
             \ },
             \ }
 set statusline+=%{gutentags#statusline()}
