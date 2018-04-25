@@ -24,12 +24,13 @@ if has("gui_running")
     set guioptions+=r  "scrollbar
   endif
 else
-    " vim --cmd 'let indexing=""'
-    if exists('indexing')
-let perforcecmd='bash -c "cat <(p4 opened) <(p4 have)" | cut -f1 -d\# | cut -f5-100 -d/ | grep "\.[c|h][a-zA-Z]*$" | grep "'.indexing.'"'
-    else
-let perforcecmd='bash -c "cat <(p4 opened) <(p4 have)" | cut -f1 -d\# | cut -f5-100 -d/ | grep "\.[c|h][a-zA-Z]*$" | grep "matlab/src\\|matlab/foundation\\|matlab/toolbox"'
-    endif
+endif
+
+" vim --cmd 'let indexing=""'
+if exists('indexing')
+    let perforcecmd='bash -c "cat <(p4 opened) <(p4 have)" | cut -f1 -d\# | cut -f5-100 -d/ | grep "\.[c|h][a-zA-Z]*$" | grep "'.indexing.'"'
+else
+    let perforcecmd='bash -c "cat <(p4 opened) <(p4 have)" | cut -f1 -d\# | cut -f5-100 -d/ | grep "\.[c|h][a-zA-Z]*$" | grep "matlab/src\\|matlab/foundation\\|matlab/toolbox"'
 endif
 
 " Use surfraw to search on the web
