@@ -17,10 +17,11 @@ let g:surround_{char2nr("c")} = "\/*\r*\/"
 
 let g:CFolderindent=0
 if exists('debug')
-let g:CFolderClosed=99
+    let g:CFolderClosed=99
 else
-let g:CFolderClosed=1
+    let g:CFolderClosed=1
 endif
+
 function! CFold1Lay()
     if getline(v:lnum) =~? '^\s*}$'
         if indent(v:lnum) == g:CFolderindent
@@ -46,8 +47,11 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 
-set complete-=i
-set complete-=t
+" Stop parsing include files
+setlocal complete-=i
+" stop use ctags, only used for jump
+setlocal complete-=t
+
 
 inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
 inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
@@ -61,19 +65,17 @@ imap <expr> {<cr> "{<cr>}<esc>O"
 inoremap [<cr> [<cr>]<c-o>O<tab>
 inoremap (<cr> (<cr>)<c-o>O<tab>
 
-inoremap <expr> <> "<>\<Left>"
-inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
 
 if !exists("*File_flip")
-function! File_flip()
-  if match(expand("%:t"),"\\.h") > 0
-    let s:flipname = substitute(expand("%:t"),'\.h','.c',"")
-    exe ":find " s:flipname
-  elseif match(expand("%:t"),"\\.c") > 0
-    let s:flipname = substitute(expand("%:t"),'\.c','.h',"")
-    exe ":find " s:flipname
-  endif
-endfun
+    function! File_flip()
+        if match(expand("%:t"),"\\.h") > 0
+            let s:flipname = substitute(expand("%:t"),'\.h','.c',"")
+            exe ":find " s:flipname
+        elseif match(expand("%:t"),"\\.c") > 0
+            let s:flipname = substitute(expand("%:t"),'\.c','.h',"")
+            exe ":find " s:flipname
+        endif
+    endfun
 endif
 
 set efm=%f:%l:%c:\ %m
@@ -83,3 +85,5 @@ set efm+=%Xmake:\ Leaving\ directory\ '%f'
 set efm+=%Dmake[%*\\d]:\ Entering\ directory\ '%f'
 set efm+=%Xmake[%*\\d]:\ Leaving\ directory\ '%f'
 set grepformat=%f:%l:%c:%m
+
+DefineLocalTagFinder TagFindStruct s,struct

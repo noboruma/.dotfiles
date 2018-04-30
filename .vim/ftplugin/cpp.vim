@@ -1,60 +1,17 @@
 " CPP config is shared with C one (c.vim)
 
-if has("gui_running")
-  au BufEnter <buffer> if (!exists('b:created')) | :execute "SemanticHighlight" | let b:created=1 | endif
-  "Triggered by :doautocmd
-  "au User <buffer> :SemanticHighlight
-  au BufWritePost <buffer> :SemanticHighlight
-endif
-
 " set keywordprg=cppman
 
 " Surround
-let g:surround_{char2nr("t")} = "\1template: \1<\r>"
+let g:surround_{char2nr(">")} = "\1template: \1<\r>"
 
-"inoremap <expr> < "<>\<Left>"
-inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
-
-imap <expr> {<cr> "{<cr>}<esc>O"
-inoremap [<cr> [<cr>]<c-o>O<tab>
-inoremap (<cr> (<cr>)<c-o>O<tab>
 inoremap <<cr> <<cr>><c-o>O<tab>
+inoremap <expr> <> "<>\<Left>"
+inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
 
 "Makeprg erroformat
 "compiler gcc
 "! see c.vim for efm
-let g:CFolderindent=0
-if exists('debug')
-let g:CFolderClosed=99
-else
-let g:CFolderClosed=1
-endif
-
-function! CFold1Lay()
-    if getline(v:lnum) =~? '^\s*}$'
-        if indent(v:lnum) == g:CFolderindent
-            let g:CFolderClosed=1
-            let g:CFolderindent=0
-            return '<1'
-        endif
-    elseif getline(v:lnum) =~? '^\s*{$'
-        if getline(v:lnum-1) =~? '^.*)$' || getline(v:lnum-1) =~? '^.*)\s*const$' || getline(v:lnum-1) =~? '^.*)\s*volatile$'
-            if g:CFolderClosed == 1
-                let g:CFolderClosed=0
-                let g:CFolderindent=indent(v:lnum)
-                return '>1'
-            endif
-        endif
-    endif
-    return '='
-endfunction
-setlocal foldmethod=expr
-setlocal foldexpr=CFold1Lay()
-
-" Stop parsing include files
-setlocal complete-=i
-" stop use ctags, only used for jump
-setlocal complete-=t
 
 if !exists("*File_flip")
   function! File_flip()
