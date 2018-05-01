@@ -21,7 +21,7 @@ endfunction
 noremap <leader>a :set scb<cr>
 noremap <leader>A :set scb!<cr>
 "noremap <leader>b :FufBuffer<cr>
-noremap <leader>b :Unite -auto-resize -toggle buffer<cr>
+noremap <leader>b :Unite -auto-resize -toggle -quick-match -sync -wipe buffer<cr>
 noremap <leader>c :ccl\|lcl\|pcl<cr>
 "noremap <leader>c <esc>:cscope c <C-r><C-w>
 noremap <leader>C lc^

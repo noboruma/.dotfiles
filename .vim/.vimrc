@@ -247,6 +247,22 @@ set tags=./tags;,tags;
 let &runtimepath.=',~/.vim/bundle/undotree'
 " !Undotree
 
+" Linediff
+let &runtimepath.=',~/.vim/bundle/linediff.vim'
+" !Linediff
+"
+" vim-snippets
+let &runtimepath.=',~/.vim/bundle/vim-snippets'
+" !
+
+" Snipmate
+let &runtimepath.=',~/.vim/bundle/tlib'
+let &runtimepath.=',~/.vim/bundle/vim-addon-mw-utils'
+let &runtimepath.=',~/.vim/bundle/vim-snipmate'
+imap <C-J> <Plug>snipMateNextOrTrigger
+smap <C-J> <Plug>snipMateNextOrTrigger
+" !Snipmate
+
 " OCC
 let &runtimepath.=',~/.vim/bundle/OmniCppComplete'
 set nocp
