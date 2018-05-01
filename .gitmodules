@@ -52,3 +52,18 @@
 [submodule ".vim/bundle/OmniCppComplete"]
 	path = .vim/bundle/OmniCppComplete
 	url = https://github.com/FromtonRouge/OmniCppComplete
+[submodule ".vim/bundle/linediff.vim"]
+	path = .vim/bundle/linediff.vim
+	url = https://github.com/AndrewRadev/linediff.vim
+[submodule ".vim/bundle/vim-snippets"]
+	path = .vim/bundle/vim-snippets
+	url = https://github.com/honza/vim-snippets
+[submodule ".vim/bundle/vim-snipmate"]
+	path = .vim/bundle/vim-snipmate
+	url = https://github.com/garbas/vim-snipmate
+[submodule ".vim/bundle/vim-addon-mw-utils"]
+	path = .vim/bundle/vim-addon-mw-utils
+	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
+[submodule ".vim/bundle/tlib"]
+	path = .vim/bundle/tlib
+	url = https://github.com/tomtom/tlib_vim.git

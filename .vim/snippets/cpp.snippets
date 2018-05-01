@@ -1,84 +1,20 @@
-snippet inc
-	#include <${1:iostream}>
-# Read File Into Vector
-snippet readfile
-	std::vector<char> v;
-	if (FILE *${2:fp} = fopen(${1:"filename"}, "r"))
-	{
-		char buf[1024];
-		while (size_t len = fread(buf, 1, sizeof(buf), $2))
-			v.insert(v.end(), buf, buf + len);
-		fclose($2);
-	}${3}
-# std::map
-snippet map
-	std::map<${1:key}, ${2:value}> ${3}Map;
-# std::vector
-snippet vec
-	std::vector<${1:char}> ${2};
-# std::array
-snippet arr
-	std::array<${1:type}, ${2:N}> ${3};
-# Namespace
-snippet ns
-	namespace ${1:`Filename('', 'ns')`} {
-		${2}
-	} //!$1
-# Class
-snippet class
-	class ${1:`Filename('$1', 'name')`}
-	{
-		public:
-		    $1 (${2:arguments});
-		    ~$1 ();
-
-		private:
-	        ${3:/* data */}
-	};
-snippet struct
-	struct ${1:`Filename('$1', 'name')`}
-	{
-		$1 (${2:arguments});
-		~$1 ();
-
-		private:
-			${3:/* data */}
-	};
-# For each it
-snippet forit
-	auto it = ${1:con};
-	for (; it != std::end($1); ++it) {
-		${2}
-	}
-# While it
-snippet whileit
-	auto it = ${1:con};
-	while (it != std::end($1)) {
-		${2}
-		++it;
-	}
-# For each i as auto
-snippet forauto
-	for (auto const &${1:e} : ${2}) {
-		${3}
-	}
-# For each i as size_t
-snippet forsize
-	for (size_t ${1:i}=0; $1 < ${2:.size()}; ${3:++}$1) {
-		${4}
-	}
-# Cout
-snippet cout
-	std::cout<<${1}<<std::endl;
-# auto const &
 snippet ac
-	auto const &
-#std::string
+	auto const&
 snippet str
 	std::string
-#std::string const
 snippet strc
 	std::string const &
-#range
-snippet range
-	std::begin(${1:con}), std::end($1)
+snippet sc
+	static_cast<${1}>(${2})
+snippet fe
+	for(auto const &a : ${1}) {
+		${2}
+	}
+snippet beg
+	std::begin(${1})
+snippet end
+	std::end(${2})
+snippet cbeg
+	std::cbegin(${1})
+snippet cend
+	std::cend(${2})
