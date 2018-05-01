@@ -267,3 +267,9 @@ function! Smart_TabComplete()
         return "\<C-X>\<C-O>"                         " plugin matching
     endif
 endfunction
+
+if &diff
+    noremap <F5> :tabclose<cr>
+    noremap <F6> :tabprev<cr>
+    noremap <F7> :tabnext<cr>
+endif
