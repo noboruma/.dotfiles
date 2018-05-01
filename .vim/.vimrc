@@ -185,6 +185,15 @@ let g:asyncrun_bell=1
 
 " Restful-console
 let &runtimepath.=',~/.vim/bundle/vim-rest-console'
+let g:vrc_curl_opts = {
+            \ '--connect-timeout' : 10,
+            \ '-L': '',
+            \ '-i': '',
+            \ '--max-time': 60,
+            \ '--ipv4': '',
+            \ '-k': '',
+            \ '-v': '',
+            \}
 "!Restful-console
 
 " Unite.vim
@@ -192,7 +201,7 @@ let &runtimepath.=',~/.vim/bundle/unite.vim'
 call unite#custom#profile('default', 'context', {
 	\   'start_insert': 1,
 	\   'winheight': 10,
-	\   'direction': 'botright',
+	\   'direction': 'botright'
 \ })
 "!Unite.vim
 
