@@ -68,6 +68,8 @@ inoremap (<cr> (<cr>)<c-o>O<tab>
 
 if !exists("*File_flip")
     function! File_flip()
+        let oldpath=&path
+        set path+=../**
         if match(expand("%:t"),"\\.h") > 0
             let s:flipname = substitute(expand("%:t"),'\.h','.c',"")
             exe ":find " s:flipname
@@ -75,6 +77,7 @@ if !exists("*File_flip")
             let s:flipname = substitute(expand("%:t"),'\.c','.h',"")
             exe ":find " s:flipname
         endif
+        let &path=oldpath
     endfun
 endif
 
