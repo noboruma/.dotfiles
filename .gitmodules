@@ -94,3 +94,6 @@
 [submodule ".vim/bundle/vim-repeat"]
 	path = .vim/bundle/vim-repeat
 	url = https://github.com/tpope/vim-repeat
+[submodule ".gdb/bundle/gdb-dashboard"]
+	path = .gdb/bundle/gdb-dashboard
+	url = https://github.com/cyrus-and/gdb-dashboard
