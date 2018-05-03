@@ -55,6 +55,8 @@ inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
 
 if !exists("*File_flip")
   function! File_flip()
+    let oldpath=&path
+    set path+=../**
     " The flip mechanism consider that path is properly set on headers
     if match(expand("%:t"),'\.h\(.*\)') > 0
         if match(expand("%:t"),'\.hh') > 0
@@ -98,6 +100,7 @@ if !exists("*File_flip")
           exe ":find ".s:flipname
         endif
     endif
+    let &path=oldpath
   endfun
 endif
 
