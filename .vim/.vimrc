@@ -122,9 +122,9 @@ filetype off
 
 " Ale
 let &runtimepath.=',~/.vim/bundle/ale'
-let g:ale_linters = {
-\   'cpp': ['g++', 'cppcheck', 'clangtidy', 'clangcheck', 'clang'],
-\}
+"let g:ale_linters = {
+"\   'cpp': ['g++', 'cppcheck', 'clangtidy', 'clangcheck', 'clang'],
+"\}
 let g:ale_cpp_gcc_options = '$(cat ~/.compiler_options)' "Options can be easily retrieved using 'bear' (github)
 let g:ale_cpp_clang_options = '$(cat ~/.compiler_options)' "Options can be easily retrieved using 'bear' (github)
 let g:ale_cpp_clangtidy_options = '$(cat ~/.compiler_options)'
@@ -253,6 +253,7 @@ filetype indent on
 set ruler          " Relative cursor position
 set is             " inc search
 set cul            " Highlight current line
+hi CursosLine gui=underline
 
 set spelllang=en
 set nospell
@@ -324,7 +325,6 @@ set cpo+=n
 
 set autochdir
 
-hi CursosLine gui=underline
 
 " Jump to the last position when reopening a file
 augroup vimrc
@@ -403,8 +403,6 @@ let g:ConqueTerm_InsertOnEnter = 1
 let g:ConqueTerm_CWInsert = 1
 
 set modeline
-
-let g:atp_Compiler = "python"
 
 " session
 set ssop-=options    " do not store global and local values in a session
