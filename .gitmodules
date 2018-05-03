@@ -67,3 +67,6 @@
 [submodule ".vim/bundle/tlib"]
 	path = .vim/bundle/tlib
 	url = https://github.com/tomtom/tlib_vim.git
+[submodule ".vim/bundle/vim-wordmotion"]
+	path = .vim/bundle/vim-wordmotion
+	url = https://github.com/chaoren/vim-wordmotion
