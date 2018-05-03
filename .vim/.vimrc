@@ -278,6 +278,10 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 let &runtimepath.=',~/.vim/bundle/tagfinder'
 " !tagfinder
 
+" wordmotion
+let &runtimepath.=',~/.vim/bundle/vim-wordmotion'
+" !wordmotion
+
 filetype on
 filetype plugin on
 filetype indent on
