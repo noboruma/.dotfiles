@@ -192,42 +192,6 @@ call unite#custom#profile('default', 'context', {
 \ })
 "!Unite.vim
 
-" javascript
-let &runtimepath.=',~/.vim/bundle/vim-javascript'
-" !javascript
-
-" Clang-format
-let &runtimepath.=',~/.vim/bundle/vim-clang-format'
-let g:clang_format#command="clang-format-3.5"
-let g:clang_format#detect_style_file=0
-let g:clang_format#style_options = {
-            \ "AlwaysBreakTemplateDeclarations" : "true",
-            \ "Standard" : "C++11",
-            \ "BasedOnStyle": "Google",
-            \"IndentWidth": 4,
-            \"AccessModifierOffset": -2,
-            \"IndentCaseLabels": "false",
-            \"MaxEmptyLinesToKeep": 3,
-            \"KeepEmptyLinesAtTheStartOfBlocks": "true",
-            \"SpacesBeforeTrailingComments": 1,
-            \"AllowShortFunctionsOnASingleLine": "None",
-            \"DerivePointerAlignment": "false",
-            \"BinPackParameters": "false",
-            \"AllowAllParametersOfDeclarationOnNextLine": "false",
-            \"BreakConstructorInitializersBeforeComma": "true",
-            \"ConstructorInitializerAllOnOneLineOrOnePerLine": "false",
-            \"AllowShortIfStatementsOnASingleLine": "false",
-            \"AllowShortLoopsOnASingleLine": "false",
-            \"BreakBeforeBraces": "Linux",
-            \"ColumnLimit": 140,
-            \"NamespaceIndentation": "All"}
-autocmd FileType c,cpp,objc vnoremap <buffer><Leader>= :ClangFormat<CR>
-" !Clang-format
-
-" Kotlin
-let &runtimepath.=',~/.vim/bundle/kotlin-vim'
-" !Kotlin
-
 " Gutentags
 let &runtimepath.=',~/.vim/bundle/vim-gutentags'
 let g:gutentags_project_root=['.perforce', '.git']
@@ -250,7 +214,7 @@ let &runtimepath.=',~/.vim/bundle/undotree'
 " Linediff
 let &runtimepath.=',~/.vim/bundle/linediff.vim'
 " !Linediff
-"
+
 " vim-snippets
 let &runtimepath.=',~/.vim/bundle/vim-snippets'
 " !
@@ -262,17 +226,6 @@ let &runtimepath.=',~/.vim/bundle/vim-snipmate'
 imap <C-J> <Plug>snipMateNextOrTrigger
 smap <C-J> <Plug>snipMateNextOrTrigger
 " !Snipmate
-
-" OCC
-let &runtimepath.=',~/.vim/bundle/OmniCppComplete'
-set nocp
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-au BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.hxx,*.hh,*.cc set omnifunc=omni#cpp#complete#Main
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-" !OCC
 
 " tagfinder
 let &runtimepath.=',~/.vim/bundle/tagfinder'
