@@ -245,7 +245,7 @@ let &runtimepath.=',~/.vim/bundle/linediff.vim'
 
 " vim-snippets
 let &runtimepath.=',~/.vim/bundle/vim-snippets'
-" !
+" vim-snippets!
 
 " Snipmate
 let &runtimepath.=',~/.vim/bundle/tlib'
@@ -262,6 +262,27 @@ let &runtimepath.=',~/.vim/bundle/tagfinder'
 " wordmotion
 let &runtimepath.=',~/.vim/bundle/vim-wordmotion'
 " !wordmotion
+
+" vim-textobj
+let &runtimepath.=',~/.vim/bundle/vim-textobj-user'
+let &runtimepath.=',~/.vim/bundle/vim-textobj-function'
+let &runtimepath.=',~/.vim/bundle/vim-textobj-parameter'
+let &runtimepath.=',~/.vim/bundle/vim-textobj-variable-segment'
+let &runtimepath.=',~/.vim/bundle/vim-textobj-xmlattr'
+" !vim-textobj
+"
+" Tabular
+let &runtimepath.=',~/.vim/bundle/tabular'
+" !Tabular
+
+" EasyMotion
+let &runtimepath.=',~/.vim/bundle/vim-easymotion'
+nmap s <Plug>(easymotion-overwin-w)
+" !EasyMotion
+
+" vim-repeat
+let &runtimepath.=',~/.vim/bundle/vim-repeat'
+" !vim-repeat
 
 filetype on
 filetype plugin on

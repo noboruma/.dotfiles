@@ -73,7 +73,6 @@ noremap <leader>T :sp<cr>
 noremap <leader>u :UndotreeToggle<cr>:UndotreeFocus<cr>
 noremap <leader>v <C-v>
 "noremap <leader>w :up<cr>
-noremap <leader>w <C-w>o:vsp<cr>
 noremap <leader>x :bp\|bd #<cr>
 noremap <leader>X :bp\|bd! #<cr>
 noremap <leader>y "+y
