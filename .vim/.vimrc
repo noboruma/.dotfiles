@@ -88,7 +88,7 @@ set autoread
 set clipboard=unnamed          " ^=
 
 " Prevent RO file editing: use 'set modifiable' manually if needed
-autocmd BufRead * let &modifiable = !&readonly
+"autocmd BufRead * let &modifiable = !&readonly
 
 " set terminal as tmux
 set term=screen-256color
@@ -216,6 +216,7 @@ let g:gutentags_file_list_command = {
             \ }
 set statusline+=%{gutentags#statusline()}
 set tags=./tags;,tags;
+let g:gutentags_cache_dir='~/.tags.auto'
 " /!\ Change plugin from setlocal to set
 " !Gutentags
 

@@ -8,7 +8,7 @@ let OmniCpp_NamespaceSearch = 1
 let OmniCpp_GlobalScopeSearch = 1
 let OmniCpp_ShowAccess = 1
 let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-au BufNewFile,BufRead,BufEnter *.cpp,*.hpp,*.hxx,*.hh,*.cc set omnifunc=omni#cpp#complete#Main
+set omnifunc=omni#cpp#complete#Main
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 " !OCC
 " Clang-format
