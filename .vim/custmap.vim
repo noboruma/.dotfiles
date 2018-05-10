@@ -26,7 +26,7 @@ noremap <leader>c :ccl\|lcl\|pcl<cr>
 "noremap <leader>c <esc>:cscope c <C-r><C-w>
 noremap <leader>C lc^
 noremap <leader>d "_d
-noremap <leader>e :e<space>`pwd`<tab>
+noremap <leader>e :silent<space>e<space>`pwd`<tab>
 noremap <leader>E :Explore<cr>
 "noremap <leader>wh<leader>e :let @e=expand('%:p:h')<cr><c-w>h:e <c-r>e/<tab>
 "noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
