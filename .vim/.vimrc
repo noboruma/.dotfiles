@@ -98,7 +98,7 @@ set clipboard=unnamed          " ^=
 "autocmd BufRead * let &modifiable = !&readonly
 
 " set terminal as tmux
-set term=screen-256color
+set term=xterm-256color
 
 " Show space and tab as blue
 "set list
@@ -138,6 +138,7 @@ let g:ale_cpp_clangtidy_options = '$(cat ~/.compiler_options)'
 let g:ale_echo_msg_error_str = 'Error'
 let g:ale_echo_msg_warning_str = 'Warning'
 let g:ale_echo_msg_format = '[%linter%]%s[%severity%]'
+let g:ale_set_loclist = 1
 "!Ale
 
 " airline plugin
