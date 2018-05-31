@@ -93,6 +93,7 @@ set smartindent
 set cino+=j1,(0,b1,+0,t0,<0      " C file option
 set autoread
 set clipboard=unnamed          " ^=
+set showcmd                    " visual count
 
 " Prevent RO file editing: use 'set modifiable' manually if needed
 "autocmd BufRead * let &modifiable = !&readonly

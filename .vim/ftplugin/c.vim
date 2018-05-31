@@ -40,8 +40,13 @@ function! CFold1Lay()
     endif
     return '='
 endfunction
-setlocal foldmethod=expr
-setlocal foldexpr=CFold1Lay()
+
+if &diff
+    " keep default folding if diff'ing
+else
+    setlocal foldmethod=expr
+    setlocal foldexpr=CFold1Lay()
+endif
 
 set expandtab
 set tabstop=4
