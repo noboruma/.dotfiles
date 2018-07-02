@@ -97,3 +97,9 @@
 [submodule ".gdb/bundle/gdb-dashboard"]
 	path = .gdb/bundle/gdb-dashboard
 	url = https://github.com/cyrus-and/gdb-dashboard
+[submodule ".vim/bundle/vim-notes"]
+	path = .vim/bundle/vim-notes
+	url = https://github.com/xolox/vim-notes
+[submodule ".vim/bundle/vim-misc"]
+	path = .vim/bundle/vim-misc
+	url = https://github.com/xolox/vim-misc

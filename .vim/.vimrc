@@ -269,6 +269,12 @@ nmap s <Plug>(easymotion-overwin-w)
 let &runtimepath.=',~/.vim/bundle/vim-repeat'
 " !vim-repeat
 
+" vim-notes
+let &runtimepath.=',~/.vim/bundle/vim-misc'
+let &runtimepath.=',~/.vim/bundle/vim-notes'
+let g:notes_directories = ['~/Dropbox/notes']
+" !vim-orgmode
+
 filetype on
 filetype plugin on
 filetype indent on
