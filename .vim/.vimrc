@@ -311,8 +311,8 @@ augroup vimrc
   "autocmd QuickFixCmdPost    l* nested botright lwindow
   "autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
   " The pre is to counter the copen from leaders aliases
-  autocmd User AsyncRunStart copen | setl nomodifiable | setl foldlevel=99 | wincmd p
-  autocmd User AsyncRunStop copen | wincmd gg | setl foldlevel=99 | wincmd p
+  autocmd User AsyncRunStart botright copen | setl nomodifiable | setl foldlevel=99 | wincmd p
+  autocmd User AsyncRunStop botright copen | wincmd gg | setl foldlevel=99 | wincmd p
 augroup END
 
 " Handle space and tabs
