@@ -13,15 +13,20 @@ inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
 
 inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
 inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
+inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
+inoremap <expr> { "{}\<Left>"
+inoremap <expr> <> "<>\<Left>"
+inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
+
 imap <expr> {<cr> "{<cr>}<esc>O"
 inoremap [<cr> [<cr>]<c-o>O<tab>
 inoremap (<cr> (<cr>)<c-o>O<tab>
 inoremap <<cr> <<cr>><c-o>O<tab>
-inoremap <expr> <> "<>\<Left>"
-inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
 
 " Make options
 let &makeprg='cargo build'
+"--manifest-path `pwd`/<tab><tab>
 noremap <F4>  :botright copen\|AsyncRun -program=make @ -j4
 
 DefineLocalTagFinder TagFindStruct s,struct
+DefineLocalTagFinder TagFindTrait t,trait

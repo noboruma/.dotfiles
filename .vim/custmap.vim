@@ -41,10 +41,10 @@ vnoremap <leader>F "sy:botright pta /<C-R>"
 "noremap <leader>fc :grep! --cpp "<C-r><C-w>(\s\\|\n)*\((.\\|\n)*\);" `pwd`<tab>
 "noremap <leader>f :cs find  <C-r><C-w><C-b><Right><Right><Right><Right><Right><Right><Right><Right><Tab>
 "noremap <leader>g :vimgrep /<C-r><C-w>/j ./**/*.[ch]*<left><left><left><left><left><left><left><left><left><left>
-noremap <leader>g :botright copen\|AsyncRun -program=grep "<C-r><C-w>" `pwd`<tab>
-vnoremap <leader>g "sy:botright copen\|AsyncRun -program=grep "<C-R>"" `pwd`<tab>
-noremap <leader>gc :botright copen\|AsyncRun -program=grep --cpp "<C-r><C-w>" `pwd`<tab>
-noremap <leader>gg :botright copen\|AsyncRun -program=grep "<C-r><C-w>" `pwd`<tab>
+noremap <leader>g :AsyncRun -program=grep "<C-r><C-w>" `pwd`<tab>
+vnoremap <leader>g "sy:AsyncRun -program=grep "<C-R>"" `pwd`<tab>
+noremap <leader>gc :AsyncRun -program=grep --cpp "<C-r><C-w>" `pwd`<tab>
+noremap <leader>gg :AsyncRun -program=grep "<C-r><C-w>" `pwd`<tab>
 noremap <leader>h :call File_flip()<cr>zz
 noremap <leader>H :0r ~/.vim/.header_template<cr>
 noremap <leader>j :tj <C-r><C-w><cr>
@@ -56,12 +56,13 @@ vnoremap <leader>J "sy:tj /<C-R>"
 noremap <leader><bs> <C-O>
 noremap <leader><leader><bs> <C-I>
 noremap <leader>l :let g:tagbar_left=IsLeftMostWindow()<cr>:TagbarOpen j<cr>
-noremap <leader>L :TagbarClose<cr>
+"noremap <leader>L :TagbarClose<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
 noremap <leader>m <esc>:SlimeSend1 cppman <C-r><C-w>
 nmap <leader>n via<esc>f,l
 nmap <leader>N viao<esc>F,h
 noremap <leader>o <c-w>w
+noremap <leader>O <esc>:only<cr>:vsp<cr>
 noremap <leader>p "_dP
 noremap <leader>q :q<cr>
 noremap <leader>r /\<<C-r><C-w>\><cr>:%s//<C-r><C-w>/g<left><left>
@@ -153,9 +154,9 @@ inoremap <expr> <s-tab>    pumvisible() ? "\<C-p>" : "\<s-tab>"
 "inoremap <F5> <esc>:up<cr>:make! -j -C <Up><cr>:redr<cr>
 " Need to manually call copen first so that directories are correctly set
 " (issue with asyncrun?)
-noremap <F4>  :botright copen\|AsyncRun -program=make @ -j4 -C `pwd`/<tab><tab>
-nnoremap <F5> :ccl<cr>:up<cr>:botright copen\|AsyncRun -program=make<Up><cr>
-inoremap <F5> <esc>:ccl<cr>:up<cr>:botright copen\|AsyncRun -program=make<Up><cr>
+noremap <F4>  :AsyncRun -program=make @ -j4 -C `pwd`/<tab><tab>
+nnoremap <F5> :ccl<cr>:up<cr>:AsyncRun -program=make<Up><cr>
+inoremap <F5> <esc>:ccl<cr>:up<cr>:AsyncRun -program=make<Up><cr>
 
 fun! NextWinOrQFError()
   try

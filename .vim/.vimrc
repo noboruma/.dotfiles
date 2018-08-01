@@ -287,6 +287,12 @@ nmap s <Plug>(easymotion-overwin-w)
 let &runtimepath.=',~/.vim/bundle/vim-repeat'
 " !vim-repeat
 
+" vim-notes
+let &runtimepath.=',~/.vim/bundle/vim-misc'
+let &runtimepath.=',~/.vim/bundle/vim-notes'
+let g:notes_directories = ['~/Dropbox/notes']
+" !vim-orgmode
+
 filetype on
 filetype plugin on
 filetype indent on
@@ -322,8 +328,8 @@ augroup vimrc
   "autocmd QuickFixCmdPost    l* nested botright lwindow
   "autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
   " The pre is to counter the copen from leaders aliases
-  autocmd User AsyncRunStart setl nomodifiable | setl foldlevel=99 | wincmd p
-  "autocmd User AsyncRunStop botright copen | setl foldlevel=0
+  autocmd User AsyncRunStart copen | setl nomodifiable | setl foldlevel=99 | wincmd p
+  autocmd User AsyncRunStop copen | wincmd gg | setl foldlevel=99 | wincmd p
 augroup END
 
 " Handle space and tabs
