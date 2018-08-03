@@ -198,7 +198,13 @@ fun! CurrWinOrQFError()
   try
     for winnr in range(1, winnr('$'))
         if getwinvar(winnr, '&syntax') == 'qf'
-            :cc
+            if g:jumpfirst == 1 
+                :cfirst
+                :cn
+                let g:jumpfirst=0
+            else
+                :cc
+            endif
             return 0
         elseif getwinvar(winnr, "&pvw") == 1
             :ptr
