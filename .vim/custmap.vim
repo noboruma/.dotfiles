@@ -162,11 +162,11 @@ let g:cppmanprovider = 0
 fun! IterateThroughProviders()
     if (g:cppmanprovider == 0)
         let g:cppmanprovider = 1
-        command! -nargs=+ Cppman silent exe "!tmux split-window 'sr google " . expand(<q-args>) . "'"
+        command! -nargs=+ Cppman silent exe "!tmux split-window 'sr google \"" . expand(<q-args>) . "\"'"
         echom "switch to google"
     elseif (g:cppmanprovider == 1)
         let g:cppmanprovider = 2
-        command! -nargs=+ Cppman silent exe "!tmux split-window 'sr duckduckgo " . expand(<q-args>) . "'"
+        command! -nargs=+ Cppman silent exe "!tmux split-window 'sr duckduckgo \"" . expand(<q-args>) . "\"'"
         echom "switch to duckduckgo"
     elseif (g:cppmanprovider == 2)
         let g:cppmanprovider = 3
@@ -181,9 +181,9 @@ endfun
 
 noremap <F3> :call IterateThroughProviders()<cr>
 " Use surfraw to search on the web
-command! -nargs=+ Cppman silent exe "!tmux split-window 'sr duckduckgo " . expand(<q-args>) . "'"
-nnoremap <silent><buffer> K <Esc>:Cppman <cword><CR>
-vnoremap <silent><buffer> K "sy:Cppman <C-R>"<CR>
+command! -nargs=+ Cppman exe "!tmux split-window 'sr duckduckgo \"" . expand(<q-args>) . "\"'"
+nnoremap <silent> K <Esc>:Cppman <cword><CR>
+vnoremap <silent> K "sy:Cppman <C-R>"<CR>
 
 fun! NextWinOrQFError()
   try
