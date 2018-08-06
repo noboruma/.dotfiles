@@ -169,9 +169,13 @@ fun! IterateThroughProviders()
         command! -nargs=+ Cppman silent exe "!tmux split-window 'sr duckduckgo " . expand(<q-args>) . "'"
         echom "switch to duckduckgo"
     elseif (g:cppmanprovider == 2)
-        let g:cppmanprovider = 0
+        let g:cppmanprovider = 3
         command! -nargs=+ Cppman silent exe "!tmux split-window 'cppman " . expand(<q-args>) . "'"
         echom "switch to cppman"
+    elseif (g:cppmanprovider == 3)
+        let g:cppmanprovider = 0
+        command! -nargs=+ Cppman silent exe "!tmux split-window 'man " . expand(<q-args>) . "'"
+        echom "switch to man"
     endif
 endfun
 
