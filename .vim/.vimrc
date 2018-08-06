@@ -42,7 +42,6 @@ else
     let g:ConqueGdb_Disable = 1
 endif
 
-
 " Use surfraw to search on the web
 command! -nargs=+ Cppman silent! call system("tmux split-window sr duckduckgo " . expand(<q-args>))
 nnoremap <silent><buffer> K <Esc>:Cppman <cword><CR>

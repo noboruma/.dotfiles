@@ -158,6 +158,29 @@ noremap <F4>  :AsyncRun -program=make @ -j4 -C `pwd`/<tab><tab>
 nnoremap <F5> :ccl<cr>:up<cr>:AsyncRun -program=make<Up><cr>
 inoremap <F5> <esc>:ccl<cr>:up<cr>:AsyncRun -program=make<Up><cr>
 
+let g:cppmanprovider = 0
+fun! IterateThroughProviders()
+    if (g:cppmanprovider == 0)
+        let g:cppmanprovider = 1
+        command! -nargs=+ Cppman silent exe "!tmux split-window 'sr google " . expand(<q-args>) . "'"
+        echom "switch to google"
+    elseif (g:cppmanprovider == 1)
+        let g:cppmanprovider = 2
+        command! -nargs=+ Cppman silent exe "!tmux split-window 'sr duckduckgo " . expand(<q-args>) . "'"
+        echom "switch to duckduckgo"
+    elseif (g:cppmanprovider == 2)
+        let g:cppmanprovider = 0
+        command! -nargs=+ Cppman silent exe "!tmux split-window 'cppman " . expand(<q-args>) . "'"
+        echom "switch to cppman"
+    endif
+endfun
+
+noremap <F3> :call IterateThroughProviders()<cr>
+" Use surfraw to search on the web
+command! -nargs=+ Cppman silent exe "!tmux split-window 'sr duckduckgo " . expand(<q-args>) . "'"
+nnoremap <silent><buffer> K <Esc>:Cppman <cword><CR>
+vnoremap <silent><buffer> K "sy:Cppman <C-R>"<CR>
+
 fun! NextWinOrQFError()
   try
     for winnr in range(1, winnr('$'))
