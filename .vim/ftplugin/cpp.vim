@@ -52,6 +52,10 @@ inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
 "Makeprg erroformat
 "compiler gcc
 "! see c.vim for efm
+if g:cppmanprovider == 0
+    command! -nargs=+ Cppman silent exe "!tmux split-window 'cppman " . expand(<q-args>) . "'"
+endif
+
 
 if !exists("*File_flip")
   function! File_flip()
