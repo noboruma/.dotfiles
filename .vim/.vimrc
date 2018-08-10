@@ -128,6 +128,7 @@ let &runtimepath.=',~/.vim/bundle/ale'
 "let g:ale_linters = {
 "\   'cpp': ['g++', 'cppcheck', 'clangtidy', 'clangcheck', 'clang'],
 "\}
+let g:ale_cquery_options = '$(cat ~/.compiler_options)' "Options can be easily retrieved using 'bear' (github)
 let g:ale_cpp_gcc_options = '$(cat ~/.compiler_options)' "Options can be easily retrieved using 'bear' (github)
 let g:ale_cpp_clang_options = '$(cat ~/.compiler_options)' "Options can be easily retrieved using 'bear' (github)
 let g:ale_cpp_clangtidy_options = '$(cat ~/.compiler_options)'
@@ -345,6 +346,22 @@ let g:AutoAdapt_Rules = [
 \]
 autocmd BufWritePre <buffer> silent! :Adapt
 "!Auto Adapt
+
+"vim lsp
+let &runtimepath.=',~/.vim/bundle/async.vim'
+let &runtimepath.=',~/.vim/bundle/vim-lsp'
+let &runtimepath.=',~/.vim/bundle/vim-lsp-cquery'
+if executable('cquery')
+   au User lsp_setup call lsp#register_server({
+      \ 'name': 'cquery',
+      \ 'cmd': {server_info->['cquery']},
+      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+      \ 'initialization_options': { 'cacheDirectory': '/path/to/cquery/cache' },
+      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+      \ })
+endif
+"!lsp
+
 
 filetype on
 filetype plugin on

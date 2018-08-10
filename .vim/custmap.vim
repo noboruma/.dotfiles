@@ -30,6 +30,10 @@ noremap <leader>e :silent<space>e<space>`pwd`<tab>
 noremap <leader>E :Explore<cr>
 "noremap <leader>wh<leader>e :let @e=expand('%:p:h')<cr><c-w>h:e <c-r>e/<tab>
 "noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
+nnoremap <leader>fv :LspCqueryDerived<CR>
+nnoremap <leader>fc :LspCqueryCallers<CR>
+nnoremap <leader>fb :LspCqueryBase<CR>
+nnoremap <leader>fi :LspCqueryVars<CR>
 noremap <leader>f :botright pta <C-r><C-w><cr>
 noremap <leader>F "sy:botright pta /<C-R>"
 vnoremap <leader>f "sy:botright pta /<C-R>"<cr>
