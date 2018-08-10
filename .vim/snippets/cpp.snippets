@@ -18,3 +18,8 @@ snippet cbeg
 	std::cbegin(${1})
 snippet cend
 	std::cend(${2})
+snippet! ns
+	namespace ${1:`vim_snippets#Filename('', 'my')`} {
+		${0}
+	} //!$1
+

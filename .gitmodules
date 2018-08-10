@@ -103,3 +103,6 @@
 [submodule ".vim/bundle/vim-misc"]
 	path = .vim/bundle/vim-misc
 	url = https://github.com/xolox/vim-misc
+[submodule ".vim/bundle/vim-ingo-library"]
+	path = .vim/bundle/vim-ingo-library
+	url = https://github.com/inkarkat/vim-ingo-library
