@@ -299,6 +299,35 @@ let g:clang_format#style_options = {
 autocmd FileType c,cpp,objc vnoremap <buffer><Leader>= :ClangFormat<CR>
 " !Clang-format
 
+"Auto adapt
+let &runtimepath.=',~/.vim/bundle/vim-ingo-library'
+"Timestamp
+let g:AutoAdapt_FilePattern = ''
+let g:AutoAdapt_FirstLines = 10
+let g:AutoAdapt_LastLines = 0
+let g:AutoAdapt_Rules = [
+\   {
+\       'name': 'Copyright notice',
+\       'patternexpr': '''\c\<Copyright:\?\%(\s\+\%((C)\|&copy;\|\%xa9\)\)\?\s\+\zs\(\%('' . strftime("%Y") . ''\)\@!\d\{4}\)\%(\ze\k\@![^-]\|\(-\%('' . strftime("%Y") . ''\)\@!\d\{4}\)\>\)''',
+\       'replacement': '\=submatch(1) . "-" . strftime("%Y")',
+\	    'range': '1,10'
+\   },
+\   {
+\       'name': 'Copyright notice modelines',
+\       'patternexpr': '''\c\<Copyright:\?\%(\s\+\%((C)\|&copy;\|\%xa9\)\)\?\s\+\zs\(\%('' . strftime("%Y") . ''\)\@!\d\{4}\)\%(\ze\k\@![^-]\|\(-\%('' . strftime("%Y") . ''\)\@!\d\{4}\)\>\)''',
+\       'replacement': '\=submatch(1) . "-" . strftime("%Y")',
+\       'range': 'modelines'
+\   },
+\   {
+\       'name': 'Last Change notice',
+\       'pattern': '\v\C%(<Last %([uU]pdate?|[Mm]odified)\s+)@<=.*$',
+\       'replacement': '\=strftime("%a %b %d %H:%M:%S %Y '.username.'")',
+\	    'range': '1,10'
+\   }
+\]
+autocmd BufWritePre <buffer> silent! :Adapt
+"!Auto Adapt
+
 filetype on
 filetype plugin on
 filetype indent on
@@ -389,32 +418,6 @@ set hidden
 " More natural split opening
 set splitbelow
 set splitright
-
-"Timestamp
-let g:AutoAdapt_FilePattern = ''
-let g:AutoAdapt_FirstLines = 10
-let g:AutoAdapt_LastLines = 0
-let g:AutoAdapt_Rules = [
-\   {
-\       'name': 'Copyright notice',
-\       'patternexpr': '''\c\<Copyright:\?\%(\s\+\%((C)\|&copy;\|\%xa9\)\)\?\s\+\zs\(\%('' . strftime("%Y") . ''\)\@!\d\{4}\)\%(\ze\k\@![^-]\|\(-\%('' . strftime("%Y") . ''\)\@!\d\{4}\)\>\)''',
-\       'replacement': '\=submatch(1) . "-" . strftime("%Y")',
-\	    'range': '1,10'
-\   },
-\   {
-\       'name': 'Copyright notice modelines',
-\       'patternexpr': '''\c\<Copyright:\?\%(\s\+\%((C)\|&copy;\|\%xa9\)\)\?\s\+\zs\(\%('' . strftime("%Y") . ''\)\@!\d\{4}\)\%(\ze\k\@![^-]\|\(-\%('' . strftime("%Y") . ''\)\@!\d\{4}\)\>\)''',
-\       'replacement': '\=submatch(1) . "-" . strftime("%Y")',
-\       'range': 'modelines'
-\   },
-\   {
-\       'name': 'Last Change notice',
-\       'pattern': '\v\C%(<Last %([uU]pdate?|[Mm]odified)\s+)@<=.*$',
-\       'replacement': '\=strftime("%a %b %d %H:%M:%S %Y '.username.'")',
-\	    'range': '1,10'
-\   }
-\]
-autocmd BufWritePre <buffer> silent! :Adapt
 
 " Semantic Highlight
 let g:semanticGUIColors = ['#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082', '#ffcc80', '#ffab91', '#bcaaa4', '#b0bec5', '#ffa726', '#ff8a65', '#f9bdbb', '#f9bdbb', '#f8bbd0', '#e1bee7', '#d1c4e9', '#ffe0b2', '#c5cae9', '#d0d9ff', '#b3e5fc', '#b2ebf2', '#b2dfdb', '#a3e9a4', '#dcedc8' , '#f0f4c3', '#ffb74d' ]
