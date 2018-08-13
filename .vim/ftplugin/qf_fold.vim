@@ -23,6 +23,23 @@ syn match pathcolor "^[^|]*"
 function! AdjustWindowHeight(minheight, maxheight)
     exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
-call AdjustWindowHeight(3, 10)
 
-
+fun! AutoAdjustQFWindow()
+  try
+      let l:prev = winnr()
+      for winnr in range(1, winnr('$'))
+          if getwinvar(winnr, '&syntax') == 'qf'
+              exe winnr . "wincmd w"
+              call AdjustWindowHeight(1, 10)
+              normal gg
+              normal G
+              exe l:prev . "wincmd w"
+              normal :cfirst<cr>
+              return 0
+          endif
+      endfor
+      return 0
+  catch /.*/
+      echohl WarningMsg | echon v:exception | echohl None
+  endtry
+endfun
