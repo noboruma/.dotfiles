@@ -106,12 +106,12 @@
 [submodule ".vim/bundle/vim-ingo-library"]
 	path = .vim/bundle/vim-ingo-library
 	url = https://github.com/inkarkat/vim-ingo-library
-[submodule "bundle/async.vim"]
-	path = bundle/async.vim
+[submodule ".vim/bundle/async.vim"]
+	path = .vim/bundle/async.vim
 	url = https://github.com/prabirshrestha/async.vim
-[submodule "bundle/vim-lsp"]
-	path = bundle/vim-lsp
+[submodule ".vim/bundle/vim-lsp"]
+	path = .vim/bundle/vim-lsp
 	url = https://github.com/pdavydov108/vim-lsp
-[submodule "bundle/vim-lsp-cquery"]
-	path = bundle/vim-lsp-cquery
+[submodule ".vim/bundle/vim-lsp-cquery"]
+	path = .vim/bundle/vim-lsp-cquery
 	url = https://github.com/pdavydov108/vim-lsp-cquery
