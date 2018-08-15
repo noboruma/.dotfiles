@@ -89,6 +89,7 @@ function! CppNoNamespaceAndTemplateIndent()
     let l:retv = cindent('.')
     let l:pindent = indent(l:pline_num)
 
+    let l:commas= strlen(substitute(l:pline, "[^,]", "","g"))
     let l:left= strlen(substitute(l:pline, "[^<]", "","g"))
     let l:right = strlen(substitute(l:pline, "[^>]", "","g"))
 
@@ -98,32 +99,24 @@ function! CppNoNamespaceAndTemplateIndent()
             let l:pline= substitute(l:pline, "<", "","")
             let l:i=l:i+1
         endwhile
+        let l:i=1
+        while(l:i < l:commas)
+            let l:pline= substitute(l:pline, ",", "","")
+            let l:i=l:i+1
+        endwhile
         let l:match = matchstrpos(l:pline,'<')
-        let l:retv = l:match[2]
+        let l:matchcomma = matchstrpos(l:pline,',')
+        if l:match[2] == strlen(l:pline) || l:matchcomma[2] == strlen(l:pline)
+            let l:retv = l:match[2] + l:commas + l:left - 2
+        endif
     elseif l:left < l:right
-        "let l:ppline_num = l:pline_num-1
-        "let l:ppline = prevnonblank(l:ppline_num)
-        "let l:left= strlen(substitute(l:ppline, "[^<]", "","g"))
-        "while l:left == 0
-        "    let l:ppline_num = l:pline_num-1
-        "    let l:ppline_num = prevnonblank(l:ppline_num)
-        "    let l:ppline = getline(l:ppline_num)
-        "    let l:left= strlen(substitute(l:ppline, "[^<]", "","g"))
-        "endwhile
-        let l:retv = cindent(l:pline_num)
-        "let l:ppline_num = prevnonblank(l:pline_num - 1)
-        "let l:ppline = getline(l:ppline_num)
-        "let l:ppindent = indent(l:ppline_num)
-        "if l:pindent == 0
-        "    let l:retv = l:ppindent
-        "else
-        "    while (l:pindent <= l:ppindent)
-        "        let l:ppline_num = prevnonblank(l:ppline_num - 1)
-        "        let l:ppline = getline(l:ppline_num)
-        "        let l:ppindent = indent(l:ppline_num)
-        "    endwhile
-        "    let l:retv = l:ppindent
-        "endif
+        let l:ppline = l:pline_num
+        while l:left < l:right && indent(l:ppline_num) != 0
+            let l:ppline_num = prevnonblank(l:ppline_num - 1)
+            let l:ppline = getline(l:ppline_num)
+            let l:left = l:left + strlen(substitute(l:ppline, "[^<]", "","g"))
+        endwhile
+        let l:retv = indent(l:ppline_num)
     endif
     return l:retv
 endfunction
