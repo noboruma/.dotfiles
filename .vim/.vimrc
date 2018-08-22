@@ -23,8 +23,6 @@ if has("gui_running")
     set guioptions+=T  "toolbar
     set guioptions+=r  "scrollbar
   endif
-else
-    set nocursorline
 endif
 
 " vim --cmd 'let indexing=1'
@@ -352,7 +350,11 @@ filetype plugin on
 filetype indent on
 set ruler          " Relative cursor position
 set is             " inc search
-set cul            " Highlight current line
+if has("gui_running")
+    set cul        " Highlight current line
+else
+    set nocul      " Speed up vim
+endif
 hi CursosLine gui=underline
 
 set spelllang=en
