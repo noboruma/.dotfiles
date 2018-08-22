@@ -23,6 +23,8 @@ if has("gui_running")
     set guioptions+=T  "toolbar
     set guioptions+=r  "scrollbar
   endif
+else
+    set nocursorline
 endif
 
 " vim --cmd 'let indexing=1'
