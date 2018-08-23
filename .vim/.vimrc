@@ -367,7 +367,11 @@ filetype plugin on
 filetype indent on
 set ruler          " Relative cursor position
 set is             " inc search
-set cul            " Highlight current line
+if has("gui_running")
+    set cul        " Highlight current line
+else
+    set nocul      " Speed up vim
+endif
 hi CursosLine gui=underline
 
 set spelllang=en
