@@ -95,7 +95,7 @@ function! CppNoNamespaceAndTemplateIndent()
 
     if l:left > l:right
         let l:i=1
-        while(l:i < l:left)
+        while(l:i < l:left - l:right)
             let l:pline= substitute(l:pline, "<", "","")
             let l:i=l:i+1
         endwhile

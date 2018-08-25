@@ -8,6 +8,7 @@ find ~ -maxdepth 1 -name ".gdb*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".colorgcc*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".screen*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".tmux*" -type l -exec rm -v {} \;
+find ~/.w3m -maxdepth 1 -name "config" -type l -exec rm -v {} \;
 
 ln -s $PWD/.vim ~
 ln -s $PWD/.vim/.vimrc ~
@@ -18,4 +19,5 @@ ln -s $PWD/.gdb/.gdbinit ~
 ln -s $PWD/.colorgccrc ~
 ln -s $PWD/.screenrc ~
 ln -s $PWD/.tmux ~
+ln -s $PWD/.w3m/config ~/.w3m/config
 cd - 1>/dev/null
