@@ -30,10 +30,19 @@ noremap <leader>e :silent<space>e<space>`pwd`<tab>
 noremap <leader>E :Explore<cr>
 "noremap <leader>wh<leader>e :let @e=expand('%:p:h')<cr><c-w>h:e <c-r>e/<tab>
 "noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
-noremap <leader>f :botright pta <C-r><C-w><cr>
-noremap <leader>F "sy:botright pta /<C-R>"
-vnoremap <leader>f "sy:botright pta /<C-R>"<cr>
-vnoremap <leader>F "sy:botright pta /<C-R>"
+if executable('cquery')
+    noremap <leader>fd :LspDefinition<cr>
+    noremap <leader>fv :LspCqueryVars<cr>
+    noremap <leader>fb :LspCqueryBase<cr>
+    noremap <leader>fo :LspCqueryDerived<cr>
+    noremap <leader>fc :LspCqueryCallers<cr>
+    noremap <leader>fa :call AutoAdjustQFWindow()<cr>
+else
+    noremap <leader>f :botright pta <C-r><C-w><cr>
+    noremap <leader>F "sy:botright pta /<C-R>"
+    vnoremap <leader>f "sy:botright pta /<C-R>"<cr>
+    vnoremap <leader>F "sy:botright pta /<C-R>"
+endif
 "noremap <leader>f <C-w>z
 "noremap <leader>f f(l
 "noremap <leader>F T(
@@ -225,7 +234,7 @@ fun! CurrWinOrQFError()
   try
     for winnr in range(1, winnr('$'))
         if getwinvar(winnr, '&syntax') == 'qf'
-            if g:jumpfirst == 1 
+            if exists('g:jumpfirst') && g:jumpfirst == 1
                 :cfirst
                 :cn
                 let g:jumpfirst=0
