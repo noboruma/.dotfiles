@@ -41,6 +41,7 @@ if executable('cquery')
    nnoremap <leader>fc :call LanguageClient#cquery_callers()<CR>
    nnoremap <leader>fv :call LanguageClient#cquery_vars()<CR>
    nnoremap <leader>fr :call LanguageClient#textDocument_references()<CR>
+   nnoremap <leader>fh :call LanguageClient#textDocument_hover()<CR>
 else
     noremap <leader>f :botright pta <C-r><C-w><cr>
     noremap <leader>F "sy:botright pta /<C-R>"
