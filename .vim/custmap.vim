@@ -31,12 +31,16 @@ noremap <leader>E :Explore<cr>
 "noremap <leader>wh<leader>e :let @e=expand('%:p:h')<cr><c-w>h:e <c-r>e/<tab>
 "noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
 if executable('cquery')
-    noremap <leader>fd :LspDefinition<cr>
-    noremap <leader>fv :LspCqueryVars<cr>
-    noremap <leader>fb :LspCqueryBase<cr>
-    noremap <leader>fo :LspCqueryDerived<cr>
-    noremap <leader>fc :LspCqueryCallers<cr>
-    noremap <leader>fa :call AutoAdjustQFWindow()<cr>
+   " noremap <leader>fd :LspDefinition<cr>
+   " noremap <leader>fv :LspCqueryVars<cr>
+   " noremap <leader>fb :LspCqueryBase<cr>
+   " noremap <leader>fo :LspCqueryDerived<cr>
+   " noremap <leader>fc :LspCqueryCallers<cr>
+   nnoremap <leader>fa :call AutoAdjustQFWindow()<cr>
+   nnoremap <leader>fd :call LanguageClient#textDocument_definition()<CR>
+   nnoremap <leader>fc :call LanguageClient#cquery_callers()<CR>
+   nnoremap <leader>fv :call LanguageClient#cquery_vars()<CR>
+   nnoremap <leader>fr :call LanguageClient#textDocument_references()<CR>
 else
     noremap <leader>f :botright pta <C-r><C-w><cr>
     noremap <leader>F "sy:botright pta /<C-R>"
