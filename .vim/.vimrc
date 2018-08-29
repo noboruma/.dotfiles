@@ -341,6 +341,8 @@ let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if yo
 let g:LanguageClient_settingsPath = '~/.dotfiles/.vim/lsp_settings.json'
 set completefunc=LanguageClient#complete
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
+let g:LanguageClient_selectionUI='quickfix'
+let g:LanguageClient_diagnosticsList='Location'
 
 "let &runtimepath.=',~/.vim/bundle/async.vim'
 "let &runtimepath.=',~/.vim/bundle/vim-lsp'

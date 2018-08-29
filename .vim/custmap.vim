@@ -198,46 +198,52 @@ command! -nargs=+ Cppman exe "!tmux split-window 'sr duckduckgo \"" . expand(<q-
 nnoremap <silent> K <Esc>:Cppman <cword><CR>
 vnoremap <silent> K "sy:Cppman <C-R>"<CR>
 
+fun! IsQFOrLocOrTagOpen()
+    silent exec 'redir @a | ls | redir END'
+    if match(@a,'\[Location List\]') >= 0
+        return 2
+    elseif match(@a,'\[Quickfix List\]') >= 0
+        return 1
+    else
+        return 3
+    endif
+endfun
 fun! NextWinOrQFError()
-  try
-    for winnr in range(1, winnr('$'))
-        if getwinvar(winnr, '&syntax') == 'qf'
+    try
+        let l:res = IsQFOrLocOrTagOpen()
+        if l:res == 1
             :cn
             return 0
-        elseif getwinvar(winnr, "&pvw") == 1
-            " found a preview
-            :ptn
-            return 0
+        elseif l:res == 2
+            :ln
+        elseif l:res == 3
+            ":ptn
         endif
-    endfor
-    :ln
-    return 0
-  catch /.*/
-      echohl WarningMsg | echon v:exception | echohl None
-  endtry
+        return 0
+    catch /.*/
+        echohl WarningMsg | echon v:exception | echohl None
+    endtry
 endfun
 fun! PrevWinOrQFError()
-  try
-    for winnr in range(1, winnr('$'))
-        if getwinvar(winnr, '&syntax') == 'qf'
+    try
+        let l:res = IsQFOrLocOrTagOpen()
+        if l:res == 1
             :cp
             return 0
-        elseif getwinvar(winnr, "&pvw") == 1
-            " found a preview
-            :ptp
-            return 0
+        elseif l:res == 2
+            :lp
+        elseif l:res == 3
+            ":ptp
         endif
-    endfor
-    :lp
-    return 0
-  catch /.*/
-      echohl WarningMsg | echon v:exception | echohl None
-  endtry
+        return 0
+    catch /.*/
+        echohl WarningMsg | echon v:exception | echohl None
+    endtry
 endfun
 fun! CurrWinOrQFError()
-  try
-    for winnr in range(1, winnr('$'))
-        if getwinvar(winnr, '&syntax') == 'qf'
+    try
+        let l:res = IsQFOrLocOrTagOpen()
+        if l:res == 1
             if exists('g:jumpfirst') && g:jumpfirst == 1
                 :cfirst
                 :cn
@@ -245,15 +251,15 @@ fun! CurrWinOrQFError()
             else
                 :cc
             endif
+            :cp
             return 0
-        elseif getwinvar(winnr, "&pvw") == 1
-            :ptr
-            return 0
+        elseif l:res == 2
+            :ll
+        elseif l:res == 3
+            ":ptr
         endif
-    endfor
-    :ll
-    return 0
-  catch /.*/
+        return 0
+    catch /.*/
       echohl WarningMsg | echon v:exception | echohl None
   endtry
 endfun
