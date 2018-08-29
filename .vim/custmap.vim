@@ -121,6 +121,7 @@ inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")
 
 inoremap <c-f> <c-x><c-f>
 inoremap <c-l> <c-x><c-l>
+inoremap <c-k> <c-o>:call LanguageClient#textDocument_signatureHelp()<cr>
 
 " Split naviguation
 " silent help to not ask anything in the command

@@ -1,15 +1,16 @@
 " CPP config is shared with C one (c.vim)
 
 " Plugins
-" OCC
-let &runtimepath.=',~/.vim/bundle/OmniCppComplete'
-set nocp
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-set omnifunc=omni#cpp#complete#Main
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+"" OCC
+"let &runtimepath.=',~/.vim/bundle/OmniCppComplete'
+"set nocp
+"let OmniCpp_NamespaceSearch = 1
+"let OmniCpp_GlobalScopeSearch = 1
+"let OmniCpp_ShowAccess = 1
+"let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+"set omnifunc=omni#cpp#complete#Main
+"autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+"set nosmd
 " !OCC
 " !Plugins
 

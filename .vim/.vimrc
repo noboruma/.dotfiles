@@ -63,6 +63,7 @@ syntax on                      " enable
 set background=dark
 colorscheme myslate
 
+set nosmd
 set ruler                      " Show cursor position, line, col
 set textwidth=0                " Max text width, 0 to disable it
 " map @# gwap                  " Wrappe à 72 caractères avec la touche '@#'
@@ -203,18 +204,18 @@ call unite#custom#profile('default', 'context', {
 "!Unite.vim
 
 " Gutentags
-let &runtimepath.=',~/.vim/bundle/vim-gutentags'
-let g:gutentags_project_root=['.perforce', '.git']
-let g:gutentags_file_list_command = {
-            \ 'markers': {
-            \ '.git': 'git ls-files',
-            \ '.hg': 'hg files',
-            \ '.perforce': 'p4 have | cut -f1 -d\# | cut -f5-100 -d/',
-            \ },
-            \ }
-set statusline+=%{gutentags#statusline()}
-set tags=./tags;,tags;
-let g:gutentags_cache_dir='~/.tags.auto'
+"let &runtimepath.=',~/.vim/bundle/vim-gutentags'
+"let g:gutentags_project_root=['.perforce', '.git']
+"let g:gutentags_file_list_command = {
+"            \ 'markers': {
+"            \ '.git': 'git ls-files',
+"            \ '.hg': 'hg files',
+"            \ '.perforce': 'p4 have | cut -f1 -d\# | cut -f5-100 -d/',
+"            \ },
+"            \ }
+"set statusline+=%{gutentags#statusline()}
+"set tags=./tags;,tags;
+"let g:gutentags_cache_dir='~/.tags.auto'
 " /!\ Change plugin from setlocal to set
 " !Gutentags
 
@@ -427,9 +428,8 @@ highlight Pmenu    ctermbg=grey gui=bold
 highlight PmenuSel ctermbg=cyan gui=bold
 "hi Search cterm=NONE ctermfg=grey ctermbg=blue
 
-" Pablo:
 set completeopt=menu,menuone,longest,preview
-set previewheight=1
+set previewheight=3
 "To close automatically the preview window:
 "autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 "autocmd InsertLeave * if pumvisible() == 0|pclose|endif
