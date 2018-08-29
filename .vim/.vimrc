@@ -348,18 +348,31 @@ autocmd BufWritePre <buffer> silent! :Adapt
 "!Auto Adapt
 
 "vim lsp
-let &runtimepath.=',~/.vim/bundle/async.vim'
-let &runtimepath.=',~/.vim/bundle/vim-lsp'
-let &runtimepath.=',~/.vim/bundle/vim-lsp-cquery'
-if executable('cquery')
-   au User lsp_setup call lsp#register_server({
-      \ 'name': 'cquery',
-      \ 'cmd': {server_info->['cquery']},
-      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery/cache' },
-      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-      \ })
-endif
+let &runtimepath.=',~/.vim/bundle/lsp-neovim'
+let g:LanguageClient_serverCommands = {
+    \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
+    \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
+    \ }
+
+let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
+let g:LanguageClient_settingsPath = '~/.dotfiles/.vim/lsp_settings.json'
+set completefunc=LanguageClient#complete
+set formatexpr=LanguageClient_textDocument_rangeFormatting()
+let g:LanguageClient_selectionUI='quickfix'
+let g:LanguageClient_diagnosticsList='Location'
+
+"let &runtimepath.=',~/.vim/bundle/async.vim'
+"let &runtimepath.=',~/.vim/bundle/vim-lsp'
+"let &runtimepath.=',~/.vim/bundle/vim-lsp-cquery'
+"if executable('cquery')
+"   au User lsp_setup call lsp#register_server({
+"      \ 'name': 'cquery',
+"      \ 'cmd': {server_info->['cquery']},
+"      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+"      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery/cache' },
+"      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+"      \ })
+"endif
 "!lsp
 
 filetype on
@@ -382,7 +395,7 @@ set dictionary+=/usr/share/dict/words
 "let g:languagetool_jar='$HOME/usr/bin/languagetool-commandline.jar'
 
 " Make options
-let &makeprg='mw gmake'
+let &makeprg='LD_PRELOAD=$HOME/usr/lib/bear $HOME/usr/bin/bear mw gmake'
 
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>
@@ -443,7 +456,6 @@ set wrap
 set cpo+=n
 
 set autochdir
-
 
 " Jump to the last position when reopening a file
 augroup vimrc

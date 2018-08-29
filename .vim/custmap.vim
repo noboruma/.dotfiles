@@ -30,14 +30,18 @@ noremap <leader>e :silent<space>e<space>`pwd`<tab>
 noremap <leader>E :Explore<cr>
 "noremap <leader>wh<leader>e :let @e=expand('%:p:h')<cr><c-w>h:e <c-r>e/<tab>
 "noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
-nnoremap <leader>fv :LspCqueryDerived<CR>
-nnoremap <leader>fc :LspCqueryCallers<CR>
-nnoremap <leader>fb :LspCqueryBase<CR>
-nnoremap <leader>fi :LspCqueryVars<CR>
-noremap <leader>f :botright pta <C-r><C-w><cr>
-noremap <leader>F "sy:botright pta /<C-R>"
-vnoremap <leader>f "sy:botright pta /<C-R>"<cr>
-vnoremap <leader>F "sy:botright pta /<C-R>"
+if executable('cquery')
+   nnoremap <leader>fa :call AutoAdjustQFWindow()<cr>
+   nnoremap <leader>fd :call LanguageClient#textDocument_definition()<CR>
+   nnoremap <leader>fc :call LanguageClient#cquery_callers()<CR>
+   nnoremap <leader>fv :call LanguageClient#cquery_vars()<CR>
+   nnoremap <leader>fr :call LanguageClient#textDocument_references()<CR>
+else
+    noremap <leader>f :botright pta <C-r><C-w><cr>
+    noremap <leader>F "sy:botright pta /<C-R>"
+    vnoremap <leader>f "sy:botright pta /<C-R>"<cr>
+    vnoremap <leader>F "sy:botright pta /<C-R>"
+endif
 "noremap <leader>f <C-w>z
 "noremap <leader>f f(l
 "noremap <leader>F T(
@@ -189,62 +193,69 @@ command! -nargs=+ Cppman exe "!tmux split-window 'sr duckduckgo \"" . expand(<q-
 nnoremap <silent> K <Esc>:Cppman <cword><CR>
 vnoremap <silent> K "sy:Cppman <C-R>"<CR>
 
+fun! IsQFOrLocOrTagOpen()
+    silent exec 'redir @a | ls | redir END'
+    if match(@a,'\[Location List\]') >= 0
+        return 2
+    elseif match(@a,'\[Quickfix List\]') >= 0
+        return 1
+    else
+        return 3
+    endif
+endfun
+
 fun! NextWinOrQFError()
-  try
-    for winnr in range(1, winnr('$'))
-        if getwinvar(winnr, '&syntax') == 'qf'
+    try
+        let l:res = IsQFOrLocOrTagOpen()
+        if l:res == 1
             :cn
             return 0
-        elseif getwinvar(winnr, "&pvw") == 1
-            " found a preview
-            :ptn
-            return 0
+        elseif l:res == 2
+            :ln
+        elseif l:res == 3
+            ":ptn
         endif
-    endfor
-    :ln
-    return 0
-  catch /.*/
-      echohl WarningMsg | echon v:exception | echohl None
-  endtry
+        return 0
+    catch /.*/
+        echohl WarningMsg | echon v:exception | echohl None
+    endtry
 endfun
 fun! PrevWinOrQFError()
-  try
-    for winnr in range(1, winnr('$'))
-        if getwinvar(winnr, '&syntax') == 'qf'
+    try
+        let l:res = IsQFOrLocOrTagOpen()
+        if l:res == 1
             :cp
             return 0
-        elseif getwinvar(winnr, "&pvw") == 1
-            " found a preview
-            :ptp
-            return 0
+        elseif l:res == 2
+            :lp
+        elseif l:res == 3
+            ":ptp
         endif
-    endfor
-    :lp
-    return 0
-  catch /.*/
-      echohl WarningMsg | echon v:exception | echohl None
-  endtry
+        return 0
+    catch /.*/
+        echohl WarningMsg | echon v:exception | echohl None
+    endtry
 endfun
 fun! CurrWinOrQFError()
-  try
-    for winnr in range(1, winnr('$'))
-        if getwinvar(winnr, '&syntax') == 'qf'
-            if g:jumpfirst == 1 
+    try
+        let l:res = IsQFOrLocOrTagOpen()
+        if l:res == 1
+            if exists('g:jumpfirst') && g:jumpfirst == 1
                 :cfirst
                 :cn
                 let g:jumpfirst=0
             else
                 :cc
             endif
+            :cp
             return 0
-        elseif getwinvar(winnr, "&pvw") == 1
-            :ptr
-            return 0
+        elseif l:res == 2
+            :ll
+        elseif l:res == 3
+            ":ptr
         endif
-    endfor
-    :ll
-    return 0
-  catch /.*/
+        return 0
+    catch /.*/
       echohl WarningMsg | echon v:exception | echohl None
   endtry
 endfun

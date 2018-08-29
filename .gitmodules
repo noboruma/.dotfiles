@@ -115,3 +115,6 @@
 [submodule ".vim/bundle/vim-lsp-cquery"]
 	path = .vim/bundle/vim-lsp-cquery
 	url = https://github.com/pdavydov108/vim-lsp-cquery
+[submodule ".vim/bundle/lsp-neovim"]
+	path = .vim/bundle/lsp-neovim
+	url = https://github.com/autozimu/LanguageClient-neovim
