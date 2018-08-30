@@ -15,6 +15,7 @@
 " !Plugins
 
 " set keywordprg=cppman
+command! -nargs=+ Cppman exe "!tmux split-window 'sr duckduckgo cppreference " . expand(<q-args>) . "'"
 
 " Surround
 let g:surround_{char2nr(">")} = "\1template: \1<\r>"
