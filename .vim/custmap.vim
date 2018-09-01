@@ -117,7 +117,6 @@ inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")
 fun! LspFunctionType()
     let l:pos=getpos('.')
     normal f)%h
-    let l:pos2=getpos('.')
     execute ":LspHover<cr>"
     call cursor(l:pos[1], l:pos[2])
 endfun
@@ -148,7 +147,7 @@ noremap <C-K> <C-Y>
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
 inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
 inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
-"inoremap <expr> <tab>      pumvisible() ? "\<C-n>" : "\<C-r>=\<SID>close_paren()\<CR>\<c-r>=Smart_TabComplete()\<CR>"
+inoremap <expr> <tab>      pumvisible() ? "\<C-n>" : "\<C-r>=\<SID>close_paren()\<CR>\<c-r>=Smart_TabComplete()\<CR>"
 inoremap <expr> <s-tab>    pumvisible() ? "\<C-p>" : "\<s-tab>"
 
 "nmap <kPlus> zo
@@ -318,6 +317,7 @@ function! Smart_TabComplete()
     elseif ( has_slash )
         return "\<C-X>\<C-F>"                         " file matching
     else
+        call asyncomplete#force_refresh()
         return "\<C-X>\<C-O>"                         " plugin matching
     endif
 endfunction

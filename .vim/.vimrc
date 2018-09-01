@@ -117,7 +117,7 @@ set matchpairs+=<:>
 
 filetype off
 
-" Ale
+" ALE plugin
 let &runtimepath.=',~/.vim/bundle/ale'
 let g:ale_linters = {
 \   'cpp': ['g++', 'cppcheck', 'cquery'],
@@ -128,14 +128,12 @@ let g:ale_echo_msg_warning_str = 'Warning'
 let g:ale_echo_msg_format = '[%linter%]%s[%severity%]'
 let g:ale_set_loclist = 1
 let g:ale_lint_on_text_changed = 'never'
-"!Ale
+"!ALE
 
 " airline plugin
 set laststatus=2 "status bar
 let &runtimepath.=',~/.vim/bundle/airline'
 let &runtimepath.=',~/.vim/bundle/airline-themes'
-" Let us use arline instead
-"set statusline=%<%f%h%m%r:\ %{tagbar#currenttag('%s','')}%=%l,%c\ %P "status' bar content
 let g:airline_theme='light'
 let g:airline_detect_whitespace=0
   let g:airline_mode_map = {
@@ -202,19 +200,23 @@ call unite#custom#profile('default', 'context', {
 "!Unite.vim
 
 " Gutentags
-"let &runtimepath.=',~/.vim/bundle/vim-gutentags'
-"let g:gutentags_project_root=['.perforce', '.git']
-"let g:gutentags_file_list_command = {
-"            \ 'markers': {
-"            \ '.git': 'git ls-files',
-"            \ '.hg': 'hg files',
-"            \ '.perforce': 'p4 have | cut -f1 -d\# | cut -f5-100 -d/',
-"            \ },
-"            \ }
-"set statusline+=%{gutentags#statusline()}
-"set tags=./tags;,tags;
-"let g:gutentags_cache_dir='~/.tags.auto'
-" /!\ Change plugin from setlocal to set
+if executable('ctags')
+    let &runtimepath.=',~/.vim/bundle/vim-gutentags'
+    let g:gutentags_project_root=['.perforce', '.git']
+    let g:gutentags_file_list_command = {
+                \ 'markers': {
+                \ '.git': 'git ls-files',
+                \ '.hg': 'hg files',
+                \ '.perforce': 'p4 have | cut -f1 -d\# | cut -f5-100 -d/',
+                \ },
+                \ }
+    set statusline+=%{gutentags#statusline()}
+    set tags=./tags;,tags;
+    let g:gutentags_cache_dir='~/.tags.auto'
+ "/!\ Change plugin from setlocal to set
+else
+    echom 'no ctags executable'
+endif
 " !Gutentags
 
 " Undotree
@@ -343,22 +345,13 @@ if executable('cquery')
       \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery/cache' },
       \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
       \ })
+else
+    echom 'no cquery executable'
 endif
 let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_remove_duplicates = 1
 let g:asyncomplete_force_refresh_on_context_changed = 1
 "let g:asyncomplete_smart_completion = 1
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ asyncomplete#force_refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 "!lsp
 
 filetype on
