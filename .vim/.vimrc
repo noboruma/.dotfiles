@@ -330,31 +330,35 @@ autocmd BufWritePre <buffer> silent! :Adapt
 "!Auto Adapt
 
 "vim lsp
-let &runtimepath.=',~/.vim/bundle/lsp-neovim'
-let g:LanguageClient_serverCommands = {
-    \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
-    \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
-    \ }
+let &runtimepath.=',~/.vim/bundle/asyncomplete.vim'
+let &runtimepath.=',~/.vim/bundle/async.vim'
+let &runtimepath.=',~/.vim/bundle/vim-lsp'
+let &runtimepath.=',~/.vim/bundle/vim-lsp-cquery'
+let &runtimepath.=',~/.vim/bundle/asyncomplete-lsp.vim'
+if executable('cquery')
+   au User lsp_setup call lsp#register_server({
+      \ 'name': 'cquery',
+      \ 'cmd': {server_info->['cquery']},
+      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery/cache' },
+      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+      \ })
+endif
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_remove_duplicates = 1
+let g:asyncomplete_force_refresh_on_context_changed = 1
+"let g:asyncomplete_smart_completion = 1
 
-let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
-let g:LanguageClient_settingsPath = '~/.dotfiles/.vim/lsp_settings.json'
-set completefunc=LanguageClient#complete
-set formatexpr=LanguageClient_textDocument_rangeFormatting()
-let g:LanguageClient_selectionUI='quickfix'
-let g:LanguageClient_diagnosticsList='Location'
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
 
-"let &runtimepath.=',~/.vim/bundle/async.vim'
-"let &runtimepath.=',~/.vim/bundle/vim-lsp'
-"let &runtimepath.=',~/.vim/bundle/vim-lsp-cquery'
-"if executable('cquery')
-"   au User lsp_setup call lsp#register_server({
-"      \ 'name': 'cquery',
-"      \ 'cmd': {server_info->['cquery']},
-"      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-"      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery/cache' },
-"      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-"      \ })
-"endif
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ asyncomplete#force_refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 "!lsp
 
 filetype on
