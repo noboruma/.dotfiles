@@ -32,10 +32,11 @@ noremap <leader>E :Explore<cr>
 "noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
 if executable('cquery')
    nnoremap <leader>fa :call AutoAdjustQFWindow()<cr>
-   nnoremap <leader>fd :call LanguageClient#textDocument_definition()<CR>
-   nnoremap <leader>fc :call LanguageClient#cquery_callers()<CR>
-   nnoremap <leader>fv :call LanguageClient#cquery_vars()<CR>
-   nnoremap <leader>fr :call LanguageClient#textDocument_references()<CR>
+   nnoremap <leader>fd :LspDefinition<CR>
+   nnoremap <leader>fc :LspCqueryCallers<cr>
+   nnoremap <leader>fv :LspCqueryVars<cr>
+   nnoremap <leader>fh :LspHover<CR>
+   nnoremap <leader>ft :call LspFunctionType()<cr>
 else
     noremap <leader>f :botright pta <C-r><C-w><cr>
     noremap <leader>F "sy:botright pta /<C-R>"
@@ -113,10 +114,15 @@ inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]
 inoremap        (  ()<Left>
 inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
 
+fun! LspFunctionType()
+    let l:pos=getpos('.')
+    normal f)%h
+    execute ":LspHover<cr>"
+    call cursor(l:pos[1], l:pos[2])
+endfun
 inoremap <c-f> <c-x><c-f>
 inoremap <c-l> <c-x><c-l>
-
-" Split naviguation
+inoremap <c-k> <c-o>:call LspFunctionType()<cr>
 " silent help to not ask anything in the command
 nnoremap <silent> <C-h> <c-w><
 nnoremap <silent> <C-l> <c-w>>
@@ -312,6 +318,7 @@ function! Smart_TabComplete()
     elseif ( has_slash )
         return "\<C-X>\<C-F>"                         " file matching
     else
+        call asyncomplete#force_refresh()
         return "\<C-X>\<C-O>"                         " plugin matching
     endif
 endfunction

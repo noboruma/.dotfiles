@@ -70,6 +70,7 @@ syntax on                      " enable
 set background=dark
 colorscheme myslate
 
+set nosmd
 set ruler                      " Show cursor position, line, col
 set textwidth=0                " Max text width, 0 to disable it
 " map @# gwap                  " Wrappe à 72 caractères avec la touche '@#'
@@ -123,28 +124,24 @@ set matchpairs+=<:>
 
 filetype off
 
-" Ale
+" ALE plugin
 let &runtimepath.=',~/.vim/bundle/ale'
 "let g:ale_linters = {
 "\   'cpp': ['g++', 'cppcheck', 'clangtidy', 'clangcheck', 'clang'],
 "\}
 let g:ale_cquery_options = '$(cat ~/.compiler_options)' "Options can be easily retrieved using 'bear' (github)
 let g:ale_cpp_gcc_options = '$(cat ~/.compiler_options)' "Options can be easily retrieved using 'bear' (github)
-let g:ale_cpp_clang_options = '$(cat ~/.compiler_options)' "Options can be easily retrieved using 'bear' (github)
-let g:ale_cpp_clangtidy_options = '$(cat ~/.compiler_options)'
 let g:ale_echo_msg_error_str = 'Error'
 let g:ale_echo_msg_warning_str = 'Warning'
 let g:ale_echo_msg_format = '[%linter%]%s[%severity%]'
 let g:ale_set_loclist = 1
 let g:ale_lint_on_text_changed = 'never'
-"!Ale
+"!ALE
 
 " airline plugin
 set laststatus=2 "status bar
 let &runtimepath.=',~/.vim/bundle/airline'
 let &runtimepath.=',~/.vim/bundle/airline-themes'
-" Let us use arline instead
-"set statusline=%<%f%h%m%r:\ %{tagbar#currenttag('%s','')}%=%l,%c\ %P "status' bar content
 let g:airline_theme='light'
 let g:airline_detect_whitespace=0
   let g:airline_mode_map = {
@@ -220,6 +217,7 @@ call unite#custom#profile('default', 'context', {
 "!Unite.vim
 
 " Gutentags
+if executable('ctags')
 let &runtimepath.=',~/.vim/bundle/vim-gutentags'
 let g:gutentags_project_root=['.perforce', '.git']
 let g:gutentags_file_list_command = {
@@ -233,6 +231,9 @@ set statusline+=%{gutentags#statusline()}
 set tags=./tags;,tags;
 let g:gutentags_cache_dir='~/.tags.auto'
 " /!\ Change plugin from setlocal to set
+else
+    echom 'no ctags executable'
+endif
 " !Gutentags
 
 " Undotree
@@ -348,31 +349,26 @@ autocmd BufWritePre <buffer> silent! :Adapt
 "!Auto Adapt
 
 "vim lsp
-let &runtimepath.=',~/.vim/bundle/lsp-neovim'
-let g:LanguageClient_serverCommands = {
-    \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
-    \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
-    \ }
-
-let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
-let g:LanguageClient_settingsPath = '~/.dotfiles/.vim/lsp_settings.json'
-set completefunc=LanguageClient#complete
-set formatexpr=LanguageClient_textDocument_rangeFormatting()
-let g:LanguageClient_selectionUI='quickfix'
-let g:LanguageClient_diagnosticsList='Location'
-
-"let &runtimepath.=',~/.vim/bundle/async.vim'
-"let &runtimepath.=',~/.vim/bundle/vim-lsp'
-"let &runtimepath.=',~/.vim/bundle/vim-lsp-cquery'
-"if executable('cquery')
-"   au User lsp_setup call lsp#register_server({
-"      \ 'name': 'cquery',
-"      \ 'cmd': {server_info->['cquery']},
-"      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-"      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery/cache' },
-"      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-"      \ })
-"endif
+let &runtimepath.=',~/.vim/bundle/asyncomplete.vim'
+let &runtimepath.=',~/.vim/bundle/async.vim'
+let &runtimepath.=',~/.vim/bundle/vim-lsp'
+let &runtimepath.=',~/.vim/bundle/vim-lsp-cquery'
+let &runtimepath.=',~/.vim/bundle/asyncomplete-lsp.vim'
+if executable('cquery')
+   au User lsp_setup call lsp#register_server({
+      \ 'name': 'cquery',
+      \ 'cmd': {server_info->['cquery']},
+      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery/cache' },
+      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+      \ })
+else
+    echom 'no cquery executable'
+endif
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_remove_duplicates = 1
+let g:asyncomplete_force_refresh_on_context_changed = 1
+"let g:asyncomplete_smart_completion = 1
 "!lsp
 
 filetype on
@@ -444,9 +440,8 @@ highlight Pmenu    ctermbg=grey gui=bold
 highlight PmenuSel ctermbg=cyan gui=bold
 "hi Search cterm=NONE ctermfg=grey ctermbg=blue
 
-" Pablo:
 set completeopt=menu,menuone,longest,preview
-set previewheight=1
+set previewheight=3
 "To close automatically the preview window:
 "autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 "autocmd InsertLeave * if pumvisible() == 0|pclose|endif
