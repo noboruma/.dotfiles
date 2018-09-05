@@ -226,5 +226,5 @@ export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 
-source ~/usr/emsdk-portable/emsdk_env.sh
-source ~/.sdkman/bin/sdkman-init.sh
+#source ~/usr/emsdk-portable/emsdk_env.sh
+#source ~/.sdkman/bin/sdkman-init.sh

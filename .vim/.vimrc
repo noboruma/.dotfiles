@@ -7,6 +7,7 @@ set shell=zsh
 " Script Setting
 let use_arrow=0
 let use_gui=0
+let use_custhelp=0
 let username="Thomas Legris"
 
 set nocompatible
@@ -120,7 +121,7 @@ filetype off
 " ALE plugin
 let &runtimepath.=',~/.vim/bundle/ale'
 let g:ale_linters = {
-\   'cpp': ['g++', 'cppcheck', 'cquery'],
+\   'cpp': ['cppcheck', 'cquery', 'clang-tidy'],
 \}
 let g:ale_cpp_gcc_options = '$(cat ~/.compiler_options)' "Options can be easily retrieved using 'bear' (github)
 let g:ale_echo_msg_error_str = 'Error'
@@ -354,6 +355,14 @@ let g:asyncomplete_force_refresh_on_context_changed = 1
 "let g:asyncomplete_smart_completion = 1
 "!lsp
 
+"vim-which-key
+let mapleader=" "
+if use_custhelp
+    let &runtimepath.=',~/.vim/bundle/vim-which-key'
+    nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+endif
+"!vim-which-key
+
 filetype on
 filetype plugin on
 filetype indent on
@@ -406,7 +415,6 @@ set shiftwidth=4
 set wildcharm=<tab>
 set timeoutlen=1000
 
-let mapleader=" "
 source ~/.vim/custmap.vim
 
 " Explorer options
