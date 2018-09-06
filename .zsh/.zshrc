@@ -228,5 +228,8 @@ export QT_IM_MODULE=ibus
 
 #source ~/usr/emsdk-portable/emsdk_env.sh
 #source ~/.sdkman/bin/sdkman-init.sh
+<<<<<<< HEAD
 
 source /usr/share/autojump/autojump.zsh
+=======
+>>>>>>> master
