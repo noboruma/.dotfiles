@@ -368,19 +368,18 @@ filetype plugin on
 filetype indent on
 set ruler          " Relative cursor position
 set is             " inc search
+
 if has("gui_running")
     set cul        " Highlight current line
+    hi CursosLine gui=underline
 else
     set nocul      " Speed up vim
 endif
-hi CursosLine gui=underline
 
 set spelllang=en
 set nospell
 " c-x c-k feature:
 set dictionary+=/usr/share/dict/words
-" Language Tools
-"let g:languagetool_jar='$HOME/usr/bin/languagetool-commandline.jar'
 
 " Make options
 let &makeprg='make'
@@ -401,7 +400,6 @@ augroup vimrc
   "autocmd QuickFixCmdPost [^l]* nested botright cwindow " Botright to open widely
   "autocmd QuickFixCmdPost    l* nested botright lwindow
   "autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
-  " The pre is to counter the copen from leaders aliases
   autocmd User AsyncRunStart botright copen | setl nomodifiable | setl foldlevel=99 | let g:jumpfirst=1 | wincmd p
   autocmd User AsyncRunStop call AutoAdjustQFWindow()
 augroup END
@@ -446,6 +444,9 @@ set autochdir
 " Jump to the last position when reopening a file
 augroup vimrc
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  " Adapt on save hook
+  autocmd BufWritePre <buffer> %s/\s\+$//e
+  autocmd BufWritePre <buffer> silent! :Adapt
 augroup END
 
 " Keep buffers hidden instead of closing it
@@ -471,7 +472,6 @@ set noswapfile
 if has('persistent_undo')
     set undodir=~/.vim/vimfiles/undo
     set undofile
-    "let &undodir=&directory
     set undolevels=1024
     set undoreload=1024
 endif
@@ -483,8 +483,7 @@ set shortmess+=I
 let g:colorizer_nomap = 1
 let g:colorizer_startup = 0
 
-let g:syntastic_tex_checkers = ['chktex']
-
+" Conque plugin
 let g:ConqueGdb_Leader = '\'
 let g:ConqueTerm_CloseOnEnd = 1
 let g:ConqueTerm_ReadUnfocused=1
@@ -506,7 +505,3 @@ if executable('ag')
   set grepprg=ag\ --vimgrep\ $*
   set grepformat=%f:%l:%c:%m
 endif
-
-" Adapt on save hook
-autocmd BufWritePre <buffer> %s/\s\+$//e
-autocmd BufWritePre <buffer> silent! :Adapt

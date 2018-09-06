@@ -1,17 +1,6 @@
 " CPP config is shared with C one (c.vim)
 
 " Plugins
-"" OCC
-"let &runtimepath.=',~/.vim/bundle/OmniCppComplete'
-"set nocp
-"let OmniCpp_NamespaceSearch = 1
-"let OmniCpp_GlobalScopeSearch = 1
-"let OmniCpp_ShowAccess = 1
-"let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-"set omnifunc=omni#cpp#complete#Main
-"autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-"set nosmd
-" !OCC
 " !Plugins
 
 " set keywordprg=cppman
@@ -28,56 +17,54 @@ inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
 "compiler gcc
 "! see c.vim for efm
 
-if !exists("*File_flip")
-  function! File_flip()
+function! File_flip()
     let oldpath=&path
     set path+=../**
     " The flip mechanism consider that path is properly set on headers
     if match(expand("%:t"),'\.h\(.*\)') > 0
         if match(expand("%:t"),'\.hh') > 0
-          try
-            let s:flipname = substitute(expand("%:t"),'\.hh','\.hxx',"")
-            exe ":find ".s:flipname
-          catch
-            let s:flipname = substitute(expand("%:t"),'\.hh','\.cc',"")
-            try "buffer opened but not reachable from path
-              exe ":buffer ".s:flipname
+            try
+                let s:flipname = substitute(expand("%:t"),'\.hh','\.hxx',"")
+                exe ":find ".s:flipname
             catch
-              exe ":find ".s:flipname
+                let s:flipname = substitute(expand("%:t"),'\.hh','\.cc',"")
+                try "buffer opened but not reachable from path
+                    exe ":buffer ".s:flipname
+                catch
+                    exe ":find ".s:flipname
+                endtry
             endtry
-          endtry
         elseif match(expand("%:t"),'\.hxx') > 0
-          let s:flipname = substitute(expand("%:t"),'\.h\(.*\)','\.hh',"")
-          exe ":find ".s:flipname
+            let s:flipname = substitute(expand("%:t"),'\.h\(.*\)','\.hh',"")
+            exe ":find ".s:flipname
         else
-          let s:flipname = substitute(expand("%:t"),'\.h\(.*\)','\.c\1',"")
-          try "buffer opened but not reachable from path
-            exe ":buffer ".s:flipname
+            let s:flipname = substitute(expand("%:t"),'\.h\(.*\)','\.c\1',"")
+            try "buffer opened but not reachable from path
+                exe ":buffer ".s:flipname
             catch
                 try
-                  exe ":find ".s:flipname
+                    exe ":find ".s:flipname
                 catch
-                  exe ":find ../../../src/".s:flipname
+                    exe ":find ../../../src/".s:flipname
                 endtry
-          endtry
+            endtry
         endif
     elseif match(expand("%:t"),'\.c\(.*\)') > 0
         if match(expand("%:t"),'\.cc') > 0
-          try
-            let s:flipname = substitute(expand("%:t"),'\.cc','\.hh',"")
-            exe ":find ".s:flipname
-          catch
-            let s:flipname = substitute(expand("%:t"),'\.cc','\.hpp',"")
-            exe ":find ".s:flipname
-          endtry
+            try
+                let s:flipname = substitute(expand("%:t"),'\.cc','\.hh',"")
+                exe ":find ".s:flipname
+            catch
+                let s:flipname = substitute(expand("%:t"),'\.cc','\.hpp',"")
+                exe ":find ".s:flipname
+            endtry
         else
-          let s:flipname = substitute(expand("%:t"),'\.c\(.*\)','\.h\1',"")
-          exe ":find ".s:flipname
+            let s:flipname = substitute(expand("%:t"),'\.c\(.*\)','\.h\1',"")
+            exe ":find ".s:flipname
         endif
     endif
     let &path=oldpath
-  endfun
-endif
+endfun
 
 function! CppNoNamespaceAndTemplateIndent()
     let l:cline_num = line('.')
