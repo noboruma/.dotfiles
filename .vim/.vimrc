@@ -85,9 +85,6 @@ set autoread
 set clipboard=unnamed          " ^=
 set showcmd                    " visual count
 
-" Prevent RO file editing: use 'set modifiable' manually if needed
-"autocmd BufRead * let &modifiable = !&readonly
-
 " set terminal as tmux
 set term=screen-256color
 
@@ -96,14 +93,16 @@ set term=screen-256color
 "set listchars=tab:>-,trail:-
 
 "set ignorecase
-" as ignore case but not if one Capital letter
 set smartcase
+" as ignore case but not if one Capital letter
 
 " Folding
 " Trigger manual after indent method
 augroup vimrc
   au BufReadPre * setlocal foldmethod=expr
   au BufWinEnter * if &fdm == 'expr' | setlocal foldmethod=manual | normal zM | endif
+  " Prevent RO file editing: use 'set modifiable' manually if needed
+  autocmd BufRead * let &modifiable = !&readonly
 augroup END
 
 set foldlevel=99
