@@ -49,9 +49,6 @@
 [submodule ".vim/bundle/tagfinder"]
 	path = .vim/bundle/tagfinder
 	url = https://github.com/AndrewRadev/tagfinder.vim
-[submodule ".vim/bundle/OmniCppComplete"]
-	path = .vim/bundle/OmniCppComplete
-	url = https://github.com/FromtonRouge/OmniCppComplete
 [submodule ".vim/bundle/linediff.vim"]
 	path = .vim/bundle/linediff.vim
 	url = https://github.com/AndrewRadev/linediff.vim
