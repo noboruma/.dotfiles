@@ -35,8 +35,13 @@ if !exists("*File_flip")
                     endtry
                 endtry
             elseif match(expand("%:t"),'\.hxx') > 0
-                let s:flipname = substitute(expand("%:t"),'\.h\(.*\)','\.hh',"")
-                exe ":find ".s:flipname
+                try
+                    let s:flipname = substitute(expand("%:t"),'\.h\(.*\)','\.hh',"")
+                    exe ":find ".s:flipname
+                catch
+                    let s:flipname = substitute(expand("%:t"),'\.h\(.*\)','\.hpp',"")
+                    exe ":find ".s:flipname
+                endtry
             else
                 let s:flipname = substitute(expand("%:t"),'\.h\(.*\)','\.c\1',"")
                 try "buffer opened but not reachable from path
