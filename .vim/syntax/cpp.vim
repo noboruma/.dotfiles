@@ -31,7 +31,7 @@ syn keyword cppOperator		and bitor or xor compl bitand and_eq or_eq xor_eq not n
 syn match cppCast		"\<\(const\|static\|dynamic\|reinterpret\)_cast\s*<"me=e-1
 syn match cppCast		"\<\(const\|static\|dynamic\|reinterpret\)_cast\s*$"
 syn keyword cppStorageClass	mutable
-syn keyword cppStructure	class typename template namespace
+syn keyword cppStructure	class typename template namespace requires concept
 syn keyword cppBoolean		true false
 syn keyword cppConstant		__cplusplus
 

@@ -126,15 +126,16 @@ filetype off
 
 " ALE plugin
 let &runtimepath.=',~/.vim/bundle/ale'
-"let g:ale_linters = {
-"\   'cpp': ['g++', 'cppcheck', 'clangtidy', 'clangcheck', 'clang'],
-"\}
+let g:ale_linters = {
+\   'cpp': ['cppcheck', 'clangtidy', 'clangcheck', 'flawfinder', 'gcc'],
+\}
 let g:ale_cpp_gcc_options = '$(cat ~/.compiler_options)' "Options can be easily retrieved using 'bear' (github)
 let g:ale_echo_msg_error_str = 'Error'
 let g:ale_echo_msg_warning_str = 'Warning'
 let g:ale_echo_msg_format = '[%linter%]%s[%severity%]'
 let g:ale_set_loclist = 1
 let g:ale_lint_on_text_changed = 'never'
+let g:ale_cpp_cquery_cache_directory= '/tmp/cquery/cache'
 "!ALE
 
 " airline plugin
