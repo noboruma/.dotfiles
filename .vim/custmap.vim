@@ -4,6 +4,7 @@ nnoremap x "_x
 vnoremap x "_d
 nnoremap X "_X
 nnoremap , :
+nnoremap ,, <nop>
 inoremap ,, <esc>
 inoremap jj <esc>
 vnoremap // y/<C-R>"<CR>``
@@ -21,7 +22,7 @@ endfunction
 noremap <leader>a :set scb<cr>
 noremap <leader>A :set scb!<cr>
 "noremap <leader>b :FufBuffer<cr>
-noremap <leader>b :Unite -auto-resize -toggle -quick-match -sync -wipe buffer<cr>
+noremap <leader>b :Unite -auto-resize -toggle -sync -wipe buffer<cr>
 noremap <leader>c :ccl\|lcl\|pcl<cr>
 "noremap <leader>c <esc>:cscope c <C-r><C-w>
 noremap <leader>C lc^

@@ -121,3 +121,6 @@
 [submodule ".vim/bundle/vim-which-key"]
 	path = .vim/bundle/vim-which-key
 	url = https://github.com/liuchengxu/vim-which-key
+[submodule ".vim/bundle/haskell-vim"]
+	path = .vim/bundle/haskell-vim
+	url = https://github.com/neovimhaskell/haskell-vim
