@@ -7,7 +7,9 @@ nnoremap , :
 nnoremap ,, <nop>
 inoremap ,, <esc>
 inoremap jj <esc>
-vnoremap // y/<C-R>"<CR>``
+inoremap kk <esc>
+nnoremap // y/\<<C-r><C-w>\><cr>
+vnoremap // "syy/<C-R>"<cr>
 
 function! IsLeftMostWindow()
     let curNr = winnr()
@@ -19,18 +21,14 @@ function! IsLeftMostWindow()
     return 0
 endfunction
 
-noremap <leader>a :set scb<cr>
-noremap <leader>A :set scb!<cr>
+"noremap <leader>a :set scb<cr> " just use vimdiff or Linediff
+"noremap <leader>A :set scb!<cr>
 "noremap <leader>b :FufBuffer<cr>
 noremap <leader>b :Unite -auto-resize -toggle -sync -wipe buffer<cr>
 noremap <leader>c :ccl\|lcl\|pcl<cr>
-"noremap <leader>c <esc>:cscope c <C-r><C-w>
-noremap <leader>C lc^
+noremap <leader>C c^
 noremap <leader>d "_d
 noremap <leader>e :silent<space>e<space>`pwd`<tab>
-noremap <leader>E :Explore<cr>
-"noremap <leader>wh<leader>e :let @e=expand('%:p:h')<cr><c-w>h:e <c-r>e/<tab>
-"noremap <leader>wl<leader>e :let @e=expand('%:p:h')<cr><c-w>l:e <c-r>e/<tab>
 if executable('cquery')
    nnoremap <leader>fa :call AutoAdjustQFWindow()<cr>
    nnoremap <leader>fd :LspDefinition<CR>
@@ -63,38 +61,37 @@ noremap <leader>o <c-w>w
 noremap <leader>O <esc>:only<cr>:vsp<cr>
 noremap <leader>p "_dP
 noremap <leader>q :q<cr>
-noremap <leader>r /\<<C-r><C-w>\><cr>:%s//<C-r><C-w>/g<left><left>
-noremap <leader>s /\<<C-r><C-w>\><cr>``zz
+noremap <leader>r y/\<<C-r><C-w>\><cr>:%s//<C-r><C-w>/g<left><left>
+vnoremap <leader>r "syy/<C-R>"<cr>:%s//<C-R>"/g<left><left>
 noremap <leader>S :SemanticHighlightToggle<cr>
-vnoremap <leader>s "sy/<C-R>"<cr>:%s//<C-R>"/g<left><left>
 noremap <leader>t :vsp<cr>
 noremap <leader>T :sp<cr>
 noremap <leader>u :UndotreeToggle<cr>:UndotreeFocus<cr>
 noremap <leader>v <C-v>
-"noremap <leader>w :up<cr>
+noremap <leader>w :up<cr>
 noremap <leader>x :bp\|bd #<cr>
 noremap <leader>X :bp\|bd! #<cr>
 noremap <leader>y "+y
 noremap <leader>z zR
+noremap <leader>Z zM
 
 vnoremap <leader>=, :Tab /,\zs/l1r0<cr>gv=
 vnoremap <leader>== :Tab /=<cr>gv=
 vnoremap <leader>=<space> :Tab /\s\zs/l1r0<cr>gv=
 vnoremap <leader>=; :Tabularize /\S\+;$/l1<cr>gv=
+vnoremap <leader>=( :Tabularize /\S\+($/l1<cr>gv=
 
 noremap <leader>\ :ConqueGdb<cr>
 noremap <leader>/ :nohlsearch<cr>
-noremap <leader>* /<c-r><c-w>/n<cr>
 noremap <leader>1 "1 ; Register
 noremap <leader>2 "2 ; Register
 noremap <leader>3 "3 ; Register
 noremap <leader><cr> a<cr><esc>
-noremap <leader>; A;<esc>
 noremap <leader>> x<esc>wP
 noremap <leader>< x<esc>bep
 
 noremap <leader><bs> <C-O>
-noremap <leader><leader><bs> <C-I>
+" <leader><tab> <C-I>
 
 " Custom hard remap
 inoremap        [  []<Left>
@@ -133,11 +130,6 @@ inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 inoremap <expr> <tab>      pumvisible() ? "\<C-n>" : "\<C-r>=\<SID>close_paren()\<CR>\<c-r>=Smart_TabComplete()\<CR>"
 inoremap <expr> <s-tab>    pumvisible() ? "\<C-p>" : "\<s-tab>"
  
-"nmap <kPlus> zo
-"nmap <kMinus> zc
-"nmap + zo
-"nmap - zc
-
 function! CaptureExtOutputInNewBuffer(cmd)
   let out = system(a:cmd)
   ene

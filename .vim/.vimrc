@@ -1,4 +1,4 @@
-" .Vimrc from Thomas Legris 28/06/2014
+"1) .Vimrc from Thomas Legris 28/06/2014
 " Useful regex stuff:
 " %s/\<word\>\C/new/g -> \< match begin \> match end \C case sensistiveness
 " copy command output:
