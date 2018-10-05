@@ -25,6 +25,7 @@ syn keyword cppStatement	new delete this friend using
 syn keyword cppAccess		public protected private
 syn keyword cppModifier		inline virtual explicit export
 syn keyword cppType		bool wchar_t
+syn keyword cppSTLType		std boost
 syn keyword cppExceptions	throw try catch
 syn keyword cppOperator		operator typeid
 syn keyword cppOperator		and bitor or xor compl bitand and_eq or_eq xor_eq not not_eq
@@ -74,6 +75,7 @@ if version >= 508 || !exists("did_cpp_syntax_inits")
   HiLink cppStatement		Statement
   HiLink cppModifier		Type
   HiLink cppType		Type
+  HiLink cppSTLType		Type
   HiLink cppStorageClass	StorageClass
   HiLink cppStructure		Structure
   HiLink cppBoolean		Boolean

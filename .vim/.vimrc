@@ -14,6 +14,10 @@ set nocompatible
 
 "  If you need infrmation on parameters, use :h param
 if has("gui_running")
+  set guifont=Terminus\ 9
+  if &guifont != 'Terminus 9'
+      set guifont=Monospace\ 9
+  endif
   set shell=bash " better support
   " Gvim specific
   set lines=999
@@ -63,9 +67,7 @@ if !use_arrow
   nnoremap  <Right>  <NOP>
 endif
 
-set guifont=Monospace\ 9
 set cmdheight=1
-
 set vb                         " visual bell
 syntax on                      " enable
 set background=dark
