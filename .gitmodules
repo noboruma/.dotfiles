@@ -121,3 +121,6 @@
 [submodule ".vim/bundle/haskell-vim"]
 	path = .vim/bundle/haskell-vim
 	url = https://github.com/neovimhaskell/haskell-vim
+[submodule ".vim/bundle/vim-lsp"]
+	path = .vim/bundle/vim-lsp
+	url = https://github.com/prabirshrestha/vim-lsp
