@@ -30,3 +30,11 @@ noremap <F4>  :botright copen\|AsyncRun -program=make @ -j4
 
 DefineLocalTagFinder TagFindStruct s,struct
 DefineLocalTagFinder TagFindTrait t,trait
+
+if executable('rls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'rls',
+        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+        \ 'whitelist': ['rust'],
+        \ })
+endif
