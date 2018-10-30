@@ -356,17 +356,6 @@ let &runtimepath.=',~/.vim/bundle/async.vim'
 let &runtimepath.=',~/.vim/bundle/vim-lsp'
 let &runtimepath.=',~/.vim/bundle/vim-lsp-cquery'
 let &runtimepath.=',~/.vim/bundle/asyncomplete-lsp.vim'
-if executable('cquery')
-   au User lsp_setup call lsp#register_server({
-      \ 'name': 'cquery',
-      \ 'cmd': {server_info->['cquery']},
-      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery/cache' },
-      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-      \ })
-else
-    echom 'no cquery executable'
-endif
 let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_remove_duplicates = 1
 let g:asyncomplete_force_refresh_on_context_changed = 1
