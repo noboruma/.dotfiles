@@ -24,9 +24,13 @@ inoremap (<cr> (<cr>)<c-o>O<tab>
 inoremap <<cr> <<cr>><c-o>O<tab>
 
 " Make options
-let &makeprg='cargo build'
+let &makeprg='cargo'
 "--manifest-path `pwd`/<tab><tab>
-noremap <F4>  :botright copen\|AsyncRun -program=make @ -j4
+noremap <F4>  :botright copen\|AsyncRun -program=make @ -j4 build
+
+set expandtab
+set tabstop=4
+set shiftwidth=4
 
 DefineLocalTagFinder TagFindStruct s,struct
 DefineLocalTagFinder TagFindTrait t,trait
