@@ -26,7 +26,7 @@ inoremap <<cr> <<cr>><c-o>O<tab>
 " Make options
 let &makeprg='cargo'
 "--manifest-path `pwd`/<tab><tab>
-noremap <F4>  :botright copen\|AsyncRun -program=make @ -j4 build
+noremap <F4>  :botright copen\|AsyncRun -program=make @ build -j4
 
 set expandtab
 set tabstop=4

@@ -8,8 +8,8 @@ nnoremap ,, <nop>
 inoremap ,, <esc>
 inoremap jj <esc>
 inoremap kk <esc>
-nnoremap // y/\<<C-r><C-w>\><cr>
-vnoremap // "syy/<C-R>"<cr>
+nnoremap // /\<<C-r><C-w>\><cr>
+vnoremap // "sy/<C-R>"<cr>
 
 function! IsLeftMostWindow()
     let curNr = winnr()
@@ -61,8 +61,8 @@ noremap <leader>o <c-w>w
 noremap <leader>O <esc>:only<cr>:vsp<cr>
 noremap <leader>p "_dP
 noremap <leader>q :q<cr>
-noremap <leader>r y/\<<C-r><C-w>\><cr>:%s//<C-r><C-w>/g<left><left>
-vnoremap <leader>r "syy/<C-R>"<cr>:%s//<C-R>"/g<left><left>
+noremap <leader>r /\<<C-r><C-w>\><cr>:%s//<C-r><C-w>/g<left><left>
+vnoremap <leader>r "sy/<C-R>"<cr>:%s//<C-R>"/g<left><left>
 noremap <leader>S :SemanticHighlightToggle<cr>
 noremap <leader>t :vsp<cr>
 noremap <leader>T :sp<cr>
