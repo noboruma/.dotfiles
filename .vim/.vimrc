@@ -360,10 +360,10 @@ let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_remove_duplicates = 1
 let g:asyncomplete_force_refresh_on_context_changed = 1
 let g:asyncomplete_smart_completion = 1
-let g:lsp_log_verbose = 1
-let g:lsp_log_file = expand('~/vim-lsp.log')
+"let g:lsp_log_verbose = 1
+"let g:lsp_log_file = expand('~/vim-lsp.log')
 set completeopt+=preview
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+"autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 "!lsp
 
 "vim-which-key

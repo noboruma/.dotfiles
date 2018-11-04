@@ -24,9 +24,13 @@ inoremap (<cr> (<cr>)<c-o>O<tab>
 inoremap <<cr> <<cr>><c-o>O<tab>
 
 " Make options
-let &makeprg='cargo build'
+let &makeprg='cargo'
 "--manifest-path `pwd`/<tab><tab>
-noremap <F4>  :botright copen\|AsyncRun -program=make @ -j4
+noremap <F4>  :botright copen\|AsyncRun -program=make @ build -j4
+
+set expandtab
+set tabstop=4
+set shiftwidth=4
 
 DefineLocalTagFinder TagFindStruct s,struct
 DefineLocalTagFinder TagFindTrait t,trait
@@ -35,6 +39,7 @@ if executable('rls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'rls',
         \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'Cargo.toml'))},
         \ 'whitelist': ['rust'],
         \ })
 endif
