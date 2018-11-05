@@ -67,7 +67,7 @@ alias arduino="arduino-asm&"
 alias mc='mw gmake -j4'
 alias mc='mw gmake -j4 check'
 
-alias l="ranger"
+alias l="unique_ranger"
 alias ll="ls -al"
 alias du="du -h"
 alias df="df -h"
@@ -103,9 +103,9 @@ function mwctb () {
     mw gmake -j4 COMPONENTS_TO_BUILD=$1
 }
 
-function ranger() {
+function unique_ranger() {
     if [ -z "$RANGER_LEVEL" ]; then
-        /usr/bin/ranger "$@"
+        ranger "$@"
     else
         exit
     fi
