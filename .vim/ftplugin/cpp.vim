@@ -14,6 +14,8 @@ else
 endif
 " !Plugins
 
+"set nonumber relativenumber
+
 " set keywordprg=cppman
 command! -nargs=+ Cppman exe "!tmux split-window 'sr duckduckgo cppreference " . expand(<q-args>) . "'"
 

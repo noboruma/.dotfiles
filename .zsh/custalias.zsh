@@ -67,7 +67,8 @@ alias arduino="arduino-asm&"
 alias mc='mw gmake -j4'
 alias mc='mw gmake -j4 check'
 
-alias l="unique_ranger"
+
+alias l='unique_ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias ll="ls -al"
 alias du="du -h"
 alias df="df -h"

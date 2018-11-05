@@ -1,5 +1,5 @@
-setlocal expandtab
-setlocal tabstop=4
-setlocal shiftwidth=4
-setlocal autochdir
-
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set list
+set listchars=tab:>-
