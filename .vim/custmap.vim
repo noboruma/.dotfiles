@@ -64,8 +64,8 @@ noremap <leader>q :q<cr>
 noremap <leader>r /\<<C-r><C-w>\><cr>:%s//<C-r><C-w>/g<left><left>
 vnoremap <leader>r "sy/<C-R>"<cr>:%s//<C-R>"/g<left><left>
 noremap <leader>S :SemanticHighlightToggle<cr>
-noremap <leader>t :vsp<cr>
-noremap <leader>T :sp<cr>
+nnoremap <leader>t :vsp<cr>
+nnoremap <leader>_ :sp<cr>
 noremap <leader>u :UndotreeToggle<cr>:UndotreeFocus<cr>
 noremap <leader>v <C-v>
 noremap <leader>w :up<cr>
@@ -129,7 +129,7 @@ inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDow
 inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 inoremap <expr> <tab>      pumvisible() ? "\<C-n>" : "\<C-r>=\<SID>close_paren()\<CR>\<c-r>=Smart_TabComplete()\<CR>"
 inoremap <expr> <s-tab>    pumvisible() ? "\<C-p>" : "\<s-tab>"
- 
+
 function! CaptureExtOutputInNewBuffer(cmd)
   let out = system(a:cmd)
   ene

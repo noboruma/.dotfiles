@@ -45,6 +45,7 @@ if exists('debug')
     autocmd VimEnter * :ConqueGdb --ex "dashboard -output /dev/null"
 else
     let g:ConqueGdb_Disable = 1
+    let g:ConqueTerm_Loaded = 1
 endif
 
 " vim --cmd 'let indexing=""'
@@ -367,7 +368,7 @@ set completeopt+=preview
 "!lsp
 
 "vim-which-key
-let mapleader=" "
+let mapleader="\<Space>"
 if use_custhelp
     let &runtimepath.=',~/.vim/bundle/vim-which-key'
     nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
@@ -495,13 +496,15 @@ let g:colorizer_nomap = 1
 let g:colorizer_startup = 0
 
 " Conque plugin
-let g:ConqueGdb_Leader = '\'
-let g:ConqueTerm_CloseOnEnd = 1
-let g:ConqueTerm_ReadUnfocused=1
-let g:ConqueTerm_Color = 1
-let g:ConqueGdb_SaveHistory = 1
-let g:ConqueTerm_InsertOnEnter = 1
-let g:ConqueTerm_CWInsert = 1
+if exists('debug')
+    let g:ConqueGdb_Leader = '\'
+    let g:ConqueTerm_CloseOnEnd = 1
+    let g:ConqueTerm_ReadUnfocused=1
+    let g:ConqueTerm_Color = 1
+    let g:ConqueGdb_SaveHistory = 1
+    let g:ConqueTerm_InsertOnEnter = 1
+    let g:ConqueTerm_CWInsert = 1
+endif
 
 set modeline
 
