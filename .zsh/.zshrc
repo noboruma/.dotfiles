@@ -188,6 +188,7 @@ bindkey '^Z' fancy-ctrl-z
 #plugin part
 setopt HIST_FIND_NO_DUPS
 source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source ~/.zsh/plugins/zshmarks/init.zsh
 
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
