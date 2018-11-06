@@ -124,3 +124,6 @@
 [submodule ".zsh/plugins/zshmarks"]
 	path = .zsh/plugins/zshmarks
 	url = https://github.com/jocelynmallon/zshmarks
+[submodule ".vim/bundle/vim-lsp"]
+	path = .vim/bundle/vim-lsp
+	url = https://github.com/prabirshrestha/vim-lsp
