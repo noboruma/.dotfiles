@@ -59,6 +59,7 @@ setopt nohup
 setopt transientrprompt
 #setopt PRINT_EXIT_VALUE
 #history
+setopt histignorespace
 setopt INC_APPEND_HISTORY
 #setopt SHARE_HISTORY
 setopt HIST_IGNORE_SPACE
