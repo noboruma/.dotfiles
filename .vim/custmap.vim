@@ -52,8 +52,8 @@ noremap <leader>J :tj /<C-r><C-w><C-b><right><right><right><right>
 vnoremap <leader>j "sy:tj /<C-R>"<cr>
 vnoremap <leader>J "sy:tj /<C-R>"
 " Use surfraw to search on the web
-nnoremap <silent> K <Esc>:Cppman <cword><CR>
-vnoremap <silent> K "sy:Cppman <C-R>"<CR>
+nnoremap <silent> <c-K> <Esc>:Cppman <cword><CR>
+vnoremap <silent> <c-k> "sy:Cppman <C-R>"<CR>
 noremap <leader>l :let g:tagbar_left=IsLeftMostWindow()<cr>:TagbarOpen j<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
 noremap <leader>mm <esc>:SlimeSend1 cppman <C-r><C-w>
@@ -118,8 +118,10 @@ nnoremap <silent> <C-j> <c-w>-
 "ALT: M-xxx
 
 " scroll remap
-noremap <C-J> <C-E>
-noremap <C-K> <C-Y>
+nnoremap <c-j> J
+nnoremap <c-k> K
+nnoremap J <c-e>
+nnoremap K <c-y>
 
 " Simulate <down> after CTRL-N
 "inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
