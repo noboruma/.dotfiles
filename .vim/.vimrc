@@ -1,4 +1,4 @@
-"1) .Vimrc from Thomas Legris 28/06/2014
+" .Vimrc from Thomas Legris 28/06/2014
 " Useful regex stuff:
 " %s/\<word\>\C/new/g -> \< match begin \> match end \C case sensistiveness
 " copy command output:
@@ -30,10 +30,6 @@ if has("gui_running")
   endif
 endif
 
-" vim --cmd 'let indexing=1'
-if !exists('indexing')
-endif
-
 " vim --cmd 'let debug=1'
 if exists('debug')
     let g:ConqueGdb_Disable = 0
@@ -46,13 +42,6 @@ if exists('debug')
 else
     let g:ConqueGdb_Disable = 1
     let g:ConqueTerm_Loaded = 1
-endif
-
-" vim --cmd 'let indexing=""'
-if exists('indexing')
-    let perforcecmd='bash -c "cat <(p4 opened) <(p4 have)" | cut -f1 -d\# | cut -f5-100 -d/ | grep "\.[c|h][a-zA-Z]*$" | grep "'.indexing.'"'
-else
-    let perforcecmd='bash -c "cat <(p4 opened) <(p4 have)" | cut -f1 -d\# | cut -f5-100 -d/ | grep "\.[c|h][a-zA-Z]*$" | grep "matlab/src\\|matlab/foundation\\|matlab/toolbox"'
 endif
 
 "set ttyfast
@@ -99,8 +88,8 @@ set showcmd                    " visual count
 set term=xterm-256color
 
 " Show space and tab as blue
-"set list
-"set listchars=tab:>-,trail:-
+set list
+set listchars=tab:>-,trail:-
 
 "set ignorecase
 set smartcase
@@ -222,12 +211,11 @@ call unite#custom#profile('default', 'context', {
 " Gutentags
 if executable('ctags')
     let &runtimepath.=',~/.vim/bundle/vim-gutentags'
-    let g:gutentags_project_root=['.perforce', '.git']
+    let g:gutentags_project_root=['.git']
     let g:gutentags_file_list_command = {
                 \ 'markers': {
                 \ '.git': 'git ls-files',
                 \ '.hg': 'hg files',
-                \ '.perforce': perforcecmd,
                 \ },
                 \ }
     set statusline+=%{gutentags#statusline()}
@@ -363,7 +351,6 @@ let g:asyncomplete_force_refresh_on_context_changed = 1
 let g:asyncomplete_smart_completion = 1
 "let g:lsp_log_verbose = 1
 "let g:lsp_log_file = expand('~/vim-lsp.log')
-set completeopt+=preview
 "autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 "!lsp
 
@@ -469,7 +456,33 @@ set splitbelow
 set splitright
 
 " Semantic Highlight
-let g:semanticGUIColors = ['#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082', '#ffcc80', '#ffab91', '#bcaaa4', '#b0bec5', '#ffa726', '#ff8a65', '#f9bdbb', '#f9bdbb', '#f8bbd0', '#e1bee7', '#d1c4e9', '#ffe0b2', '#c5cae9', '#d0d9ff', '#b3e5fc', '#b2ebf2', '#b2dfdb', '#a3e9a4', '#dcedc8' , '#f0f4c3', '#ffb74d' ]
+let g:semanticGUIColors = [
+            \'#72d572',
+            \'#c5e1a5',
+            \'#e6ee9c',
+            \'#fff59d',
+            \'#ffe082',
+            \'#ffcc80',
+            \'#ffab91',
+            \'#bcaaa4',
+            \'#b0bec5',
+            \'#ffa726',
+            \'#ff8a65',
+            \'#f9bdbb',
+            \'#f9bdbb',
+            \'#f8bbd0',
+            \'#e1bee7',
+            \'#d1c4e9',
+            \'#ffe0b2',
+            \'#c5cae9',
+            \'#d0d9ff',
+            \'#b3e5fc',
+            \'#b2ebf2',
+            \'#b2dfdb',
+            \'#a3e9a4',
+            \'#dcedc8',
+            \'#f0f4c3',
+            \'#ffb74d' ]
 let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,19]
 
 " Backup part
