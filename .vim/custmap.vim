@@ -6,8 +6,8 @@ nnoremap X "_X
 nnoremap , :
 nnoremap ,, <nop>
 inoremap ,, <esc>
-inoremap jj <esc>
-inoremap kk <esc>
+inoremap jj <esc>j
+inoremap kk <esc>k
 nnoremap // /\<<C-r><C-w>\><cr>
 vnoremap // "sy/<C-R>"<cr>
 
@@ -52,8 +52,6 @@ noremap <leader>J :tj /<C-r><C-w><C-b><right><right><right><right>
 vnoremap <leader>j "sy:tj /<C-R>"<cr>
 vnoremap <leader>J "sy:tj /<C-R>"
 " Use surfraw to search on the web
-nnoremap <silent> <c-K> <Esc>:Cppman <cword><CR>
-vnoremap <silent> <c-k> "sy:Cppman <C-R>"<CR>
 noremap <leader>l :let g:tagbar_left=IsLeftMostWindow()<cr>:TagbarOpen j<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
 noremap <leader>mm <esc>:SlimeSend1 cppman <C-r><C-w>
@@ -108,18 +106,20 @@ endfun
 inoremap <c-f> <c-x><c-f>
 inoremap <c-l> <c-x><c-l>
 inoremap <c-k> <c-o>:call LspFunctionType()<cr>
+nnoremap <silent> <c-k> <Esc>:Cppman <cword><CR>
+vnoremap <silent> <c-k> "sy:Cppman <C-R>"<CR>
 
 " Adding silent helps not asking anything in the command
-nnoremap <silent> <C-h> <c-w><
-nnoremap <silent> <C-l> <c-w>>
-nnoremap <silent> <C-k> <c-w>+
-nnoremap <silent> <C-j> <c-w>-
+"nnoremap <silent> <C-h> <c-w><
+"nnoremap <silent> <C-l> <c-w>>
+"nnoremap <silent> <C-k> <c-w>+
+"nnoremap <silent> <C-j> <c-w>-
 
 "ALT: M-xxx
 
 " scroll remap
 nnoremap <c-j> J
-nnoremap <c-k> K
+"nnoremap <c-k> K
 nnoremap J <c-e>
 nnoremap K <c-y>
 
@@ -145,25 +145,41 @@ noremap <F2>  :set modifiable<cr>:set noro<cr>
 
 let g:cppmanprovider = 0
 fun IterateThroughProviders()
+    if has("gui_running")
+        let l:tmux_command="new-window"
+        let l:sr_command='sr'
+        let l:focus="-d"
+        let l:silent="silent"
+    else
+        let l:tmux_command="split-window"
+        let l:sr_command='sr -browser=w3m'
+        let l:focus=""
+        let l:silent=""
+    endif
+
     if (g:cppmanprovider == 0)
         let g:cppmanprovider = 1
-        command! -nargs=+ Cppman silent exe "!tmux split-window 'sr google \"" . expand(<q-args>) . "\"'"
+        command! -nargs=+ Cppman silent exe "silent !tmux ".l:tmux_command." ".l:focus." '".l:sr_command." google \"" . expand(<q-args>) . "\"'"
         echom "switch to google"
     elseif (g:cppmanprovider == 1)
         let g:cppmanprovider = 2
-        command! -nargs=+ Cppman silent exe "!tmux split-window 'sr duckduckgo \"" . expand(<q-args>) . "\"'"
+        command! -nargs=+ Cppman silent exe "silent !tmux ".l:tmux_command." ".l:focus."'".l:sr_command." duckduckgo \"" . expand(<q-args>) . "\"'"
         echom "switch to duckduckgo"
     elseif (g:cppmanprovider == 2)
         let g:cppmanprovider = 3
-        command! -nargs=+ Cppman silent exe "!tmux split-window 'cppman " . expand(<q-args>) . "'"
+        command! -nargs=+ Cppman silent exe l:silent."!tmux ".l:tmux_command." 'cppman " . expand(<q-args>) . "'"
         echom "switch to cppman"
     elseif (g:cppmanprovider == 3)
         let g:cppmanprovider = 0
-        command! -nargs=+ Cppman silent exe "!tmux split-window 'man " . expand(<q-args>) . "'"
+        command! -nargs=+ Cppman silent exe l:silent."!tmux ".l:tmux_command." 'man " . expand(<q-args>) . "'"
         echom "switch to man"
     endif
 endfun
-command! -nargs=+ Cppman exe "!tmux split-window 'sr duckduckgo \"" . expand(<q-args>) . "\"'"
+if has("gui_running")
+    command! -nargs=+ Cppman exe "silent !tmux new-window -d 'sr duckduckgo \"" . expand(<q-args>) . "\"'"
+else
+    command! -nargs=+ Cppman exe "silent !tmux split-window 'sr -browser=w3m duckduckgo \"" . expand(<q-args>) . "\"'"
+endif
 
 noremap <F3> :call IterateThroughProviders()<cr>
 
