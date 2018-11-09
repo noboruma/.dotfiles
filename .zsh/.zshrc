@@ -189,7 +189,6 @@ bindkey '^Z' fancy-ctrl-z
 #plugin part
 setopt HIST_FIND_NO_DUPS
 source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-source ~/.zsh/plugins/zshmarks/init.zsh
 
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
@@ -227,6 +226,8 @@ source $HOME/.zsh/plugins/bd/bd.zsh
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
+
+source /home/tlegris/.zsh/plugins/fzf-marks/init.zsh
 
 #source ~/usr/emsdk-portable/emsdk_env.sh
 #source ~/.sdkman/bin/sdkman-init.sh
