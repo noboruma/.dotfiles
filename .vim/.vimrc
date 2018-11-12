@@ -365,6 +365,7 @@ endif
 "fzf
 if(isdirectory($HOME."/.fzf"))
     let &runtimepath.=',~/.fzf'
+    let &runtimepath.=',~/.vim/bundle/fzf.vim'
 else
     echom 'fzf not installed'
 endif

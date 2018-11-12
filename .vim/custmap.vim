@@ -24,7 +24,7 @@ endfunction
 "noremap <leader>a :set scb<cr> " just use vimdiff or Linediff
 "noremap <leader>A :set scb!<cr>
 "noremap <leader>b :FufBuffer<cr>
-noremap <leader>b :Unite -auto-resize -toggle -sync -wipe buffer<cr>
+noremap <leader>b :Buffers <cr>
 noremap <leader>c :ccl\|lcl\|pcl<cr>
 noremap <leader>C c^
 noremap <leader>d "_d
