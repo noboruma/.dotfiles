@@ -362,6 +362,14 @@ if use_custhelp
 endif
 "!vim-which-key
 
+"fzf
+if(isdirectory($HOME."/.fzf"))
+    let &runtimepath.=',~/.fzf'
+else
+    echom 'fzf not installed'
+endif
+"!fzf
+
 filetype on
 filetype plugin on
 filetype indent on
