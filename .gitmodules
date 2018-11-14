@@ -127,3 +127,6 @@
 [submodule ".zsh/plugins/fzf-marks"]
 	path = .zsh/plugins/fzf-marks
 	url = https://github.com/urbainvaes/fzf-marks
+[submodule ".vim/bundle/fzf.vim"]
+	path = .vim/bundle/fzf.vim
+	url = https://github.com/junegunn/fzf.vim

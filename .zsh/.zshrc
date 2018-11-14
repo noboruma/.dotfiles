@@ -169,9 +169,32 @@ source ~/.zsh/custalias.zsh
 
 set inc
 
+# Enable v inside command
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
+
+# i18n
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+
+# Sourcing part
 export PATH=~/usr/bin:$PATH
 export PATH=/usr/local/cuda-7.5/bin:$PATH
 export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
+
+export ANDROID_NDK_ROOT=$HOME'/workspace/android/android-ndk-r16b'
+export ANDROID_NDK_HOME=$HOME'/workspace/android/android-ndk-r16b'
+export ANDROID_HOME=$HOME'/usr/adt-bundle-linux-x86_64-20131030/sdk'
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+export P4CONFIG=.perforce
+
+export NPM_PACKAGES="${HOME}/usr/npm-packages"
+export PATH="$NPM_PACKAGES/bin:$PATH"
+#source ~/usr/emsdk-portable/emsdk_env.sh
+#source ~/.sdkman/bin/sdkman-init.sh
 
 # vim CTRL-Z helper
 fancy-ctrl-z () {
@@ -186,7 +209,9 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
-#plugin part
+# Plugin part
+export ZBEEP=''
+# History
 setopt HIST_FIND_NO_DUPS
 source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
@@ -199,35 +224,25 @@ bindkey '^[[B' down-line-or-search
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
-export ANDROID_NDK_ROOT=$HOME'/workspace/android/android-ndk-r16b'
-export ANDROID_NDK_HOME=$HOME'/workspace/android/android-ndk-r16b'
-export ANDROID_HOME=$HOME'/usr/adt-bundle-linux-x86_64-20131030/sdk'
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+# FZF
+export FZF_DEFAULT_COMMAND="fd --type file --color=always --follow --exclude .git"
+export FZF_DEFAULT_OPTS="--ansi"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd -d 1 --type d --color=always --exclude .git --follow"
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1" --color=always
+}
 
-export P4CONFIG=.perforce
-
-export NPM_PACKAGES="${HOME}/usr/npm-packages"
-export PATH="$NPM_PACKAGES/bin:$PATH"
-
-export ZBEEP=''
-
-# Enable v inside command
-autoload edit-command-line
-zle -N edit-command-line
-bindkey '^x^e' edit-command-line
-
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1" --color=always
+}
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-echo 'running on '$TTY
+# FZF marks
+source $HOME/.zsh/plugins/fzf-marks/init.zsh
 
 # zsh-bd
 source $HOME/.zsh/plugins/bd/bd.zsh
 
-export GTK_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-export QT_IM_MODULE=ibus
-
-source /home/tlegris/.zsh/plugins/fzf-marks/init.zsh
-
-#source ~/usr/emsdk-portable/emsdk_env.sh
-#source ~/.sdkman/bin/sdkman-init.sh
+echo 'running on '$TTY

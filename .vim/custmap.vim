@@ -26,11 +26,12 @@ endfunction
 "noremap <leader>a :set scb<cr> " just use vimdiff or Linediff
 "noremap <leader>A :set scb!<cr>
 "noremap <leader>b :FufBuffer<cr>
-noremap <leader>b :Unite -auto-resize -toggle -sync -wipe buffer<cr>
+noremap <leader>b :Buffers <cr>
 noremap <leader>c :ccl\|lcl\|pcl<cr>
 noremap <leader>C c^
 noremap <leader>d "_d
 noremap <leader>e :silent<space>e<space>`pwd`<tab>
+noremap <leader>ff :Files<space>`pwd`<tab>
 if executable('cquery')
    nnoremap <leader>fa :call AutoAdjustQFWindow()<cr>
    nnoremap <leader>fd :LspDefinition<CR>
@@ -48,7 +49,8 @@ endif
 noremap <leader>g :AsyncRun -program=grep "<C-r><C-w>" `pwd`<tab>
 vnoremap <leader>g "sy:AsyncRun -program=grep "<C-R>"" `pwd`<tab>
 noremap <leader>h :call File_flip()<cr>zz
-noremap <leader>H :0r ~/.vim/.header_template<cr>
+nnoremap <leader>H :History<cr>
+"noremap <leader>H :0r ~/.vim/.header_template<cr>
 noremap <leader>j :tj <C-r><C-w><cr>
 noremap <leader>J :tj /<C-r><C-w><C-b><right><right><right><right>
 vnoremap <leader>j "sy:tj /<C-R>"<cr>
@@ -56,6 +58,7 @@ vnoremap <leader>J "sy:tj /<C-R>"
 " Use surfraw to search on the web
 noremap <leader>l :let g:tagbar_left=IsLeftMostWindow()<cr>:TagbarOpen j<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
+nnoremap <leader>m :Marks<cr>
 noremap <leader>mm <esc>:SlimeSend1 cppman <C-r><C-w>
 noremap <leader>o <c-w>w
 noremap <leader>O <esc>:only<cr>:vsp<cr>
@@ -128,11 +131,22 @@ nnoremap K <c-y>
 " Simulate <down> after CTRL-N
 "inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 "  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
-inoremap <expr> <tab>      pumvisible() ? "\<C-n>" : "\<C-r>=\<SID>close_paren()\<CR>\<c-r>=Smart_TabComplete()\<CR>"
-inoremap <expr> <s-tab>    pumvisible() ? "\<C-p>" : "\<s-tab>"
+"inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+"inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+"inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+"inoremap <expr> <tab>      pumvisible() ? "\<C-n>" : "\<C-r>=\<SID>close_paren()\<CR>\<c-r>=Smart_TabComplete()\<CR>"
+"inoremap <expr> <s-tab>    pumvisible() ? "\<C-p>" : "\<s-tab>"
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? "\<C-n>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ asyncomplete#force_refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! CaptureExtOutputInNewBuffer(cmd)
   let out = system(a:cmd)
@@ -287,28 +301,28 @@ function s:close_paren() abort
     return ''
 endfunction
 
-function Smart_TabComplete()
-    let line = getline('.')                         " current line
-
-    let substr = strpart(line, -1, col('.'))      " from the start of the current
-    " line to one character right
-    " of the cursor
-    let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
-    if (strlen(substr)==0)                          " nothing to match on empty string
-        return "\<tab>"
-    endif
-    let has_period = match(substr, '\.') != -1      " position of period, if any
-    let has_slash = match(substr, '\/') != -1       " position of slash, if any
-    let has_colon = match(substr, '::') != -1     " position of ::, if any
-    if (!has_period && !has_slash && !has_colon)
-        return "\<C-X>\<C-P>"                         " existing text matching
-    elseif ( has_slash )
-        return "\<C-X>\<C-F>"                         " file matching
-    else
-        call asyncomplete#force_refresh()
-        return "\<C-X>\<C-O>"                         " plugin matching
-    endif
-endfunction
+"function Smart_TabComplete()
+"    let line = getline('.')                         " current line
+"
+"    let substr = strpart(line, -1, col('.'))      " from the start of the current
+"    " line to one character right
+"    " of the cursor
+"    let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
+"    if (strlen(substr)==0)                          " nothing to match on empty string
+"        return "\<tab>"
+"    endif
+"    let has_period = match(substr, '\.') != -1      " position of period, if any
+"    let has_slash = match(substr, '\/') != -1       " position of slash, if any
+"    let has_colon = match(substr, '::') != -1     " position of ::, if any
+"    if (!has_period && !has_slash && !has_colon)
+"        return "\<C-X>\<C-P>"                         " existing text matching
+"    elseif ( has_slash )
+"        return "\<C-X>\<C-F>"                         " file matching
+"    else
+"        call asyncomplete#force_refresh()
+"        "return "\<tab>"                         " plugin matching
+"    endif
+"endfunction
 
 if &diff
     noremap <F5> :tabclose<cr>

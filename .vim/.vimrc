@@ -345,12 +345,12 @@ let &runtimepath.=',~/.vim/bundle/async.vim'
 let &runtimepath.=',~/.vim/bundle/vim-lsp'
 let &runtimepath.=',~/.vim/bundle/vim-lsp-cquery'
 let &runtimepath.=',~/.vim/bundle/asyncomplete-lsp.vim'
-let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_auto_popup = 0
 let g:asyncomplete_remove_duplicates = 1
 let g:asyncomplete_force_refresh_on_context_changed = 1
 let g:asyncomplete_smart_completion = 1
-let g:lsp_log_verbose = 1
-let g:lsp_log_file = expand('~/vim-lsp.log')
+"let g:lsp_log_verbose = 1
+"let g:lsp_log_file = expand('~/vim-lsp.log')
 "autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 "!lsp
 
@@ -361,6 +361,16 @@ if use_custhelp
     nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 endif
 "!vim-which-key
+
+"fzf
+if(isdirectory($HOME."/.fzf"))
+    let &runtimepath.=',~/.fzf'
+    let &runtimepath.=',~/.vim/bundle/fzf.vim'
+    let g:fzf_buffers_jump = 1
+else
+    echom 'fzf not installed'
+endif
+"!fzf
 
 filetype on
 filetype plugin on
@@ -428,7 +438,8 @@ highlight Pmenu    ctermbg=grey gui=bold
 highlight PmenuSel ctermbg=cyan gui=bold
 "hi Search cterm=NONE ctermfg=grey ctermbg=blue
 
-set completeopt=menu,menuone,longest,preview
+set completeopt=menu,menuone,longest
+",preview
 set previewheight=3
 "To close automatically the preview window:
 "autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
