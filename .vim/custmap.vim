@@ -8,6 +8,8 @@ nnoremap ,, <nop>
 inoremap ,, <esc>
 inoremap jj <esc>j
 inoremap kk <esc>k
+inoremap JJ <esc>J
+inoremap KK <esc>K
 nnoremap // /\<<C-r><C-w>\><cr>
 vnoremap // "sy/<C-R>"<cr>
 
