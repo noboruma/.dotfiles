@@ -225,7 +225,7 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
 # FZF
-export FZF_DEFAULT_COMMAND="fd -d 1 --type file --color=always --follow --exclude .git"
+export FZF_DEFAULT_COMMAND="fd --type file --color=always --follow --exclude .git"
 export FZF_DEFAULT_OPTS="--ansi"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd -d 1 --type d --color=always --exclude .git --follow"

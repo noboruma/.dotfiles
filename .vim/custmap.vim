@@ -29,6 +29,7 @@ noremap <leader>c :ccl\|lcl\|pcl<cr>
 noremap <leader>C c^
 noremap <leader>d "_d
 noremap <leader>e :silent<space>e<space>`pwd`<tab>
+noremap <leader>ff :Files<space>`pwd`<tab>
 if executable('cquery')
    nnoremap <leader>fa :call AutoAdjustQFWindow()<cr>
    nnoremap <leader>fd :LspDefinition<CR>
