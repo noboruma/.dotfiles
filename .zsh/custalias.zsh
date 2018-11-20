@@ -82,6 +82,7 @@ alias edebug="gvim --cmd 'let debug=1'"
 alias vdebug="vim --cmd 'let debug=1'"
 alias vdev="vim --cmd 'let indexing=1' --servername VIM"
 alias vimdev="vim --cmd 'let indexing=1' --servername VIM"
+alias f="fzf-fs"
 
 alias alert_helper='history|tail -n1|sed -e "s/^\s*[0-9]\+\s*//" -e "s/;\s*alert$//"'
 alias alert='notify-send -i /usr/share/icons/gnome/32x32/apps/gnome-terminal.png "[$?] $(alert_helper)"'

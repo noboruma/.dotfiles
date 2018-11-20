@@ -48,6 +48,7 @@ endif
 "Add --cpp or --type:
 noremap <leader>g :AsyncRun -program=grep "<C-r><C-w>" `pwd`<tab>
 vnoremap <leader>g "sy:AsyncRun -program=grep "<C-R>"" `pwd`<tab>
+nnoremap <leader>G :lcd<space>`pwd`<space>\|<space>Ag<left><left><left><left><left><tab>
 noremap <leader>h :call File_flip()<cr>zz
 nnoremap <leader>H :History<cr>
 "noremap <leader>H :0r ~/.vim/.header_template<cr>
