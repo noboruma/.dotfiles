@@ -400,7 +400,7 @@ let g:semanticGUIColors = [
             \'#dcedc8',
             \'#f0f4c3',
             \'#ffb74d' ]
-let g:semanticTermColors = [28,1,2,3,12,5,6,7,25,9,10,34,1,13,14,15,16,125,124,39]
+let g:semanticTermColors = [195,3,4,5,6,7,8,9,10,11,12,13,14,15,22,44,61,77,211, 229]
 let g:semanticPersistCache = 1
 let &runtimepath.=',~/.vim/bundle/semantic-highlight.vim'
 " !Semantic Highlight
