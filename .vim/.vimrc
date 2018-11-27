@@ -364,6 +364,7 @@ endif
 
 "fzf
 if(isdirectory($HOME."/.fzf"))
+"ln -s the fzf source directory for your own good
     let &runtimepath.=',~/.fzf'
     let &runtimepath.=',~/.vim/bundle/fzf.vim'
     let g:fzf_buffers_jump = 1
