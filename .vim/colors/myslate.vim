@@ -38,7 +38,7 @@ let colors_name = "myslate"
 :hi PreProc guifg=red guibg=black ctermfg=red
 :hi Operator guifg=Red ctermfg=Red
 :hi Define guifg=gold gui=bold ctermfg=yellow
-:hi Type guifg=CornflowerBlue ctermfg=2
+:hi Type guifg=CornflowerBlue ctermfg=69
 :hi Function guifg=navajowhite ctermfg=brown
 :hi Structure guifg=salmon ctermfg=lightred
 :hi LineNr guifg=grey50 ctermfg=3

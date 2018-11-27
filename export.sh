@@ -14,7 +14,8 @@ ln -s $PWD/.vim/.vimrc ~
 ln -s $PWD/.tmux.conf ~
 ln -s $PWD/.zsh ~
 ln -s $PWD/.zsh/.zshrc ~
-ln -s $PWD/.gdb/.gdbinit ~
+ln -s $PWD/.gdb/bundle/gdb-dashboard/.gdbinit ~
+ln -s $PWD/.gdb/.gdbinit.d ~
 ln -s $PWD/.colorgccrc ~
 ln -s $PWD/.tmux ~
 ln -s $PWD/ranger/rc.conf ~/.config/ranger
