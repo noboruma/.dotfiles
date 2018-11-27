@@ -1,3 +1,4 @@
+" Custom blacklist to override official repo's
 let s:blacklist = {
     \ 'javascript': [
     \   'render',

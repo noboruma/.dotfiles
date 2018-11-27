@@ -130,3 +130,6 @@
 [submodule ".vim/bundle/fzf.vim"]
 	path = .vim/bundle/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
+[submodule ".vim/bundle/semantic-highlight.vim"]
+	path = .vim/bundle/semantic-highlight.vim
+	url = https://github.com/jaxbot/semantic-highlight.vim
