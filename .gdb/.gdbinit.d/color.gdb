@@ -71,6 +71,16 @@ define do-generic-colors
         sed -r "s_(\.*[/A-Za-z0-9\+_\.\-]*):([0-9]+)\$_$(tput setaf 6)\1$(tput sgr0):$(tput bold)$(tput setaf 8)\2$(tput sgr0)_"
 end
 
+define do-print-colors
+    # 1. Field names
+    # 4. Opening {
+    # 5. Closing }
+    shell echo | cat ./.gdb-color-pipe - | \
+        sed -r "s_([a-zA-Z0-9_# ]*)=([a-zA-Z0-9_#\. ]*)_$(tput setaf 2)$(tput bold)\1$(tput sgr0)=$(tput setaf 3)\2$(tput sgr0)_g" | \
+        sed -r "s_[{]_$(tput setaf 1)$(tput bold){$(tput sgr0)_g" | \
+        sed -r "s_[}]_$(tput setaf 1)$(tput bold)}$(tput sgr0)_g"
+end
+
 #------------------------------------------------------------------------------#
 # Prompt
 #------------------------------------------------------------------------------#
@@ -162,3 +172,14 @@ define hookpost-thread
     cleanup-color-pipe
 end
 
+#------------------------------------------------------------------------------#
+# print
+#------------------------------------------------------------------------------#
+define hook-print
+    setup-color-pipe
+end
+
+define hookpost-print
+    do-print-colors
+    cleanup-color-pipe
+end
