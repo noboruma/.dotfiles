@@ -23,15 +23,20 @@ function! IsLeftMostWindow()
     return 0
 endfunction
 
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-h> <S-Left>
+cnoremap <C-l> <S-Right>
+
 "noremap <leader>a :set scb<cr> " just use vimdiff or Linediff
 "noremap <leader>A :set scb!<cr>
 "noremap <leader>b :FufBuffer<cr>
-noremap <leader>b :Buffers <cr>
-noremap <leader>c :ccl\|lcl\|pcl<cr>
+noremap <leader>b :<c-u>Buffers <cr>
+noremap <leader>c :<c-u>ccl\|lcl\|pcl<cr>
 noremap <leader>C c^
 noremap <leader>d "_d
 noremap <leader>e :silent<space>e<space>`pwd`<tab>
-noremap <leader>ff :Files<space>`pwd`<tab>
+noremap <leader>ff :<c-u>Files<space>`pwd`<tab>
 if executable('cquery')
    nnoremap <leader>fa :call AutoAdjustQFWindow()<cr>
    nnoremap <leader>fd :LspDefinition<CR>
@@ -48,33 +53,36 @@ endif
 "Add --cpp or --type:
 noremap <leader>g :AsyncRun -program=grep "<C-r><C-w>" `pwd`<tab>
 vnoremap <leader>g "sy:AsyncRun -program=grep "<C-R>"" `pwd`<tab>
-nnoremap <leader>G :lcd<space>`pwd`<space>\|<space>Ag<left><left><left><left><left><tab>
-noremap <leader>h :call File_flip()<cr>zz
-nnoremap <leader>H :History<cr>
+nnoremap <leader>G :lcd<space>`pwd`<tab><space>\|<space>Ag<left><left><left><left><left><tab>
+vnoremap <leader>G "sy:lcd<space>`pwd`<tab><space>\|<space>Ag<space><C-R>"<C-f>F\|<left><C-c><tab>
+noremap <leader>h :<c-u>call File_flip()<cr>zz
+nnoremap <leader>H :<c-u>History<cr>
 "noremap <leader>H :0r ~/.vim/.header_template<cr>
-noremap <leader>j :tj <C-r><C-w><cr>
-noremap <leader>J :tj /<C-r><C-w><C-b><right><right><right><right>
+noremap <leader>j :<c-u>tj <C-r><C-w><cr>
+noremap <leader>J :<c-u>tj /<C-r><C-w><C-b><right><right><right><right>
 vnoremap <leader>j "sy:tj /<C-R>"<cr>
 vnoremap <leader>J "sy:tj /<C-R>"
 " Use surfraw to search on the web
-noremap <leader>l :let g:tagbar_left=IsLeftMostWindow()<cr>:TagbarOpen j<cr>
+noremap <leader>l :<c-u>let g:tagbar_left=IsLeftMostWindow()<cr>:TagbarOpen j<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
 nnoremap <leader>m :Marks<cr>
 noremap <leader>mm <esc>:SlimeSend1 cppman <C-r><C-w>
 noremap <leader>o <c-w>w
 noremap <leader>O <esc>:only<cr>:vsp<cr>
 noremap <leader>p "_dP
-noremap <leader>q :q<cr>
+noremap <leader>q :<c-u>q<cr>
 noremap <leader>r /\<<C-r><C-w>\><cr>:%s//<C-r><C-w>/g<left><left>
 vnoremap <leader>r "sy/<C-R>"<cr>:%s//<C-R>"/g<left><left>
-noremap <leader>S :SemanticHighlightToggle<cr>
-nnoremap <leader>t :vsp<cr>
-nnoremap <leader>_ :sp<cr>
-noremap <leader>u :UndotreeToggle<cr>:UndotreeFocus<cr>
+noremap <leader>s vi
+noremap <leader>s, vi,
+noremap <leader>S :<c-u>SemanticHighlightToggle<cr>
+nnoremap <leader>t :<c-u>vsp<cr>
+nnoremap <leader>_ :<c-u>sp<cr>
+noremap <leader>u :<c-u>UndotreeToggle<cr>:UndotreeFocus<cr>
 noremap <leader>v <C-v>
-noremap <leader>w :up<cr>
-noremap <leader>x :bp\|bd #<cr>
-noremap <leader>X :bp\|bd! #<cr>
+noremap <leader>w :<c-u>up<cr>
+noremap <leader>x :<c-u>bp\|bd #<cr>
+noremap <leader>X :<c-u>bp\|bd! #<cr>
 noremap <leader>y "+y
 noremap <leader>z zR
 noremap <leader>Z zM
@@ -85,8 +93,8 @@ vnoremap <leader>=<space> :Tab /\s\zs/l1r0<cr>gv=
 vnoremap <leader>=; :Tabularize /\S\+;$/l1<cr>gv=
 vnoremap <leader>=( :Tabularize /\S\+($/l1<cr>gv=
 
-noremap <leader>\ :ConqueGdb<cr>
-noremap <leader>/ :nohlsearch<cr>
+noremap <leader>\ :<c-u>ConqueGdb<cr>
+noremap <leader>/ :<c-u>nohlsearch<cr>
 noremap <leader>1 "1 ; Register
 noremap <leader>2 "2 ; Register
 noremap <leader>3 "3 ; Register
@@ -157,8 +165,8 @@ function! CaptureExtOutputInNewBuffer(cmd)
 endfunction
 command! -nargs=+ -complete=command CaptureExtOutputInNewBuffer call CaptureExtOutputInNewBuffer(<q-args>)
 
-noremap <F1>  :!git add %<cr>
-noremap <F2>  :set modifiable<cr>:set noro<cr>
+noremap <F1>  :<c-u>!git add %<cr>
+noremap <F2>  :<c-u>set modifiable<cr>:set noro<cr>
 
 let g:cppmanprovider = 0
 fun IterateThroughProviders()
@@ -198,13 +206,13 @@ else
     command! -nargs=+ Cppman exe "silent !tmux split-window 'sr -browser=w3m duckduckgo \"" . expand(<q-args>) . "\"'"
 endif
 
-noremap <F3> :call IterateThroughProviders()<cr>
+noremap <F3> :<c-u>call IterateThroughProviders()<cr>
 
 " Need to manually call copen first so that directories are correctly set
 " (issue with asyncrun?)
-noremap <F4>  :AsyncRun -program=make @ -j4 -C `pwd`/<tab><tab>
-nnoremap <F5> :ccl<cr>:up<cr>:AsyncRun -program=make<Up><cr>
-inoremap <F5> <esc>:ccl<cr>:up<cr>:AsyncRun -program=make<Up><cr>
+noremap <F4>  :<c-u>AsyncRun -program=make @ -j4 -C `pwd`/<tab><tab>
+nnoremap <F5> :<c-u>ccl<cr>:up<cr>:AsyncRun -program=make<Up><cr>
+inoremap <F5> <esc>:<c-u>ccl<cr>:up<cr>:AsyncRun -program=make<Up><cr>
 
 fun IsQFOrLocOrTagOpen()
     silent exec 'redir @a | ls | redir END'
@@ -273,9 +281,9 @@ fun CurrWinOrQFError()
   endtry
 endfun
 
-noremap <F6> :call PrevWinOrQFError()<cr>
-noremap <F7> :call NextWinOrQFError()<cr>
-noremap <F8> :call CurrWinOrQFError()<cr>
+noremap <F6> :<c-u>call PrevWinOrQFError()<cr>
+noremap <F7> :<c-u>call NextWinOrQFError()<cr>
+noremap <F8> :<c-u>call CurrWinOrQFError()<cr>
 
 function ToggleSpell()
   if &spell
@@ -326,7 +334,7 @@ endfunction
 "endfunction
 
 if &diff
-    noremap <F5> :tabclose<cr>
-    noremap <F6> :tabprev<cr>
-    noremap <F7> :tabnext<cr>
+    noremap <F5> :<c-u>tabclose<cr>
+    noremap <F6> :<c-u>tabprev<cr>
+    noremap <F7> :<c-u>tabnext<cr>
 endif

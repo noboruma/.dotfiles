@@ -368,6 +368,20 @@ if(isdirectory($HOME."/.fzf"))
     let &runtimepath.=',~/.fzf'
     let &runtimepath.=',~/.vim/bundle/fzf.vim'
     let g:fzf_buffers_jump = 1
+    "   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
+    "   :Ag! - Start fzf in fullscreen and display the preview window above
+    command! -bang -nargs=* Ag
+                \ call fzf#vim#ag(<q-args>,
+                \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+                \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+                \                 <bang>0)
+
+    " Likewise, Files command with preview window
+    command! -bang -nargs=* -complete=dir Files
+                \ call fzf#vim#files(<q-args>,
+                \                    <bang>0 ? fzf#vim#with_preview('up:70%')
+                \                            : fzf#vim#with_preview('right:50%:hidden', '?'),
+                \                    <bang>0)
 else
     echom 'fzf not installed'
 endif
@@ -382,15 +396,12 @@ let g:semanticGUIColors = [
             \'#5f87d7',
             \'#c0c0c0',
             \'#808080',
-            \'#ff0000',
-            \'#00ff00',
+            \'#d75f00',
+            \'#afffaf',
             \'#ffff00',
-            \'#af5fff',
-            \'#ff00ff',
-            \'#00ffff',
-            \'#808080',
+            \'#d7af87',
+            \'#d787af',
             \'#00af5f',
-            \'#00d7d7',
             \'#5f5faf',
             \'#5fd75f',
             \'#ff87af',

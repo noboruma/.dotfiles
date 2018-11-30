@@ -4,3 +4,5 @@ set print vtbl on
 set print array on
 set print symbol-filename on
 set print sevenbit-strings off
+
+dashboard -layout assembly memory stack source
