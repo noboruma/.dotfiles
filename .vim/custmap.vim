@@ -27,6 +27,7 @@ cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-h> <S-Left>
 cnoremap <C-l> <S-Right>
+cnoremap <C-k> <C-w><C-w>
 
 "noremap <leader>a :set scb<cr> " just use vimdiff or Linediff
 "noremap <leader>A :set scb!<cr>
