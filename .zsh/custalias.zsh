@@ -64,8 +64,8 @@ alias shibern="sudo pm-hibernate"
 alias sreboot="sudo reboot"
 
 alias arduino="arduino-asm"
-alias mc='mw gmake -j4'
-alias mc='mw gmake -j4 check'
+alias m='make -j4'
+alias mc='make -j4 check'
 
 alias l='unique_ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 alias ll="ls -haltr"
