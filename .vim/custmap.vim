@@ -34,7 +34,7 @@ cnoremap <C-k> <C-w><C-w>
 "noremap <leader>b :FufBuffer<cr>
 noremap <leader>b :<c-u>Buffers <cr>
 noremap <leader>c :<c-u>ccl\|lcl\|pcl<cr>
-noremap <leader>C c^
+noremap <leader>C :AsyncStop<cr>
 noremap <leader>d "_d
 noremap <leader>e :silent<space>e<space>`pwd`<tab>
 noremap <leader>ff :<c-u>Files<space>`pwd`<tab>
@@ -211,9 +211,14 @@ noremap <F3> :<c-u>call IterateThroughProviders()<cr>
 
 " Need to manually call copen first so that directories are correctly set
 " (issue with asyncrun?)
-noremap <F4>  :<c-u>AsyncRun -program=make @ -j4 -C `pwd`/<tab><tab>
+
+
+noremap <expr> <F4> exists('debug') ? ":<c-u>AsyncRun -program=make @ -j4 DEBUG=1 -C `pwd`/<tab><tab>" : ":<c-u>AsyncRun -program=make @ -j4 -C `pwd`/<tab><tab>"
+
 nnoremap <F5> :<c-u>ccl<cr>:up<cr>:AsyncRun -program=make<Up><cr>
 inoremap <F5> <esc>:<c-u>ccl<cr>:up<cr>:AsyncRun -program=make<Up><cr>
+
+noremap <expr> <F9> exists('debug') ?  ":<c-u>unlet debug<cr>" : ":<c-u>let debug=1<cr>"
 
 fun IsQFOrLocOrTagOpen()
     silent exec 'redir @a | ls | redir END'

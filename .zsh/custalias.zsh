@@ -77,11 +77,15 @@ alias zrc="vim ~/.zshrc"
 
 alias er="gvim --servername GVIM --remote"
 alias ers="gvim --servername GVIM"
-alias edebug="gvim --cmd 'let debug=1'"
-alias vdebug="vim --cmd 'let debug=1'"
 alias vdev="vim --cmd 'let indexing=1' --servername VIM"
 alias vimdev="vim --cmd 'let indexing=1' --servername VIM"
 alias ff="fzf-fs"
+
+function vdebug () {
+    tmux split-window -vbd vimgdb-server $2
+    sleep 2
+    vimgdb $1
+}
 
 alias alert_helper='history|tail -n1|sed -e "s/^\s*[0-9]\+\s*//" -e "s/;\s*alert$//"'
 alias alert='notify-send -i /usr/share/icons/gnome/32x32/apps/gnome-terminal.png "[$?] $(alert_helper)"'

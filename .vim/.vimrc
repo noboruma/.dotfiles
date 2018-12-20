@@ -31,18 +31,19 @@ if has("gui_running")
 endif
 
 " vim --cmd 'let debug=1'
-if exists('debug')
+"if exists('debug')
     let g:ConqueGdb_Disable = 0
     nnoremap <silent> <bslash>l :ConqueGdbCommand record<CR>
     nnoremap <silent> <bslash>L :ConqueGdbCommand record stop<CR>
     nnoremap <silent> <bslash>N :ConqueGdbCommand reverse-next<CR>
     nnoremap <silent> <bslash>S :ConqueGdbCommand reverse-step<CR>
     " Start ConqueGdb up without glitching
-    autocmd VimEnter * :ConqueGdb --ex "dashboard -output /dev/null"
-else
-    let g:ConqueGdb_Disable = 1
-    let g:ConqueTerm_Loaded = 1
-endif
+    "execute "autocmd VimEnter * :ConqueGdb --ex 'file ". debug . "'"
+    "--ex "dashboard -output /dev/null"
+"else
+"    let g:ConqueGdb_Disable = 1
+"    let g:ConqueTerm_Loaded = 1
+"endif
 
 "set ttyfast
 set scrolloff=0 " Keep no lines after/before the cursor

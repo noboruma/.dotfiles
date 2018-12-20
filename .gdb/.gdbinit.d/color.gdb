@@ -75,7 +75,7 @@ define do-print-colors
     # 1. Field names
     # 4. Opening {
     # 5. Closing }
-    shell echo | cat ./.gdb-color-pipe - | \
+    shell cat ./.gdb-color-pipe | \
         sed -r "s_([a-zA-Z0-9_# ]*)=([a-zA-Z0-9_#\. ]*)_$(tput setaf 2)$(tput bold)\1$(tput sgr0)=$(tput setaf 3)\2$(tput sgr0)_g" | \
         sed -r "s_[{]_$(tput setaf 1)$(tput bold){$(tput sgr0)_g" | \
         sed -r "s_[}]_$(tput setaf 1)$(tput bold)}$(tput sgr0)_g"
@@ -175,11 +175,3 @@ end
 #------------------------------------------------------------------------------#
 # print
 #------------------------------------------------------------------------------#
-define hook-print
-    setup-color-pipe
-end
-
-define hookpost-print
-    do-print-colors
-    cleanup-color-pipe
-end

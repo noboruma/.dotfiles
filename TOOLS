@@ -1,8 +1,9 @@
 git clone https://github.com/universal-ctags/ctags
 git clone https://github.com/rizsotto/Bear
-git clone https://github.com/junegunn/fzf.vim                                                                                                                                                                                                                                                                (git)-[master]-
-git clone https://github.com/sharkdp/fd                                                                                                                                                                                                                                                                      (git)-[master]-
-git clone https://github.com/cquery-project/cquery                                                                                                                                                                                                                                                           (git)-[master]-
+git clone https://github.com/junegunn/fzf.vim
+git clone https://github.com/sharkdp/fd
+git clone https://github.com/cquery-project/cquery
+git clone https://github.com/gisodal/vimgdb
 
 # linux
 sai silversearcher-ag surfraw
