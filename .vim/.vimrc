@@ -30,20 +30,7 @@ if has("gui_running")
   endif
 endif
 
-" vim --cmd 'let debug=1'
-"if exists('debug')
-    let g:ConqueGdb_Disable = 0
-    nnoremap <silent> <bslash>l :ConqueGdbCommand record<CR>
-    nnoremap <silent> <bslash>L :ConqueGdbCommand record stop<CR>
-    nnoremap <silent> <bslash>N :ConqueGdbCommand reverse-next<CR>
-    nnoremap <silent> <bslash>S :ConqueGdbCommand reverse-step<CR>
-    " Start ConqueGdb up without glitching
-    "execute "autocmd VimEnter * :ConqueGdb --ex 'file ". debug . "'"
-    "--ex "dashboard -output /dev/null"
-"else
-"    let g:ConqueGdb_Disable = 1
-"    let g:ConqueTerm_Loaded = 1
-"endif
+let g:ConqueGdb_Disable = 1
 
 "set ttyfast
 set scrolloff=0 " Keep no lines after/before the cursor
@@ -534,17 +521,6 @@ set shortmess+=I
 " Colorizer
 let g:colorizer_nomap = 1
 let g:colorizer_startup = 0
-
-" Conque plugin
-if exists('debug')
-    let g:ConqueGdb_Leader = '\'
-    let g:ConqueTerm_CloseOnEnd = 1
-    let g:ConqueTerm_ReadUnfocused=1
-    let g:ConqueTerm_Color = 1
-    let g:ConqueGdb_SaveHistory = 1
-    let g:ConqueTerm_InsertOnEnter = 1
-    let g:ConqueTerm_CWInsert = 1
-endif
 
 set modeline
 

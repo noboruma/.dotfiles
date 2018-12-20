@@ -82,9 +82,9 @@ alias vimdev="vim --cmd 'let indexing=1' --servername VIM"
 alias ff="fzf-fs"
 
 function vdebug () {
-    tmux split-window -vbd vimgdb-server $2
+    tmux split-window -vbd python2.7 `which vimgdb-server` $2
     sleep 2
-    vimgdb $1
+    python2.7 `which vimgdb` $1
 }
 
 alias alert_helper='history|tail -n1|sed -e "s/^\s*[0-9]\+\s*//" -e "s/;\s*alert$//"'

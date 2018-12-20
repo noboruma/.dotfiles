@@ -20,4 +20,5 @@ ln -s $PWD/.colorgccrc ~
 ln -s $PWD/.tmux ~
 ln -s $PWD/ranger/rc.conf ~/.config/ranger
 ln -s $PWD/.w3m/config ~/.w3m/config
+ln -s $PWD/.inputrc ~
 cd - 1>/dev/null
