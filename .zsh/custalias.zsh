@@ -81,9 +81,9 @@ alias vdev="vim --cmd 'let indexing=1' --servername VIM"
 alias vimdev="vim --cmd 'let indexing=1' --servername VIM"
 alias ff="fzf-fs"
 
-function vdebug () {
+function vgdb () {
     tmux split-window -vbd python2.7 `which vimgdb-server` $2
-    sleep 2
+    sleep 1
     python2.7 `which vimgdb` $1
 }
 
