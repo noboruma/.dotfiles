@@ -1,1 +1,1 @@
-dashboard -layout assembly memory stack
+dashboard -layout stack expressions history

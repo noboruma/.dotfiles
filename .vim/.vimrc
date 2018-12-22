@@ -405,6 +405,13 @@ let g:semanticPersistCache = 1
 let &runtimepath.=',~/.vim/bundle/semantic-highlight.vim'
 " !Semantic Highlight
 
+" Termdebug
+let g:termdebug_popup=0
+let no_buffers_menu=0
+let termdebugger = "gdb"
+packadd termdebug
+" !Termdebug
+
 filetype on
 filetype plugin on
 filetype indent on

@@ -287,9 +287,9 @@ fun CurrWinOrQFError()
   endtry
 endfun
 
-noremap <F6> :<c-u>call PrevWinOrQFError()<cr>
-noremap <F7> :<c-u>call NextWinOrQFError()<cr>
-noremap <F8> :<c-u>call CurrWinOrQFError()<cr>
+noremap <expr> <F6> bufwinnr('!gdb') != -1 ? ":<c-u>Finish<cr>" : ":<c-u>call PrevWinOrQFError()<cr>"
+noremap <expr> <F7> bufwinnr('!gdb') != -1 ? ":<c-u>Over<cr>" : ":<c-u>call NextWinOrQFError()<cr>"
+noremap <expr> <F8> bufwinnr('!gdb') != -1 ? ":<c-u>Step<cr>" : ":<c-u>call CurrWinOrQFError()<cr>"
 
 function ToggleSpell()
   if &spell

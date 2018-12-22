@@ -26,3 +26,30 @@ if current_line != 0:
     os.system("tmux split-window \"" + theCmd + "\"")
 end
 end
+
+# multiple commands
+python
+import gdb
+
+
+class Cmds(gdb.Command):
+  """run multiple commands separated by ';'"""
+  def __init__(self):
+    gdb.Command.__init__(
+      self,
+      "cmds",
+      gdb.COMMAND_DATA,
+      gdb.COMPLETE_SYMBOL,
+      True,
+    )
+
+  def invoke(self, arg, from_tty):
+    for fragment in arg.split(';'):
+      # from_tty is true. These commands should be considered interactive.
+      # to_string is false. We just want to write the output of the commands, not capture it.
+      gdb.execute(fragment, from_tty=True, to_string=False)
+      print
+
+
+Cmds()
+end
