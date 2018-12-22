@@ -94,8 +94,6 @@ vnoremap <leader>=<space> :Tab /\s\zs/l1r0<cr>gv=
 vnoremap <leader>=; :Tabularize /\S\+;$/l1<cr>gv=
 vnoremap <leader>=( :Tabularize /\S\+($/l1<cr>gv=
 
-noremap <leader>\ :<c-u>ConqueGdb<cr>
-noremap <leader>/ :<c-u>nohlsearch<cr>
 noremap <leader>1 "1 ; Register
 noremap <leader>2 "2 ; Register
 noremap <leader>3 "3 ; Register

@@ -30,8 +30,6 @@ if has("gui_running")
   endif
 endif
 
-let g:ConqueGdb_Disable = 1
-
 "set ttyfast
 set scrolloff=0 " Keep no lines after/before the cursor
 
