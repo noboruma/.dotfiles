@@ -325,21 +325,6 @@ let g:AutoAdapt_Rules = [
 autocmd BufWritePre <buffer> silent! :Adapt
 "!Auto Adapt
 
-"vim lsp
-let &runtimepath.=',~/.vim/bundle/asyncomplete.vim'
-let &runtimepath.=',~/.vim/bundle/async.vim'
-let &runtimepath.=',~/.vim/bundle/vim-lsp'
-let &runtimepath.=',~/.vim/bundle/vim-lsp-cquery'
-let &runtimepath.=',~/.vim/bundle/asyncomplete-lsp.vim'
-let g:asyncomplete_auto_popup = 0
-let g:asyncomplete_remove_duplicates = 1
-let g:asyncomplete_force_refresh_on_context_changed = 1
-let g:asyncomplete_smart_completion = 1
-"let g:lsp_log_verbose = 1
-"let g:lsp_log_file = expand('~/vim-lsp.log')
-"autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-"!lsp
-
 "vim-which-key
 let mapleader="\<Space>"
 if use_custhelp
@@ -409,6 +394,55 @@ let no_buffers_menu=0
 let termdebugger = "gdb"
 packadd termdebug
 " !Termdebug
+
+" Ultisnips
+set runtimepath+=~/.vim/bundle/ultisnips
+let g:ulti_expand_res = 0 "default value, just set once
+function! CompleteSnippet()
+  if empty(v:completed_item)
+    return
+  endif
+
+  call UltiSnips#ExpandSnippet()
+  if g:ulti_expand_res > 0
+    return
+  endif
+
+  let l:complete = type(v:completed_item) == v:t_dict ? v:completed_item.word : v:completed_item
+  let l:comp_len = len(l:complete)
+
+  let l:cur_col = mode() == 'i' ? col('.') - 2 : col('.') - 1
+  let l:cur_line = getline('.')
+
+  let l:start = l:comp_len <= l:cur_col ? l:cur_line[:l:cur_col - l:comp_len] : ''
+  let l:end = l:cur_col < len(l:cur_line) ? l:cur_line[l:cur_col + 1 :] : ''
+
+  call setline('.', l:start . l:end)
+  call cursor('.', l:cur_col - l:comp_len + 2)
+
+  call UltiSnips#Anon(l:complete)
+endfunction
+autocmd CompleteDone * call CompleteSnippet()
+let g:UltiSnipsExpandTrigger="<NUL>"
+let g:UltiSnipsListSnippets="<NUL>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"!Ultisnips
+
+" LC
+set runtimepath+=~/.vim/bundle/LanguageClient-neovim
+let g:LanguageClient_serverCommands = {
+\ 'cpp': ['/home/zackel/usr/bin/cquery',
+"\ '--log-file=/tmp/cq.log',
+\ '--init={"cacheDirectory":"/tmp/cquery/cache/", "index": {"comments": 2}, "cacheFormat": "msgpack", "completion": {"filterAndSort": false}}'],
+\ 'rust': ['rustup', 'run', 'stable', 'rls'],
+\ 'python': ['pyls']
+\ }
+let g:LanguageClient_diagnosticsEnable=0
+let g:LanguageClient_selectionUI='quickfix'
+"set formatexpr=LanguageClient_textDocument_rangeFormatting()
+set omnifunc=LanguageClient#complete
+" !LC
 
 filetype on
 filetype plugin on

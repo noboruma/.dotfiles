@@ -133,3 +133,12 @@
 [submodule ".vim/bundle/semantic-highlight.vim"]
 	path = .vim/bundle/semantic-highlight.vim
 	url = https://github.com/jaxbot/semantic-highlight.vim
+[submodule ".vim/bundle/completor.vim"]
+	path = .vim/bundle/completor.vim
+	url = https://github.com/maralla/completor.vim
+[submodule ".vim/bundle/ultisnips"]
+	path = .vim/bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips
+[submodule ".vim/bundle/LanguageClient-neovim"]
+	path = .vim/bundle/LanguageClient-neovim
+	url = https://github.com/autozimu/LanguageClient-neovim.git

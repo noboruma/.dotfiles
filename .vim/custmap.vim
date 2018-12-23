@@ -39,12 +39,12 @@ noremap <leader>d "_d
 noremap <leader>e :silent<space>e<space>`pwd`<tab>
 noremap <leader>ff :<c-u>Files<space>`pwd`<tab>
 if executable('cquery')
-   nnoremap <leader>fa :call AutoAdjustQFWindow()<cr>
-   nnoremap <leader>fd :LspDefinition<CR>
-   nnoremap <leader>fc :LspCqueryCallers<cr>
-   nnoremap <leader>fv :LspCqueryVars<cr>
-   nnoremap <leader>fh :LspHover<CR>
-   nnoremap <leader>ft :call LspFunctionType()<cr>
+   nnoremap <leader>fa :<c-u>call AutoAdjustQFWindow()<cr>
+   nnoremap <leader>fd :<c-u>call LanguageClient#textDocument_definition()<CR>
+   nnoremap <leader>fr :<c-u>call LanguageClient#textDocument_references()<cr>:copen<cr>
+   nnoremap <leader>fh :<c-u>call LanguageClient#textDocument_hover()<cr>
+   nnoremap <leader>ft :<c-u>call LanguageClient#textDocument_signatureHelp()<cr>
+   nnoremap <leader>fg :<c-u>call LanguageClient_contextMenu()<cr>
 else
     noremap <leader>f :botright pta <C-r><C-w><cr>
     noremap <leader>F "sy:botright pta /<C-R>"
@@ -118,7 +118,7 @@ fun LspFunctionType()
 endfun
 inoremap <c-f> <c-x><c-f>
 inoremap <c-l> <c-x><c-l>
-inoremap <c-k> <c-o>:call LspFunctionType()<cr>
+inoremap <c-k> <c-o>:call LAnguageClient#textDocument_signatureHelp()<cr>
 nnoremap <silent> <c-k> <Esc>:Cppman <cword><CR>
 vnoremap <silent> <c-k> "sy:Cppman <C-R>"<CR>
 
@@ -137,24 +137,13 @@ nnoremap J <c-e>
 nnoremap K <c-y>
 
 " Simulate <down> after CTRL-N
-"inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-"  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-"inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-"inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-"inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
-"inoremap <expr> <tab>      pumvisible() ? "\<C-n>" : "\<C-r>=\<SID>close_paren()\<CR>\<c-r>=Smart_TabComplete()\<CR>"
-"inoremap <expr> <s-tab>    pumvisible() ? "\<C-p>" : "\<s-tab>"
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ asyncomplete#force_refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+inoremap <expr> <tab>      pumvisible() ? "\<C-n>" : "\<c-r>=Smart_TabComplete()\<CR>"
+inoremap <expr> <s-tab>    pumvisible() ? "\<C-p>" : "\<s-tab>"
 
 function! CaptureExtOutputInNewBuffer(cmd)
   let out = system(a:cmd)
@@ -234,6 +223,7 @@ fun NextWinOrQFError()
         let l:res = IsQFOrLocOrTagOpen()
         if l:res == 1
             :cn
+            :foldopen
             return 0
         elseif l:res == 2
             :ln
@@ -250,6 +240,7 @@ fun PrevWinOrQFError()
         let l:res = IsQFOrLocOrTagOpen()
         if l:res == 1
             :cp
+            :foldopen
             return 0
         elseif l:res == 2
             :lp
@@ -265,20 +256,13 @@ fun CurrWinOrQFError()
     try
         let l:res = IsQFOrLocOrTagOpen()
         if l:res == 1
-            if exists('g:jumpfirst') && g:jumpfirst == 1
-                :cfirst
-                :cn
-                let g:jumpfirst=0
-            else
-                :cc
-            endif
-            :cp
-            return 0
+            :cc
         elseif l:res == 2
             :ll
         elseif l:res == 3
             ":ptr
         endif
+        :foldopen
         return 0
     catch /.*/
       echohl WarningMsg | echon v:exception | echohl None
@@ -301,41 +285,27 @@ inoremap <F10> <Esc>:call ToggleSpell()<cr>
 
 noremap <F11> <esc>:up<cr>:!!<cr>
 
-function s:close_paren() abort
-    augroup close_paren
-        " use 'fire once' auto command tech
-        autocmd!
-        autocmd CompleteDone <buffer> silent! if v:completed_item.word =~# '($'
-                    \|      call feedkeys(")\<Left>", 'in')
-                    \| endif
-                    \| autocmd! close_paren
-                    \| augroup! close_paren
-    augroup END
-    return ''
-endfunction
+function Smart_TabComplete()
+    let line = getline('.')                         " current line
 
-"function Smart_TabComplete()
-"    let line = getline('.')                         " current line
-"
-"    let substr = strpart(line, -1, col('.'))      " from the start of the current
-"    " line to one character right
-"    " of the cursor
-"    let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
-"    if (strlen(substr)==0)                          " nothing to match on empty string
-"        return "\<tab>"
-"    endif
-"    let has_period = match(substr, '\.') != -1      " position of period, if any
-"    let has_slash = match(substr, '\/') != -1       " position of slash, if any
-"    let has_colon = match(substr, '::') != -1     " position of ::, if any
-"    if (!has_period && !has_slash && !has_colon)
-"        return "\<C-X>\<C-P>"                         " existing text matching
-"    elseif ( has_slash )
-"        return "\<C-X>\<C-F>"                         " file matching
-"    else
-"        call asyncomplete#force_refresh()
-"        "return "\<tab>"                         " plugin matching
-"    endif
-"endfunction
+    let substr = strpart(line, -1, col('.'))      " from the start of the current
+    " line to one character right
+    " of the cursor
+    let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
+    if (strlen(substr)==0)                          " nothing to match on empty string
+        return "\<tab>"
+    endif
+    let has_period = match(substr, '\.') != -1      " position of period, if any
+    let has_slash = match(substr, '\/') != -1       " position of slash, if any
+    let has_colon = match(substr, '::') != -1     " position of ::, if any
+    if (!has_period && !has_slash && !has_colon)
+        return "\<C-X>\<C-O>"                         " existing text matching
+    elseif ( has_slash )
+        return "\<C-X>\<C-F>"                         " file matching
+    else
+        return "\<C-X>\<C-O>"                         " plugin matching
+    endif
+endfunction
 
 if &diff
     noremap <F5> :<c-u>tabclose<cr>
