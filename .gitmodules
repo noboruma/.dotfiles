@@ -103,27 +103,12 @@
 [submodule ".vim/bundle/vim-ingo-library"]
 	path = .vim/bundle/vim-ingo-library
 	url = https://github.com/inkarkat/vim-ingo-library
-[submodule ".vim/bundle/async.vim"]
-	path = .vim/bundle/async.vim
-	url = https://github.com/prabirshrestha/async.vim
-[submodule ".vim/bundle/vim-lsp-cquery"]
-	path = .vim/bundle/vim-lsp-cquery
-	url = https://github.com/pdavydov108/vim-lsp-cquery
-[submodule ".vim/bundle/asyncomplete.vim"]
-	path = .vim/bundle/asyncomplete.vim
-	url = https://github.com/prabirshrestha/asyncomplete.vim
-[submodule ".vim/bundle/asyncomplete-lsp.vim"]
-	path = .vim/bundle/asyncomplete-lsp.vim
-	url = https://github.com/prabirshrestha/asyncomplete-lsp.vim
 [submodule ".vim/bundle/vim-which-key"]
 	path = .vim/bundle/vim-which-key
 	url = https://github.com/liuchengxu/vim-which-key
 [submodule ".vim/bundle/haskell-vim"]
 	path = .vim/bundle/haskell-vim
 	url = https://github.com/neovimhaskell/haskell-vim
-[submodule ".vim/bundle/vim-lsp"]
-	path = .vim/bundle/vim-lsp
-	url = https://github.com/prabirshrestha/vim-lsp
 [submodule ".zsh/plugins/fzf-marks"]
 	path = .zsh/plugins/fzf-marks
 	url = https://github.com/urbainvaes/fzf-marks
@@ -133,9 +118,6 @@
 [submodule ".vim/bundle/semantic-highlight.vim"]
 	path = .vim/bundle/semantic-highlight.vim
 	url = https://github.com/jaxbot/semantic-highlight.vim
-[submodule ".vim/bundle/completor.vim"]
-	path = .vim/bundle/completor.vim
-	url = https://github.com/maralla/completor.vim
 [submodule ".vim/bundle/ultisnips"]
 	path = .vim/bundle/ultisnips
 	url = https://github.com/SirVer/ultisnips
