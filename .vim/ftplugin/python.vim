@@ -8,6 +8,9 @@
 if exists("b:did_indent")
     finish
 endif
+
+let g:LanguageClient_serverCommands.python =['pyls']
+
 let b:did_indent = 1
 
 setlocal expandtab

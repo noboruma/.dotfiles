@@ -430,14 +430,8 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 "!Ultisnips
 
 " LC
+" See ftplugin for tools setup
 set runtimepath+=~/.vim/bundle/LanguageClient-neovim
-let g:LanguageClient_serverCommands = {
-\ 'cpp': ['/home/zackel/usr/bin/cquery',
-"\ '--log-file=/tmp/cq.log',
-\ '--init={"cacheDirectory":"/tmp/cquery/cache/", "index": {"comments": 2}, "cacheFormat": "msgpack", "completion": {"filterAndSort": false}}'],
-\ 'rust': ['rustup', 'run', 'stable', 'rls'],
-\ 'python': ['pyls']
-\ }
 let g:LanguageClient_diagnosticsEnable=0
 let g:LanguageClient_selectionUI='quickfix'
 "set formatexpr=LanguageClient_textDocument_rangeFormatting()

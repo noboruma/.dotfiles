@@ -6,13 +6,9 @@ au BufWritePost <buffer> :SemanticHighlight
 "endif
 
 if executable('cquery')
-   au User lsp_setup call lsp#register_server({
-      \ 'name': 'cquery',
-      \ 'cmd': {server_info->['cquery']},
-      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery/cache' },
-      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-      \ })
+    let g:LanguageClient_serverCommands.cpp = ['cquery',
+                "\ '--log-file=/tmp/cq.log',
+                \ '--init={"cacheDirectory":"/tmp/cquery/cache/", "index": {"comments": 2}, "cacheFormat": "msgpack", "completion": {"filterAndSort": false}}']
 else
     echom 'no cquery executable'
 endif
