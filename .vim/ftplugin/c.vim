@@ -8,7 +8,7 @@ au BufWritePost <buffer> :SemanticHighlight
 if executable('cquery')
     let g:LanguageClient_serverCommands.cpp = ['cquery',
                 "\ '--log-file=/tmp/cq.log',
-                \ '--init={"cacheDirectory":"/tmp/cquery/cache/", "index": {"comments": 2}, "cacheFormat": "msgpack", "completion": {"filterAndSort": false}}']
+                \ '--init={"cacheDirectory":"/tmp/cquery/cache/", "diagnostics": {"onParse": false, "onType": false}, "index": {"comments": 2}, "cacheFormat": "msgpack", "completion": {"filterAndSort": false}}']
 else
     echom 'no cquery executable'
 endif

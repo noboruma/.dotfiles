@@ -40,7 +40,7 @@ noremap <leader>e :silent<space>e<space>`pwd`<tab>
 noremap <leader>ff :<c-u>Files<space>`pwd`<tab>
 if executable('cquery')
    nnoremap <leader>fa :<c-u>call AutoAdjustQFWindow()<cr>
-   nnoremap <leader>fd :<c-u>call LanguageClient#textDocument_definition()<CR>
+   nnoremap <leader>fd :<c-u>vsplit<cr> :<c-u> try \| call LanguageClient#textDocument_definition() \| catch \| :q \| endtry <cr>
    nnoremap <leader>fr :<c-u>call LanguageClient#textDocument_references()<cr>:copen<cr>
    nnoremap <leader>fh :<c-u>call LanguageClient#textDocument_hover()<cr>
    nnoremap <leader>ft :<c-u>call LanguageClient#textDocument_signatureHelp()<cr>
