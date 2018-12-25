@@ -5,12 +5,17 @@ au BufEnter <buffer> if (!exists('b:created')) | exe "SemanticHighlightToggle" |
 au BufWritePost <buffer> :SemanticHighlight
 "endif
 
-if executable('cquery')
+if executable('ccls')
+    let g:LanguageClient_serverCommands.cpp = ['ccls',
+                "\ '--log-file=/tmp/cq.log',
+                \ '--init={"cacheDirectory":"/tmp/cquery/cache/"}']
+elseif executable('cquery')
+    echom 'no ccls, using cquery'
     let g:LanguageClient_serverCommands.cpp = ['cquery',
                 "\ '--log-file=/tmp/cq.log',
                 \ '--init={"cacheDirectory":"/tmp/cquery/cache/", "diagnostics": {"onParse": false, "onType": false}, "index": {"comments": 2}, "cacheFormat": "msgpack", "completion": {"filterAndSort": false}}']
 else
-    echom 'no cquery executable'
+    echom 'no ccls nor cquery executable'
 endif
 
 "Makeprg erroformat
