@@ -256,7 +256,17 @@ fun CurrWinOrQFError()
     try
         let l:res = IsQFOrLocOrTagOpen()
         if l:res == 1
-            :cc
+            if exists('g:jumpfirst')
+                :cfirst
+                :cn
+                if g:asyncrun_status != 'running'
+                    unlet g:jumpfirst
+                endif
+            else
+                :cc
+            endif
+            :cp
+            return 0
         elseif l:res == 2
             :ll
         elseif l:res == 3

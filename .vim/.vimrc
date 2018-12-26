@@ -14,7 +14,7 @@ set nocompatible
 
 "  If you need infrmation on parameters, use :h param
 if has("gui_running")
-  set guifont=Terminus\ 9
+  set guifont=Terminus\ 11
   if &guifont != 'Terminus 9'
       set guifont=Monospace\ 9
   endif
@@ -457,7 +457,7 @@ set nospell
 set dictionary+=/usr/share/dict/words
 
 " Make options
-let &makeprg='mw gmake'
+let &makeprg='make'
 
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>
