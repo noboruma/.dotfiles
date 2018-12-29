@@ -294,6 +294,6 @@ abstracts = {
 };
 formats = {
   "fe-common/core" = { 
-    pubmsg = "{pubmsgnick $2 {pubnick \00305$[0]0}}$1";
+    pubmsg = "{pubmsgnick $2 {pubnick \00313$[0]0}}$1";
   };
 };

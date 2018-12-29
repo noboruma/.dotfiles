@@ -47,7 +47,7 @@ servers = (
     use_tls = "yes";
     tls_verify = "yes";
   },
-  {
+  { 
     address = "irc.quakenet.org";
     chatnet = "QuakeNet";
     port = "6667";
@@ -60,7 +60,7 @@ servers = (
     tls_verify = "yes";
   },
   { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; },
-  {
+  { 
     address = "irc.undernet.org";
     chatnet = "Undernet";
     port = "6667";
@@ -74,7 +74,7 @@ chatnets = {
     max_msgs = "20";
     max_whois = "30";
   };
-  EFNet = {
+  EFNet = { 
     type = "IRC";
     max_kicks = "1";
     max_msgs = "4";
@@ -92,7 +92,7 @@ chatnets = {
     max_msgs = "1";
     max_whois = "1";
   };
-  IRCnet = {
+  IRCnet = { 
     type = "IRC";
     max_kicks = "1";
     max_msgs = "1";
@@ -117,7 +117,7 @@ chatnets = {
     max_msgs = "1";
     max_whois = "1";
   };
-  Rizon = {
+  Rizon = { 
     type = "IRC";
     max_kicks = "1";
     max_msgs = "1";
@@ -136,19 +136,19 @@ chatnets = {
 channels = (
   { name = "#lobby"; chatnet = "EsperNet"; autojoin = "No"; },
   { name = "#freenode"; chatnet = "Freenode"; autojoin = "No"; },
-  { name = "#irssi"; chatnet = "Freenode"; autojoin = "yes"; },
   { name = "#gamesurge"; chatnet = "GameSurge"; autojoin = "No"; },
   { name = "#irssi"; chatnet = "IRCNet"; autojoin = "No"; },
   { name = "#ircsource"; chatnet = "IRCSource"; autojoin = "No"; },
   { name = "#netfuze"; chatnet = "NetFuze"; autojoin = "No"; },
   { name = "#oftc"; chatnet = "OFTC"; autojoin = "No"; },
   { name = "silc"; chatnet = "SILC"; autojoin = "No"; },
+  { name = "#irssi"; chatnet = "Freenode"; autojoin = "yes"; },
   { name = "##Linux"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "##c++"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "##asm"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "##rust"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#security"; chatnet = "Freenode"; autojoin = "yes"; },
-  { name = "#networking"; chatnet = "Freenode"; autojoin = "yes"; }
+  { name = "#networking"; chatnet = "Freenode"; autojoin = "yes"; },
   { name = "#linux-kernel"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#vim"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#zsh"; chatnet = "freenode"; autojoin = "yes"; },
@@ -158,7 +158,7 @@ channels = (
   { name = "#docker"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "##aws"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "##japanese"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#debian"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#debian"; chatnet = "freenode"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -427,158 +427,15 @@ settings = {
     print_active_channel = "yes";
     window_default_level = "ALL";
     autolog = "yes";
+    term_charset = "utf-8";
+    use_msgs_window = "yes";
+    autocreate_query_level = "MSGS";
   };
 };
 hilights = ( { text = "nick"; nick = "yes"; word = "yes"; } );
 ignores = ( { level = "JOINS PARTS QUITS"; } );
 logs = { };
-windows = {
-  1 = { immortal = "yes"; name = "(status)"; level = "ALL"; };
-  2 = {
-    level = "ALL";
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "#debian";
-        tag = "Freenode";
-      }
-    );
-  };
-  3 = {
-    level = "ALL";
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "##linux";
-        tag = "Freenode";
-      }
-    );
-  };
-  4 = {
-    level = "ALL";
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "##c++";
-        tag = "Freenode";
-      }
-    );
-  };
-  5 = {
-    level = "ALL";
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "#linux-kernel";
-        tag = "Freenode";
-      }
-    );
-  };
-  6 = {
-    level = "ALL";
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "#chromium";
-        tag = "Freenode";
-      }
-    );
-  };
-  7 = {
-    level = "ALL";
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "#zsh";
-        tag = "Freenode";
-      }
-    );
-  };
-  8 = {
-    level = "ALL";
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "#docker";
-        tag = "Freenode";
-      }
-    );
-  };
-  9 = {
-    level = "ALL";
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "#git";
-        tag = "Freenode";
-      }
-    );
-  };
-  10 = {
-    level = "ALL";
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "#bitcoin";
-        tag = "Freenode";
-      }
-    );
-  };
-  11 = {
-    level = "ALL";
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "##aws";
-        tag = "Freenode";
-      }
-    );
-  };
-  12 = {
-    level = "ALL";
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "##math";
-        tag = "Freenode";
-      }
-    );
-  };
-  13 = {
-    level = "ALL";
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "##asm";
-        tag = "Freenode";
-      }
-    );
-  };
-  14 = {
-    level = "ALL";
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "##rust";
-        tag = "Freenode";
-      }
-    );
-  };
-};
 mainwindows = { 1 = { first_line = "1"; lines = "39"; }; };
-keyboard = (
+keyboard = ( 
   { key = "^G"; id = "command"; data = "ido_switch_start "; }
 );
