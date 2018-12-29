@@ -296,5 +296,6 @@ abstracts = {
 formats = {
   "fe-common/core" = {
     pubmsg = "{pubmsgnick $2 {pubnick \00310$[0]0}}$1";
+    timestamp = "{timestamp %%H:%%M:%%S} ";
   };
 };
