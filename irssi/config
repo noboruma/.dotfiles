@@ -47,7 +47,7 @@ servers = (
     use_tls = "yes";
     tls_verify = "yes";
   },
-  { 
+  {
     address = "irc.quakenet.org";
     chatnet = "QuakeNet";
     port = "6667";
@@ -60,18 +60,10 @@ servers = (
     tls_verify = "yes";
   },
   { address = "silc.silcnet.org"; chatnet = "SILC"; port = "706"; },
-  { 
+  {
     address = "irc.undernet.org";
     chatnet = "Undernet";
     port = "6667";
-  },
-  {
-    address = "char.freenode.net";
-    chatnet = "Freenode";
-    port = "6697";
-    use_tls = "yes";
-    tls_cert = "~/.irssi/irssi.pem";
-    tls_verify = "no";
   }
 );
 
@@ -82,7 +74,7 @@ chatnets = {
     max_msgs = "20";
     max_whois = "30";
   };
-  EFNet = { 
+  EFNet = {
     type = "IRC";
     max_kicks = "1";
     max_msgs = "4";
@@ -100,7 +92,7 @@ chatnets = {
     max_msgs = "1";
     max_whois = "1";
   };
-  IRCnet = { 
+  IRCnet = {
     type = "IRC";
     max_kicks = "1";
     max_msgs = "1";
@@ -125,7 +117,7 @@ chatnets = {
     max_msgs = "1";
     max_whois = "1";
   };
-  Rizon = { 
+  Rizon = {
     type = "IRC";
     max_kicks = "1";
     max_msgs = "1";
@@ -144,28 +136,29 @@ chatnets = {
 channels = (
   { name = "#lobby"; chatnet = "EsperNet"; autojoin = "No"; },
   { name = "#freenode"; chatnet = "Freenode"; autojoin = "No"; },
-  { name = "#irssi"; chatnet = "Freenode"; autojoin = "No"; },
+  { name = "#irssi"; chatnet = "Freenode"; autojoin = "yes"; },
   { name = "#gamesurge"; chatnet = "GameSurge"; autojoin = "No"; },
   { name = "#irssi"; chatnet = "IRCNet"; autojoin = "No"; },
   { name = "#ircsource"; chatnet = "IRCSource"; autojoin = "No"; },
   { name = "#netfuze"; chatnet = "NetFuze"; autojoin = "No"; },
   { name = "#oftc"; chatnet = "OFTC"; autojoin = "No"; },
   { name = "silc"; chatnet = "SILC"; autojoin = "No"; },
-  { name = "#debian"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#linux"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "##Linux"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "##c++"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#linux-kernel"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#chromium"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#zsh"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#docker"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#git"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#bitcoin"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "##aws"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "##math"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "##asm"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "##rust"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "##japanese"; chatnet = "freenode"; autojoin = "yes"; }
+  { name = "#security"; chatnet = "Freenode"; autojoin = "yes"; },
+  { name = "#networking"; chatnet = "Freenode"; autojoin = "yes"; }
+  { name = "#linux-kernel"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#vim"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#zsh"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#git"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "##math"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#chromium"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#docker"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "##aws"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "##japanese"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#debian"; chatnet = "freenode"; autojoin = "yes"; },
 );
 
 aliases = {
@@ -586,6 +579,6 @@ windows = {
   };
 };
 mainwindows = { 1 = { first_line = "1"; lines = "39"; }; };
-keyboard = ( 
+keyboard = (
   { key = "^G"; id = "command"; data = "ido_switch_start "; }
 );
