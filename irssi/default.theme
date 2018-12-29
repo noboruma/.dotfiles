@@ -67,7 +67,7 @@ abstracts = {
 
   # timestamp styling, nothing by default
   #timestamp = "$*";
-  timestamp = "%_$*";
+  timestamp = "%B$*%n";
 
   # any kind of text that needs hilighting, default is to bold
   hilight = "%_$*%_";

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 DIR=$(cd $(dirname "$0"); pwd)
 cd $DIR 1>/dev/null
 find ~ -maxdepth 1 -name ".vim*" -type l -exec rm -v {} \;
@@ -19,8 +19,17 @@ ln -s $PWD/.gdb/bundle/gdb-dashboard/.gdbinit ~
 ln -s $PWD/.gdb/.gdbinit.d ~
 ln -s $PWD/.colorgccrc ~
 ln -s $PWD/.tmux ~
+ln -s $PWD/.tmux/tmux-notifications/bin/* ~/usr/bin
+ln -s $PWD/irssi/irssi-notify.sh ~/usr/bin
 ln -s $PWD/ranger/rc.conf ~/.config/ranger
 ln -s $PWD/.w3m/config ~/.w3m/config
 ln -s $PWD/.inputrc ~
 ln -s $PWD/irssi ~/.irssi
 cd - 1>/dev/null
+
+incrontab -l | grep -q fnotify
+if [ $? = 1 ];
+then
+    ( incrontab -l ; echo "$HOME/.irssi/fnotify IN_MODIFY $HOME/usr/bin/irssi-notify.sh" ) | incrontab -
+fi
+

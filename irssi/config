@@ -436,6 +436,7 @@ settings = {
     neat_dynamic = "yes";
     neat_shrink = "yes";
     neat_staircase_shrink = "yes";
+    trackbar_style = "%K";
   };
 };
 hilights = ( { text = "nick"; nick = "yes"; word = "yes"; } );
