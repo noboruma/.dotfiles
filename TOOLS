@@ -3,9 +3,14 @@ git clone https://github.com/rizsotto/Bear
 git clone https://github.com/junegunn/fzf.vim
 git clone https://github.com/sharkdp/fd
 git clone https://github.com/cquery-project/cquery
+git clone https://github.com/newsboat/newsboat
+
 
 # linux
 sai silversearcher-ag surfraw
 
 # python
 pip3 install --user pygments
+
+# news
+pip install --user rtv
