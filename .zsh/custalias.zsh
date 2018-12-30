@@ -74,6 +74,9 @@ alias df="df -h"
 
 alias vrc="vim ~/.vimrc"
 alias zrc="vim ~/.zshrc"
+alias trc="vim ~/.tmux.conf"
+alias mrc="vim ~/.mutt/neomuttrc"
+alias irc="vim ~/.irssi/config"
 
 alias er="gvim --servername GVIM --remote"
 alias ers="gvim --servername GVIM"
@@ -84,6 +87,8 @@ alias ff="fzf-fs"
 function vgdb () {
     vim -c ":Termdebug "$1
 }
+
+alias nmutt='neomutt'
 
 alias alert_helper='history|tail -n1|sed -e "s/^\s*[0-9]\+\s*//" -e "s/;\s*alert$//"'
 alias alert='notify-send -i /usr/share/icons/gnome/32x32/apps/gnome-terminal.png "[$?] $(alert_helper)"'

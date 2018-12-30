@@ -25,6 +25,7 @@ ln -s $PWD/ranger/rc.conf ~/.config/ranger
 ln -s $PWD/.w3m/config ~/.w3m/config
 ln -s $PWD/.inputrc ~
 ln -s $PWD/irssi ~/.irssi
+ln -s $PWD/mutt ~/.mutt
 cd - 1>/dev/null
 
 incrontab -l | grep -q fnotify

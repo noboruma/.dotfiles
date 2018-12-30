@@ -1,0 +1,35 @@
+set ssl_starttls = yes
+set ssl_force_tls = yes
+
+set smtp_authenticators = "gassip:login"
+
+set smtp_url = "smtp://$GMAIL_USERNAME@smtp.gmail.com:587/"
+set imap_user = "$GMAIL_USERNAME@gmail.com"
+set from = "$GMAIL_USERNAME@gmail.com"
+set realname = "Thomas Legris"
+
+source ~/.mutt/stuff
+
+set folder=imaps://imap.gmail.com/
+set header_cache = ~/.mutt/com.gmail.$GMAIL_USERNAME/cache/headers
+set message_cachedir = ~/.mutt/com.gmail.$GMAIL_USERNAME/cache/bodies
+set certificate_file = ~/.mutt/com.gmail.$GMAIL_USERNAME/certificates
+set header_cache = ~/.mutt/com.gmail.$GMAIL_USERNAME/headers
+
+set move = no
+
+set spoolfile = imaps://imap.gmail.com/INBOX
+set trash = "imaps://imap.gmail.com/[Gmail]/Trash"
+
+# Specify where to save and/or look for postponed messages.
+set postponed = +[Gmail]/Drafts
+
+# Allow Mutt to open a new IMAP connection automatically.
+unset imap_passive
+
+# Keep the IMAP connection alive by polling intermittently (time in seconds).
+set imap_keepalive = 300
+
+# How often to check for new mail (time in seconds).
+set mail_check = 120
+
