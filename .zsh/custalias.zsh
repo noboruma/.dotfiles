@@ -84,9 +84,7 @@ alias vdev="vim --cmd 'let indexing=1' --servername VIM"
 alias vimdev="vim --cmd 'let indexing=1' --servername VIM"
 alias ff="fzf-fs"
 
-function vgdb () {
-    vim -c ":Termdebug "$1
-}
+alias ttyw3m="TERM=fbterm w3m"
 
 alias nmutt='neomutt'
 
@@ -102,13 +100,13 @@ cdn () { pushd .; for ((i=1; i<=$1; i++)); do cd ..; done; pwd; }
 # Go up until reaching $1, ie: cdu home
 cdu () { cd "${PWD%/$1/*}/$1"; }
 
-function mwfindPath () {
-    mw ch findPath -c $1 $2 -f DOT | dot -Tx11
+function vgdb () {
+    vim -c ":Termdebug "$1
 }
 
-function mwctb () {
-    mw gmake -j4 COMPONENTS_TO_BUILD=$1
-}
+#function mwfindPath () {
+#    mw ch findPath -c $1 $2 -f DOT | dot -Tx11
+#}
 
 function unique_ranger() {
     if [ -z "$RANGER_LEVEL" ]; then
@@ -116,4 +114,17 @@ function unique_ranger() {
     else
         exit
     fi
+}
+
+function jisho() {
+    w3m "https://jisho.org/search/$1 $2"
+}
+
+# default tmux layout
+function dtmux {
+    tmux new-session -d 'main'
+    tmux new-window 'nmutt'
+    tmux new-window 'irssi'
+    tmux new-window 'newsboat'
+    tmux select-window -t 1
 }
