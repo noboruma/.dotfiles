@@ -14,3 +14,5 @@ pip3 install --user pygments
 
 # news
 pip install --user rtv
+
+sai fbterm ium ium-mozc ium-fep

@@ -26,6 +26,11 @@ ln -s $PWD/.w3m/config ~/.w3m/config
 ln -s $PWD/.inputrc ~
 ln -s $PWD/irssi ~/.irssi
 ln -s $PWD/mutt ~/.mutt
+mkdir ~/.newsboat 2>/dev/null
+mkdir ~/.config/newsboat 2>/dev/null
+ln -s $PWD/newsboat/config ~/.newsboat/config
+ln -s $PWD/newsboat/urls ~/.config/newsboat/urls
+ln -s $PWD/mutt ~/.mutt
 cd - 1>/dev/null
 
 incrontab -l | grep -q fnotify

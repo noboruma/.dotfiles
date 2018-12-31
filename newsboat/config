@@ -1,0 +1,3 @@
+max-items   100
+auto-reload yes
+browser     w3m
