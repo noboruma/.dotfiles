@@ -13,6 +13,8 @@ macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/account.com.$WORK_
 bind index G imap-fetch-mail
 bind pager j next-page
 bind pager k previous-page
+bind index q noop # Use c-c instead
+bind index x noop
 
 set editor="vim"
 set charset = "utf-8"
