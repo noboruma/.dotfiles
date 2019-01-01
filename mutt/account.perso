@@ -1,11 +1,13 @@
+set my_username = "legris.thomas"
+
 set ssl_starttls = yes
 set ssl_force_tls = yes
 
 set smtp_authenticators = "gassip:login"
 
-set smtp_url = "smtp://$GMAIL_USERNAME@smtp.gmail.com:587/"
-set imap_user = "$GMAIL_USERNAME@gmail.com"
-set from = "$GMAIL_USERNAME@gmail.com"
+set smtp_url = "smtp://$my_username@smtp.gmail.com:587/"
+set imap_user = "$my_username@gmail.com"
+set from = "$my_username@gmail.com"
 set realname = "Thomas Legris"
 
 source "gpg -dq $HOME/.gpg/stuff.gpg |"
@@ -13,10 +15,10 @@ set imap_pass=$my_pass
 set smtp_pass=$my_pass
 
 set folder=imaps://imap.gmail.com/
-set header_cache = ~/.mutt/com.gmail.$GMAIL_USERNAME/cache/headers
-set message_cachedir = ~/.mutt/com.gmail.$GMAIL_USERNAME/cache/bodies
-set certificate_file = ~/.mutt/com.gmail.$GMAIL_USERNAME/certificates
-set header_cache = ~/.mutt/com.gmail.$GMAIL_USERNAME/headers
+set header_cache = ~/.mutt/com.gmail.$my_username/cache/headers
+set message_cachedir = ~/.mutt/com.gmail.$my_username/cache/bodies
+set certificate_file = ~/.mutt/com.gmail.$my_username/certificates
+set header_cache = ~/.mutt/com.gmail.$my_username/headers
 
 set move = no
 

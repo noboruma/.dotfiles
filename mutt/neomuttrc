@@ -1,12 +1,12 @@
 # Folder hooks
-folder-hook 'account.com.gmail.$GMAIL_USERNAME' 'source ~/.mutt/account.com.gmail.$GMAIL_USERNAME'
+folder-hook 'account.perso' 'source ~/.mutt/account.perso'
 folder-hook 'account.com.$WORK_PLACE.$WORK_USERNAME' 'source ~/.mutt/account.com.$WORK_PLACE.$WORK_USERNAME'
 
 # Default account
-source ~/.mutt/account.com.gmail.$GMAIL_USERNAME
+source ~/.mutt/account.perso
 
 # Macros for switching accounts
-macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/account.com.gmail.$GMAIL_USERNAME<enter><change-folder>!<enter>'
+macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/account.perso<enter><change-folder>!<enter>'
 macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/account.com.$WORK_PLACE.$WORK_USERNAME<enter><change-folder>!<enter>'
 
 # Fetch mail shortcut
