@@ -85,7 +85,7 @@ alias vimdev="vim --cmd 'let indexing=1' --servername VIM"
 alias ff="fzf-fs"
 
 alias ttyw3m="TERM=fbterm w3m"
-
+alias news="newsboat --config-file=$HOME/.newsboat/config --url-file=$HOME/.newsboat/urls"
 alias nmutt='neomutt'
 
 alias alert_helper='history|tail -n1|sed -e "s/^\s*[0-9]\+\s*//" -e "s/;\s*alert$//"'
@@ -121,10 +121,10 @@ function jisho() {
 }
 
 # default tmux layout
-function dtmux {
-    tmux new-session -d 'main'
-    tmux new-window 'nmutt'
-    tmux new-window 'irssi'
-    tmux new-window 'newsboat'
-    tmux select-window -t 1
+function tnetsession() {
+    tmux setenv GMAIL_USERNAME $GMAIL_USERNAME
+    tmux new-session -d -s 'netclients'
+    tmux new-window -d -k -t netclients:1 'neomutt'
+    tmux new-window -d -k -t netclients:2 'irssi'
+    tmux new-window -d -k -t netclients:3 'newsboat --config-file=$HOME/.newsboat/config --url-file=$HOME/.newsboat/urls'
 }

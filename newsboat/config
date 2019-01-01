@@ -1,3 +1,8 @@
 max-items   100
 auto-reload yes
+reload-time 30
 browser     w3m
+
+highlight article "^(Feed|Title|Author|Date|Links?|URL):" default default bold
+highlight article "https?://[^ ]+" blue default bold
+highlight feedlist "https?://[^ ]+" yellow red bold

@@ -11,9 +11,12 @@ macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/account.com.$WORK_
 
 # Fetch mail shortcut
 bind index G imap-fetch-mail
+bind pager j next-page
+bind pager k previous-page
 
 set editor="vim"
 set charset = "utf-8"
+set pager_stop=yes
 
 # Colours for items in the index
 color index brightblue  black ~N

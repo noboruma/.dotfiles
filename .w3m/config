@@ -16,9 +16,9 @@ use_dictcommand 1
 dictcommand file:///$LIB/w3mdict.cgi
 multicol 0
 alt_entity 0
-graphic_char 0
+graphic_char 2
 display_borders 0
-fold_textarea 0
+fold_textarea 1
 display_ins_del 1
 ignore_null_img_alt 1
 view_unseenobject 1
@@ -30,7 +30,7 @@ ext_image_viewer 1
 image_scale 100
 imgdisplay w3mimgdisplay
 image_map_list 1
-fold_line 1
+fold_line 0
 show_lnum 0
 show_srch_str 1
 label_topline 0
@@ -50,10 +50,10 @@ pagerline 10000
 use_history 1
 history 100
 save_hist 1
-confirm_qq 1
+confirm_qq 0
 close_tab_back 0
 mark 1
-emacs_like_lineedit 1
+emacs_like_lineedit 0
 vi_prec_num 1
 mark_all_pages 0
 wrap_search 0
@@ -106,7 +106,7 @@ argv_is_url 1
 retry_http 1
 default_url 1
 follow_redirection 10
-meta_refresh 0
+meta_refresh 1
 dns_order 0
 nntpserver 
 nntpmode 
@@ -126,7 +126,7 @@ ssl_key_file
 ssl_ca_path /etc/ssl/certs
 ssl_ca_file 
 use_cookie 1
-show_cookie 0
+show_cookie 1
 accept_cookie 1
 accept_bad_cookie 0
 cookie_reject_domains 
