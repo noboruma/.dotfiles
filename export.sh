@@ -10,19 +10,19 @@ rm ~/.config/ranger/rc.conf 2>/dev/null
 find ~/.w3m -maxdepth 1 -name "config" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".irssi" -type l -exec rm -v {} \;
 
-ln -s $PWD/.vim ~
-ln -s $PWD/.vim/.vimrc ~
-ln -s $PWD/.tmux.conf ~
-ln -s $PWD/.zsh ~
-ln -s $PWD/.zsh/.zshrc ~
-ln -s $PWD/.gdb/bundle/gdb-dashboard/.gdbinit ~
-ln -s $PWD/.gdb/.gdbinit.d ~
+ln -s $PWD/vim ~/.vim
+ln -s $PWD/vim/.vimrc ~
+ln -s $PWD/zsh ~/.zsh
+ln -s $PWD/zsh/.zshrc ~
+ln -s $PWD/gdb/bundle/gdb-dashboard/.gdbinit ~
+ln -s $PWD/gdb/.gdbinit.d ~
 ln -s $PWD/.colorgccrc ~
-ln -s $PWD/.tmux ~
-ln -s $PWD/.tmux/tmux-notifications/bin/* ~/usr/bin
+ln -s $PWD/tmux.conf ~
+ln -s $PWD/tmux ~/.tmux
+ln -s $PWD/tmux/tmux-notifications/bin/* ~/usr/bin
 ln -s $PWD/irssi/irssi-notify.sh ~/usr/bin
 ln -s $PWD/ranger/rc.conf ~/.config/ranger
-ln -s $PWD/.w3m/config ~/.w3m/config
+ln -s $PWD/w3m ~/.w3m
 ln -s $PWD/.inputrc ~
 ln -s $PWD/irssi ~/.irssi
 ln -s $PWD/mutt ~/.mutt

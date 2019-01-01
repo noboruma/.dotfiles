@@ -18,9 +18,9 @@ bind index x noop
 bind generic,alias,attach,browser,editor,index,compose,pager,pgp,postpone ':' noop
 
 
-set editor="vim"
-set charset = "utf-8"
-set pager_stop=yes
+set editor     = "vim"
+set charset    = "utf-8"
+set pager_stop = yes
 
 # Colours for items in the index
 color index brightblue  black ~N
