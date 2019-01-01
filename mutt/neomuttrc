@@ -15,6 +15,8 @@ bind pager j next-page
 bind pager k previous-page
 bind index q noop # Use c-c instead
 bind index x noop
+bind generic,alias,attach,browser,editor,index,compose,pager,pgp,postpone ':' noop
+
 
 set editor="vim"
 set charset = "utf-8"

@@ -8,7 +8,9 @@ set imap_user = "$GMAIL_USERNAME@gmail.com"
 set from = "$GMAIL_USERNAME@gmail.com"
 set realname = "Thomas Legris"
 
-source ~/.mutt/stuff
+source "gpg -dq $HOME/.gpg/stuff.gpg |"
+set imap_pass=$my_pass
+set smtp_pass=$my_pass
 
 set folder=imaps://imap.gmail.com/
 set header_cache = ~/.mutt/com.gmail.$GMAIL_USERNAME/cache/headers
