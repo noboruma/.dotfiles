@@ -3,16 +3,16 @@ set my_username = "legris.thomas"
 set ssl_starttls = yes
 set ssl_force_tls = yes
 
-set smtp_authenticators = "gassip:login"
+#set smtp_authenticators = "gassip:login"
 
-set smtp_url = "smtp://$my_username@smtp.gmail.com:587/"
+#set smtp_url = "smtp://$my_username@smtp.gmail.com:587/"
 set imap_user = "$my_username@gmail.com"
 set from = "$my_username@gmail.com"
 set realname = "Thomas Legris"
 
 source "gpg -dq $HOME/.gpg/stuff.gpg |"
 set imap_pass=$my_pass
-set smtp_pass=$my_pass
+#set smtp_pass=$my_pass
 
 set folder=imaps://imap.gmail.com/
 set header_cache = ~/.mutt/com.gmail.$my_username/cache/headers
@@ -23,7 +23,8 @@ set header_cache = ~/.mutt/com.gmail.$my_username/headers
 set move = no
 
 set spoolfile = imaps://imap.gmail.com/INBOX
-set trash = "imaps://imap.gmail.com/[Gmail]/Trash"
+# set trash = "imaps://imap.gmail.com/[Gmail]/Trash"
+set trash = +[Gmail]/Trash
 
 # Specify where to save and/or look for postponed messages.
 set postponed = +[Gmail]/Drafts

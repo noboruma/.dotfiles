@@ -6,6 +6,7 @@ find ~ -maxdepth 1 -name ".zsh*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".gdb*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".colorgcc*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".tmux*" -type l -exec rm -v {} \;
+find ~ -maxdepth 1 -name ".w3m*" -type l -exec rm -v {} \;
 rm ~/.config/ranger/rc.conf 2>/dev/null
 find ~/.w3m -maxdepth 1 -name "config" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".irssi" -type l -exec rm -v {} \;
@@ -17,7 +18,7 @@ ln -s $PWD/zsh/.zshrc ~
 ln -s $PWD/gdb/bundle/gdb-dashboard/.gdbinit ~
 ln -s $PWD/gdb/.gdbinit.d ~
 ln -s $PWD/.colorgccrc ~
-ln -s $PWD/tmux.conf ~
+ln -s $PWD/tmux/.tmux.conf ~/.tmux.conf
 ln -s $PWD/tmux ~/.tmux
 ln -s $PWD/tmux/tmux-notifications/bin/* ~/usr/bin
 ln -s $PWD/irssi/irssi-notify.sh ~/usr/bin

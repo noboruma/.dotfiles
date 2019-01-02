@@ -122,7 +122,9 @@ function jisho() {
 
 # default tmux layout
 function tnetsession() {
-    tmux setenv GMAIL_USERNAME $GMAIL_USERNAME
+    if [[ -v GMAIL_USERNAME ]]; then
+        tmux setenv GMAIL_USERNAME $GMAIL_USERNAME
+    fi
     tmux new-session -d -s 'netclients'
     tmux new-window -d -k -t netclients:1 'neomutt'
     tmux new-window -d -k -t netclients:2 'irssi'
