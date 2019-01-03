@@ -9,6 +9,9 @@ source ~/.mutt/account.perso
 macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/account.perso<enter><change-folder>!<enter>'
 macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/account.com.$WORK_PLACE.$WORK_USERNAME<enter><change-folder>!<enter>'
 
+macro index,pager \cb '<pipe-message> urlscan<Enter>' 'call urlscan to extract URLs out of a message'
+macro attach,compose \cb "<pipe-entry> urlscan<Enter>"
+
 # Fetch mail shortcut
 bind index G imap-fetch-mail
 bind pager j next-page
@@ -16,7 +19,6 @@ bind pager k previous-page
 bind index q noop # Use c-c instead
 bind index x noop
 bind generic,alias,attach,browser,editor,index,compose,pager,pgp,postpone ':' noop
-
 
 set editor     = "vim"
 set charset    = "utf-8"

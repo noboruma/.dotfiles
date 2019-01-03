@@ -10,7 +10,6 @@ if executable('ccls')
                 "\ '--log-file=/tmp/cq.log',
                 \ '--init={"cacheDirectory":"/tmp/cquery/cache/"}']
 elseif executable('cquery')
-    echom 'no ccls, using cquery'
     let g:LanguageClient_serverCommands.cpp = ['cquery',
                 "\ '--log-file=/tmp/cq.log',
                 \ '--init={"cacheDirectory":"/tmp/cquery/cache/", "diagnostics": {"onParse": false, "onType": false}, "index": {"comments": 2}, "cacheFormat": "msgpack", "completion": {"filterAndSort": false}}']

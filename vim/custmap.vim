@@ -45,6 +45,8 @@ if executable('cquery')
    nnoremap <leader>fh :<c-u>call LanguageClient#textDocument_hover()<cr>
    nnoremap <leader>ft :<c-u>call LanguageClient#textDocument_signatureHelp()<cr>
    nnoremap <leader>fg :<c-u>call LanguageClient_contextMenu()<cr>
+   nnoremap <leader>fc :<c-u>call LanguageClient#findLocations({'method':'$ccls/call'})<cr>
+   nnoremap <leader>fC :<c-u>call LanguageClient#findLocations({'method':'$ccls/call','callee':v:true})<cr>
 else
     noremap <leader>f :botright pta <C-r><C-w><cr>
     noremap <leader>F "sy:botright pta /<C-R>"
