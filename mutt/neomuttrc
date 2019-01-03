@@ -22,6 +22,9 @@ bind index x noop
 bind generic,alias,attach,browser,editor,index,compose,pager,pgp,postpone ':' noop
 bind editor <space> noop
 
+bind index t tag-thread
+bind index \ct tag-entry
+
 set editor     = "vim"
 set charset    = "utf-8"
 set pager_stop = yes
