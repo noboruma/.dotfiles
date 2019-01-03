@@ -44,6 +44,6 @@ set imap_keepalive = 300
 set mail_check = 15
 
 # sidebar 
-set sidebar_visible=yes
+set sidebar_visible=no
 #set sidebar_width=10
 set sidebar_on_right=yes

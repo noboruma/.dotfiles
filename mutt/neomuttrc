@@ -40,7 +40,7 @@ set sort_aux="last-date-received"
 bind index - collapse-thread
 bind index _ collapse-all
 
-set date_format="%y %b %e %T"
+set date_format="%y %b %d %R"
 set index_format="%2C %?M?-&|? %Z [%d] %-30.30F (%-4.4c) %s"
 
 # Colours for items in the index
@@ -99,3 +99,26 @@ color body brightblue  black "(^|[[:space:]])/[^[:space:]]+/([[:space:]]|$)"    
 color index yellow  default "~v~(!~N)~(!~F)" # collapsed thread with no New or Flagged
 color index red     default "~v~(~F)~(!~N)"  # collapsed thread with Flagged but no New
 color index green   default "~v~(~N)"        # collapsed thread with New
+
+
+# For the examples below, set some defaults
+set status_format='[%r] %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? \
+Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? %l?]   (%s/%S) %> %?V?{%V}?   (%P)   '
+## 'status color' can take up to 2 extra parameters
+## color status foreground background [ regex [ num ]]
+## 0 extra parameters
+## Set the default color for the entire status line
+#color status blue white
+## 1 extra parameter
+## Set the color for a matching pattern
+## color status foreground background regex
+## Highlight New, Deleted, or Flagged emails
+color status brightred blue '(New|Del|Flag):[0-9]+'
+## ordering:
+color status green blue '\([^)]+/[^)]+\)'
+# mailbox:
+color status magenta blue '\]([^]]+)\[' 1
+# filter:
+color status cyan blue '\{([^]]+)\}' 1
+# size:
+#color status brightyellow blue ' [0-9]+(M|K|B)'
