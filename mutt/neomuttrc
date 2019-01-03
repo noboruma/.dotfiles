@@ -19,10 +19,22 @@ bind pager k previous-page
 bind index q noop # Use c-c instead
 bind index x noop
 bind generic,alias,attach,browser,editor,index,compose,pager,pgp,postpone ':' noop
+bind editor <space> noop
 
 set editor     = "vim"
 set charset    = "utf-8"
 set pager_stop = yes
+set text_flowed = yes
+set editor = "vim +/^$ ++1"
+set imap_check_subscribed=yes
+
+set sort="threads"
+set strict_threads="yes"
+set sort_browser="reverse-date"
+set sort_aux="last-date-received"
+
+bind index - collapse-thread
+bind index _ collapse-all
 
 # Colours for items in the index
 color index brightblue  black ~N
@@ -75,3 +87,8 @@ color body brightgreen black " [;:]-*[)>(<|]"                                   
 color body brightblue  black "(^|[[:space:]])\\*[^[:space:]]+\\*([[:space:]]|$)" # *Bold* text.
 color body brightblue  black "(^|[[:space:]])_[^[:space:]]+_([[:space:]]|$)"     # _Underlined_ text.
 color body brightblue  black "(^|[[:space:]])/[^[:space:]]+/([[:space:]]|$)"     # /Italic/ text.
+
+# threads
+color index yellow  default "~v~(!~N)~(!~F)" # collapsed thread with no New or Flagged
+color index red     default "~v~(~F)~(!~N)"  # collapsed thread with Flagged but no New
+color index green   default "~v~(~N)"        # collapsed thread with New

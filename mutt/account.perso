@@ -4,13 +4,19 @@ set ssl_starttls = yes
 set ssl_force_tls = yes
 
 set imap_user = "$my_username@gmail.com"
-set from = "$my_username@gmail.com"
-set realname = "Thomas Legris"
+set from      = "$my_username@gmail.com"
+set realname  = "Thomas Legris"
 
 source "gpg -dq $HOME/.gpg/stuff.gpg |"
-set imap_pass=$my_pass
+set crypt_autosign = yes
 
 set folder=imaps://imap.gmail.com/
+set imap_pass=$my_pass
+
+set smtp_url = "smtp://$my_username@smtp.gmail.com:587/" # needed  to retrieve mailboxes
+
+set hostname = "gmail.com"
+
 set header_cache = ~/.mutt/com.gmail.$my_username/cache/headers
 set message_cachedir = ~/.mutt/com.gmail.$my_username/cache/bodies
 set certificate_file = ~/.mutt/com.gmail.$my_username/certificates
@@ -19,9 +25,11 @@ set header_cache = ~/.mutt/com.gmail.$my_username/headers
 set move = no
 
 set spoolfile = +INBOX
-set trash  = "+[Google Mail]/Trash"
-set record = "+[Google Mail]/Sent Mail"
-#set mbox   = "+[Google Mail]/All Mail"
+set trash     = "+[Google Mail]/Trash"
+set record    = "+[Google Mail]/Sent Mail"
+#set mbox     = "+[Google Mail]/All Mail" # W: local only?
+
+macro index,pager A "<save-message>=[Google Mail]/All Mail<enter><enter>" "Archive"
 
 # Specify where to save and/or look for postponed messages.
 set postponed = "+[Google Mail]/Drafts"
@@ -33,4 +41,8 @@ unset imap_passive
 set imap_keepalive = 300
 
 # How often to check for new mail (time in seconds).
-set mail_check = 120
+set mail_check = 15
+
+# sidebar 
+set sidebar_visible=yes
+set sidebar_width=10
