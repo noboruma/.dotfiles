@@ -37,6 +37,9 @@ set sort_aux="last-date-received"
 bind index - collapse-thread
 bind index _ collapse-all
 
+set date_format="%y %b %e %T"
+set index_format="%2C %?M?-&|? %Z [%d] %-30.30F (%-4.4c) %s"
+
 # Colours for items in the index
 color index brightblue  black ~N
 color index brightblue  black ~O
