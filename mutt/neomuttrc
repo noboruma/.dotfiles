@@ -1,6 +1,7 @@
 # Folder hooks
 folder-hook 'account.perso' 'source ~/.mutt/account.perso'
 folder-hook 'account.com.$WORK_PLACE.$WORK_USERNAME' 'source ~/.mutt/account.com.$WORK_PLACE.$WORK_USERNAME'
+folder-hook . "exec collapse-all"
 
 # Default account
 source ~/.mutt/account.perso
