@@ -59,7 +59,7 @@ color attachment black        green
 color error      red          black
 color message    white         black
 color search     brightwhite  magenta
-color status     brightyellow blue
+color status     brightwhite blue
 color tree       red          black
 color normal     white         black
 color tilde      green        black
@@ -121,4 +121,4 @@ color status magenta blue '\]([^]]+)\[' 1
 # filter:
 color status cyan blue '\{([^]]+)\}' 1
 # size:
-#color status brightyellow blue ' [0-9]+(M|K|B)'
+color status brightyellow blue ' [0-9]+(M|K|B)'
