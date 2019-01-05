@@ -297,5 +297,15 @@ formats = {
   "fe-common/core" = {
     pubmsg = "{pubmsgnick $2 {pubnick \00310$[0]0}}$1";
     timestamp = "{timestamp %%H:%%M:%%S} ";
+    pubmsg_me = "{pubmsgmenick $nickalign$2 {menick $[.16]0$nicktrunc}}$1";
+    pubmsg_me_channel = "{pubmsgmenick $nickalign$3 {menick $[.16]0$nicktrunc}{msgchannel $1}}$2";
+    pubmsg_hilight = "{pubmsghinick $0 $nickalign$3 $[.16]1$nicktrunc}$2";
+    pubmsg_hilight_channel = "{pubmsghinick $0 $nickalign$4 $[.16]1$nicktrunc{msgchannel $2}}$3";
+    pubmsg_channel = "{pubmsgnick $nickalign$3 {pubnick $nickcolor$[.16]0$nicktrunc}{msgchannel $1}}$2";
+  };
+  "Irssi::Script::adv_windowlist" = {
+    awl_display_header = "$C";
+    awl_name_display = "$0";
+    awl_title = " ";
   };
 };

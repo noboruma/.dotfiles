@@ -321,7 +321,6 @@ statusbar = {
     topicbarstart = "{topicsbstart}";
     topicbarend = "{topicsbend}";
 
-    time = "{sb $Z}";
     user = "{sb {sbnickmode $cumode}$N{sbmode $usermode}{sbaway $A}}";
 
     window = "{sb $winref:$tag/$itemname{sbmode $M}}";
@@ -355,7 +354,6 @@ statusbar = {
         window = { };
         window_empty = { };
         lag = { priority = "-1"; };
-        act = { priority = "10"; };
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
       };
@@ -385,7 +383,8 @@ statusbar = {
       visible = "always";
 
       items = {
-        uberprompt = { priority = "-1"; };
+        prompt = { priority = "-1"; };
+        prompt_empty = { priority = "-1"; };
         input = { priority = "10"; };
       };
     };
@@ -430,6 +429,11 @@ settings = {
     neat_shrink = "yes";
     neat_staircase_shrink = "yes";
     trackbar_style = "%K";
+    awl_shared_sbar = "OFF";
+    awl_viewer = "yes";
+    awl_viewer_launch = "yes";
+    awl_viewer_tmux_position = "top";
+    awl_sort = "refnum";
   };
 };
 hilights = ( { text = "nick"; nick = "yes"; word = "yes"; } );

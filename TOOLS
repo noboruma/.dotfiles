@@ -7,7 +7,7 @@ git clone https://github.com/newsboat/newsboat
 
 
 # linux
-sai silversearcher-ag surfraw hub taskwarrior
+sai silversearcher-ag surfraw hub taskwarrior urlview
 
 # python
 pip3 install --user pygments

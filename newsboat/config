@@ -3,6 +3,8 @@ auto-reload yes
 reload-time 30
 browser     $BROWSER
 confirm-exit yes
+bind-key o open-in-browser-and-mark-read
+bind-key O open-in-browser
 
 highlight article "^(Feed|Title|Author|Date|Links?|URL):" default default bold
 highlight article "https?://[^ ]+" blue default bold
