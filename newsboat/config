@@ -1,9 +1,13 @@
 max-items   100
 auto-reload yes
 reload-time 30
-browser     w3m
+browser     $BROWSER
 confirm-exit yes
 
 highlight article "^(Feed|Title|Author|Date|Links?|URL):" default default bold
 highlight article "https?://[^ ]+" blue default bold
 highlight feedlist "https?://[^ ]+" yellow red bold
+
+# macro leader key is ,
+macro r set browser "rtv %u"; open-in-browser ; set browser "$BROWSER %u"
+macro y set browser "mpv %u"; open-in-browser ; set browser "$BROWSER %u"

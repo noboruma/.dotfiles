@@ -7,10 +7,13 @@ git clone https://github.com/newsboat/newsboat
 
 
 # linux
-sai silversearcher-ag surfraw
+sai silversearcher-ag surfraw hub taskwarrior
 
 # python
 pip3 install --user pygments
+
+# ruby
+gem install terjira
 
 # news
 pip install --user rtv
