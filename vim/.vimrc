@@ -14,7 +14,7 @@ set nocompatible
 
 "  If you need infrmation on parameters, use :h param
 if has("gui_running")
-  set guifont=Terminus\ 11
+  set guifont=Terminus\ 9
   if &guifont != 'Terminus 9'
       set guifont=Monospace\ 9
   endif

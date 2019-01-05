@@ -11,7 +11,6 @@ if executable('ccls')
                 \ '--init={"cacheDirectory":"/tmp/cquery/cache/"}']
 elseif executable('cquery')
     let g:LanguageClient_serverCommands.cpp = ['cquery',
-                "\ '--log-file=/tmp/cq.log',
                 \ '--init={"cacheDirectory":"/tmp/cquery/cache/", "diagnostics": {"onParse": false, "onType": false}, "index": {"comments": 2}, "cacheFormat": "msgpack", "completion": {"filterAndSort": false}}']
 else
     echom 'no ccls nor cquery executable'
