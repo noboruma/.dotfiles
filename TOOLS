@@ -17,5 +17,6 @@ gem install terjira
 
 # news
 pip install --user rtv
+pip3 install --user myougiden
 
 sai fbterm ium ium-mozc ium-fep
