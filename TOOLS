@@ -7,7 +7,7 @@ git clone https://github.com/newsboat/newsboat
 
 
 # linux
-sai silversearcher-ag surfraw hub taskwarrior urlview
+sai silversearcher-ag surfraw hub taskwarrior urlview libtext-aspell-perl irssi neomutt
 
 # python
 pip3 install --user pygments
@@ -16,7 +16,8 @@ pip3 install --user pygments
 gem install terjira
 
 # news
-pip install --user rtv
+pip install --user rtv urlscan
 pip3 install --user myougiden
 
+# tty specifics
 sai fbterm ium ium-mozc ium-fep

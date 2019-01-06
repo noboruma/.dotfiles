@@ -422,6 +422,7 @@ settings = {
     use_msgs_window = "yes";
     autocreate_query_level = "MSGS";
     theme = "default";
+    timestamp_level = "ALL";
   };
   "perl/core/scripts" = {
     neat_dynamic = "yes";
@@ -441,5 +442,6 @@ logs = { };
 mainwindows = { 1 = { first_line = "1"; lines = "39"; }; };
 keyboard = (
   { key = "^G"; id = "command"; data = "ido_switch_start "; },
-  { key = "^H"; id = "command"; data = "window 1"; }
+  { key = "^H"; id = "command"; data = "window 1"; },
+  { key = "^[[23~"; id = "command"; data = "spellcheck "; }
 );
