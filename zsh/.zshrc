@@ -79,33 +79,33 @@ local NOCOLOR='%{\e[0m%}'
 local MCOLOR='%{\e[0;35m%}'
 local CBLUE='%{\e[1;34m%}'
 local CGREEN='%{\e[1;32m%}'
-
+local PROMPT_EOL_MARK='$'
+setopt prompt_subst
 # PS1 and PS2
 if [ -n "$TMUX" ]; then
-export PS1="$(print $CBROWN'(%D{%L:%M:%S %p})\n'\
-$CREDOR'['$CBLUE'%n'$CREDOR']'$MCOLOR%d%b'\n'\
-$CREDOR'$ '%f%b)"
+export PS1="$(print \
+'%(?..[%B%?%b]\n)'\
+$CBROWN'(%D{%L:%M:%S %p})\n'\
+$CREDOR'['$CBLUE'%n'$CREDOR']'$MCOLOR%d%b$CGREEN' ${vcs_info_msg_0_}'%f%b '\n'\
+$CREDOR'%(!.#.$)' %f%b)"
 else
-export PS1="$(print $CBROWN'(%D{%L:%M:%S %p})\n'\
+export PS1="$(print \
+'%(?..[%B%?%b]\n)'\
+$CBROWN'(%D{%L:%M:%S %p})\n'\
 $CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR']'$MCOLOR%d%b'\n'\
-$CREDOR'$ '%f%b)"
+$CREDOR'%(!.#.$)' %f%b)"
 fi
 export PS2="$(print '%{\e[0;34m%}>'$NOCOLOR)"
 
-#export RPROMPT='[%D{%L:%M:%S %p}]'
-#TMOUT=0
-#TRAPALRM() {
-#   zle reset-prompt
-#}
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:*' enable git svn p4
 precmd() {
   vcs_info
 }
 # Mode at Prompt
 function zle-line-init zle-keymap-select {
     # Show exit code on the right if it was != 0
-    RPS1="%(?..[%B%?%b])%{%F{red}%}${vcs_info_msg_0_}%{$fg_bold[yellow]%}${${KEYMAP/vicmd/ -- NORMAL --}/(main|viins)/}%f%b"
+    RPS1="%{$fg_bold[yellow]%}${${KEYMAP/vicmd/ -- NORMAL --}/(main|viins)/}%f%b"
     zle reset-prompt
 }
 
@@ -197,8 +197,6 @@ export ANDROID_NDK_ROOT=$HOME'/workspace/android/android-ndk-r16b'
 export ANDROID_NDK_HOME=$HOME'/workspace/android/android-ndk-r16b'
 export ANDROID_HOME=$HOME'/usr/adt-bundle-linux-x86_64-20131030/sdk'
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-export P4CONFIG=.perforce
 
 export NPM_PACKAGES="${HOME}/usr/npm-packages"
 export PATH="$NPM_PACKAGES/bin:$PATH"
