@@ -21,7 +21,7 @@ display_borders 0
 fold_textarea 1
 display_ins_del 1
 ignore_null_img_alt 1
-view_unseenobject 1
+view_unseenobject 0
 display_image 1
 pseudo_inlines 1
 auto_image 1
