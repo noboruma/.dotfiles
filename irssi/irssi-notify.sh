@@ -1,2 +1,2 @@
 #!/bin/sh
-$HOME/usr/bin/tmux-notify "talk on `cat /home/zackel/.irssi/fnotify | tail -n1 | cut -d' ' -f2`"
+$HOME/.tmux/tmux-notifications/bin/tmux-notify "talk on `cat $HOME/.irssi/fnotify | tail -n1 | cut -d' ' -f2`"

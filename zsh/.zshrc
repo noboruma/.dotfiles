@@ -21,17 +21,19 @@
 export HISTFILE=~/.zsh_history
 export HISTSIZE=50000
 export SAVEHIST=50000
+
 case `uname` in
-  Darwin)
-  ;;
-  Linux)
-eval `dircolors -b`
-setxkbmap -option ctrl:nocaps
-#setxkbmap -option to enable
-  ;;
-  FreeBSD)
-    # commands for FreeBSD go here
-  ;;
+    Darwin)
+        ;;
+    Linux)
+        eval `dircolors -b`
+        if type "setxkbmap" > /dev/null; then
+            setxkbmap -option ctrl:nocaps
+            #setxkbmap -option to enable
+        fi
+        ;;
+    FreeBSD)
+        ;;
 esac
 
 #set -o vi
@@ -79,9 +81,15 @@ local CBLUE='%{\e[1;34m%}'
 local CGREEN='%{\e[1;32m%}'
 
 # PS1 and PS2
+if [ -n "$TMUX" ]; then
+export PS1="$(print $CBROWN'(%D{%L:%M:%S %p})\n'\
+$CREDOR'['$CBLUE'%n'$CREDOR']'$MCOLOR%d%b'\n'\
+$CREDOR'$ '%f%b)"
+else
 export PS1="$(print $CBROWN'(%D{%L:%M:%S %p})\n'\
 $CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR']'$MCOLOR%d%b'\n'\
 $CREDOR'$ '%f%b)"
+fi
 export PS2="$(print '%{\e[0;34m%}>'$NOCOLOR)"
 
 #export RPROMPT='[%D{%L:%M:%S %p}]'
@@ -182,8 +190,7 @@ export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 
 # Sourcing part
-export PATH=~/usr/bin:$PATH
-export PATH=/usr/local/cuda-7.5/bin:$PATH
+export PATH=~/usr/bin:~/.local/bin:$PATH
 export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
 
 export ANDROID_NDK_ROOT=$HOME'/workspace/android/android-ndk-r16b'

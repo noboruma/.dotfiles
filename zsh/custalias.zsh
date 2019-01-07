@@ -11,15 +11,14 @@ alias xterm='xterm -fg white -bg black'
 
 # Normal aliases
 case `uname` in
-  Darwin)
-alias ls='ls -GFh'
-  ;;
-  Linux)
-alias ls='ls --color=auto -Fh'
-  ;;
-  FreeBSD)
-    # commands for FreeBSD go here
-  ;;
+    Darwin)
+        alias ls='ls -GFh'
+        ;;
+    Linux)
+        alias ls='ls --color=auto -Fh'
+        ;;
+    FreeBSD)
+        ;;
 esac
 #alias lsd='ls -ld *(-/DN)'
 #alias lsa='ls -ld .*'
@@ -72,6 +71,7 @@ alias ll="ls -haltr"
 alias du="du -h"
 alias df="df -h"
 
+alias dotfiles="cd ~/.dotfiles"
 alias vrc="vim ~/.vimrc"
 alias zrc="vim ~/.zshrc"
 alias trc="vim ~/.tmux.conf"
@@ -80,8 +80,8 @@ alias irc="vim ~/.irssi/config"
 
 alias er="gvim --servername GVIM --remote"
 alias ers="gvim --servername GVIM"
-alias vdev="vim --cmd 'let indexing=1' --servername VIM"
-alias vimdev="vim --cmd 'let indexing=1' --servername VIM"
+alias vdev="vim --servername VIM --remote"
+alias vimdev="vim --servername VIM"
 alias ff="fzf-fs"
 
 alias ttyw3m="TERM=fbterm w3m"
@@ -114,10 +114,6 @@ function unique_ranger() {
     else
         exit
     fi
-}
-
-function jisho() {
-    w3m "https://jisho.org/search/$1 $2"
 }
 
 # default tmux layout

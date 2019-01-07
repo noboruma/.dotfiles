@@ -20,7 +20,6 @@ ln -s $PWD/gdb/.gdbinit.d ~
 ln -s $PWD/.colorgccrc ~
 ln -s $PWD/tmux/.tmux.conf ~/.tmux.conf
 ln -s $PWD/tmux ~/.tmux
-ln -s $PWD/tmux/tmux-notifications/bin/* ~/usr/bin
 ln -s $PWD/irssi/irssi-notify.sh ~/usr/bin
 ln -s $PWD/ranger/rc.conf ~/.config/ranger
 ln -s $PWD/w3m ~/.w3m
