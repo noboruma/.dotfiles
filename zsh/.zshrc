@@ -99,12 +99,36 @@ export PS2="$(print '%{\e[0;34m%}>'$NOCOLOR)"
 
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git svn p4
-precmd() {
-  vcs_info
+# zsh hooks: precmd, chpwd, preexec, ...
+precmd(){
+    #Needed for tmux splitting
+    vcs_info
 }
+chpwd() {
+    vcs_info
+}
+
+# From Mikachu
+cd-or-accept-line() {
+    local success=0;
+    args=( ${(z)BUFFER} );
+    if [ $#args -eq 2 ] && [[ ${(Q)args[1]} == cd ]]; then
+            cd ${(Q)args[2]} 1>/dev/null 2>/dev/null
+            if [ $? -eq 0 ]; then
+                zle .kill-buffer;
+                zle reset-prompt;
+                success=1;
+            fi
+    fi
+    if [ $success -eq 0 ]; then
+        zle .$WIDGET;
+    fi
+};
+zle -N accept-line cd-or-accept-line
+
 # Mode at Prompt
 function zle-line-init zle-keymap-select {
-    # Show exit code on the right if it was != 0
+    # Show vim mode on the right
     RPS1="%{$fg_bold[yellow]%}${${KEYMAP/vicmd/ -- NORMAL --}/(main|viins)/}%f%b"
     zle reset-prompt
 }
