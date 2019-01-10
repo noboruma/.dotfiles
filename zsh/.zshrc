@@ -112,7 +112,7 @@ chpwd() {
 cd-or-accept-line() {
     local success=0;
     args=( ${(z)BUFFER} );
-    if [ $#args -eq 2 ] && [[ ${(Q)args[1]} == cd ]]; then
+    if ([ $#args -eq 2 ] && [[ ${(Q)args[1]} == cd ]]) || [ $#args -eq 1 ] && [[ ${(Q)args[1]} == cd ]]; then
             cd ${(Q)args[2]} 1>/dev/null 2>/dev/null
             if [ $? -eq 0 ]; then
                 zle .kill-buffer;
