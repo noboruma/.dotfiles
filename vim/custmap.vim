@@ -137,6 +137,8 @@ nnoremap <c-j> J
 "nnoremap <c-k> K
 nnoremap J <c-e>
 nnoremap K <c-y>
+nnoremap + <PageDown>
+nnoremap - <PageUp>
 
 " Simulate <down> after CTRL-N
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
