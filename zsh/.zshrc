@@ -36,19 +36,14 @@ case `uname` in
         ;;
 esac
 
-#set -o vi
-#bindkey -v
-#bindkey -M vicmd 'u' undo
-#bindkey -M vicmd '^r' redo
 autoload -Uz copy-earlier-word
 zle -N copy-earlier-word
-bindkey "^[m" copy-earlier-word
-bindkey "^[[1;5C" forward-word
-bindkey "^[[1;5D" backward-word
+
+bindkey "^y" copy-earlier-word
 bindkey "^l" forward-word
 bindkey "^h" backward-word
 #kill the lag
-#export KEYTIMEOUT=1
+export KEYTIMEOUT=1
 
 autoload -Uz compinit
 setopt autopushd pushdminus pushdsilent pushdtohome
@@ -112,8 +107,8 @@ chpwd() {
 cd-or-accept-line() {
     local success=0;
     args=( ${(z)BUFFER} );
-    if ([ $#args -eq 2 ] && [[ ${(Q)args[1]} == cd ]]) || [ $#args -eq 1 ] && [[ ${(Q)args[1]} == cd ]]; then
-            cd ${(Q)args[2]} 1>/dev/null 2>/dev/null
+    if ([ $#args -eq 2 ] && ([[ ${(Q)args[1]} == cd ]] || [[ ${(Q)args[1]} == cdu ]])) || ([ $#args -eq 1 ] && [[ ${(Q)args[1]} == cd ]]); then
+            ${(Q)args[1]} ${(Q)args[2]} 1>/dev/null 2>/dev/null
             if [ $? -eq 0 ]; then
                 zle .kill-buffer;
                 zle reset-prompt;
@@ -274,6 +269,6 @@ _fzf_compgen_dir() {
 source $HOME/.zsh/plugins/fzf-marks/init.zsh
 
 # zsh-bd
-source $HOME/.zsh/plugins/bd/bd.zsh
+#source $HOME/.zsh/plugins/bd/bd.zsh
 
 echo 'running on '$TTY

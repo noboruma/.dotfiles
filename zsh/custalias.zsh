@@ -97,6 +97,7 @@ fi
 
 # Go back (..) n times
 cdn () { pushd .; for ((i=1; i<=$1; i++)); do cd ..; done; pwd; }
+
 # Go up until reaching $1, ie: cdu home
 cdu () { cd "${PWD%/$1/*}/$1"; }
 

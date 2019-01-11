@@ -486,7 +486,7 @@ set shiftwidth=4
 
 " Allow real tab in leader mapping
 set wildcharm=<tab>
-set timeoutlen=1000
+set timeoutlen=1000 ttimeoutlen=10
 
 source ~/.vim/custmap.vim
 
