@@ -3,9 +3,7 @@
 
 # Set up auto extension stuff
 alias -s net=$BROWSER
-# alias -s torrent="qbittorrent"
 alias -s gz=tar -xzvf
-#alias -s bz2=tar -xjvf
 alias -s PKGBUILD=$EDITOR
 alias xterm='xterm -fg white -bg black'
 
@@ -20,22 +18,13 @@ case `uname` in
     FreeBSD)
         ;;
 esac
-#alias lsd='ls -ld *(-/DN)'
-#alias lsa='ls -ld .*'
 alias fe='find -type f | xargs grep'
 alias c="clear"
-alias ..='cd ..'
-#alias ppp-on=' /usr/sbin/ppp-on'
-#alias ppp-off=' /usr/sbin/ppp-off'
-alias hist="grep '$1' ~/.zsh_history"
 #alias irssi="irssi -c irc.freenode.net -n yyz"
 alias mem="free -m"
 
-# command L equivalent to command |less
-alias -g L='|less'
-
-# command S equivalent to command &> /dev/null &
-alias -g N='&> /dev/null &'
+alias -g V='|vim -'
+alias -g N='1> /dev/null'
 
 alias sshfs='sshfs -C -o reconnect -o workaround=all'
 
@@ -52,14 +41,14 @@ alias sv='sudo $EDITOR'
 alias gcommit='git commit -am'
 alias gpush='git push'
 alias gpull='git pull'
-#alias ocaml='rlwrap ocaml'
+alias gchange='git checkout -'
+alias irb='rlwrap irb'
 
 alias smount="sudo mount"
 alias sumount="sudo umount"
 alias srcconf="sudo rcconf"
 alias pwdb="pwman3"
 alias sshut="sudo shutdown -h 0"
-alias shibern="sudo pm-hibernate"
 alias sreboot="sudo reboot"
 
 alias arduino="arduino-asm"
@@ -71,7 +60,7 @@ alias ll="ls -haltr"
 alias du="du -h"
 alias df="df -h"
 
-alias dotfiles="cd ~/.dotfiles"
+alias dots="cd ~/.dotfiles"
 alias vrc="vim ~/.vimrc"
 alias zrc="vim ~/.zshrc"
 alias trc="vim ~/.tmux.conf"
@@ -119,9 +108,6 @@ function unique_ranger() {
 
 # default tmux layout
 function tnetsession() {
-    if [[ -v GMAIL_USERNAME ]]; then
-        tmux setenv GMAIL_USERNAME $GMAIL_USERNAME
-    fi
     tmux new-session -d -s 'netclients'
     tmux new-window -d -k -t netclients:1 'neomutt'
     tmux new-window -d -k -t netclients:2 'irssi'

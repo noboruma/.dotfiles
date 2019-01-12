@@ -5,6 +5,9 @@
 # <(cmd) <(cmd) For asynchron piping
 # fdupes A/ --recurse: B | grep ^A/ | xargs rm
 
+#zmodload zsh/zprof
+#zprof
+
 export TERM='screen-256color'
 bindkey -e
 
@@ -27,7 +30,7 @@ case `uname` in
     Darwin)
         ;;
     Linux)
-        eval `dircolors -b`
+        #eval `dircolors -b`
         if xset q &>/dev/null; then
             if type "setxkbmap" > /dev/null; then
                 setxkbmap -option ctrl:nocaps
@@ -52,7 +55,6 @@ bindkey "^h" backward-word
 #kill the lag
 export KEYTIMEOUT=1
 
-autoload -Uz compinit
 setopt autopushd pushdminus pushdsilent pushdtohome
 setopt autocd
 #setopt cdablevars
@@ -83,24 +85,22 @@ local CBLUE='%{\e[1;34m%}'
 local CGREEN='%{\e[1;32m%}'
 local PROMPT_EOL_MARK='$'
 setopt prompt_subst
+
 # PS1 and PS2
+local ret_code='%(?..[%B%?%b]\n)'
+#local date=$CBROWN'(%D{%H:%M:%S})\n'
+local path_with_vcs=$MCOLOR'%d%b'$CGREEN' ${vcs_info_msg_0_}%f%b'
+local prompt=$CREDOR'%(!.#.$) %f%b'
+
 if [ -n "$TMUX" ]; then
-export PS1="$(print \
-'%(?..[%B%?%b]\n)'\
-$CBROWN'(%D{%L:%M:%S %p})\n'\
-$CREDOR'['$CBLUE'%n'$CREDOR']'$MCOLOR%d%b$CGREEN' ${vcs_info_msg_0_}'%f%b '\n'\
-$CREDOR'%(!.#.$)' %f%b)"
+    export PS1=`print $ret_code$date$CREDOR'['$CBLUE'%n'$CREDOR']'$path_with_vcs'\n'$prompt`
 else
-export PS1="$(print \
-'%(?..[%B%?%b]\n)'\
-$CBROWN'(%D{%L:%M:%S %p})\n'\
-$CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR']'$MCOLOR%d%b'\n'\
-$CREDOR'%(!.#.$)' %f%b)"
+    export PS1=`print $ret_code$data$CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR']'$path_with_vcs'\n'$prompt`
 fi
-export PS2="$(print '%{\e[0;34m%}>'$NOCOLOR)"
+export PS2=`print '%{\e[0;34m%}>'$NOCOLOR`
 
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git svn p4
+zstyle ':vcs_info:*' enable git p4
 # zsh hooks: precmd, chpwd, preexec, ...
 precmd(){
     #Needed for tmux splitting
@@ -111,10 +111,10 @@ chpwd() {
 }
 
 # From Mikachu
-cd-or-accept-line() {
+function cd-or-accept-line() {
     local success=0;
-    args=( ${(z)BUFFER} );
-    if ([ $#args -eq 2 ] && ([[ ${(Q)args[1]} == cd ]] || [[ ${(Q)args[1]} == cdu ]])) || ([ $#args -eq 1 ] && [[ ${(Q)args[1]} == cd ]]); then
+    args=(${(z)BUFFER});
+    if ([ $#args -eq 2 ] && [[ ${(Q)args[1]} == cd* ]]) || ([ $#args -eq 1 ] && [[ ${(Q)args[1]} == cd ]]); then
             ${(Q)args[1]} ${(Q)args[2]} 1>/dev/null 2>/dev/null
             if [ $? -eq 0 ]; then
                 zle .kill-buffer;
@@ -145,7 +145,7 @@ export GIT_EDITOR="$EDITOR"
 export IDE="gvim"
 export BROWSER="w3m"
 export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
-export PAGER="less"
+export PAGER="$MANPAGER"
 
 ##################################################################
 # Stuff to make life easier
@@ -157,14 +157,10 @@ zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*:*:cd:*' tag-order local-directories
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 autoload -U colors && colors
-compinit
+autoload -Uz compinit && compinit
 
 # This sets the case insensitivity
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
-
-# tab completion for PID :D
-zstyle ':completion:*:*:kill:*' menu yes select
-zstyle ':completion:*:kill:*' force-list always
 
 # cd not select parent dir
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
@@ -269,9 +265,6 @@ _fzf_compgen_path() {
 
 # FZF marks
 source $HOME/.zsh/plugins/fzf-marks/init.zsh
-
-# zsh-bd
-#source $HOME/.zsh/plugins/bd/bd.zsh
 
 #ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8, bold'
