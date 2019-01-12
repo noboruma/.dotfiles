@@ -5,7 +5,8 @@
 # <(cmd) <(cmd) For asynchron piping
 # fdupes A/ --recurse: B | grep ^A/ | xargs rm
 
-#export TERM='screen-256color'
+export TERM='screen-256color'
+bindkey -e
 
 # Root allow X?
 # xhost + > /dev/null 2> /dev/null || true
@@ -27,9 +28,15 @@ case `uname` in
         ;;
     Linux)
         eval `dircolors -b`
-        if type "setxkbmap" > /dev/null; then
-            setxkbmap -option ctrl:nocaps
-            #setxkbmap -option to enable
+        if xset q &>/dev/null; then
+            if type "setxkbmap" > /dev/null; then
+                setxkbmap -option ctrl:nocaps
+                #setxkbmap -option to enable
+            fi
+            # i18n
+            export GTK_IM_MODULE=ibus
+            export XMODIFIERS=@im=ibus
+            export QT_IM_MODULE=ibus
         fi
         ;;
     FreeBSD)
@@ -121,15 +128,15 @@ cd-or-accept-line() {
 };
 zle -N accept-line cd-or-accept-line
 
-# Mode at Prompt
-function zle-line-init zle-keymap-select {
-    # Show vim mode on the right
-    RPS1="%{$fg_bold[yellow]%}${${KEYMAP/vicmd/ -- NORMAL --}/(main|viins)/}%f%b"
-    zle reset-prompt
-}
-
-zle -N zle-line-init
-zle -N zle-keymap-select
+## Mode at Prompt
+#function zle-line-init zle-keymap-select {
+#    # Show vim mode on the right
+#    RPS1="%{$fg_bold[yellow]%}${${KEYMAP/vicmd/ -- NORMAL --}/(main|viins)/}%f%b"
+#    zle reset-prompt
+#}
+#
+#zle -N zle-line-init
+#zle -N zle-keymap-select
 
 # Vars used later on by Zsh
 export EDITOR="vim"
@@ -203,11 +210,6 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
-# i18n
-export GTK_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-export QT_IM_MODULE=ibus
-
 # Sourcing part
 export PATH=~/usr/bin:~/.local/bin:$PATH
 export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
@@ -224,19 +226,20 @@ export PATH="$NPM_PACKAGES/bin:$PATH"
 
 # vim CTRL-Z helper
 fancy-ctrl-z () {
-  if [[ $#BUFFER -eq 0 ]]; then
+if [[ $#BUFFER -eq 0 ]]; then
     fg
     zle redisplay
-  else
+else
     zle push-input
     zle clear-screen
-  fi
+fi
 }
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
 # Plugin part
 export ZBEEP=''
+
 # History
 setopt HIST_FIND_NO_DUPS
 source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -247,22 +250,21 @@ bindkey '^N' history-substring-search-down
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
-
 # FZF
 export FZF_DEFAULT_COMMAND="fd --type file --color=always --follow --exclude .git"
 export FZF_DEFAULT_OPTS="--ansi"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd -d 1 --type d --color=always --exclude .git --follow"
+
 _fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git" . "$1" --color=always
+    fd --hidden --follow --exclude ".git" . "$1" --color=always
 }
 
 # Use fd to generate the list for directory completion
-_fzf_compgen_dir() {
-  fd --type d --hidden --follow --exclude ".git" . "$1" --color=always
-}
+    _fzf_compgen_dir() {
+        fd --type d --hidden --follow --exclude ".git" . "$1" --color=always
+    }
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # FZF marks
@@ -271,4 +273,14 @@ source $HOME/.zsh/plugins/fzf-marks/init.zsh
 # zsh-bd
 #source $HOME/.zsh/plugins/bd/bd.zsh
 
-echo 'running on '$TTY
+#ZSH_AUTOSUGGEST_USE_ASYNC=1
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8, bold'
+source $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+source $HOME/.zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=33'
+ZSH_HIGHLIGHT_STYLES[command]='fg=33'
+source $HOME/.zsh/plugins/zsh-syntaz-highlighting/zsh-syntax-highlighting.zsh

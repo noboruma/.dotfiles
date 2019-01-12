@@ -22,7 +22,7 @@ case `uname` in
 esac
 #alias lsd='ls -ld *(-/DN)'
 #alias lsa='ls -ld .*'
-alias f='find -type f | xargs grep'
+alias fe='find -type f | xargs grep'
 alias c="clear"
 alias ..='cd ..'
 #alias ppp-on=' /usr/sbin/ppp-on'

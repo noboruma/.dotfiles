@@ -12,6 +12,7 @@ inoremap JJ <esc>J
 inoremap KK <esc>K
 nnoremap // /\<<C-r><C-w>\><cr>
 vnoremap // "sy/<C-R>"<cr>
+nnoremap <leader>/ :nohlsearch<cr>
 
 function! IsLeftMostWindow()
     let curNr = winnr()
