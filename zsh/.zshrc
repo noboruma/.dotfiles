@@ -6,8 +6,6 @@
 # fdupes A/ --recurse: B | grep ^A/ | xargs rm
 
 #zmodload zsh/zprof
-#zprof
-
 export TERM='screen-256color'
 bindkey -e
 
@@ -32,7 +30,7 @@ case `uname` in
     Linux)
         #eval `dircolors -b`
         if xset q &>/dev/null; then
-            if type "setxkbmap" > /dev/null; then
+            if which setxkbmap >/dev/null 2>&1; then
                 setxkbmap -option ctrl:nocaps
                 #setxkbmap -option to enable
             fi
@@ -76,6 +74,7 @@ setopt HIST_REDUCE_BLANKS
 setopt CORRECT
 
 #print colors
+autoload -U colors && colors
 local CREDOR='%{\e[1;31m%}'
 local CBROWN='%{\e[0;33m%}'
 local BOLDNOC='%{\e[1;0m%}'
@@ -145,7 +144,7 @@ export GIT_EDITOR="$EDITOR"
 export IDE="gvim"
 export BROWSER="w3m"
 export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
-export PAGER="$MANPAGER"
+export PAGER="less"
 
 ##################################################################
 # Stuff to make life easier
@@ -156,8 +155,12 @@ zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*:*:cd:*' tag-order local-directories
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-autoload -U colors && colors
-autoload -Uz compinit && compinit
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+    compinit;
+else
+    compinit -C;
+fi;
 
 # This sets the case insensitivity
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
@@ -277,3 +280,5 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[builtin]='fg=33'
 ZSH_HIGHLIGHT_STYLES[command]='fg=33'
 source $HOME/.zsh/plugins/zsh-syntaz-highlighting/zsh-syntax-highlighting.zsh
+
+#zprof
