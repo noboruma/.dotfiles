@@ -88,13 +88,14 @@ setopt prompt_subst
 # PS1 and PS2
 local ret_code='%(?..[%B%?%b]\n)'
 #local date=$CBROWN'(%D{%H:%M:%S})\n'
-local path_with_vcs=$MCOLOR'%d%b'$CGREEN' ${vcs_info_msg_0_}%f%b'
+local ppath=$MCOLOR'%~%b'
+local vcs=$CGREEN'${vcs_info_msg_0_}%f%b'
 local prompt=$CREDOR'%(!.#.$) %f%b'
 
 if [ -n "$TMUX" ]; then
-    export PS1=`print $ret_code$date$CREDOR'['$CBLUE'%n'$CREDOR']'$path_with_vcs'\n'$prompt`
+    export PS1=`print $ret_code$date$CREDOR'['$CBLUE'%n'$CREDOR':'$ppath$CREDOR']'$vcs'\n'$prompt`
 else
-    export PS1=`print $ret_code$data$CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR']'$path_with_vcs'\n'$prompt`
+    export PS1=`print $ret_code$data$CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR':'$ppath$CREDOR']'$vcs'\n'$prompt`
 fi
 export PS2=`print '%{\e[0;34m%}>'$NOCOLOR`
 
