@@ -42,7 +42,6 @@ alias gcommit='git commit -am'
 alias gpush='git push'
 alias gpull='git pull'
 alias gchange='git checkout -'
-alias irb='rlwrap irb'
 
 alias smount="sudo mount"
 alias sumount="sudo umount"

@@ -28,6 +28,7 @@ ln -s $PWD/irssi ~/.irssi
 ln -s $PWD/mutt ~/.mutt
 ln -s $PWD/newsboat ~/.newsboat
 ln -s $PWD/mutt ~/.mutt
+ln -s $PWD/.irbrc ~
 cd - 1>/dev/null
 
 incrontab -l | grep -q fnotify
