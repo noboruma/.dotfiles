@@ -48,8 +48,8 @@ autoload -Uz copy-earlier-word
 zle -N copy-earlier-word
 
 bindkey "^y" copy-earlier-word
-bindkey "^l" forward-word
-bindkey "^h" backward-word
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
 #kill the lag
 export KEYTIMEOUT=1
 
@@ -107,6 +107,7 @@ precmd(){
     vcs_info
 }
 chpwd() {
+    emulate -L zsh
     vcs_info
 }
 
@@ -127,7 +128,6 @@ function cd-or-accept-line() {
     fi
 };
 zle -N accept-line cd-or-accept-line
-
 ## Mode at Prompt
 #function zle-line-init zle-keymap-select {
 #    # Show vim mode on the right
@@ -247,8 +247,8 @@ source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
-bindkey '^[[A' up-line-or-search
-bindkey '^[[B' down-line-or-search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # FZF
 export FZF_DEFAULT_COMMAND="fd --type file --color=always --follow --exclude .git"

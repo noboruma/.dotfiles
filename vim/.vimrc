@@ -14,20 +14,20 @@ set nocompatible
 
 "  If you need infrmation on parameters, use :h param
 if has("gui_running")
-  set guifont=Terminus\ 9
-  if &guifont != 'Terminus 9'
-      set guifont=Monospace\ 9
-  endif
-  set shell=bash " better support
-  " Gvim specific
-  set lines=999
-  set columns=999
-  set guioptions=
-  if use_gui
-    set guioptions+=m  "menu bar
-    set guioptions+=T  "toolbar
-    set guioptions+=r  "scrollbar
-  endif
+    set guifont=Terminus\ 9
+    if &guifont != 'Terminus 9'
+        set guifont=Monospace\ 9
+    endif
+    set shell=bash " better support
+    " Gvim specific
+    set lines=999
+    set columns=999
+    set guioptions=
+    if use_gui
+        set guioptions+=m  "menu bar
+        set guioptions+=T  "toolbar
+        set guioptions+=r  "scrollbar
+    endif
 endif
 
 "set ttyfast
@@ -35,12 +35,12 @@ set scrolloff=0 " Keep no lines after/before the cursor
 
 " Start to be a good vimmer
 if !use_arrow
-  inoremap  <Left>   <NOP>
-  inoremap  <Right>  <NOP>
-  nnoremap  <Up>     <NOP>
-  nnoremap  <Down>   <NOP>
-  nnoremap  <Left>   <NOP>
-  nnoremap  <Right>  <NOP>
+    inoremap  <Left>   <NOP>
+    inoremap  <Right>  <NOP>
+    nnoremap  <Up>     <NOP>
+    nnoremap  <Down>   <NOP>
+    nnoremap  <Left>   <NOP>
+    nnoremap  <Right>  <NOP>
 endif
 
 set cmdheight=1
@@ -84,10 +84,10 @@ set smartcase
 " Folding
 " Trigger manual after indent method
 augroup vimrc
-  au BufReadPre * setlocal foldmethod=expr
-  au BufWinEnter * if &fdm == 'expr' | setlocal foldmethod=manual | normal zM | endif
-  " Prevent RO file editing: use 'set modifiable' manually if needed
-  autocmd BufRead * let &modifiable = !&readonly
+    au BufReadPre * setlocal foldmethod=expr
+    au BufWinEnter * if &fdm == 'expr' | setlocal foldmethod=manual | normal zM | endif
+    " Prevent RO file editing: use 'set modifiable' manually if needed
+    autocmd BufRead * let &modifiable = !&readonly
 augroup END
 
 set foldlevel=99
@@ -119,36 +119,37 @@ let &runtimepath.=',~/.vim/bundle/airline'
 let &runtimepath.=',~/.vim/bundle/airline-themes'
 let g:airline_theme='light'
 let g:airline_detect_whitespace=0
-  let g:airline_mode_map = {
-      \ '__' : '',
-      \ 'n'  : '',
-      \ 'i'  : '',
-      \ 'R'  : '',
-      \ 'c'  : '',
-      \ 'v'  : '',
-      \ 'V'  : '',
-      \ '' : '',
-      \ 's'  : '',
-      \ 'S'  : '',
-      \ '' : '',
-      \ }
+let g:airline_mode_map = {
+            \ '__' : '',
+            \ 'n'  : '',
+            \ 'i'  : '',
+            \ 'R'  : '',
+            \ 'c'  : '',
+            \ 'v'  : '',
+            \ 'V'  : '',
+            \ '' : '',
+            \ 's'  : '',
+            \ 'S'  : '',
+            \ '' : '',
+            \ }
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#ale#enabled = 1
+let g:airline_section_z = '%2c: %#__accent_bold#%3l%#__restore__#/%L %3p%%' "can add variable via %{g:airline_right_sep}
 "!Airline
 
 "Rainbow plugin
 let &runtimepath.=',~/.vim/bundle/rainbow'
 let g:rainbow_active = 1
 let g:rainbow_conf = {
-   \ 'operators' : '_,\|=\|+\|\*\|-\|\.\|;\||\|&\|?\|:\|<\|>\|%\|/[^/*]_',
-   \ 'separately': {
-   \   'cpp': {
-   \     'parentheses': [
-   \       'start=/(/ end=/)/ fold',
-   \       'start=/\[/ end=/\]/ fold',
-   \       'start=/{/ end=/}/ fold',
-   \       'start=/\(\(\<operator\>\)\@<!<\)\&[a-zA-Z0-9_]\@<=<\ze[^<]/ end=/>/'] } } }
+            \ 'operators' : '_,\|=\|+\|\*\|-\|\.\|;\||\|&\|?\|:\|<\|>\|%\|/[^/*]_',
+            \ 'separately': {
+            \   'cpp': {
+            \     'parentheses': [
+            \       'start=/(/ end=/)/ fold',
+            \       'start=/\[/ end=/\]/ fold',
+            \       'start=/{/ end=/}/ fold',
+            \       'start=/\(\(\<operator\>\)\@<!<\)\&[a-zA-Z0-9_]\@<=<\ze[^<]/ end=/>/'] } } }
 "!Rainbow
 
 "Slime plugin
@@ -185,10 +186,10 @@ let g:vrc_curl_opts = {
 " Unite.vim
 let &runtimepath.=',~/.vim/bundle/unite.vim'
 call unite#custom#profile('default', 'context', {
-	\   'start_insert': 1,
-	\   'winheight': 10,
-	\   'direction': 'botright'
-\ })
+            \   'start_insert': 1,
+            \   'winheight': 10,
+            \   'direction': 'botright'
+            \ })
 "!Unite.vim
 
 " Gutentags
@@ -300,25 +301,25 @@ let g:AutoAdapt_FilePattern = ''
 let g:AutoAdapt_FirstLines = 10
 let g:AutoAdapt_LastLines = 0
 let g:AutoAdapt_Rules = [
-\   {
-\       'name': 'Copyright notice',
-\       'patternexpr': '''\c\<Copyright:\?\%(\s\+\%((C)\|&copy;\|\%xa9\)\)\?\s\+\zs\(\%('' . strftime("%Y") . ''\)\@!\d\{4}\)\%(\ze\k\@![^-]\|\(-\%('' . strftime("%Y") . ''\)\@!\d\{4}\)\>\)''',
-\       'replacement': '\=submatch(1) . "-" . strftime("%Y")',
-\	    'range': '1,10'
-\   },
-\   {
-\       'name': 'Copyright notice modelines',
-\       'patternexpr': '''\c\<Copyright:\?\%(\s\+\%((C)\|&copy;\|\%xa9\)\)\?\s\+\zs\(\%('' . strftime("%Y") . ''\)\@!\d\{4}\)\%(\ze\k\@![^-]\|\(-\%('' . strftime("%Y") . ''\)\@!\d\{4}\)\>\)''',
-\       'replacement': '\=submatch(1) . "-" . strftime("%Y")',
-\       'range': 'modelines'
-\   },
-\   {
-\       'name': 'Last Change notice',
-\       'pattern': '\v\C%(<Last %([uU]pdate?|[Mm]odified)\s+)@<=.*$',
-\       'replacement': '\=strftime("%a %b %d %H:%M:%S %Y '.username.'")',
-\	    'range': '1,10'
-\   }
-\]
+            \   {
+            \       'name': 'Copyright notice',
+            \       'patternexpr': '''\c\<Copyright:\?\%(\s\+\%((C)\|&copy;\|\%xa9\)\)\?\s\+\zs\(\%('' . strftime("%Y") . ''\)\@!\d\{4}\)\%(\ze\k\@![^-]\|\(-\%('' . strftime("%Y") . ''\)\@!\d\{4}\)\>\)''',
+            \       'replacement': '\=submatch(1) . "-" . strftime("%Y")',
+            \	    'range': '1,10'
+            \   },
+            \   {
+            \       'name': 'Copyright notice modelines',
+            \       'patternexpr': '''\c\<Copyright:\?\%(\s\+\%((C)\|&copy;\|\%xa9\)\)\?\s\+\zs\(\%('' . strftime("%Y") . ''\)\@!\d\{4}\)\%(\ze\k\@![^-]\|\(-\%('' . strftime("%Y") . ''\)\@!\d\{4}\)\>\)''',
+            \       'replacement': '\=submatch(1) . "-" . strftime("%Y")',
+            \       'range': 'modelines'
+            \   },
+            \   {
+            \       'name': 'Last Change notice',
+            \       'pattern': '\v\C%(<Last %([uU]pdate?|[Mm]odified)\s+)@<=.*$',
+            \       'replacement': '\=strftime("%a %b %d %H:%M:%S %Y '.username.'")',
+            \	    'range': '1,10'
+            \   }
+            \]
 autocmd BufWritePre <buffer> silent! :Adapt
 "!Auto Adapt
 
@@ -332,7 +333,7 @@ endif
 
 "fzf
 if(isdirectory($HOME."/.fzf"))
-"ln -s the fzf source directory for your own good
+    "ln -s the fzf source directory for your own good
     let &runtimepath.=',~/.fzf'
     let &runtimepath.=',~/.vim/bundle/fzf.vim'
     let g:fzf_buffers_jump = 1
@@ -396,28 +397,28 @@ packadd termdebug
 set runtimepath+=~/.vim/bundle/ultisnips
 let g:ulti_expand_res = 0 "default value, just set once
 function! CompleteSnippet()
-  if empty(v:completed_item)
-    return
-  endif
+    if empty(v:completed_item)
+        return
+    endif
 
-  call UltiSnips#ExpandSnippet()
-  if g:ulti_expand_res > 0
-    return
-  endif
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res > 0
+        return
+    endif
 
-  let l:complete = type(v:completed_item) == v:t_dict ? v:completed_item.word : v:completed_item
-  let l:comp_len = len(l:complete)
+    let l:complete = type(v:completed_item) == v:t_dict ? v:completed_item.word : v:completed_item
+    let l:comp_len = len(l:complete)
 
-  let l:cur_col = mode() == 'i' ? col('.') - 2 : col('.') - 1
-  let l:cur_line = getline('.')
+    let l:cur_col = mode() == 'i' ? col('.') - 2 : col('.') - 1
+    let l:cur_line = getline('.')
 
-  let l:start = l:comp_len <= l:cur_col ? l:cur_line[:l:cur_col - l:comp_len] : ''
-  let l:end = l:cur_col < len(l:cur_line) ? l:cur_line[l:cur_col + 1 :] : ''
+    let l:start = l:comp_len <= l:cur_col ? l:cur_line[:l:cur_col - l:comp_len] : ''
+    let l:end = l:cur_col < len(l:cur_line) ? l:cur_line[l:cur_col + 1 :] : ''
 
-  call setline('.', l:start . l:end)
-  call cursor('.', l:cur_col - l:comp_len + 2)
+    call setline('.', l:start . l:end)
+    call cursor('.', l:cur_col - l:comp_len + 2)
 
-  call UltiSnips#Anon(l:complete)
+    call UltiSnips#Anon(l:complete)
 endfunction
 autocmd CompleteDone * call CompleteSnippet()
 let g:UltiSnipsExpandTrigger="<NUL>"
@@ -469,11 +470,11 @@ let &makeprg='make'
 " (but not if it's already open). However, as part of the autocmd, this doesn't
 " seem to happen.
 augroup vimrc
-  "autocmd QuickFixCmdPost [^l]* nested botright cwindow " Botright to open widely
-  "autocmd QuickFixCmdPost    l* nested botright lwindow
-  "autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
-  autocmd User AsyncRunStart botright copen | setl nomodifiable | setl foldlevel=99 | let g:jumpfirst=1 | wincmd p
-  autocmd User AsyncRunStop call AutoAdjustQFWindow()
+    "autocmd QuickFixCmdPost [^l]* nested botright cwindow " Botright to open widely
+    "autocmd QuickFixCmdPost    l* nested botright lwindow
+    "autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
+    autocmd User AsyncRunStart botright copen | setl nomodifiable | setl foldlevel=99 | let g:jumpfirst=1 | wincmd p
+    autocmd User AsyncRunStop call AutoAdjustQFWindow()
 augroup END
 
 " Handle space and tabs
@@ -516,10 +517,10 @@ set autochdir
 
 " Jump to the last position when reopening a file
 augroup vimrc
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-  " Adapt on save hook
-  autocmd BufWritePre <buffer> %s/\s\+$//e
-  autocmd BufWritePre <buffer> silent! :Adapt
+    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    " Adapt on save hook
+    autocmd BufWritePre <buffer> %s/\s\+$//e
+    autocmd BufWritePre <buffer> silent! :Adapt
 augroup END
 
 " Keep buffers hidden instead of closing it
@@ -561,8 +562,8 @@ set ssop+=localoptions
 
 " The Silver Searcher
 if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --vimgrep\ $*
-  set grepformat=%f:%l:%c:%m
+    " Use ag over grep
+    set grepprg=ag\ --vimgrep\ $*
+    set grepformat=%f:%l:%c:%m
 endif
 
