@@ -5,6 +5,45 @@ au BufEnter <buffer> if (!exists('b:created')) | exe "SemanticHighlightToggle" |
 au BufWritePost <buffer> :SemanticHighlight
 "endif
 
+source ~/.vim/bundle/coding_activator.vim
+
+" LC
+" See ftplugin for tools setup
+packadd LanguageClient-neovim
+let g:LanguageClient_diagnosticsEnable=0
+let g:LanguageClient_selectionUI='quickfix'
+"set formatexpr=LanguageClient_textDocument_rangeFormatting()
+set omnifunc=LanguageClient#complete
+" !LC
+
+" Clang-format
+packadd vim-clang-format
+let g:clang_format#command="clang-format-3.5"
+let g:clang_format#detect_style_file=0
+let g:clang_format#style_options = {
+            \ "AlwaysBreakTemplateDeclarations" : "true",
+            \ "Standard" : "C++11",
+            \ "BasedOnStyle": "Google",
+            \ "IndentWidth": 4,
+            \ "AccessModifierOffset": -2,
+            \ "IndentCaseLabels": "false",
+            \ "MaxEmptyLinesToKeep": 3,
+            \ "KeepEmptyLinesAtTheStartOfBlocks": "true",
+            \ "SpacesBeforeTrailingComments": 1,
+            \ "AllowShortFunctionsOnASingleLine": "None",
+            \ "DerivePointerAlignment": "false",
+            \ "BinPackParameters": "false",
+            \ "AllowAllParametersOfDeclarationOnNextLine": "false",
+            \ "BreakConstructorInitializersBeforeComma": "true",
+            \ "ConstructorInitializerAllOnOneLineOrOnePerLine": "false",
+            \ "AllowShortIfStatementsOnASingleLine": "false",
+            \ "AllowShortLoopsOnASingleLine": "false",
+            \ "BreakBeforeBraces": "Linux",
+            \ "ColumnLimit": 140,
+            \ "NamespaceIndentation": "All"}
+vnoremap <buffer><Leader>= :ClangFormat<CR>
+" !Clang-format
+
 if executable('ccls')
     let g:LanguageClient_serverCommands.cpp = ['ccls',
                 "\ '--log-file=/tmp/cq.log',

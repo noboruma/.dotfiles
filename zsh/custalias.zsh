@@ -42,6 +42,7 @@ alias gcommit='git commit -am'
 alias gpush='git push'
 alias gpull='git pull'
 alias gchange='git checkout -'
+alias gconflicts='git diff --name-only --diff-filter=U'
 
 alias smount="sudo mount"
 alias sumount="sudo umount"

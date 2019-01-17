@@ -30,7 +30,9 @@ if has("gui_running")
     endif
 endif
 
-"set ttyfast
+set ttyfast
+set re=1
+set lazyredraw
 set scrolloff=0 " Keep no lines after/before the cursor
 
 " Start to be a good vimmer
@@ -71,7 +73,7 @@ set clipboard=unnamed          " ^=
 set showcmd                    " visual count
 
 " set terminal as tmux
-set term=xterm-256color
+set term=screen-256color
 
 " Show space and tab as blue
 set list
@@ -84,7 +86,7 @@ set smartcase
 " Folding
 " Trigger manual after indent method
 augroup vimrc
-    au BufReadPre * setlocal foldmethod=expr
+    au BufReadPre  * setlocal foldmethod=expr
     au BufWinEnter * if &fdm == 'expr' | setlocal foldmethod=manual | normal zM | endif
     " Prevent RO file editing: use 'set modifiable' manually if needed
     autocmd BufRead * let &modifiable = !&readonly
@@ -115,9 +117,8 @@ let g:ale_cpp_cquery_cache_directory= '/tmp/cquery/cache'
 
 " airline plugin
 set laststatus=2 "status bar
-let &runtimepath.=',~/.vim/bundle/airline'
-let &runtimepath.=',~/.vim/bundle/airline-themes'
 let g:airline_theme='light'
+let g:airline_highlighting_cache=1
 let g:airline_detect_whitespace=0
 let g:airline_mode_map = {
             \ '__' : '',
@@ -132,10 +133,13 @@ let g:airline_mode_map = {
             \ 'S'  : '',
             \ '' : '',
             \ }
+let g:airline_section_z = '%2c:%#__accent_bold#%3l%#__restore__#/%L %3p%%' "can add variable via %{g:airline_right_sep}
+"let g:airline_extensions = ['ale', 'gutentags', 'languageclient', 'quickfix', 'tagbar', 'undotree', 'unite']
+let &runtimepath.=',~/.vim/bundle/airline'
+let &runtimepath.=',~/.vim/bundle/airline-themes'
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#ale#enabled = 1
-let g:airline_section_z = '%2c: %#__accent_bold#%3l%#__restore__#/%L %3p%%' "can add variable via %{g:airline_right_sep}
 "!Airline
 
 "Rainbow plugin
@@ -153,17 +157,8 @@ let g:rainbow_conf = {
 "!Rainbow
 
 "Slime plugin
-let &runtimepath.=',~/.vim/bundle/slime'
 let g:slime_target = "tmux"
 "!Slime
-
-" Tagbar options
-let &runtimepath.=',~/.vim/bundle/tagbar'
-let g:tagbar_compact = 1
-let g:tagbar_autofocus = 1
-let g:tagbar_autoclose = 0
-let g:tagbar_sort = 0
-" !Tagbar
 
 " AsyncRun
 let &runtimepath.=',~/.vim/bundle/asyncrun'
@@ -192,48 +187,9 @@ call unite#custom#profile('default', 'context', {
             \ })
 "!Unite.vim
 
-" Gutentags
-if executable('ctags')
-    let &runtimepath.=',~/.vim/bundle/vim-gutentags'
-    let g:gutentags_project_root=['.git']
-    let g:gutentags_file_list_command = {
-                \ 'markers': {
-                \ '.git': 'git ls-files',
-                \ '.hg': 'hg files',
-                \ },
-                \ }
-    set statusline+=%{gutentags#statusline()}
-    set tags=./tags;,tags;
-    let g:gutentags_cache_dir='~/.tags.auto'
-    " /!\ Change plugin from setlocal to set
-else
-    echom 'no ctags executable'
-endif
-" !Gutentags
-
-" Undotree
-let &runtimepath.=',~/.vim/bundle/undotree'
-" !Undotree
-
 " Linediff
 let &runtimepath.=',~/.vim/bundle/linediff.vim'
 " !Linediff
-
-" vim-snippets
-let &runtimepath.=',~/.vim/bundle/vim-snippets'
-" vim-snippets!
-
-" Snipmate
-let &runtimepath.=',~/.vim/bundle/tlib'
-let &runtimepath.=',~/.vim/bundle/vim-addon-mw-utils'
-let &runtimepath.=',~/.vim/bundle/vim-snipmate'
-imap <C-J> <Plug>snipMateNextOrTrigger
-smap <C-J> <Plug>snipMateNextOrTrigger
-" !Snipmate
-
-" tagfinder
-let &runtimepath.=',~/.vim/bundle/tagfinder'
-" !tagfinder
 
 " wordmotion
 let &runtimepath.=',~/.vim/bundle/vim-wordmotion'
@@ -246,7 +202,7 @@ let &runtimepath.=',~/.vim/bundle/vim-textobj-parameter'
 let &runtimepath.=',~/.vim/bundle/vim-textobj-variable-segment'
 let &runtimepath.=',~/.vim/bundle/vim-textobj-xmlattr'
 " !vim-textobj
-"
+
 " Tabular
 let &runtimepath.=',~/.vim/bundle/tabular'
 " !Tabular
@@ -265,38 +221,10 @@ let &runtimepath.=',~/.vim/bundle/vim-misc'
 let &runtimepath.=',~/.vim/bundle/vim-notes'
 let g:notes_directories = ['~/Dropbox/notes']
 " !vim-orgmode
-"
-" Clang-format
-let &runtimepath.=',~/.vim/bundle/vim-clang-format'
-let g:clang_format#command="clang-format-3.5"
-let g:clang_format#detect_style_file=0
-let g:clang_format#style_options = {
-            \ "AlwaysBreakTemplateDeclarations" : "true",
-            \ "Standard" : "C++11",
-            \ "BasedOnStyle": "Google",
-            \"IndentWidth": 4,
-            \"AccessModifierOffset": -2,
-            \"IndentCaseLabels": "false",
-            \"MaxEmptyLinesToKeep": 3,
-            \"KeepEmptyLinesAtTheStartOfBlocks": "true",
-            \"SpacesBeforeTrailingComments": 1,
-            \"AllowShortFunctionsOnASingleLine": "None",
-            \"DerivePointerAlignment": "false",
-            \"BinPackParameters": "false",
-            \"AllowAllParametersOfDeclarationOnNextLine": "false",
-            \"BreakConstructorInitializersBeforeComma": "true",
-            \"ConstructorInitializerAllOnOneLineOrOnePerLine": "false",
-            \"AllowShortIfStatementsOnASingleLine": "false",
-            \"AllowShortLoopsOnASingleLine": "false",
-            \"BreakBeforeBraces": "Linux",
-            \"ColumnLimit": 140,
-            \"NamespaceIndentation": "All"}
-autocmd FileType c,cpp,objc vnoremap <buffer><Leader>= :ClangFormat<CR>
-" !Clang-format
 
-"Auto adapt
+" Auto adapt
 let &runtimepath.=',~/.vim/bundle/vim-ingo-library'
-"Timestamp
+" Timestamp
 let g:AutoAdapt_FilePattern = ''
 let g:AutoAdapt_FirstLines = 10
 let g:AutoAdapt_LastLines = 0
@@ -326,7 +254,7 @@ autocmd BufWritePre <buffer> silent! :Adapt
 "vim-which-key
 let mapleader="\<Space>"
 if use_custhelp
-    let &runtimepath.=',~/.vim/bundle/vim-which-key'
+    packadd vim-which-key
     nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 endif
 "!vim-which-key
@@ -356,85 +284,12 @@ else
 endif
 "!fzf
 
-" Semantic Highlight
-let g:semanticGUIColors = [
-            \'#5fd7ff',
-            \'#d75f5f',
-            \'#87afd7',
-            \'#875faf',
-            \'#5f87d7',
-            \'#c0c0c0',
-            \'#808080',
-            \'#d75f00',
-            \'#afffaf',
-            \'#ffff00',
-            \'#d7af87',
-            \'#d787af',
-            \'#00af5f',
-            \'#5f5faf',
-            \'#5fd75f',
-            \'#ff87af',
-            \'#ffffaf',
-            \'#b2ebf2',
-            \'#b2dfdb',
-            \'#a3e9a4',
-            \'#dcedc8',
-            \'#f0f4c3',
-            \'#ffb74d' ]
-let g:semanticTermColors = [195,3,4,5,6,7,8,9,10,11,12,13,14,15,22,44,61,77,211, 229]
-let g:semanticPersistCache = 1
-let &runtimepath.=',~/.vim/bundle/semantic-highlight.vim'
-" !Semantic Highlight
-
 " Termdebug
 let g:termdebug_popup=0
 let no_buffers_menu=0
 let termdebugger = "gdb"
 packadd termdebug
 " !Termdebug
-
-" Ultisnips
-set runtimepath+=~/.vim/bundle/ultisnips
-let g:ulti_expand_res = 0 "default value, just set once
-function! CompleteSnippet()
-    if empty(v:completed_item)
-        return
-    endif
-
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res > 0
-        return
-    endif
-
-    let l:complete = type(v:completed_item) == v:t_dict ? v:completed_item.word : v:completed_item
-    let l:comp_len = len(l:complete)
-
-    let l:cur_col = mode() == 'i' ? col('.') - 2 : col('.') - 1
-    let l:cur_line = getline('.')
-
-    let l:start = l:comp_len <= l:cur_col ? l:cur_line[:l:cur_col - l:comp_len] : ''
-    let l:end = l:cur_col < len(l:cur_line) ? l:cur_line[l:cur_col + 1 :] : ''
-
-    call setline('.', l:start . l:end)
-    call cursor('.', l:cur_col - l:comp_len + 2)
-
-    call UltiSnips#Anon(l:complete)
-endfunction
-autocmd CompleteDone * call CompleteSnippet()
-let g:UltiSnipsExpandTrigger="<NUL>"
-let g:UltiSnipsListSnippets="<NUL>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-"!Ultisnips
-
-" LC
-" See ftplugin for tools setup
-set runtimepath+=~/.vim/bundle/LanguageClient-neovim
-let g:LanguageClient_diagnosticsEnable=0
-let g:LanguageClient_selectionUI='quickfix'
-"set formatexpr=LanguageClient_textDocument_rangeFormatting()
-set omnifunc=LanguageClient#complete
-" !LC
 
 filetype on
 filetype plugin on
@@ -489,7 +344,6 @@ set timeoutlen=1000 ttimeoutlen=10
 source ~/.vim/custmap.vim
 
 " Explorer options
-""""""""""""""""""
 let g:netrw_liststyle=3
 autocmd FileType netrw setl bufhidden=delete
 "set winfixwidth
