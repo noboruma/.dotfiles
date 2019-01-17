@@ -13,7 +13,7 @@ sai silversearcher-ag surfraw hub taskwarrior urlview libtext-aspell-perl irssi 
 pip3 install --user pygments
 
 # ruby
-gem install terjira
+gem install terjira solargrpah
 
 # news
 pip install --user rtv urlscan

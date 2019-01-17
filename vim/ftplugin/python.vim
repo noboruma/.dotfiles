@@ -9,10 +9,11 @@ if exists("b:did_indent")
     finish
 endif
 
+packadd vim-slime
 source ~/.vim/bundle/coding_activator.vim
-packadd slime
 
 let g:LanguageClient_serverCommands.python =['pyls']
+    set omnifunc=LanguageClient#complete
 
 let b:did_indent = 1
 

@@ -136,3 +136,6 @@
 [submodule "vim/pack/submodules/opt/tlib"]
 	path = vim/pack/submodules/opt/tlib
 	url = https://github.com/tomtom/tlib_vim.git
+[submodule "vim/pack/submodules/opt/vim-ruby"]
+	path = vim/pack/submodules/opt/vim-ruby
+	url = https://github.com/vim-ruby/vim-ruby
