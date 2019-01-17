@@ -9,11 +9,13 @@ source ~/.vim/bundle/coding_activator.vim
 
 " LC
 " See ftplugin for tools setup
-packadd LanguageClient-neovim
-let g:LanguageClient_diagnosticsEnable=0
-let g:LanguageClient_selectionUI='quickfix'
-"set formatexpr=LanguageClient_textDocument_rangeFormatting()
-set omnifunc=LanguageClient#complete
+if executable('ccls') || executable ('cquery')
+    packadd LanguageClient-neovim
+    let g:LanguageClient_diagnosticsEnable=0
+    let g:LanguageClient_selectionUI='quickfix'
+    "set formatexpr=LanguageClient_textDocument_rangeFormatting()
+    set omnifunc=LanguageClient#complete
+endif
 " !LC
 
 " Clang-format

@@ -72,8 +72,9 @@ set autoread
 set clipboard=unnamed          " ^=
 set showcmd                    " visual count
 
-" set terminal as tmux
-set term=screen-256color
+" set terminal, needed this way to support C-arrows.
+" Looks like vim is only parsing 'xterm' to make decisions
+set term=xterm-256color
 
 " Show space and tab as blue
 set list

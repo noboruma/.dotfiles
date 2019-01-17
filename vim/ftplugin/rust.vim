@@ -39,5 +39,11 @@ DefineLocalTagFinder TagFindStruct s,struct
 DefineLocalTagFinder TagFindTrait t,trait
 
 if executable('rls')
+    packadd LanguageClient-neovim
+    let g:LanguageClient_diagnosticsEnable=0
+    let g:LanguageClient_selectionUI='quickfix'
+    "set formatexpr=LanguageClient_textDocument_rangeFormatting()
+    set omnifunc=LanguageClient#complete
+
     let g:LanguageClient_serverCommands.rust = ['rustup', 'run', 'nightly', 'rls']
 endif

@@ -154,8 +154,11 @@ export PAGER="less"
 #zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
-zstyle ':completion:*:*:cd:*' tag-order local-directories
+zstyle ':completion:*:*:cd:*' local-directories
+# cd not select parent dir
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+
 autoload -Uz compinit
 if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
     compinit;
@@ -165,9 +168,6 @@ fi;
 
 # This sets the case insensitivity
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
-
-# cd not select parent dir
-zstyle ':completion:*:cd:*' ignore-parents parent pwd
 
 zstyle ':completion:*' menu select
 setopt menu_complete

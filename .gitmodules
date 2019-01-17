@@ -133,3 +133,6 @@
 [submodule "vim/pack/submodules/opt/vim-javascript"]
 	path = vim/pack/submodules/opt/vim-javascript
 	url = https://github.com/pangloss/vim-javascript
+[submodule "vim/pack/submodules/opt/tlib"]
+	path = vim/pack/submodules/opt/tlib
+	url = https://github.com/tomtom/tlib_vim.git
