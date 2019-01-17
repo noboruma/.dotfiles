@@ -1,6 +1,7 @@
 " CPP config is shared with C one (c.vim)
 
 " Plugins
+packadd tagfinder
 " !Plugins
 
 " set nonumber relativenumber

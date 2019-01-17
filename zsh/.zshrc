@@ -116,12 +116,12 @@ function cd-or-accept-line() {
     local success=0;
     args=(${(z)BUFFER});
     if ([ $#args -eq 2 ] && [[ ${(Q)args[1]} == cd* ]]) || ([ $#args -eq 1 ] && [[ ${(Q)args[1]} == cd ]]); then
-            ${(Q)args[1]} ${(Q)args[2]} 1>/dev/null 2>/dev/null
-            if [ $? -eq 0 ]; then
-                zle .kill-buffer;
-                zle reset-prompt;
-                success=1;
-            fi
+        ${(Q)args[1]} ${(Q)args[2]} 1>/dev/null 2>/dev/null
+        if [ $? -eq 0 ]; then
+            zle .kill-buffer;
+            zle reset-prompt;
+            success=1;
+        fi
     fi
     if [ $success -eq 0 ]; then
         zle .$WIDGET;
@@ -261,9 +261,9 @@ _fzf_compgen_path() {
 }
 
 # Use fd to generate the list for directory completion
-    _fzf_compgen_dir() {
-        fd --type d --hidden --follow --exclude ".git" . "$1" --color=always
-    }
+_fzf_compgen_dir() {
+    fd --type d --hidden --follow --exclude ".git" . "$1" --color=always
+}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

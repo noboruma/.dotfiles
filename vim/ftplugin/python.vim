@@ -9,6 +9,9 @@ if exists("b:did_indent")
     finish
 endif
 
+source ~/.vim/bundle/coding_activator.vim
+packadd slime
+
 let g:LanguageClient_serverCommands.python =['pyls']
 
 let b:did_indent = 1
