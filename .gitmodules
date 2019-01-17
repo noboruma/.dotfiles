@@ -130,3 +130,6 @@
 [submodule "vim/pack/submodules/opt/vim-snipmate"]
 	path = vim/pack/submodules/opt/vim-snipmate
 	url = https://github.com/garbas/vim-snipmate
+[submodule "vim/pack/submodules/opt/vim-javascript"]
+	path = vim/pack/submodules/opt/vim-javascript
+	url = https://github.com/pangloss/vim-javascript
