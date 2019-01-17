@@ -44,7 +44,7 @@
 	path = vim/pack/submodules/opt/vim-addon-mw-utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
 [submodule "vim/bundle/tlib"]
-	path =vim/bundle/tlib
+	path = vim/pack/submodules/opt/tlib
 	url = https://github.com/tomtom/tlib_vim.git
 [submodule "vim/bundle/vim-wordmotion"]
 	path =vim/bundle/vim-wordmotion

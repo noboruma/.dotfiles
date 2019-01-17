@@ -48,7 +48,7 @@ endif
 " !Gutentags
 
 " Snipmate
-let &runtimepath.=',~/.vim/bundle/tlib'
+packadd tlib
 packadd vim-addon-mw-utils
 packadd vim-snipmate
 imap <C-J> <Plug>snipMateNextOrTrigger
