@@ -115,9 +115,6 @@
 [submodule ".vim/bundle/fzf.vim"]
 	path = vim/bundle/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
-[submodule ".vim/bundle/semantic-highlight.vim"]
-	path = vim/pack/submodules/opt/semantic-highlight.vim
-	url = https://github.com/jaxbot/semantic-highlight.vim
 [submodule ".vim/bundle/ultisnips"]
 	path = vim/bundle/ultisnips
 	url = https://github.com/SirVer/ultisnips
@@ -139,3 +136,6 @@
 [submodule "zsh/plugins/zsh-history-substring-search"]
 	path = zsh/plugins/zsh-history-substring-search
 	url = https://github.com/zsh-users/zsh-history-substring-search
+[submodule "vim/pack/submodules/opt/semantic-highlight.vim"]
+	path = vim/pack/submodules/opt/semantic-highlight.vim
+	url = https://github.com/jaxbot/semantic-highlight.vim
