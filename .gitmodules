@@ -10,54 +10,36 @@
 [submodule "vim/bundle/rainbow"]
 	path =vim/bundle/rainbow
 	url = https://github.com/luochen1990/rainbow
-[submodule "vim/pack/submodules/opt/slime"]
-	path = vim/pack/submodules/opt/slime
-	url = https://github.com/jpalardy/vim-slime
 [submodule "vim/pack/submodules/opt/tagbar"]
 	path = vim/pack/submodules/opt/tagbar
 	url = https://github.com/majutsushi/tagbar
 [submodule "vim/bundle/asyncrun"]
 	path =vim/bundle/asyncrun
 	url = https://github.com/skywind3000/asyncrun.vim
-[submodule "vim/pack/submodules/opt/rust"]
-	path = vim/pack/submodules/opt/rust
-	url = https://github.com/rust-lang/rust.vim
 [submodule "vim/bundle/vim-rest-console"]
 	path =vim/bundle/vim-rest-console
 	url = https://github.com/diepm/vim-rest-console
 [submodule ".tmux/tpm"]
 	path = tmux/tpm
 	url = https://github.com/tmux-plugins/tpm
-[submodule "vim/pack/submodules/opt/vim-javascript"]
-	path = vim/pack/submodules/opt/vim-javascript
-	url = https://github.com/pangloss/vim-javascript
 [submodule "vim/bundle/unite.vim"]
 	path =vim/bundle/unite.vim
 	url = https://github.com/noboruma/unite.vim
 [submodule "vim/pack/submodules/opt/vim-clang-format"]
 	path = vim/pack/submodules/opt/vim-clang-format
 	url = https://github.com/rhysd/vim-clang-format
-[submodule "vim/pack/submodules/opt/kotlin-vim"]
-	path = vim/pack/submodules/opt/kotlin-vim
-	url = https://github.com/udalov/kotlin-vim
 [submodule "vim/pack/submodules/opt/vim-gutentags"]
 	path = vim/pack/submodules/opt/vim-gutentags
 	url = https://github.com/ludovicchabant/vim-gutentags
 [submodule "vim/bundle/undotree"]
 	path =vim/bundle/undotree
 	url = https://github.com/mbbill/undotree
-[submodule "vvim/pack/submodules/opt/tagfinder"]
-	path = vim/pack/submodules/opt/tagfinder
-	url = https://github.com/AndrewRadev/tagfinder.vim
 [submodule "vim/bundle/linediff.vim"]
 	path =vim/bundle/linediff.vim
 	url = https://github.com/AndrewRadev/linediff.vim
 [submodule "vim/pack/submodules/opt/vim-snippets"]
 	path = vim/pack/submodules/opt/vim-snippets
 	url = https://github.com/honza/vim-snippets
-[submodule "vvim/pack/submodules/opt/vim-snipmate"]
-	path = vim/pack/submodules/opt/vim-snipmate
-	url = https://github.com/garbas/vim-snipmate
 [submodule "vim/pack/submodules/opt/vim-addon-mw-utils"]
 	path = vim/pack/submodules/opt/vim-addon-mw-utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
@@ -106,9 +88,6 @@
 [submodule "vim/pack/submodules/opt/vim-which-key"]
 	path = vim/pack/submodules/opt/vim-which-key
 	url = https://github.com/liuchengxu/vim-which-key
-[submodule "vim/pack/submodules/opt/haskell-vim"]
-	path = vim/pack/submodules/opt/haskell-vim
-	url = https://github.com/neovimhaskell/haskell-vim
 [submodule ".zsh/plugins/fzf-marks"]
 	path = zsh/plugins/fzf-marks
 	url = https://github.com/urbainvaes/fzf-marks
@@ -139,3 +118,15 @@
 [submodule "vim/pack/submodules/opt/semantic-highlight.vim"]
 	path = vim/pack/submodules/opt/semantic-highlight.vim
 	url = https://github.com/jaxbot/semantic-highlight.vim
+[submodule "vim/pack/submodules/opt/vim-slime"]
+	path = vim/pack/submodules/opt/vim-slime
+	url = https://github.com/jpalardy/vim-slime
+[submodule "vim/pack/submodules/opt/rust.vim"]
+	path = vim/pack/submodules/opt/rust.vim
+	url = https://github.com/rust-lang/rust.vim
+[submodule "vim/pack/submodules/opt/tagfinder"]
+	path = vim/pack/submodules/opt/tagfinder
+	url = https://github.com/AndrewRadev/tagfinder.vim
+[submodule "vim/pack/submodules/opt/vim-snipmate"]
+	path = vim/pack/submodules/opt/vim-snipmate
+	url = https://github.com/garbas/vim-snipmate
