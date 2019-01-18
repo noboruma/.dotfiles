@@ -47,16 +47,9 @@ else
 endif
 " !Gutentags
 
-" Snipmate
-packadd tlib
-packadd vim-addon-mw-utils
-packadd vim-snipmate
-imap <C-J> <Plug>snipMateNextOrTrigger
-smap <C-J> <Plug>snipMateNextOrTrigger
-" !Snipmate
-
 " Ultisnips
 packadd ultisnips
+packadd vim-snippets
 let g:ulti_expand_res = 0 "default value, just set once
 function! CompleteSnippet()
     if empty(v:completed_item)
@@ -90,7 +83,13 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 "!Ultisnips
 
-packadd vim-snippets
+" Snipmate
+packadd tlib
+packadd vim-addon-mw-utils
+packadd vim-snipmate
+imap <C-J> <Plug>snipMateNextOrTrigger
+smap <C-J> <Plug>snipMateNextOrTrigger
+" !Snipmate
 
 " Tagbar options
 let g:tagbar_compact = 1

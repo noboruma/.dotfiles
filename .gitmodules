@@ -139,3 +139,6 @@
 [submodule "vim/pack/submodules/opt/vim-ruby"]
 	path = vim/pack/submodules/opt/vim-ruby
 	url = https://github.com/vim-ruby/vim-ruby
+[submodule "vim/pack/submodules/opt/ultisnips"]
+	path = vim/pack/submodules/opt/ultisnips
+	url = https://github.com/SirVer/ultisnips
