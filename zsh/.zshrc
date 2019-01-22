@@ -100,7 +100,7 @@ fi
 export PS2=`print '%{\e[0;34m%}>'$NOCOLOR`
 
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git p4
+zstyle ':vcs_info:*' enable git
 # zsh hooks: precmd, chpwd, preexec, ...
 precmd(){
     #Needed for tmux splitting
@@ -189,8 +189,8 @@ bindkey '^[[3~' delete-char
 bindkey '^[[4~' end-of-line
 bindkey '^[[5~' history-search-backward
 bindkey '^[[6~' down-line-or-history
-bindkey '^[[A' up-line-or-search
 bindkey '^[[D' backward-char
+bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 bindkey '^[[C' forward-char
 # completion in the middle of a line
@@ -247,8 +247,8 @@ source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+bindkey '^[OA' up-line-or-search
+bindkey '^[OB' down-line-or-search
 
 # FZF
 export FZF_DEFAULT_COMMAND="fd --type file --color=always --follow --exclude .git"
