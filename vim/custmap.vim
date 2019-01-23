@@ -318,8 +318,16 @@ function Smart_TabComplete()
     endif
 endfunction
 
+command! -nargs=? Gdiff diffthis |
+      \ vnew |
+      \ set buftype=nofile |
+      \ set bufhidden=wipe |
+      \ set noswapfile |
+      \ execute "r!git show ".(!"<args>"?'HEAD~0':"<args>").":./".expand('#') |
+      \ 1d_ |
+      \ let &filetype=getbufvar('#', '&filetype') |
+      \ execute 'autocmd BufWipeout <buffer> diffoff!' |
+      \ diffthis
+
 if &diff
-    noremap <F5> :<c-u>tabclose<cr>
-    noremap <F6> :<c-u>tabprev<cr>
-    noremap <F7> :<c-u>tabnext<cr>
 endif

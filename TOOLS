@@ -7,8 +7,7 @@ git clone https://github.com/newsboat/newsboat
 git clone https://github.com/facebook/pathpicker
 
 # linux
-sai silversearcher-ag surfraw hub taskwarrior urlview libtext-aspell-perl irssi neomutt
-
+sai silversearcher-ag surfraw hub taskwarrior urlview libtext-aspell-perl irssi neomutt ttf-ancient-fonts
 # python
 pip3 install --user pygments
 
