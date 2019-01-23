@@ -76,6 +76,7 @@ setopt CORRECT
 #print colors
 autoload -U colors && colors
 local CREDOR='%{\e[1;31m%}'
+local CREDORNORM='%{\e[0;31m%}'
 local CBROWN='%{\e[0;33m%}'
 local BOLDNOC='%{\e[1;0m%}'
 local NOCOLOR='%{\e[0m%}'
@@ -93,9 +94,9 @@ local vcs=$CGREEN'${vcs_info_msg_0_}%f%b'
 local prompt=$CREDOR'%(!.#.$) %f%b'
 
 if [ -n "$TMUX" ]; then
-    export PS1=`print $ret_code$date$CREDOR'['$CBLUE'%n'$CREDOR':'$ppath$CREDOR']'$vcs'\n'$prompt`
+    export PS1=`print $ret_code$date$CREDORNORM'╭╼'$CREDOR'['$CBLUE'%n'$CREDOR':'$ppath$CREDOR']'$vcs'\n'$CREDORNORM'╰ '$prompt`
 else
-    export PS1=`print $ret_code$data$CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR':'$ppath$CREDOR']'$vcs'\n'$prompt`
+    export PS1=`print $ret_code$data$CREDORNORM'╭╼'$CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR':'$ppath$CREDOR']'$vcs'\n'$CREDORNORM'╰ '$prompt`
 fi
 export PS2=`print '%{\e[0;34m%}>'$NOCOLOR`
 
