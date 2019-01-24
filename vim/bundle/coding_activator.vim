@@ -26,6 +26,15 @@ let g:semanticGUIColors = [
 let g:semanticTermColors = [195,3,4,5,6,7,8,9,10,11,12,13,14,15,22,44,61,77,211, 229]
 let g:semanticPersistCache = 1
 packadd semantic-highlight.vim
+
+"if has("gui_running")
+    if !&diff
+        au BufEnter <buffer> if (!exists('b:created')) | exe "SemanticHighlightToggle" | let b:created=1 | endif
+        "Triggered by :doautocmd
+        "au User <buffer> :SemanticHighlight
+        au BufWritePost <buffer> :SemanticHighlight
+    endif
+"endif
 " !Semantic Highlight
 
 " Gutentags

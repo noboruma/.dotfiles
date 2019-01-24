@@ -426,6 +426,6 @@ if executable('ag')
 endif
 
 if &diff
-    syntax off
+    "syntax off
     set undolevels=-1
 endif

@@ -319,11 +319,12 @@ function Smart_TabComplete()
 endfunction
 
 command! -nargs=? Gdiff diffthis |
+      \ let gdiffpath=fnamemodify(resolve(expand('%:p')),':h') |
       \ vnew |
       \ set buftype=nofile |
       \ set bufhidden=wipe |
       \ set noswapfile |
-      \ execute "r!git show ".(!"<args>"?'HEAD~0':"<args>").":./".expand('#') |
+      \ execute "cd ".gdiffpath." | r!git show ".(!"<args>"?'HEAD~0':"<args>").":./".expand('#') |
       \ 1d_ |
       \ let &filetype=getbufvar('#', '&filetype') |
       \ execute 'autocmd BufWipeout <buffer> diffoff!' |
