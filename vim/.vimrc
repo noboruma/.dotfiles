@@ -424,3 +424,8 @@ if executable('ag')
     set grepprg=ag\ --vimgrep\ $*
     set grepformat=%f:%l:%c:%m
 endif
+
+if &diff
+    syntax off
+    set undolevels=-1
+endif
