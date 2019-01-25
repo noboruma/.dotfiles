@@ -48,10 +48,10 @@ let colors_name = "myslate"
 :hi ErrorMsg cterm=bold guifg=White guibg=Red cterm=bold ctermfg=7 ctermbg=1
 :hi VisualNOS cterm=bold,underline
 :hi WildMenu ctermfg=0 ctermbg=3
-:hi DiffAdd ctermbg=4
-:hi DiffChange ctermbg=5
-:hi DiffDelete cterm=bold ctermfg=4 ctermbg=6
-:hi DiffText cterm=bold ctermbg=1
+:hi DiffAdd                     ctermbg=24
+:hi DiffChange      ctermfg=181 ctermbg=239
+:hi DiffDelete      ctermfg=162 ctermbg=53
+:hi DiffText                    ctermbg=145 cterm=bold
 :hi Underlined cterm=underline ctermfg=5
 :hi Error guifg=White guibg=Red cterm=bold ctermfg=7 ctermbg=1
 :hi SpellErrors guifg=White guibg=Red cterm=bold ctermfg=7 ctermbg=1
