@@ -142,3 +142,6 @@
 [submodule "vim/pack/submodules/opt/ultisnips"]
 	path = vim/pack/submodules/opt/ultisnips
 	url = https://github.com/SirVer/ultisnips
+[submodule "zsh/plugins/zplug"]
+	path = zsh/plugins/zplug
+	url = https://github.com/zplug/zplug

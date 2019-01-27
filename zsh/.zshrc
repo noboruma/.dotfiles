@@ -9,6 +9,8 @@
 export TERM='screen-256color'
 bindkey -e
 
+source ~/.zsh/plugins/zplug/init.zsh
+
 # Root allow X?
 # xhost + > /dev/null 2> /dev/null || true
 
@@ -53,7 +55,7 @@ bindkey "^[[1;5D" backward-word
 #kill the lag
 export KEYTIMEOUT=1
 
-setopt autopushd pushdminus pushdsilent pushdtohome
+#setopt autopushd pushdminus pushdsilent pushdtohome
 setopt autocd
 #setopt cdablevars
 #setopt ignoreeof
@@ -62,7 +64,7 @@ setopt interactivecomments
 setopt noclobber # Use >! to override file
 setopt SH_WORD_SPLIT
 setopt nohup
-setopt transientrprompt
+#setopt transientrprompt
 #setopt PRINT_EXIT_VALUE
 #history
 setopt histignorespace
@@ -102,6 +104,9 @@ export PS2=`print '%{\e[0;34m%}>'$NOCOLOR`
 
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' check-for-staged-changes true
+
 # zsh hooks: precmd, chpwd, preexec, ...
 precmd(){
     #Needed for tmux splitting
@@ -136,8 +141,6 @@ zle -N accept-line cd-or-accept-line
 #    zle reset-prompt
 #}
 #
-#zle -N zle-line-init
-#zle -N zle-keymap-select
 
 # Vars used later on by Zsh
 export EDITOR="vim"
@@ -271,12 +274,15 @@ _fzf_compgen_dir() {
 # FZF marks
 source $HOME/.zsh/plugins/fzf-marks/init.zsh
 
-#ZSH_AUTOSUGGEST_USE_ASYNC=1
+# zsh autosuggestions
+ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8, bold'
 source $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+# zsh completions
 source $HOME/.zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
 
+# zsh syntax highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[builtin]='fg=33'
