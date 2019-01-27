@@ -258,7 +258,7 @@ bindkey '^[OB' down-line-or-search
 export FZF_DEFAULT_COMMAND="fd --type file --color=always --follow --exclude .git"
 export FZF_DEFAULT_OPTS="--ansi"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd -d 1 --type d --color=always --exclude .git --follow"
+export FZF_ALT_C_COMMAND="fd --type d --color=always --exclude .git --follow"
 
 _fzf_compgen_path() {
     fd --hidden --follow --exclude ".git" . "$1" --color=always

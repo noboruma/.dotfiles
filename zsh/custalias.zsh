@@ -55,7 +55,8 @@ alias arduino="arduino-asm"
 alias m='make -j4'
 alias mc='make -j4 check'
 
-alias l='unique_ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+alias ranger='unique_ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+alias l="ls"
 alias ll="ls -haltr"
 alias du="du -h"
 alias df="df -h"
