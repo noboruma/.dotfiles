@@ -96,9 +96,9 @@ local vcs=$CGREEN'${vcs_info_msg_0_}%f%b'
 local prompt=$CREDOR'%(!.#.$) %f%b'
 
 if [ -n "$TMUX" ]; then
-    export PS1=`print $ret_code$date$CREDORNORM'┌─'$CREDOR'['$CBLUE'%n'$CREDOR':'$ppath$CREDOR']'$vcs'\n'$CREDORNORM'└ '$prompt`
+    export PS1=`print $ret_code$date$CREDORNORM'┌─'$CREDOR'['$CBLUE'%n'$CREDOR':'$ppath$CREDOR']'$vcs'\n'$CREDORNORM'└'$prompt`
 else
-    export PS1=`print $ret_code$data$CREDORNORM'┌─'$CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR':'$ppath$CREDOR']'$vcs'\n'$CREDORNORM'└ '$prompt`
+    export PS1=`print $ret_code$data$CREDORNORM'┌─'$CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR':'$ppath$CREDOR']'$vcs'\n'$CREDORNORM'└'$prompt`
 fi
 export PS2=`print '%{\e[0;34m%}>'$NOCOLOR`
 
