@@ -3,11 +3,23 @@ source ~/.vim/bundle/coding_activator.vim
 " LC
 " See ftplugin for tools setup
 if executable('ccls') || executable ('cquery')
-    packadd LanguageClient-neovim
     let g:LanguageClient_diagnosticsEnable=0
     let g:LanguageClient_selectionUI='quickfix'
+    let g:LanguageClient_serverCommands = {}
+    if executable('ccls')
+        let g:LanguageClient_serverCommands.cpp = ['ccls',
+                    "\ '--log-file=/tmp/cq.log',
+                    \ '--init={"cacheDirectory":"/tmp/cquery/cache/"}']
+    elseif executable('cquery')
+        let g:LanguageClient_serverCommands.cpp = ['cquery',
+                    \ '--init={"cacheDirectory":"/tmp/cquery/cache/", "diagnostics": {"onParse": false, "onType": false}, "index": {"comments": 2}, "cacheFormat": "msgpack", "completion": {"filterAndSort": false}}']
+    else
+        echom 'no ccls nor cquery executable'
+    endif
+    packadd LanguageClient-neovim
     "set formatexpr=LanguageClient_textDocument_rangeFormatting()
     set omnifunc=LanguageClient#complete
+    LanguageClientStart
 endif
 " !LC
 
@@ -38,17 +50,6 @@ let g:clang_format#style_options = {
             \ "NamespaceIndentation": "All"}
 vnoremap <buffer><Leader>= :ClangFormat<CR>
 " !Clang-format
-
-if executable('ccls')
-    let g:LanguageClient_serverCommands.cpp = ['ccls',
-                "\ '--log-file=/tmp/cq.log',
-                \ '--init={"cacheDirectory":"/tmp/cquery/cache/"}']
-elseif executable('cquery')
-    let g:LanguageClient_serverCommands.cpp = ['cquery',
-                \ '--init={"cacheDirectory":"/tmp/cquery/cache/", "diagnostics": {"onParse": false, "onType": false}, "index": {"comments": 2}, "cacheFormat": "msgpack", "completion": {"filterAndSort": false}}']
-else
-    echom 'no ccls nor cquery executable'
-endif
 
 "Makeprg erroformat
 compiler gcc
