@@ -1,7 +1,7 @@
 max-items   100
 auto-reload yes
 reload-time 30
-browser     $BROWSER
+browser     "w3m %u"
 confirm-exit yes
 bind-key o open-in-browser-and-mark-read
 bind-key O open-in-browser
