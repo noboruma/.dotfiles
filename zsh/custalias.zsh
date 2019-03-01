@@ -13,7 +13,7 @@ case `uname` in
         alias ls='ls -GFh'
         ;;
     Linux)
-        alias ls='ls --color=auto -Fh'
+        alias ls='ls --color=always -Fh'
         ;;
     FreeBSD)
         ;;
@@ -43,6 +43,8 @@ alias gpush='git push'
 alias gpull='git pull'
 alias gchange='git checkout -'
 alias gconflicts='git diff --name-only --diff-filter=U'
+alias grep='grep --color'
+alias tree='tree -C'
 
 alias smount="sudo mount"
 alias sumount="sudo umount"
@@ -56,7 +58,7 @@ alias m='make -j4'
 alias mc='make -j4 check'
 
 alias ranger='unique_ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
-alias l="ls"
+alias l="tree -shDFCL 1 | grep --color=always -E '\[.*\]|$'"
 alias ll="ls -haltr"
 alias du="du -h"
 alias df="df -h"

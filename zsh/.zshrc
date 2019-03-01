@@ -151,7 +151,7 @@ export GIT_EDITOR="$EDITOR"
 export IDE="gvim"
 export BROWSER="w3m"
 export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
-export PAGER="less"
+export PAGER="less -R"
 
 ##################################################################
 # Stuff to make life easier
