@@ -18,6 +18,8 @@ source ~/.zsh/plugins/zplug/init.zsh
 # setxkbmap -option ctrl:nocaps
 # Best layout ever:
 # setxkbmap -layout us -variant intl
+# For console, use:
+# loadkeys jp106 or whatever
 
 ###########################################################
 # Options for Zsh
