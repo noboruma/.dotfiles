@@ -31,7 +31,7 @@ alias sshfs='sshfs -C -o reconnect -o workaround=all'
 alias sifconfig='sudo ifconfig'
 alias siptables='sudo iptables'
 alias spi='sudo pacman -S'
-alias spup='sudo pacman -Sy'
+alias spu='sudo pacman -Syu'
 alias sps='pacman -Ss'
 # makepkg -sri
 alias sai='sudo apt install'
@@ -62,7 +62,9 @@ alias m='make -j4'
 alias mc='make -j4 check'
 
 alias ranger='unique_ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
-alias l="tree -shDFCL 1 | grep --color=always -E '\[.*\]|$'"
+function l() {
+    tree $1 -shDFCL 1 | grep --color=always -E '\[.*\]|$'
+}
 alias ll="ls -haltr"
 alias du="du -h"
 alias df="df -h"
