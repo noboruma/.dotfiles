@@ -32,7 +32,7 @@ alias sifconfig='sudo ifconfig'
 alias siptables='sudo iptables'
 alias spi='sudo pacman -S'
 alias spup='sudo pacman -Sy'
-alias sps='pacman -Fs'
+alias sps='pacman -Ss'
 # makepkg -sri
 alias sai='sudo apt install'
 alias aS='aptitude search'
