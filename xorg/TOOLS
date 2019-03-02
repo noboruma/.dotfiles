@@ -1,0 +1,13 @@
+# Put . in front of Xdefaults & xinitrc and place in ~
+
+# Mandatory packages
+- xorg-server
+- xinit (for startx script)
+
+# Useful utils
+xfontsel
+feh
+
+# Set locale system-wide via:
+sudo localectl set-locale LANG=en_US.UTF8
+# Set locale for X in ~/.xinitrc via export LANG
