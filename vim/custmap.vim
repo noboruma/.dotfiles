@@ -48,6 +48,7 @@ if executable('cquery') || executable('ccls')
     nnoremap <leader>fg :<c-u>call LanguageClient_contextMenu()<cr>
     nnoremap <leader>fc :<c-u>call LanguageClient#findLocations({'method':'$ccls/call'})<cr>
     nnoremap <leader>fC :<c-u>call LanguageClient#findLocations({'method':'$ccls/call','callee':v:true})<cr>
+    nnoremap <leader>fx :<c-u>call LanguageClient#textDocument_codeAction()<cr>
 else
     noremap <leader>f :botright pta <C-r><C-w><cr>
     noremap <leader>F "sy:botright pta /<C-R>"

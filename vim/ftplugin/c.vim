@@ -18,7 +18,7 @@ if executable('ccls') || executable ('cquery')
     endif
     packadd LanguageClient-neovim
     "set formatexpr=LanguageClient_textDocument_rangeFormatting()
-    set omnifunc=LanguageClient#complete
+    setlocal omnifunc=LanguageClient#complete
     LanguageClientStart
 endif
 " !LC
