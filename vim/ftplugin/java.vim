@@ -1,5 +1,8 @@
 source ~/.vim/bundle/coding_activator.vim
 
+" Make options
+let &makeprg='nvm'
+
 " Surround
 let g:surround_{char2nr(">")} = "\1template: \1<\r>"
 

@@ -7,10 +7,15 @@ if executable('ccls') || executable ('cquery')
     let g:LanguageClient_selectionUI='quickfix'
     let g:LanguageClient_serverCommands = {}
     if executable('ccls')
+        let g:LanguageClient_serverCommands.c = ['ccls',
+                    "\ '--log-file=/tmp/cq.log',
+                    \ '--init={"cacheDirectory":"/tmp/cquery/cache/"}']
         let g:LanguageClient_serverCommands.cpp = ['ccls',
                     "\ '--log-file=/tmp/cq.log',
                     \ '--init={"cacheDirectory":"/tmp/cquery/cache/"}']
     elseif executable('cquery')
+        let g:LanguageClient_serverCommands.c = ['cquery',
+                    \ '--init={"cacheDirectory":"/tmp/cquery/cache/", "diagnostics": {"onParse": false, "onType": false}, "index": {"comments": 2}, "cacheFormat": "msgpack", "completion": {"filterAndSort": false}}']
         let g:LanguageClient_serverCommands.cpp = ['cquery',
                     \ '--init={"cacheDirectory":"/tmp/cquery/cache/", "diagnostics": {"onParse": false, "onType": false}, "index": {"comments": 2}, "cacheFormat": "msgpack", "completion": {"filterAndSort": false}}']
     else
