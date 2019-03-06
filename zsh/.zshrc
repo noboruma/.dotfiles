@@ -146,7 +146,7 @@ zle -N accept-line cd-or-accept-line
 
 # Vars used later on by Zsh
 export EDITOR="vim"
-export VISUAL="vim"
+export VEDITOR="gvim -f"
 export GIT_EDITOR="$EDITOR"
 export IDE="gvim"
 export BROWSER="w3m"
