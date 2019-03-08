@@ -6,7 +6,7 @@
 # fdupes A/ --recurse: B | grep ^A/ | xargs rm
 
 #zmodload zsh/zprof
-export TERM='screen-256color'
+#export TERM='screen-256color'
 bindkey -e
 
 source ~/.zsh/plugins/zplug/init.zsh
@@ -106,8 +106,8 @@ export PS2=`print '%{\e[0;34m%}>'$NOCOLOR`
 
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' check-for-staged-changes true
+zstyle ':vcs_info:*' check-for-changes false
+zstyle ':vcs_info:*' check-for-staged-changes false
 
 # zsh hooks: precmd, chpwd, preexec, ...
 precmd(){
