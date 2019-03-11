@@ -57,7 +57,7 @@ bindkey "^[[1;5D" backward-word
 #kill the lag
 export KEYTIMEOUT=1
 
-#setopt autopushd pushdminus pushdsilent pushdtohome
+setopt autopushd pushdminus pushdsilent pushdtohome
 setopt autocd
 #setopt cdablevars
 #setopt ignoreeof
@@ -77,6 +77,7 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 setopt HIST_FIND_NO_DUPS
 setopt CORRECT
+setopt correct_all
 
 #print colors
 autoload -U colors && colors
