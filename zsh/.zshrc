@@ -71,10 +71,11 @@ setopt nohup
 #history
 setopt histignorespace
 setopt INC_APPEND_HISTORY
-#setopt SHARE_HISTORY
+setopt SHARE_HISTORY
 setopt HIST_IGNORE_SPACE
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
+setopt HIST_FIND_NO_DUPS
 setopt CORRECT
 
 #print colors
@@ -218,7 +219,7 @@ zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
 # Sourcing part
-export PATH=~/usr/bin:~/.gem/ruby/2.3.0/bin:~/.local/bin:$PATH
+export PATH=~/usr/bin:~/.gem/ruby/current/bin:~/.local/bin:$PATH
 export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
 
 export ANDROID_NDK_ROOT=$HOME'/workspace/android/android-ndk-r16b'
@@ -248,7 +249,6 @@ bindkey '^Z' fancy-ctrl-z
 export ZBEEP=''
 
 # History
-setopt HIST_FIND_NO_DUPS
 source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 bindkey '^P' history-substring-search-up

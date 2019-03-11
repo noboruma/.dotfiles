@@ -8,7 +8,6 @@ find ~ -maxdepth 1 -name ".colorgcc*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".tmux*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".w3m*" -type l -exec rm -v {} \;
 rm ~/.config/ranger/rc.conf 2>/dev/null
-rm -rf ~/.config/uzbl 2>/dev/null
 find ~/.w3m -maxdepth 1 -name "config" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".irssi" -type l -exec rm -v {} \;
 
@@ -30,7 +29,7 @@ ln -s $PWD/mutt ~/.mutt
 ln -s $PWD/newsboat ~/.newsboat
 ln -s $PWD/mutt ~/.mutt
 ln -s $PWD/.irbrc ~
-ln -s $PWD/uzbl ~/.config/uzbl
+ln -s $PWD/vimb ~/.config/vimb
 cd - 1>/dev/null
 
 incrontab -l | grep -q fnotify
