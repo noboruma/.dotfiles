@@ -52,9 +52,11 @@ set incsearch=true
 # additional parameters.
 shortcut-add duck=https://duckduckgo.com/?q=$0
 shortcut-add d=http://dict.cc/?s=$0
+shortcut-add j=https://jisho.org/search/$0
 shortcut-add g=https://encrypted.google.com/search?q=$0
 shortcut-add y=http://www.youtube.com/results?search_query=$0
-shortcut-add s=https://www.startpage.com/do/dsearch?query=$0
+shortcut-add sp=https://www.startpage.com/do/dsearch?query=$0
+shortcut-add cppref=https://en.cppreference.com/mwiki/index.php?search=$0
 
 # Set the shortcut as the default, that is the shortcut to be used if no
 # shortcut is given and the string to open is not an URI.
@@ -67,7 +69,17 @@ nmap z- zO
 nmap = zz
 nnoremap + <C-F>
 nnoremap - <C-B>
-nnoremap <CR> :e!simplyread();<CR>
+nnoremap \  :e!simplyread();<CR>
+#nnoremap \ <BS> <C-O>
+#nnoremap \ <Tab> <C-I>
+nnoremap b <C-O>
+nnoremap B <C-I>
+inoremap jj <Esc>j
+inoremap JJ <Esc>j
+
+# Just hit ! and have the page reload with JS activated.
+#set scripts=off
+#nnoremap ! :set scripts!<CR>r
 
 # GUI color settings
 ## Color scheme: Base16 Eighties (https://github.com/chriskempson/base16)
@@ -79,3 +91,9 @@ set input-error-css=color:#f2777a;background-color:#393939;font:10pt monospace;
 set status-css=color:#ffcc66;background-color:#000000;font:10pt monospace;
 set status-ssl-css=color:#99cc99;background-color:#000000;font:10pt monospace;
 set status-ssl-invalid-css=color:#f2777a;background-color:#393939;font:10pt monospace;
+
+# Custom additions
+set accelerated-2d-canvas = true
+set webinspector=true
+set smooth-scrolling=true
+
