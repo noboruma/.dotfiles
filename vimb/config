@@ -65,7 +65,8 @@ shortcut-default duck
 nmap z+ zI
 nmap z- zO
 nmap = zz
-
+nnoremap + <C-F>
+nnoremap - <C-B>
 nnoremap <CR> :e!simplyread();<CR>
 
 # GUI color settings
