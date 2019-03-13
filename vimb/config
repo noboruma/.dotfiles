@@ -74,7 +74,8 @@ nnoremap \  :e!simplyread();<CR>
 #nnoremap \ <Tab> <C-I>
 nnoremap b <C-O>
 nnoremap B <C-I>
-inoremap jj <Esc>j
+nnoremap J j
+nnoremap K k
 inoremap JJ <Esc>j
 
 # Just hit ! and have the page reload with JS activated.
@@ -109,3 +110,9 @@ set images=true
 # JS
 set javascript-can-access-clipboard=off
 set javascript-can-open-windows-automatically=off
+
+aug myautocmds
+    au LoadFinished * normal <esc>
+    au LoadCommitted * normal <esc>
+    au LoadStarted * normal <esc>
+aug end
