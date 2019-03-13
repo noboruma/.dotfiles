@@ -96,4 +96,5 @@ set status-ssl-invalid-css=color:#f2777a;background-color:#393939;font:10pt mono
 set accelerated-2d-canvas = true
 set webinspector=true
 set smooth-scrolling=true
-
+set caret=false
+set tabs-to-links=false
