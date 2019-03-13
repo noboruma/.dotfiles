@@ -96,7 +96,7 @@ alias ff="fzf-fs"
 
 alias ttyw3m="TERM=fbterm w3m"
 alias www="w3m https://google.com"
-alias vimb="tabbed -c vimb -e"
+alias tabbed-vimb="tabbed -c vimb -e"
 alias news="newsboat --config-file=$HOME/.newsboat/config --url-file=$HOME/.newsboat/urls"
 alias nmutt='neomutt'
 

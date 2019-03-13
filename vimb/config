@@ -15,7 +15,7 @@ set editor-command=gvim -f %s
 #set input-autohide=true
 
 # Enable or disable the spell checking feature.
-set spell-checking=true
+set spell-checking=false
 
 # Set comma separated list of spell checking languages to be used for
 # spell checking.
@@ -93,8 +93,19 @@ set status-ssl-css=color:#99cc99;background-color:#000000;font:10pt monospace;
 set status-ssl-invalid-css=color:#f2777a;background-color:#393939;font:10pt monospace;
 
 # Custom additions
-set accelerated-2d-canvas = true
 set webinspector=true
 set smooth-scrolling=true
-set caret=false
-set tabs-to-links=false
+set mediasource=true
+set media-stream=true
+set dns-prefetching=true
+#set insecure-content-show=true
+#set insecure-content-run=true
+set html5-database=true
+set html5-local-storage=true
+set accelerated-2d-canvas=true
+set images=true
+#set strict-ssl=false
+
+# JS
+set javascript-can-access-clipboard=off
+set javascript-can-open-windows-automatically=off
