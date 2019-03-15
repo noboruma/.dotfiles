@@ -1,3 +1,19 @@
+'use strict';
+
+function github_wc(repo)
+{
+    if(typeof repo === "undefined") {
+        repo = window.location.pathname.substring(1, window.location.pathname.length);
+    }
+    return fetch('https://api.github.com/repos/'+repo+'/stats/contributors')
+        .then(response => response.json())
+        .then(contributors => contributors
+              .map(contributor => contributor.weeks
+                   .reduce((lineCount, week) => lineCount + week.a - week.d, 0)))
+        .then(lineCounts => lineCounts.reduce((lineTotal, lineCount) => lineTotal + lineCount))
+        .then(lines => window.alert(lines));
+}
+
 /* See COPYING file for copyright, license and warranty details. */
 
 if(window.content && window.content.document && window.content.document.simplyread_original === undefined) window.content.document.simplyread_original = false;

@@ -87,10 +87,10 @@ inoremap JJ <Esc>j
 set completion-css=color:#d3d0c8;background-color:#393939;font:10pt monospace
 set completion-hover-css=color:#d3d0c8;background-color:#393939;font:10pt monospace;
 set completion-selected-css=color:#d3d0c8;background-color:#515151;font:10pt monospace;
-set input-css=color:#d3d0c8;background-color:#393939;font:10pt monospace;
-set input-error-css=color:#f2777a;background-color:#393939;font:10pt monospace;
-set status-css=color:#ffcc66;background-color:#000000;font:10pt monospace;
-set status-ssl-css=color:#99cc99;background-color:#000000;font:10pt monospace;
+set input-css=color:#d3d0c8;background-color:#000000;font:10pt monospace;
+set input-error-css=color:#f2777a;background-color:#000000;font:10pt monospace;
+set status-css=color:#ffcc66;background-color:#303030;font:10pt monospace;
+set status-ssl-css=color:#99cc99;background-color:#303030;font:10pt monospace;
 set status-ssl-invalid-css=color:#f2777a;background-color:#393939;font:10pt monospace;
 
 # Custom additions

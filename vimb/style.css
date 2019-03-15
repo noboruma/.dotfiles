@@ -1,5 +1,5 @@
 *,div,pre,textarea,body,input,td,tr,p {
-    background-color: #303030 !important;
+    background-color: #000000 !important;
     background-image: none !important;
     color: #bbbbbb !important;
 }
@@ -13,17 +13,15 @@ a {
 a:hover,a:focus {
     color: #7070e0 !important;
 }
-
 a:visited {
     color: #e07070 !important;
 }
 img {
-    opacity: .5;
+    opacity: .7;
 }
 img:hover {
     opacity: 1;
 }
-
 /* Hint mode color styling
  * Color scheme: Base16 Eighties (https://github.com/chriskempson/base16)
  *
