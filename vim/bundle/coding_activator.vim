@@ -39,7 +39,6 @@ packadd semantic-highlight.vim
 
 " Gutentags
 if executable('ctags')
-    packadd vim-gutentags
     let g:gutentags_project_root=['.git']
     let g:gutentags_file_list_command = {
                 \ 'markers': {
@@ -51,6 +50,10 @@ if executable('ctags')
     set tags=./tags;,tags;
     let g:gutentags_cache_dir='~/.tags.auto'
     " /!\ Change plugin from setlocal to set
+    "let g:gutentags_trace=1
+    packadd vim-gutentags
+    call gutentags#setup_gutentags()
+    exe 'setlocal tags^='.b:gutentags_files['ctags']
 else
     echom 'no ctags executable'
 endif
