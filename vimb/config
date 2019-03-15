@@ -78,6 +78,11 @@ nnoremap J j
 nnoremap K k
 inoremap JJ <Esc>j
 
+# injector is simply a wrapper around xclip:
+# xclip -selection clipbaord -o > $1
+nnoremap p :set editor-command=injector %s<CR>
+nnoremap P :set editor-command=gvim -f %s<CR>
+
 # Just hit ! and have the page reload with JS activated.
 #set scripts=off
 #nnoremap ! :set scripts!<CR>r
