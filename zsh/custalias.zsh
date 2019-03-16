@@ -33,6 +33,7 @@ alias siptables='sudo iptables'
 alias spi='sudo pacman -S'
 alias spu='sudo pacman -Syu'
 alias sps='pacman -Ss'
+alias spr='pacman -Rcns'
 # makepkg -sri
 alias sai='sudo apt install'
 alias aS='aptitude search'
