@@ -89,14 +89,14 @@ nnoremap P :set editor-command=gvim -f %s<CR>
 
 # GUI color settings
 ## Color scheme: Base16 Eighties (https://github.com/chriskempson/base16)
-set completion-css=color:#d3d0c8;background-color:#393939;font-smooth:never;font:10pt monospace!important;-webkit-font-smoothing:none;
-set completion-hover-css=color:#d3d0c8;background-color:#393939;font-smooth:never;font:10pt monospace!important;-webkit-font-smoothing:none;
-set completion-selected-css=color:#d3d0c8;background-color:#515151;font-smooth:never;font:10pt monospace!important;-webkit-font-smoothing:none;
-set input-css=color:#d3d0c8;background-color:#000000;font-smooth:never;font:10pt monospace!important;-webkit-font-smoothing:none;
-set input-error-css=color:#f2777a;background-color:#000000;font-smooth:never;font:10pt monospace!important;-webkit-font-smoothing:none;
-set status-css=color:#ffcc66;background-color:#303030;font-smooth:never;font:10pt monospace!important;-webkit-font-smoothing:none;
-set status-ssl-css=color:#99cc99;background-color:#303030;font-smooth:never;font:10pt monospace!important;-webkit-font-smoothing:none;
-set status-ssl-invalid-css=color:#f2777a;background-color:#393939;font-smooth:never;font:10pt monospace!important;-webkit-font-smoothing:none;
+set completion-css=color:#d3d0c8;background-color:#393939;font:10pt monospace;-webkit-font-smoothing:none;
+set completion-hover-css=color:#d3d0c8;background-color:#393939;font:10pt monospace;-webkit-font-smoothing:none;
+set completion-selected-css=color:#d3d0c8;background-color:#515151;font:10pt monospace;-webkit-font-smoothing:none;
+set input-css=color:#d3d0c8;background-color:#000000;font:10pt monospace;-webkit-font-smoothing:none;
+set input-error-css=color:#f2777a;background-color:#000000;font:10pt monospace;-webkit-font-smoothing:none;
+set status-css=color:#ffcc66;background-color:#303030;font:10pt monospace;-webkit-font-smoothing:none;
+set status-ssl-css=color:#99cc99;background-color:#303030;font:10pt monospace;-webkit-font-smoothing:none;
+set status-ssl-invalid-css=color:#f2777a;background-color:#393939;font:10pt monospace;-webkit-font-smoothing:none;
 
 # Custom additions
 set webinspector=true

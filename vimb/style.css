@@ -1,8 +1,14 @@
-*,div,pre,textarea,body,input,td,tr,p {
+span {
+    font: 10pt Share Tech Mono !important;
+    -webkit-font-smoothing: none;
+    /*-webkit-filter: invert(1);*/
+    color: inherit;
+    background-color: inherit;
+}
+:not(span),div,pre,textarea,body,td,tr,p {
     background-color: #000000 !important;
-    background-image: none !important;
+    /*background-image: none !important;*/
     color: #bbbbbb !important;
-    font-smooth: never;
     font: 10pt Share Tech Mono !important;
     -webkit-font-smoothing: none;
 }

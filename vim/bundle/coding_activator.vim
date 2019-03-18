@@ -53,7 +53,9 @@ if executable('ctags')
     "let g:gutentags_trace=1
     packadd vim-gutentags
     call gutentags#setup_gutentags()
-    exe 'setlocal tags^='.b:gutentags_files['ctags']
+    if(exists('b:gutentags_files'))
+        exe 'set tags^='.b:gutentags_files['ctags']
+    endif
 else
     echom 'no ctags executable'
 endif
