@@ -113,4 +113,7 @@ let g:tagbar_sort = 0
 packadd tagbar
 " !Tagbar
 
+
+let g:airline_extensions = ['ale', 'gutentags', 'languageclient', 'quickfix', 'tagbar', 'undotree', 'unite']
+
 packadd tagfinder

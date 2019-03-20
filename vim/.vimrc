@@ -137,8 +137,8 @@ let g:airline_mode_map = {
             \ 'S'  : '',
             \ '' : '',
             \ }
-let g:airline_section_z = '%2c:%#__accent_bold#%3l%#__restore__#/%L %3p%%' "can add variable via %{g:airline_right_sep}
-"let g:airline_extensions = ['ale', 'gutentags', 'languageclient', 'quickfix', 'tagbar', 'undotree', 'unite']
+let g:airline_section_z = '%3l:%2c%#__accent_bold#%3p%%%#__restore__#' "can add variable via %{g:airline_right_sep}
+let g:airline_extensions = ['quickfix', 'undotree', 'unite']
 let &runtimepath.=',~/.vim/bundle/airline'
 let &runtimepath.=',~/.vim/bundle/airline-themes'
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
@@ -163,6 +163,10 @@ let g:rainbow_conf = {
 "Slime plugin
 let g:slime_target = "tmux"
 "!Slime
+
+"Undo tree
+let &runtimepath.=',~/.vim/bundle/undotree'
+"!Undo
 
 " AsyncRun
 let &runtimepath.=',~/.vim/bundle/asyncrun'
