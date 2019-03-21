@@ -88,7 +88,7 @@ set smartcase
 " Trigger manual after indent method
 augroup vimrc
     au BufReadPre  * setlocal foldmethod=expr
-    "au BufWinEnter * if &fdm == 'expr' | setlocal foldmethod=manual | normal zM | endif
+    au BufWinEnter * if &fdm == 'expr' | setlocal foldmethod=manual | exe "normal zM" | endif
     " Prevent RO file editing: use 'set modifiable' manually if needed
     autocmd BufRead * let &modifiable = !&readonly
 augroup END
