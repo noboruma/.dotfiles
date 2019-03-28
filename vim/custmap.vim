@@ -63,7 +63,7 @@ noremap <leader>e :silent<space>e<space>`pwd`<tab>
 noremap <leader>ff :<c-u>Files<space>`pwd`<tab>
 if executable('cquery') || executable('ccls')
     nnoremap <leader>fa :<c-u>call AutoAdjustQFWindow()<cr>
-    nnoremap <leader>fd :<c-u>call SmartSplit()<cr>:<c-u>call LanguageClient#textDocument_definition()<cr>
+    nnoremap <leader>fd :<c-u>vsplit<cr>:call LanguageClient#textDocument_definition()<cr>
     nnoremap <leader>fr :<c-u>call LanguageClient#textDocument_references()<cr>:botright copen<cr>
     nnoremap <leader>fh :<c-u>call LanguageClient#textDocument_hover()<cr>
     nnoremap <leader>ft :<c-u>call LanguageClient#textDocument_signatureHelp()<cr>
@@ -104,7 +104,7 @@ noremap <leader>s vi
 noremap <leader>s, vi,
 noremap <leader>S :<c-u>SemanticHighlightToggle<cr>
 nnoremap <leader>t :<c-u>vsp<cr>
-nnoremap _ :<c-u>call SmartSplit()<cr>
+nnoremap _ :<c-u>call SmartSplit()<cr>``zz
 noremap <leader>u :<c-u>UndotreeToggle<cr>:UndotreeFocus<cr>
 noremap <leader>v <C-v>
 noremap <leader>w :<c-u>up<cr>
