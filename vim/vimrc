@@ -34,6 +34,8 @@ set ttyfast
 set re=1
 set lazyredraw
 set scrolloff=0 " Keep no lines after/before the cursor
+set scrolljump=0
+set noequalalways
 
 " Start to be a good vimmer
 if !use_arrow
@@ -87,10 +89,10 @@ set smartcase
 " Folding
 " Trigger manual after indent method
 augroup vimrc
-    au BufReadPre  * setlocal foldmethod=expr
-    au BufWinEnter * if &fdm == 'expr' | setlocal foldmethod=manual | exe "normal zM" | endif
+    autocmd BufReadPre  * setlocal foldmethod=expr
+    autocmd BufWinEnter * if &fdm == 'expr' | setlocal foldmethod=manual | exe "normal zM" | endif
     " Prevent RO file editing: use 'set modifiable' manually if needed
-    autocmd BufRead * let &modifiable = !&readonly
+    autocmd BufEnter * let &modifiable = !&readonly
 augroup END
 
 set foldlevel=99
@@ -234,14 +236,14 @@ let g:notes_directories = ['~/Dropbox/notes']
 let &runtimepath.=',~/.vim/bundle/vim-ingo-library'
 " Timestamp
 let g:AutoAdapt_FilePattern = ''
-let g:AutoAdapt_FirstLines = 10
+let g:AutoAdapt_FirstLines = 5
 let g:AutoAdapt_LastLines = 0
 let g:AutoAdapt_Rules = [
             \   {
             \       'name': 'Copyright notice',
             \       'patternexpr': '''\c\<Copyright:\?\%(\s\+\%((C)\|&copy;\|\%xa9\)\)\?\s\+\zs\(\%('' . strftime("%Y") . ''\)\@!\d\{4}\)\%(\ze\k\@![^-]\|\(-\%('' . strftime("%Y") . ''\)\@!\d\{4}\)\>\)''',
             \       'replacement': '\=submatch(1) . "-" . strftime("%Y")',
-            \	    'range': '1,10'
+            \	    'range': '1,5'
             \   },
             \   {
             \       'name': 'Copyright notice modelines',
@@ -253,10 +255,9 @@ let g:AutoAdapt_Rules = [
             \       'name': 'Last Change notice',
             \       'pattern': '\v\C%(<Last %([uU]pdate?|[Mm]odified)\s+)@<=.*$',
             \       'replacement': '\=strftime("%a %b %d %H:%M:%S %Y '.username.'")',
-            \	    'range': '1,10'
+            \	    'range': '1,5'
             \   }
             \]
-autocmd BufWritePre <buffer> silent! :Adapt
 "!Auto Adapt
 
 "vim-which-key
@@ -336,7 +337,7 @@ augroup vimrc
     "autocmd QuickFixCmdPost [^l]* nested botright cwindow " Botright to open widely
     "autocmd QuickFixCmdPost    l* nested botright lwindow
     "autocmd QuickFixCmdPost * call asyncrun#quickfix_toggle(8, 1)
-    autocmd User AsyncRunStart botright copen | setl nomodifiable | setl foldlevel=99 | let g:jumpfirst=1 | wincmd p
+    autocmd User AsyncRunStart call asyncrun#quickfix_toggle(0, 1) | setl nomodifiable | setl foldlevel=99 | let g:jumpfirst=1 | wincmd p
     autocmd User AsyncRunStop call AutoAdjustQFWindow()
 augroup END
 
@@ -379,7 +380,7 @@ set autochdir
 
 " Jump to the last position when reopening a file
 augroup vimrc
-    au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
     " Adapt on save hook
     autocmd BufWritePre <buffer> %s/\s\+$//e
     autocmd BufWritePre <buffer> silent! :Adapt

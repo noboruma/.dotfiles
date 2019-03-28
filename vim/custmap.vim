@@ -24,6 +24,28 @@ function! IsLeftMostWindow()
     return 0
 endfunction
 
+function IsCursorTop()
+    let cursline = winline()
+    let middleline = winheight(0) /2
+    if cursline <= middleline
+        return 1
+    endif
+    return 0
+endfunction
+function SmartSplit()
+    if IsCursorTop()
+        normal H
+        execute ":split"
+        normal <C-w>k``<C-w>j
+    else
+        normal L
+        execute ":topleft split"
+        normal <C-w>j``<C-w>k
+    endif
+endfunction
+
+command! AsyncCCL call asyncrun#quickfix_toggle(0, 0)
+
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-h> <S-Left>
@@ -34,14 +56,14 @@ cnoremap <C-k> <C-w><C-w>
 "noremap <leader>A :set scb!<cr>
 "noremap <leader>b :FufBuffer<cr>
 noremap <leader>b :<c-u>Buffers <cr>
-noremap <leader>c :<c-u>ccl\|lcl\|pcl<cr>
+noremap <leader>c :<c-u>AsyncCCL<cr>:ccl\|lcl\|pcl<cr>
 noremap <leader>C :AsyncStop<cr>
 noremap <leader>d "_d
 noremap <leader>e :silent<space>e<space>`pwd`<tab>
 noremap <leader>ff :<c-u>Files<space>`pwd`<tab>
 if executable('cquery') || executable('ccls')
     nnoremap <leader>fa :<c-u>call AutoAdjustQFWindow()<cr>
-    nnoremap <leader>fd :<c-u>vsplit<cr> :<c-u> try \| call LanguageClient#textDocument_definition() \| catch \| :q \| endtry <cr>
+    nnoremap <leader>fd :<c-u>call SmartSplit()<cr>:<c-u>call LanguageClient#textDocument_definition()<cr>
     nnoremap <leader>fr :<c-u>call LanguageClient#textDocument_references()<cr>:botright copen<cr>
     nnoremap <leader>fh :<c-u>call LanguageClient#textDocument_hover()<cr>
     nnoremap <leader>ft :<c-u>call LanguageClient#textDocument_signatureHelp()<cr>
@@ -82,7 +104,7 @@ noremap <leader>s vi
 noremap <leader>s, vi,
 noremap <leader>S :<c-u>SemanticHighlightToggle<cr>
 nnoremap <leader>t :<c-u>vsp<cr>
-nnoremap <leader>_ :<c-u>sp<cr>
+nnoremap _ :<c-u>call SmartSplit()<cr>
 noremap <leader>u :<c-u>UndotreeToggle<cr>:UndotreeFocus<cr>
 noremap <leader>v <C-v>
 noremap <leader>w :<c-u>up<cr>
@@ -154,7 +176,7 @@ endfunction
 command! -nargs=+ -complete=command CaptureExtOutputInNewBuffer call CaptureExtOutputInNewBuffer(<q-args>)
 
 noremap <F1> :<c-u>!git add %<cr>
-noremap <F2> :<c-u>set modifiable<cr>:set noro<cr>
+noremap <F2>  :<c-u>set modifiable\|set noro<cr>
 
 let g:cppmanprovider = 0
 fun IterateThroughProviders()
@@ -201,8 +223,8 @@ noremap <F3> :<c-u>call IterateThroughProviders()<cr>
 
 
 noremap <expr> <F4> exists('debug') ? ":<c-u>AsyncRun -program=make @ -j4 DEBUG=1 -C `pwd`/<tab><tab>" : ":<c-u>AsyncRun -program=make @ -j4 -C `pwd`/<tab><tab>"
-nnoremap <F5> :<c-u>ccl<cr>:up<cr>:AsyncRun -program=make<Up><cr>
-inoremap <F5> <esc>:<c-u>ccl<cr>:up<cr>:AsyncRun -program=make<Up><cr>
+nnoremap <F5> :<c-u>AsyncCCL<cr>:up<cr>:AsyncRun -program=make<Up><cr>
+inoremap <F5> <esc>:<c-u>AsyncCCL<cr>:up<cr>:AsyncRun -program=make<Up><cr>
 
 noremap <expr> <F9> exists('debug') ?  ":<c-u>unlet debug<cr>" : ":<c-u>let debug=1<cr>"
 
