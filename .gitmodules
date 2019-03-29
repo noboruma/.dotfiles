@@ -94,9 +94,6 @@
 [submodule "vim/bundle/fzf.vim"]
 	path =vim/bundle/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
-[submodule "vim/bundle/ultisnips"]
-	path =vim/bundle/ultisnips
-	url = https://github.com/SirVer/ultisnips
 [submodule "vim/pack/submodules/opt/LanguageClient-neovim"]
 	path = vim/pack/submodules/opt/LanguageClient-neovim
 	url = https://github.com/autozimu/LanguageClient-neovim.git
@@ -139,12 +136,12 @@
 [submodule "vim/pack/submodules/opt/vim-ruby"]
 	path = vim/pack/submodules/opt/vim-ruby
 	url = https://github.com/vim-ruby/vim-ruby
-[submodule "vim/pack/submodules/opt/ultisnips"]
-	path = vim/pack/submodules/opt/ultisnips
-	url = https://github.com/SirVer/ultisnips
 [submodule "zsh/plugins/zplug"]
 	path = zsh/plugins/zplug
 	url = https://github.com/zplug/zplug
 [submodule "vim/bundle/vim-fugitive"]
 	path = vim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive
+[submodule "vim/pack/submodules/opt/neosnippet.vim"]
+	path = vim/pack/submodules/opt/neosnippet.vim
+	url = https://github.com/Shougo/neosnippet.vim

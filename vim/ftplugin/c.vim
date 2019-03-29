@@ -4,6 +4,7 @@ source ~/.vim/bundle/coding_activator.vim
 " See ftplugin for tools setup
 if executable('ccls') || executable ('cquery')
     let g:LanguageClient_diagnosticsEnable=0
+    let g:LanguageClient_hasSnippetSupport=1
     let g:LanguageClient_selectionUI='quickfix'
     let g:LanguageClient_serverCommands = {}
     if executable('ccls')

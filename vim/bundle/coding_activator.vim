@@ -62,47 +62,76 @@ endif
 " !Gutentags
 
 " Ultisnips
-packadd ultisnips
-packadd vim-snippets
-let g:ulti_expand_res = 0 "default value, just set once
-function! CompleteSnippet()
-    if empty(v:completed_item)
-        return
-    endif
-
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res > 0
-        return
-    endif
-
-    let l:complete = type(v:completed_item) == v:t_dict ? v:completed_item.word : v:completed_item
-    let l:comp_len = len(l:complete)
-
-    let l:cur_col = mode() == 'i' ? col('.') - 2 : col('.') - 1
-    let l:cur_line = getline('.')
-
-    let l:start = l:comp_len <= l:cur_col ? l:cur_line[:l:cur_col - l:comp_len] : ''
-    let l:end = l:cur_col < len(l:cur_line) ? l:cur_line[l:cur_col + 1 :] : ''
-
-    call setline('.', l:start . l:end)
-    call cursor('.', l:cur_col - l:comp_len + 2)
-
-    call UltiSnips#Anon(l:complete)
-endfunction
-
-autocmd CompleteDone * call CompleteSnippet()
-let g:UltiSnipsExpandTrigger="<NUL>"
-let g:UltiSnipsListSnippets="<NUL>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"let g:UltiSnipsExpandTrigger="<NUL>"
+"let g:UltiSnipsListSnippets="<NUL>"
+"let g:UltiSnipsJumpForwardTrigger="<tab>"
+"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+""packadd ultisnips
+"let g:UltiSnipsJumpForwardTrigger = "<C-J>"
+"let g:UltiSnipsJumpBackwardTrigger = "<C-K>"
+"let g:ulti_expand_res = 0 "default value, just set once
+"function! CompleteSnippet()
+"    if empty(v:completed_item)
+"        return
+"    endif
+"
+"    call UltiSnips#ExpandSnippet()
+"    if g:ulti_expand_res > 0
+"        return
+"    endif
+"
+"    let l:complete = type(v:completed_item) == v:t_dict ? v:completed_item.word : v:completed_item
+"    let l:comp_len = len(l:complete)
+"
+"    let l:cur_col = mode() == 'i' ? col('.') - 2 : col('.') - 1
+"    let l:cur_line = getline('.')
+"
+"    let l:start = l:comp_len <= l:cur_col ? l:cur_line[:l:cur_col - l:comp_len] : ''
+"    let l:end = l:cur_col < len(l:cur_line) ? l:cur_line[l:cur_col + 1 :] : ''
+"
+"    call setline('.', l:start . l:end)
+"    call cursor('.', l:cur_col - l:comp_len + 2)
+"
+"    call UltiSnips#Anon(l:complete)
+"endfunction
+"
+"autocmd CompleteDone * call CompleteSnippet()
 "!Ultisnips
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
+packadd neosnippet.vim
+imap <C-j>     <Plug>(neosnippet_expand_or_jump)
+smap <C-j>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-j>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <expr><TAB>
+ \ pumvisible() ? "\<C-n>" :
+ \ neosnippet#expandable_or_jumpable() ?
+ \    "\<Plug>(neosnippet_expand_or_jump)" : "\<c-r>=Smart_TabComplete()\<CR>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+  endif
+
 
 " Snipmate
+packadd vim-snippets
 packadd tlib
 packadd vim-addon-mw-utils
 packadd vim-snipmate
-imap <C-J> <Plug>snipMateNextOrTrigger
-smap <C-J> <Plug>snipMateNextOrTrigger
+"imap <C-J> <Plug>snipMateNextOrTrigger
+"smap <C-J> <Plug>snipMateNextOrTrigger
 " !Snipmate
 
 " Tagbar options
@@ -111,10 +140,9 @@ let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 0
 let g:tagbar_sort = 0
 packadd tagbar
-let g:airline_extensions += ['tagbar']
 " !Tagbar
 
 
-let g:airline_extensions = ['ale', 'gutentags', 'languageclient', 'quickfix', 'tagbar', 'undotree', 'unite']
+let g:airline_extensions += ['ale', 'gutentags', 'languageclient', 'tagbar']
 
 packadd tagfinder
