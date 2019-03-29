@@ -6,7 +6,9 @@ if executable('ccls') || executable ('cquery')
     let g:LanguageClient_diagnosticsEnable=0
     let g:LanguageClient_hasSnippetSupport=1
     let g:LanguageClient_selectionUI='quickfix'
-    let g:LanguageClient_serverCommands = {}
+    if !exists('g:LanguageClient_serverCommands')
+        let g:LanguageClient_serverCommands = {}
+    endif
     if executable('ccls')
         let g:LanguageClient_serverCommands.c = ['ccls',
                     "\ '--log-file=/tmp/cq.log',
@@ -104,7 +106,6 @@ set shiftwidth=4
 setlocal complete-=i
 " stop use ctags, only used for jump
 setlocal complete-=t
-
 
 inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
 inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"

@@ -1,9 +1,11 @@
 packadd vim-slime
 source ~/.vim/bundle/coding_activator.vim
 
-let g:LanguageClient_serverCommands = {}
+if !exists('g:LanguageClient_serverCommands')
+    let g:LanguageClient_serverCommands = {}
+endif
 let g:LanguageClient_serverCommands.python =['pyls']
-set omnifunc=LanguageClient#complete
+setlocal omnifunc=LanguageClient#complete
 
 setlocal expandtab
 setlocal nolisp

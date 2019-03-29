@@ -2,10 +2,11 @@ packadd vim-javascript
 
 source ~/.vim/bundle/coding_activator.vim
 
-let g:LanguageClient_serverCommands = {
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-    \ }
+if !exists('g:LanguageClient_serverCommands')
+    let g:LanguageClient_serverCommands = {}
+endif
+let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
+let g:LanguageClient_serverCommands.javascript.jsx = ['tcp://127.0.0.1:2089']
 
-set omnifunc=LanguageClient#complete
+setlocal omnifunc=LanguageClient#complete
 let g:LanguageClient_autoStop =0

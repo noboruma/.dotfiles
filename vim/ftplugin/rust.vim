@@ -36,7 +36,10 @@ if executable('rls')
     let g:LanguageClient_diagnosticsEnable=0
     let g:LanguageClient_selectionUI='quickfix'
     "set formatexpr=LanguageClient_textDocument_rangeFormatting()
-    set omnifunc=LanguageClient#complete
+    setlocal omnifunc=LanguageClient#complete
 
+    if !exists('g:LanguageClient_serverCommands')
+        let g:LanguageClient_serverCommands = {}
+    endif
     let g:LanguageClient_serverCommands.rust = ['rustup', 'run', 'nightly', 'rls']
 endif

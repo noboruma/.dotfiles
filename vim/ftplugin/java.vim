@@ -30,9 +30,13 @@ setlocal complete-=t
 if executable('jdtls')
     let g:LanguageClient_diagnosticsEnable=1
     let g:LanguageClient_selectionUI='quickfix'
-    let g:LanguageClient_serverCommands = {
-                \ 'java': ['$HOME/usr/bin/jdtls', '-data', getcwd()],
-                \ }
+    if !exists('g:LanguageClient_serverCommands')
+        let g:LanguageClient_serverCommands = {
+                    \ 'java': ['$HOME/usr/bin/jdtls', '-data', getcwd()],
+                    \ }
+    else
+        let g:LanguageClient_serverCommands.java = ['$HOME/usr/bin/jdtls', '-data', getcwd()]
+    endif
     packadd LanguageClient-neovim
     "set formatexpr=LanguageClient_textDocument_rangeFormatting()
     setlocal omnifunc=LanguageClient#complete

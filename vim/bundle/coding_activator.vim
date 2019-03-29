@@ -1,3 +1,8 @@
+if exists('g:coding_activator_loaded')
+  finish
+endif
+let g:coding_activator_loaded = 1
+
 " Semantic Highlight
 let g:semanticGUIColors = [
             \'#5fd7ff',
@@ -106,7 +111,6 @@ let g:tagbar_autoclose = 0
 let g:tagbar_sort = 0
 packadd tagbar
 " !Tagbar
-
 
 let g:airline_extensions += ['ale', 'gutentags', 'languageclient', 'tagbar']
 
