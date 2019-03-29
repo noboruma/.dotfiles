@@ -84,7 +84,7 @@ vnoremap <leader>g "sy:AsyncRun -program=grep "<C-R>"" `pwd`<tab>
 nnoremap <leader>G :lcd<space>`pwd`<tab><space>\|<space>Ag<left><left><left><left><left><tab>
 vnoremap <leader>G "sy:lcd<space>`pwd`<tab><space>\|<space>Ag<space><C-R>"<C-f>F\|<left><C-c><tab>
 noremap <leader>h :<c-u>call File_flip()<cr>zz
-nnoremap <leader>H :<c-u>History<cr>
+nnoremap <c-h> :<c-u>History<cr>
 "noremap <leader>H :0r ~/.vim/.header_template<cr>
 noremap <leader>j :<c-u>tj <C-r><C-w><cr>
 noremap <leader>J :<c-u>tj /<C-r><C-w><C-b><right><right><right><right>
@@ -165,8 +165,8 @@ inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
 inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
 inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
-inoremap <expr> <tab>      pumvisible() ? "\<C-n>" : "\<c-r>=Smart_TabComplete()\<CR>"
-inoremap <expr> <s-tab>    pumvisible() ? "\<C-p>" : "\<s-tab>"
+inoremap <expr> <tab>      pumvisible() ? "\<lt>Down>" : "\<c-r>=Smart_TabComplete()\<CR>"
+inoremap <expr> <s-tab>    pumvisible() ? "\<lt>Up>" : "\<s-tab>"
 
 function! CaptureExtOutputInNewBuffer(cmd)
     let out = system(a:cmd)

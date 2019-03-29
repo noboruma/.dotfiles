@@ -61,42 +61,7 @@ else
 endif
 " !Gutentags
 
-" Ultisnips
-"let g:UltiSnipsExpandTrigger="<NUL>"
-"let g:UltiSnipsListSnippets="<NUL>"
-"let g:UltiSnipsJumpForwardTrigger="<tab>"
-"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-""packadd ultisnips
-"let g:UltiSnipsJumpForwardTrigger = "<C-J>"
-"let g:UltiSnipsJumpBackwardTrigger = "<C-K>"
-"let g:ulti_expand_res = 0 "default value, just set once
-"function! CompleteSnippet()
-"    if empty(v:completed_item)
-"        return
-"    endif
-"
-"    call UltiSnips#ExpandSnippet()
-"    if g:ulti_expand_res > 0
-"        return
-"    endif
-"
-"    let l:complete = type(v:completed_item) == v:t_dict ? v:completed_item.word : v:completed_item
-"    let l:comp_len = len(l:complete)
-"
-"    let l:cur_col = mode() == 'i' ? col('.') - 2 : col('.') - 1
-"    let l:cur_line = getline('.')
-"
-"    let l:start = l:comp_len <= l:cur_col ? l:cur_line[:l:cur_col - l:comp_len] : ''
-"    let l:end = l:cur_col < len(l:cur_line) ? l:cur_line[l:cur_col + 1 :] : ''
-"
-"    call setline('.', l:start . l:end)
-"    call cursor('.', l:cur_col - l:comp_len + 2)
-"
-"    call UltiSnips#Anon(l:complete)
-"endfunction
-"
-"autocmd CompleteDone * call CompleteSnippet()
-"!Ultisnips
+" neosnippet
 " Plugin key-mappings.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
 " Enable snipMate compatibility feature.
@@ -113,17 +78,17 @@ xmap <C-j>     <Plug>(neosnippet_expand_target)
 " SuperTab like snippets behavior.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
 imap <expr><TAB>
- \ pumvisible() ? "\<C-n>" :
+ \ pumvisible() ? "\<lt>Down>" :
  \ neosnippet#expandable_or_jumpable() ?
  \    "\<Plug>(neosnippet_expand_or_jump)" : "\<c-r>=Smart_TabComplete()\<CR>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+ \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " For conceal markers.
 if has('conceal')
-  set conceallevel=2 concealcursor=niv
-  endif
-
+    set conceallevel=2 concealcursor=niv
+endif
+"!neosnippet
 
 " Snipmate
 packadd vim-snippets
