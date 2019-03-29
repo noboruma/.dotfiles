@@ -108,7 +108,7 @@ set matchpairs+=<:>
 filetype off
 
 " ALE plugin
-let &runtimepath.=',~/.vim/bundle/ale'
+"let &runtimepath.=',~/.vim/bundle/ale'
 let g:ale_linters = {
 \   'cpp': ['cppcheck', 'clangtidy', 'clangcheck', 'flawfinder', 'gcc'],
 \}
