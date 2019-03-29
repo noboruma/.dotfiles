@@ -111,6 +111,7 @@ let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 0
 let g:tagbar_sort = 0
 packadd tagbar
+let g:airline_extensions += ['tagbar']
 " !Tagbar
 
 

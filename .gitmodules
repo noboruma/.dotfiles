@@ -145,3 +145,6 @@
 [submodule "zsh/plugins/zplug"]
 	path = zsh/plugins/zplug
 	url = https://github.com/zplug/zplug
+[submodule "vim/bundle/vim-fugitive"]
+	path = vim/bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive

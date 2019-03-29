@@ -32,6 +32,7 @@ function IsCursorTop()
     endif
     return 0
 endfunction
+
 function SmartSplit()
     if IsCursorTop()
         normal H
@@ -120,9 +121,9 @@ vnoremap <leader>=<space> :Tab /\s\zs/l1r0<cr>gv=
 vnoremap <leader>=; :Tabularize /\S\+;$/l1<cr>gv=
 vnoremap <leader>=( :Tabularize /\S\+($/l1<cr>gv=
 
-noremap <leader>1 "1 ; Register
-noremap <leader>2 "2 ; Register
-noremap <leader>3 "3 ; Register
+noremap <leader>1 "1
+noremap <leader>2 "2
+noremap <leader>3 "3
 noremap <leader><cr> a<cr><esc>
 noremap <leader>> x<esc>wP
 noremap <leader>< x<esc>bep
@@ -341,17 +342,18 @@ function Smart_TabComplete()
     endif
 endfunction
 
-command! -nargs=? Gdiff diffthis |
-      \ let gdiffpath=fnamemodify(resolve(expand('%:p')),':h') |
-      \ vnew |
-      \ set buftype=nofile |
-      \ set bufhidden=wipe |
-      \ set noswapfile |
-      \ execute "cd ".gdiffpath." | r!git show ".(!"<args>"?'HEAD~0':"<args>").":./".expand('#') |
-      \ 1d_ |
-      \ let &filetype=getbufvar('#', '&filetype') |
-      \ execute 'autocmd BufWipeout <buffer> diffoff!' |
-      \ diffthis
+"command! -nargs=? Gdiff diffthis |
+"      \ let gdiffpath=fnamemodify(resolve(expand('%:p')),':h') |
+"      \ vnew |
+"      \ set buftype=nofile |
+"      \ set bufhidden=wipe |
+"      \ set noswapfile |
+"      \ execute "cd ".gdiffpath." | r!git show ".(!"<args>"?'HEAD~0':"<args>").":./".expand('#') |
+"      \ 1d_ |
+"      \ let &filetype=getbufvar('#', '&filetype') |
+"      \ execute 'autocmd BufWipeout <buffer> diffoff!' |
+"      \ diffthis
+
 
 if &diff
 endif
