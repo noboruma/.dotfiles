@@ -56,7 +56,7 @@ cnoremap <C-k> <C-w><C-w>
 "noremap <leader>a :set scb<cr> " just use vimdiff or Linediff
 "noremap <leader>A :set scb!<cr>
 "noremap <leader>b :FufBuffer<cr>
-noremap <leader>b :<c-u>Buffers <cr>
+noremap <leader>b :<c-u>Buffers<cr>:set autochdir<cr>
 noremap <leader>c :<c-u>AsyncCCL<cr>:ccl\|lcl\|pcl<cr>
 noremap <leader>C :AsyncStop<cr>
 noremap <leader>d "_d
@@ -128,8 +128,8 @@ noremap <leader><cr> a<cr><esc>
 noremap <leader>> x<esc>wP
 noremap <leader>< x<esc>bep
 
-noremap <leader><bs> <C-O>
-noremap <leader><tab> <C-I>
+nnoremap <bs> <C-O>
+nnoremap <tab> <C-I>
 
 " Custom hard remap
 inoremap        [  []<Left>
