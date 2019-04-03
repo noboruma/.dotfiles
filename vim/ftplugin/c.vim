@@ -20,7 +20,7 @@ if executable('ccls') || executable ('cquery')
         let g:LanguageClient_serverCommands.c = ['cquery',
                     \ '--init={"cacheDirectory":"/tmp/cquery/cache/", "diagnostics": {"onParse": false, "onType": false}, "index": {"comments": 2}, "cacheFormat": "msgpack", "completion": {"filterAndSort": false}}']
         let g:LanguageClient_serverCommands.cpp = ['cquery',
-                    \ '--init={"cacheDirectory":"/tmp/cquery/cache/", "diagnostics": {"onParse": false, "onType": false}, "index": {"comments": 2}, "cacheFormat": "msgpack", "completion": {"filterAndSort": false}}']
+                    \ '--init={"cacheDirectory":"/tmp/cquery/cache/", "diagnostics": {"onParse": true, "onType": true}, "index": {"comments": 2}, "cacheFormat": "msgpack", "completion": {"filterAndSort": true}}']
     else
         echom 'no ccls nor cquery executable'
     endif

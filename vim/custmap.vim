@@ -129,7 +129,7 @@ noremap <leader>> x<esc>wP
 noremap <leader>< x<esc>bep
 
 nnoremap <bs> <C-O>
-nnoremap <tab> <C-I>
+nnoremap <leader><bs> <C-I>
 
 " Custom hard remap
 inoremap        [  []<Left>
