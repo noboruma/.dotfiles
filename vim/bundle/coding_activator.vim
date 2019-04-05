@@ -73,11 +73,11 @@ endif
 let g:neosnippet#enable_snipmate_compatibility = 1
 
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+let g:neosnippet#snippets_directory=['~/.vim/bundle/vim-snippets/snippets', '~/.vim/bundle/custom-snippets']
 
 packadd neosnippet.vim
-imap <C-j>     <Plug>(neosnippet_expand_or_jump)
-smap <C-j>     <Plug>(neosnippet_expand_or_jump)
+imap <C-j>     <Plug>(neosnippet_expand)
+smap <C-j>     <Plug>(neosnippet_expand)
 xmap <C-j>     <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
@@ -96,10 +96,10 @@ endif
 "!neosnippet
 
 " Snipmate
-packadd vim-snippets
-packadd tlib
-packadd vim-addon-mw-utils
-packadd vim-snipmate
+"packadd vim-snippets
+"packadd tlib
+"packadd vim-addon-mw-utils
+"packadd vim-snipmate
 "imap <C-J> <Plug>snipMateNextOrTrigger
 "smap <C-J> <Plug>snipMateNextOrTrigger
 " !Snipmate
