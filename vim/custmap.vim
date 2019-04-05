@@ -45,6 +45,20 @@ function SmartSplit()
     endif
 endfunction
 
+function FixedScroll()
+    let curline   = line(".")
+    let curcol    = col(".")
+    let viewlines = winheight(0)
+
+    let pagesnum = curline / viewlines
+    normal gg
+    for i in range(1, pagesnum)
+        normal +
+    endfor
+    let offset_to_line = curline % viewlines
+    call cursor(curline, curcol)
+endfunction
+
 command! AsyncCCL call asyncrun#quickfix_toggle(0, 0)
 
 cnoremap <C-a> <Home>
@@ -112,8 +126,9 @@ noremap <leader>w :<c-u>up<cr>
 noremap <leader>x :<c-u>bp\|bd #<cr>
 noremap <leader>X :<c-u>bp\|bd! #<cr>
 noremap <leader>y "+y
-noremap <leader>z zR
-noremap <leader>Z zM
+nnoremap <leader>z :<c-u>call FixedScroll()<cr>
+"noremap <leader>z zR
+"noremap <leader>Z zM
 
 vnoremap <leader>=, :Tab /,\zs/l1r0<cr>gv=
 vnoremap <leader>== :Tab /=<cr>gv=
@@ -156,8 +171,12 @@ nnoremap <c-j> J
 "nnoremap <c-k> K
 nnoremap J <c-e>
 nnoremap K <c-y>
-nnoremap + <PageDown>
-nnoremap - <PageUp>
+nnoremap + <PageDown><c-e><c-e>
+nnoremap - <PageUp><c-y><c-y>
+nnoremap <PageDown> <c-f><c-e><c-e>
+nnoremap <PageUp> <c-b><c-y><c-y>
+nmap <ScrollWheelUp> <PageUp>
+nmap <ScrollWheelDown> <PageDown>
 
 " Simulate <down> after CTRL-N
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
