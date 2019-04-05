@@ -93,6 +93,8 @@ augroup vimrc
     autocmd BufWinEnter * if &fdm == 'expr' | setlocal foldmethod=manual | exe "normal zM" | endif
     " Prevent RO file editing: use 'set modifiable' manually if needed
     autocmd BufEnter * let &modifiable = !&readonly
+    " Fix FZF Buffer
+    autocmd BufEnter * silent cd %:p:h
 augroup END
 
 set foldlevel=99
