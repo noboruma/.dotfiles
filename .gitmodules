@@ -145,3 +145,9 @@
 [submodule "vim/pack/submodules/opt/neosnippet.vim"]
 	path = vim/pack/submodules/opt/neosnippet.vim
 	url = https://github.com/Shougo/neosnippet.vim
+[submodule "zsh/plugins/per-directory-history"]
+	path = zsh/plugins/per-directory-history
+	url = https://github.com/jimhester/per-directory-history
+[submodule "qutebrowser/plugins/solarized-everything-css"]
+	path = qutebrowser/plugins/solarized-everything-css
+	url = https://github.com/alphapapa/solarized-everything-css

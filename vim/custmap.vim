@@ -13,6 +13,10 @@ inoremap KK <esc>K
 nnoremap // /\<<C-r><C-w>\><cr>
 vnoremap // "sy/<C-R>"<cr>
 nnoremap <leader>/ :nohlsearch<cr>
+" search clipboard
+nnoremap <S-Insert> q/p<cr>
+" insert clipboard into command
+cnoremap <S-Insert> <c-r>0
 
 function! IsLeftMostWindow()
     let curNr = winnr()

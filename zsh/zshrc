@@ -294,4 +294,8 @@ ZSH_HIGHLIGHT_STYLES[builtin]='fg=33'
 ZSH_HIGHLIGHT_STYLES[command]='fg=33'
 source $HOME/.zsh/plugins/zsh-syntaz-highlighting/zsh-syntax-highlighting.zsh
 
+# zsh per directory history
+PER_DIRECTORY_HISTORY_TOGGLE='^H'
+source $HOME/.zsh/plugins/per-directory-history/per-directory-history.zsh
+
 #zprof
