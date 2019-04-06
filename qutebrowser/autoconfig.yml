@@ -9,6 +9,10 @@ settings:
     global:
       normal:
         '*': search {primary}
+  colors.statusbar.progress.bg:
+    global: blue
+  colors.webpage.bg:
+    global: black
   content.user_stylesheets:
     global: ~/.dotfiles/qutebrowser/plugins/solarized-everything-css/css/solarized-dark/solarized-dark-all-sites.css
   scrolling.smooth:

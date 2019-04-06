@@ -33,7 +33,7 @@ alias siptables='sudo iptables'
 alias spi='sudo pacman -S'
 alias spu='sudo pacman -Syu'
 alias sps='pacman -Ss'
-alias spr='pacman -Rcns'
+alias spr='sudo pacman -Rcns'
 # makepkg -sri
 alias sai='sudo apt install'
 alias aS='aptitude search'
@@ -83,7 +83,7 @@ alias 9='cd -9'
 
 alias dots="cd ~/.dotfiles"
 alias vrc="vim ~/.vimrc"
-alias wrc="vim ~/.config/vimb/config"
+alias wrc="vim ~/.config/qutebrowser/autoconfig.yml"
 alias zrc="vim ~/.zshrc"
 alias trc="vim ~/.tmux.conf"
 alias mrc="vim ~/.mutt/neomuttrc"
