@@ -6,7 +6,7 @@ if executable('ccls') || executable ('cquery')
     let g:LanguageClient_diagnosticsEnable=1
     let g:LanguageClient_hasSnippetSupport=1
     let g:LanguageClient_selectionUI='quickfix'
-    let g:LanguageClient_diagnosticsList='location-list'
+    let g:LanguageClient_diagnosticsList='Location'
     if !exists('g:LanguageClient_serverCommands')
         let g:LanguageClient_serverCommands = {}
     endif
