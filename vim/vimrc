@@ -314,9 +314,6 @@ set nospell
 " c-x c-k feature:
 set dictionary+=/usr/share/dict/words
 
-" Make options
-let &makeprg='make'
-
 " Ced: let this be the default CTAGS file location
 "map tags :!exctags -R --c++-kinds=+p --fields=+iaS --extra=+q . <CR>
 "set tags+=./tags

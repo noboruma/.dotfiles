@@ -1,5 +1,8 @@
 source ~/.vim/bundle/coding_activator.vim
 
+" Make options
+let &makeprg='make'
+
 " LC
 " See ftplugin for tools setup
 if executable('ccls') || executable ('cquery')

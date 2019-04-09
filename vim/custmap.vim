@@ -51,16 +51,22 @@ endfunction
 
 function FixedScroll()
     let curline   = line(".")
-    let curcol    = col(".")
     let viewlines = winheight(0)
+    let topviewline = line("w0")
 
-    let pagesnum = curline / viewlines
-    normal gg
-    for i in range(1, pagesnum)
-        normal +
-    endfor
-    let offset_to_line = curline % viewlines
-    call cursor(curline, curcol)
+    let pagenum = curline / viewlines
+    let pagestartline = pagenum * viewlines
+    if topviewline < pagestartline
+        let offset = pagestartline - topviewline
+        for i in range(1, offset)
+            normal J
+        endfor
+    elseif topviewline > pagestartline
+        let offset = topviewline - pagestartline
+        for i in range(1, offset)
+            normal K
+        endfor
+    endif
 endfunction
 
 command! AsyncCCL call asyncrun#quickfix_toggle(0, 0)
@@ -156,31 +162,22 @@ inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]
 inoremap        (  ()<Left>
 inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
 
-fun LspFunctionType()
-    let l:pos=getpos('.')
-    normal f)%h
-    execute ":LspHover<cr>"
-    call cursor(l:pos[1], l:pos[2])
-endfun
 inoremap <c-f> <c-x><c-f>
 inoremap <c-l> <c-x><c-l>
-inoremap <c-k> <c-o>:call LAnguageClient#textDocument_signatureHelp()<cr>
-nnoremap <silent> <c-k> <Esc>:Cppman <cword><CR>
-vnoremap <silent> <c-k> "sy:Cppman <C-R>"<CR>
-
-"ALT: M-xxx
+inoremap <c-k> <c-o>:call LanguageClient#textDocument_signatureHelp()<cr>
+nnoremap <silent> <c-k> <Esc>:Man <cword><CR>
+vnoremap <silent> <c-k> "sy:Man <C-R>"<CR>
 
 " scroll remap
 nnoremap <c-j> J
-"nnoremap <c-k> K
-nnoremap J <c-e>
 nnoremap K <c-y>
-nnoremap + <PageDown><c-e><c-e>
-nnoremap - <PageUp><c-y><c-y>
-nnoremap <PageDown> <c-f><c-e><c-e>
-nnoremap <PageUp> <c-b><c-y><c-y>
-nmap <ScrollWheelUp> <PageUp>
-nmap <ScrollWheelDown> <PageDown>
+nnoremap J <c-e>
+nnoremap <PageUp> :<c-u>call FixedScroll()<cr><c-b><c-y><c-y>M
+nnoremap <PageDown> :<c-u>call FixedScroll()<cr><c-f><c-e><c-e>M
+nnoremap - <PageUp>
+nnoremap + <PageDown>
+nmap <S-ScrollWheelUp> <PageUp>
+nmap <S-ScrollWheelDown> <PageDown>
 
 " Simulate <down> after CTRL-N
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
@@ -200,57 +197,41 @@ endfunction
 command! -nargs=+ -complete=command CaptureExtOutputInNewBuffer call CaptureExtOutputInNewBuffer(<q-args>)
 
 noremap <F1> :<c-u>!git add %<cr>
-noremap <F2>  :<c-u>set modifiable\|set noro<cr>
+noremap <F2> :<c-u>set modifiable\|set noro\|set write<cr>
 
-let g:cppmanprovider = 0
-fun IterateThroughProviders()
-    if has("gui_running")
-        let l:tmux_command="new-window"
-        let l:sr_command='sr'
-        let l:focus="-d"
-        let l:silent="silent"
-    else
-        let l:tmux_command="split-window"
-        let l:sr_command='sr -browser=w3m'
-        let l:focus=""
-        let l:silent=""
+function! SetMan()
+    let choice = confirm("Which provider?", "&Google\n&Duckduckgo\n&Cppman\n&man", 2)
+    if choice == 0
+        echom "none"
+    elseif choice == 1
+        command! -nargs=+ Man exe "silent !tmux ".g:man_tmux_command." ".man_focus." '".man_sr_command." google \"" . expand(<q-args>) . "\"'"
+    elseif choice == 2
+        command! -nargs=+ Man exe "silent !tmux ".g:man_tmux_command." ".man_focus."'".man_sr_command." duckduckgo \"" . expand(<q-args>) . "\"'"
+    elseif choice == 3
+        command! -nargs=+ Man exe man_silent."!tmux ".g:man_tmux_command." 'cppman " . expand(<q-args>) . "'"
+    elseif choice == 4
+        command! -nargs=+ Man exe man_silent."!tmux ".g:man_tmux_command." 'man " . expand(<q-args>) . "'"
     endif
-
-    if (g:cppmanprovider == 0)
-        let g:cppmanprovider = 1
-        command! -nargs=+ Cppman silent exe "silent !tmux ".l:tmux_command." ".l:focus." '".l:sr_command." google \"" . expand(<q-args>) . "\"'"
-        echom "switch to google"
-    elseif (g:cppmanprovider == 1)
-        let g:cppmanprovider = 2
-        command! -nargs=+ Cppman silent exe "silent !tmux ".l:tmux_command." ".l:focus."'".l:sr_command." duckduckgo \"" . expand(<q-args>) . "\"'"
-        echom "switch to duckduckgo"
-    elseif (g:cppmanprovider == 2)
-        let g:cppmanprovider = 3
-        command! -nargs=+ Cppman silent exe l:silent."!tmux ".l:tmux_command." 'cppman " . expand(<q-args>) . "'"
-        echom "switch to cppman"
-    elseif (g:cppmanprovider == 3)
-        let g:cppmanprovider = 0
-        command! -nargs=+ Cppman silent exe l:silent."!tmux ".l:tmux_command." 'man " . expand(<q-args>) . "'"
-        echom "switch to man"
-    endif
-endfun
+endfunction
 if has("gui_running")
-    command! -nargs=+ Cppman exe "silent !tmux new-window -d 'sr duckduckgo \"" . expand(<q-args>) . "\"'"
+    let g:man_tmux_command="new-window"
+    let g:man_sr_command='sr'
+    let g:man_focus="-d"
+    let g:man_silent="silent"
 else
-    command! -nargs=+ Cppman exe "silent !tmux split-window 'sr -browser=w3m duckduckgo \"" . expand(<q-args>) . "\"'"
+    let g:man_tmux_command="split-window"
+    let g:man_sr_command='sr -browser=w3m'
+    let g:man_focus=""
+    let g:man_silent=""
 endif
-
-noremap <F3> :<c-u>call IterateThroughProviders()<cr>
+command! -nargs=+ Man exe "silent !tmux ".g:man_tmux_command." ".man_focus."'".man_sr_command." duckduckgo \"" . expand(<q-args>) . "\"'"
 
 " Need to manually call copen first so that directories are correctly set
 " (issue with asyncrun?)
 
-
-noremap <expr> <F4> exists('debug') ? ":<c-u>AsyncRun -program=make @ -j4 DEBUG=1 -C `pwd`/<tab><tab>" : ":<c-u>AsyncRun -program=make @ -j4 -C `pwd`/<tab><tab>"
+noremap <expr> <F4> exists('g:debug') ? ":<c-u>AsyncRun -program=make @ -j4 DEBUG=1 -C `pwd`/<tab><tab>" : ":<c-u>AsyncRun -program=make @ -j4 -C `pwd`/<tab><tab>"
 nnoremap <F5> :<c-u>AsyncCCL<cr>:up<cr>:AsyncRun -program=make<Up><cr>
 inoremap <F5> <esc>:<c-u>AsyncCCL<cr>:up<cr>:AsyncRun -program=make<Up><cr>
-
-noremap <expr> <F9> exists('debug') ?  ":<c-u>unlet debug<cr>" : ":<c-u>let debug=1<cr>"
 
 fun IsQFOrLocOrTagOpen()
     silent exec 'redir @a | ls | redir END'
@@ -330,6 +311,19 @@ noremap <expr> <F6> bufwinnr('!gdb') != -1 ? ":<c-u>Finish<cr>" : ":<c-u>call Pr
 noremap <expr> <F7> bufwinnr('!gdb') != -1 ? ":<c-u>Over<cr>" : ":<c-u>call NextWinOrQFError()<cr>"
 noremap <expr> <F8> bufwinnr('!gdb') != -1 ? ":<c-u>Step<cr>" : ":<c-u>call CurrWinOrQFError()<cr>"
 
+function SetDebug()
+    let choice = confirm("Debug mode", "&Yes\n&No", 2)
+    if choice == 0
+    elseif choice == 1
+        let g:debug=1
+    elseif choice == 2
+        let g:debug=1
+        unlet g:debug
+    endif
+endfunction
+
+noremap <expr> <F9> "<esc>:<c-u>call SetDebug()<cr>"
+
 function ToggleSpell()
     if &spell
         set nospell
@@ -340,8 +334,7 @@ endfunction
 
 noremap <F10> :call ToggleSpell()<cr>
 inoremap <F10> <Esc>:call ToggleSpell()<cr>
-
-noremap <F11> <esc>:up<cr>:!!<cr>
+noremap <F11> :<c-u>call SetMan()<cr>
 
 function Smart_TabComplete()
     let line = getline('.')                         " current line
