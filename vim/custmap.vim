@@ -372,6 +372,5 @@ endfunction
 "      \ execute 'autocmd BufWipeout <buffer> diffoff!' |
 "      \ diffthis
 
-
 if &diff
 endif

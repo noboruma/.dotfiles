@@ -73,6 +73,7 @@ set cino+=j1,(0,b1,+0,t0,<0      " C file option
 set autoread
 set clipboard=unnamed          " ^=
 set showcmd                    " visual count
+set matchpairs+=<:>
 
 " set terminal, needed this way to support C-arrows.
 " Looks like vim is only parsing 'xterm' to make decisions
@@ -82,9 +83,7 @@ set term=xterm-256color
 set list
 set listchars=tab:>-,trail:-
 
-"set ignorecase
-set smartcase
-" as ignore case but not if one Capital letter
+set smartcase " As 'ignorecase' but activate case if contains Capital letter
 
 " Folding
 " Trigger manual after indent method
@@ -105,10 +104,6 @@ set incsearch      " Search as we type
 set hlsearch       " Highlight
 
 set mouse=a
-
-set matchpairs+=<:>
-
-filetype off
 
 " ALE plugin
 let &runtimepath.=',~/.vim/bundle/ale'
@@ -296,9 +291,6 @@ let termdebugger = "gdb"
 packadd termdebug
 " !Termdebug
 
-filetype on
-filetype plugin on
-filetype indent on
 set ruler          " Relative cursor position
 set is             " inc search
 
@@ -348,7 +340,6 @@ source ~/.vim/custmap.vim
 " Explorer options
 let g:netrw_liststyle=3
 autocmd FileType netrw setl bufhidden=delete
-"set winfixwidth
 
 " Ced: for auto-completion popup menu
 highlight Pmenu    guifg=black  guibg=grey
@@ -358,8 +349,7 @@ highlight Pmenu    ctermbg=grey gui=bold
 highlight PmenuSel ctermbg=cyan gui=bold
 "hi Search cterm=NONE ctermfg=grey ctermbg=blue
 
-set completeopt=menu,menuone,longest
-",preview
+set completeopt=menu,menuone,longest ",preview
 set previewheight=3
 "To close automatically the preview window:
 "autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
@@ -425,3 +415,7 @@ if &diff
     "syntax off
     set undolevels=-1
 endif
+
+filetype on
+filetype plugin on
+filetype indent on

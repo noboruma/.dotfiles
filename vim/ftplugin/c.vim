@@ -140,7 +140,6 @@ if !exists("*File_flip")
 endif
 
 set efm=%f:%l:%c:%m
-"set efm+=%f:%l:%c:%m
 set efm+=%Dmake:\ Entering\ directory\ '%f'
 set efm+=%Xmake:\ Leaving\ directory\ '%f'
 set efm+=%Dmake[%*\\d]:\ Entering\ directory\ '%f'
