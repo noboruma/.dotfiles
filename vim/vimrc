@@ -39,12 +39,12 @@ set noequalalways
 
 " Start to be a good vimmer
 if !use_arrow
-    inoremap  <Left>   <NOP>
-    inoremap  <Right>  <NOP>
-    nnoremap  <Up>     <NOP>
-    nnoremap  <Down>   <NOP>
-    nnoremap  <Left>   <NOP>
-    nnoremap  <Right>  <NOP>
+    inoremap <Left>  <NOP>
+    inoremap <Right> <NOP>
+    nnoremap <Up>    <NOP>
+    nnoremap <Down>  <NOP>
+    nnoremap <Left>  <NOP>
+    nnoremap <Right> <NOP>
 endif
 
 set cmdheight=1

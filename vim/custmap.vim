@@ -308,8 +308,8 @@ fun CurrWinOrQFError()
 endfun
 
 noremap <expr> <F6> bufwinnr('!gdb') != -1 ? ":<c-u>Finish<cr>" : ":<c-u>call PrevWinOrQFError()<cr>"
-noremap <expr> <F7> bufwinnr('!gdb') != -1 ? ":<c-u>Over<cr>" : ":<c-u>call NextWinOrQFError()<cr>"
-noremap <expr> <F8> bufwinnr('!gdb') != -1 ? ":<c-u>Step<cr>" : ":<c-u>call CurrWinOrQFError()<cr>"
+noremap <expr> <F7> bufwinnr('!gdb') != -1 ? ":<c-u>Over<cr>"   : ":<c-u>call NextWinOrQFError()<cr>"
+noremap <expr> <F8> bufwinnr('!gdb') != -1 ? ":<c-u>Step<cr>"   : ":<c-u>call CurrWinOrQFError()<cr>"
 
 function SetDebug()
     let choice = confirm("Debug mode", "&Yes\n&No", 2)
@@ -332,7 +332,7 @@ function ToggleSpell()
     endif
 endfunction
 
-noremap <F10> :call ToggleSpell()<cr>
+noremap <F10> :<c-u>call ToggleSpell()<cr>
 inoremap <F10> <Esc>:call ToggleSpell()<cr>
 noremap <F11> :<c-u>call SetMan()<cr>
 
