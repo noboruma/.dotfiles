@@ -94,8 +94,9 @@ augroup vimrc
     " Prevent RO file editing: use 'set modifiable' manually if needed
     autocmd BufEnter * let &modifiable = !&readonly
     " Fix FZF Buffer
-    autocmd BufEnter * silent cd %:p:h
+    autocmd BufEnter * try | silent cd %:p:h | catch | endtry
 augroup END
+set autochdir
 
 set foldlevel=99
 set foldnestmax=0
@@ -110,10 +111,10 @@ set matchpairs+=<:>
 filetype off
 
 " ALE plugin
-"let &runtimepath.=',~/.vim/bundle/ale'
-let g:ale_linters = {
-\   'cpp': ['cppcheck', 'clangtidy', 'clangcheck', 'flawfinder', 'gcc'],
-\}
+let &runtimepath.=',~/.vim/bundle/ale'
+"let g:ale_linters = {
+"\   'cpp': ['cppcheck', 'clangtidy', 'clangcheck', 'flawfinder', 'gcc'],
+"\}
 let g:ale_cpp_gcc_options = '$(cat ~/.compiler_options)' "Options can be easily retrieved using 'bear' (github)
 let g:ale_echo_msg_error_str = 'Error'
 let g:ale_echo_msg_warning_str = 'Warning'
@@ -177,7 +178,6 @@ let &runtimepath.=',~/.vim/bundle/vim-fugitive'
 " AsyncRun
 let &runtimepath.=',~/.vim/bundle/asyncrun'
 let g:asyncrun_bell=1
-command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 " !AsyncRun
 
 " Restful-console
@@ -368,8 +368,6 @@ set previewheight=3
 set showbreak=↪
 set wrap
 set cpo+=n
-
-set autochdir
 
 " Jump to the last position when reopening a file
 augroup vimrc

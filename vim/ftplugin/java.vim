@@ -6,9 +6,20 @@ let &makeprg='nvm'
 " Surround
 let g:surround_{char2nr(">")} = "\1template: \1<\r>"
 
+imap <expr> {<cr> "{<cr>}<esc>O"
+inoremap [<cr> [<cr>]<c-o>O<tab>
+inoremap (<cr> (<cr>)<c-o>O<tab>
+
 inoremap <<cr> <<cr>><c-o>O<tab>
 inoremap <expr> <> "<>\<Left>"
 inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
+inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
+inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
+inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
+inoremap <expr> { "{}\<Left>"
+
+" Surround
+let g:surround_{char2nr("c")} = "\/*\r*\/"
 
 if &diff
     " keep default folding if diff'ing
@@ -29,7 +40,9 @@ setlocal complete-=t
 
 if executable('jdtls')
     let g:LanguageClient_diagnosticsEnable=1
+    let g:LanguageClient_hasSnippetSupport=1
     let g:LanguageClient_selectionUI='quickfix'
+    let g:LanguageClient_diagnosticsList='Location'
     if !exists('g:LanguageClient_serverCommands')
         let g:LanguageClient_serverCommands = {
                     \ 'java': ['$HOME/usr/bin/jdtls', '-data', getcwd()],
