@@ -42,6 +42,7 @@ alias sau='sudo apt update'
 alias saup='sudo aptitude safe-upgrade'
 alias e=$IDE
 alias v=$EDITOR
+alias nv="neovim"
 alias sv='sudo $EDITOR'
 alias gcommit='git commit -am'
 alias gpush='git push'

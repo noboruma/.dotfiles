@@ -31,22 +31,32 @@ if executable('ccls') || executable ('cquery')
     packadd LanguageClient-neovim
     LanguageClientStart
     "set formatexpr=LanguageClient_textDocument_rangeFormatting()
-    setlocal omnifunc=LanguageClient#complete
-
     if has('nvim')
-        packadd deoplete.nvim
-        let g:deoplete#enable_at_startup = 1
         call deoplete#custom#source('LanguageClient',
             \ 'min_pattern_length',
             \ 2)
-        "inoremap <silent><expr> <TAB>
-        "            \ pumvisible() ? "\<C-n>" :
-        "            \ <SID>check_back_space() ? "\<TAB>" :
-        "            \ deoplete#mappings#manual_complete()
-        "function! s:check_back_space() abort "{{{
-        "    let col = col('.') - 1
-        "    return !col || getline('.')[col - 1]  =~ '\s'
-        "endfunction"}}}
+        call deoplete#custom#filter('attrs_order', {
+                    \ 'cpp': {
+                    \     'kind': [
+                    \     'Method',
+                    \     'Function',
+                    \     'Property'
+                    \     ],
+                    \ },
+                    \ 'c': {
+                    \     'kind': [
+                    \     'Function',
+                    \     'Property'
+                    \     ]
+                    \ }
+                    \})
+        imap <silent><expr> <TAB>
+                    \ pumvisible() ? "\<lt>Down>" :
+                    \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
+                    \ <SID>check_back_space() ? "\<TAB>"
+                    \ : deoplete#mappings#manual_complete()
+    else
+        setlocal omnifunc=LanguageClient#complete
     endif
 endif
 " !LC

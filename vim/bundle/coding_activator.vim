@@ -80,12 +80,35 @@ imap <C-j> <Plug>(neosnippet_expand)
 smap <C-j> <Plug>(neosnippet_expand)
 xmap <C-j> <Plug>(neosnippet_expand_target)
 
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <expr><TAB>
- \ pumvisible() ? "\<lt>Down>" :
- \ neosnippet#expandable_or_jumpable() ?
- \    "\<Plug>(neosnippet_expand_or_jump)" : "\<c-r>=Smart_TabComplete()\<CR>"
+if has('nvim')
+    let g:python3_host_prog = '/home/tlegris/usr/bin/python3'
+    let g:deoplete#enable_at_startup = 1
+    packadd deoplete.nvim
+    call deoplete#enable()
+    call deoplete#custom#option({
+                \ 'auto_complete': v:true,
+                \ 'auto_complete_delay': 100,
+                \ 'smart_case': v:true,
+                \ })
+    let g:deoplete#file#enable_buffer_path=1
+    imap <silent><expr> <TAB>
+                \ pumvisible() ? "\<lt>Down>" :
+                \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
+                \ <SID>check_back_space() ? "\<TAB>"
+                \ : deoplete#mappings#manual_complete()
+    function! s:check_back_space() abort "{{{
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~ '\s'
+    endfunction"}}}
+else
+    " SuperTab like snippets behavior.
+    " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+    imap <expr><TAB>
+         \ pumvisible() ? "\<lt>Down>" :
+         \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" 
+         \ : "\<c-r>=Smart_TabComplete()\<CR>"
+endif
+
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
  \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
