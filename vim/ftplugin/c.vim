@@ -50,11 +50,6 @@ if executable('ccls') || executable ('cquery')
                     \     ]
                     \ }
                     \})
-        imap <silent><expr> <TAB>
-                    \ pumvisible() ? "\<lt>Down>" :
-                    \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
-                    \ <SID>check_back_space() ? "\<TAB>"
-                    \ : deoplete#mappings#manual_complete()
     else
         setlocal omnifunc=LanguageClient#complete
     endif
