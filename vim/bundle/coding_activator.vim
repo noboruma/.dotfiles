@@ -76,9 +76,9 @@ let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#snippets_directory=['~/.vim/pack/submodules/opt/vim-snippets/snippets', '~/.vim/bundle/custom-snippets']
 
 packadd neosnippet.vim
-imap <C-j>     <Plug>(neosnippet_expand)
-smap <C-j>     <Plug>(neosnippet_expand)
-xmap <C-j>     <Plug>(neosnippet_expand_target)
+imap <C-j> <Plug>(neosnippet_expand)
+smap <C-j> <Plug>(neosnippet_expand)
+xmap <C-j> <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.

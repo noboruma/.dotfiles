@@ -75,9 +75,11 @@ set clipboard=unnamed          " ^=
 set showcmd                    " visual count
 set matchpairs+=<:>
 
-" set terminal, needed this way to support C-arrows.
-" Looks like vim is only parsing 'xterm' to make decisions
-set term=xterm-256color
+if !has('nvim')
+    " set terminal, needed this way to support C-arrows.
+    " Looks like vim is only parsing 'xterm' to make decisions
+    set term=xterm-256color
+endif
 
 " Show space and tab as blue
 set list

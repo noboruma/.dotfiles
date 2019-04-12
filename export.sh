@@ -31,6 +31,7 @@ ln -s $PWD/mutt ~/.mutt
 ln -s $PWD/.irbrc ~
 ln -s $PWD/vimb ~/.config/vimb
 ln -s $PWD/qutebrowser/autoconfig.yml  ~/.config/qutebrowser/
+ln -s $PWD/nvim ~/.config/nvim
 cd - 1>/dev/null
 
 incrontab -l | grep -q fnotify
