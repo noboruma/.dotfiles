@@ -16,7 +16,7 @@ ln -s $PWD/vim/vimrc ~/.vimrc
 ln -s $PWD/zsh ~/.zsh
 ln -s $PWD/zsh/zshrc ~/.zshrc
 ln -s $PWD/gdb/bundle/gdb-dashboard/.gdbinit ~
-ln -s $PWD/gdb/.gdbinit.d ~
+ln -s $PWD/gdb/gdbinit.d ~/.gdbinit.d
 ln -s $PWD/.colorgccrc ~
 ln -s $PWD/tmux/tmux.conf ~/.tmux.conf
 ln -s $PWD/tmux ~/.tmux
