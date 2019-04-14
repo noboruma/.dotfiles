@@ -154,3 +154,6 @@
 [submodule "vim/pack/submodules/opt/deoplete.nvim"]
 	path = vim/pack/submodules/opt/deoplete.nvim
 	url = https://github.com/Shougo/deoplete.nvim
+[submodule "vim/pack/submodules/opt/nvim-gdb"]
+	path = vim/pack/submodules/opt/nvim-gdb
+	url = https://github.com/sakhnik/nvim-gdb

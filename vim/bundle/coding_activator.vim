@@ -81,7 +81,6 @@ smap <C-j> <Plug>(neosnippet_expand)
 xmap <C-j> <Plug>(neosnippet_expand_target)
 
 if has('nvim')
-    let g:python3_host_prog = '/home/tlegris/usr/bin/python3'
     let g:deoplete#enable_at_startup = 1
     packadd deoplete.nvim
     call deoplete#enable()
@@ -105,7 +104,7 @@ else
     " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
     imap <expr><TAB>
          \ pumvisible() ? "\<lt>Down>" :
-         \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" 
+         \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)"
          \ : "\<c-r>=Smart_TabComplete()\<CR>"
 endif
 
@@ -138,3 +137,4 @@ packadd tagbar
 let g:airline_extensions += ['ale', 'gutentags', 'languageclient', 'tagbar']
 
 packadd tagfinder
+packadd nvim-gdb
