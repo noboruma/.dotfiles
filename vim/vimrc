@@ -212,7 +212,6 @@ let &runtimepath.=',~/.vim/bundle/tabular'
 
 " EasyMotion
 let &runtimepath.=',~/.vim/bundle/vim-easymotion'
-nmap s <Plug>(easymotion-overwin-w)
 " !EasyMotion
 
 " vim-repeat

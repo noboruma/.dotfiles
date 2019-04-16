@@ -1,4 +1,5 @@
 " Custom map
+nmap n <Plug>(easymotion-overwin-w)
 nnoremap Q <nop>
 nnoremap x "_x
 vnoremap x "_d
@@ -214,8 +215,8 @@ if has('nvim')
     nmap <leader>p :ExtractPin<cr>
 
     " mappings for cycling
-    nmap <leader>n <Plug>(extract-sycle)
-    nmap <leader>N <Plug>(extract-Sycle)
+    nmap s <Plug>(extract-sycle)
+    nmap S <Plug>(extract-Sycle)
 
     " mappings for insert
     imap <m-v> <Plug>(extract-completeReg)
