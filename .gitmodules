@@ -157,3 +157,9 @@
 [submodule "vim/pack/submodules/opt/nvim-gdb"]
 	path = vim/pack/submodules/opt/nvim-gdb
 	url = https://github.com/sakhnik/nvim-gdb
+[submodule "vim/pack/submodules/opt/Extract"]
+	path = vim/pack/submodules/opt/Extract
+	url = https://github.com/cyansprite/Extract
+[submodule "vim/pack/submodules/opt/neoterm"]
+	path = vim/pack/submodules/opt/neoterm
+	url = https://github.com/kassio/neoterm

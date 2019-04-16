@@ -121,7 +121,7 @@ nnoremap <leader>m :Marks<cr>
 noremap <leader>mm <esc>:SlimeSend1 cppman <C-r><C-w>
 noremap <leader>o <c-w>w
 noremap <leader>O <esc>:only<cr>:vsp<cr>
-noremap <leader>p "_dP
+vnoremap <leader>p "_dP
 noremap <leader>q :<c-u>q<cr>
 noremap <leader>r /\<<C-r><C-w>\><cr>:%s//<C-r><C-w>/g<left><left>
 vnoremap <leader>r "sy/<C-R>"<cr>:%s//<C-R>"/g<left><left>
@@ -198,6 +198,29 @@ command! -nargs=+ -complete=command CaptureExtOutputInNewBuffer call CaptureExtO
 
 noremap <F1> :<c-u>!git add %<cr>
 noremap <F2> :<c-u>set modifiable\|set noro\|set write<cr>
+
+if has('nvim')
+    tnoremap <Esc> <C-\><C-n>
+    nnoremap <F3> :<c-u>let g:neoterm_size=winheight(0)/3 \| topleft Ttoggle<cr>
+    tnoremap <F3> <C-\><C-n>: Ttoggle<cr>
+
+    " mappings for putting
+    nmap p <Plug>(extract-put)
+    nmap P <Plug>(extract-Put)
+    " mappings for visual
+    vmap p <Plug>(extract-put)
+    vmap P <Plug>(extract-Put)
+
+    nmap <leader>p :ExtractPin<cr>
+
+    " mappings for cycling
+    nmap s <Plug>(extract-sycle)
+    nmap S <Plug>(extract-Sycle)
+
+    " mappings for insert
+    imap <m-v> <Plug>(extract-completeReg)
+    imap <c-v> <Plug>(extract-completeList)
+endif
 
 function! SetMan()
     let choice = confirm("Which provider?", "&Google\n&Duckduckgo\n&Cppman\n&man", 2)

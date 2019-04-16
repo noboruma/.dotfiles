@@ -81,9 +81,6 @@ smap <C-j> <Plug>(neosnippet_expand)
 xmap <C-j> <Plug>(neosnippet_expand_target)
 
 if has('nvim')
-    let g:deoplete#enable_at_startup = 1
-    packadd deoplete.nvim
-    call deoplete#enable()
     call deoplete#custom#option({
                 \ 'auto_complete': v:true,
                 \ 'auto_complete_delay': 100,

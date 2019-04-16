@@ -293,6 +293,20 @@ let termdebugger = "gdb"
 packadd termdebug
 " !Termdebug
 
+if has('nvim')
+    let g:neoterm_autoinsert=1
+    packadd neoterm
+
+    let g:deoplete#enable_at_startup = 1
+    packadd deoplete.nvim
+    call deoplete#enable()
+
+    let g:extract_useDefaultMappings=0
+    let g:extract_loadDeoplete=1
+    let g:extract_maxCount = 8
+    packadd Extract
+endif
+
 set ruler          " Relative cursor position
 set is             " inc search
 
