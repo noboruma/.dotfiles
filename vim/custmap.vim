@@ -214,8 +214,8 @@ if has('nvim')
     nmap <leader>p :ExtractPin<cr>
 
     " mappings for cycling
-    nmap s <Plug>(extract-sycle)
-    nmap S <Plug>(extract-Sycle)
+    nmap <leader>n <Plug>(extract-sycle)
+    nmap <leader>N <Plug>(extract-Sycle)
 
     " mappings for insert
     imap <m-v> <Plug>(extract-completeReg)
