@@ -298,7 +298,7 @@ if has('nvim')
 
     let g:deoplete#enable_at_startup = 1
     packadd deoplete.nvim
-    call deoplete#enable()
+    call deoplete#custom#option('ignore_sources', {'_': ['buffer', 'around', 'memeber']})
 
     let g:extract_useDefaultMappings=0
     let g:extract_loadDeoplete=1

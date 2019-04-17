@@ -83,12 +83,12 @@ alias 8='cd -8'
 alias 9='cd -9'
 
 alias dots="cd ~/.dotfiles"
-alias vrc="vim ~/.vimrc"
-alias wrc="vim ~/.config/qutebrowser/autoconfig.yml"
-alias zrc="vim ~/.zshrc"
-alias trc="vim ~/.tmux.conf"
-alias mrc="vim ~/.mutt/neomuttrc"
-alias irc="vim ~/.irssi/config"
+alias vrc="nvim ~/.vimrc"
+alias wrc="nvim ~/.config/qutebrowser/autoconfig.yml"
+alias zrc="nvim ~/.zshrc"
+alias trc="nvim ~/.tmux.conf"
+alias mrc="nvim ~/.mutt/neomuttrc"
+alias irc="nvim ~/.irssi/config"
 
 alias er="gvim --servername GVIM --remote"
 alias ers="gvim --servername GVIM"

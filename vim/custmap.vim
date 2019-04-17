@@ -1,5 +1,5 @@
 " Custom map
-nmap n <Plug>(easymotion-overwin-w)
+nmap m <Plug>(easymotion-overwin-w)
 nnoremap Q <nop>
 nnoremap x "_x
 vnoremap x "_d
@@ -158,10 +158,14 @@ nnoremap <bs> <C-O>
 nnoremap <leader><bs> <C-I>
 
 " Custom hard remap
-inoremap        [  []<Left>
-inoremap <expr> ]  strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
-inoremap        (  ()<Left>
-inoremap <expr> )  strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+inoremap        [ []<Left>
+inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
+inoremap        ( ()<Left>
+inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
+inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
+inoremap <expr> { "{}\<Left>"
+inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
 
 inoremap <c-f> <c-x><c-f>
 inoremap <c-l> <c-x><c-l>

@@ -132,10 +132,6 @@ setlocal complete-=i
 " stop use ctags, only used for jump
 setlocal complete-=t
 
-inoremap <expr> ' strpart(getline('.'), col('.')-1, 1) == "\'" ? "\<Right>" : "\'\'\<Left>"
-inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\"\"\<Left>"
-inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
-inoremap <expr> { "{}\<Left>"
 inoremap ;; <esc>g_a;
 inoremap ,, <esc>g_a,
 inoremap ;. <esc>g_a.
