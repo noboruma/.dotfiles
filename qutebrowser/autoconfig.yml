@@ -11,6 +11,7 @@ settings:
         '*': search {primary}
         +: scroll-page 0 1
         '-': scroll-page 0 -1
+        m: hint
         z+: zoom-in
         z-: zoom-out
   colors.statusbar.progress.bg:

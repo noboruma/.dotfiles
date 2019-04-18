@@ -173,8 +173,12 @@ let &runtimepath.=',~/.vim/bundle/vim-fugitive'
 " !vim-fugitive
 
 " AsyncRun
+if executable('aplay')
+    let g:asynrun_exit="silent call system('aplay ~/.vim/pack/submodules/opt/clackclack.symphony/autoload/woodwhack.wav')"
+else
+    let g:asyncrun_bell=1
+endif
 let &runtimepath.=',~/.vim/bundle/asyncrun'
-let g:asyncrun_bell=1
 " !AsyncRun
 
 " Restful-console
