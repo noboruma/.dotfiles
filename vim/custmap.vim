@@ -233,66 +233,54 @@ if has('nvim')
     imap <c-v> <Plug>(extract-completeList)
 endif
 
-function! SetMyManHost()
-    let choice = confirm("Which provider?", "&Tmux\n&Neoterm\n", 1)
-    if choice == 0
+function! SetMyManHost(choice)
+    if a:choice == 0
         echom "none"
-    elseif choice == 1
+    elseif a:choice == 1
         let g:man_host_command="tmux"
-        command! -nargs=+ MyMan exe "silent !tmux ".g:man_tmux_command." ".man_focus."'".man_sr_command." ".g:man_provider." \"" . expand(<q-args>) . "\"'"
-    elseif choice == 2
+        command! -nargs=+ MyMan exe "silent !tmux ".g:man_tmux_command." ".man_focus."'".g:man_provider." \"" . expand(<q-args>) . "\"'"
+    elseif a:choice == 2
         let g:man_host_command="neoterm"
         command! -nargs=+ MyMan exe "silent T ".g:man_provider." \"" . expand(<q-args>) . "\""
     endif
 endfunction
+
+function! ChangeMyManHost()
+    let choice = confirm("Which provider?", "&Tmux\n&Neoterm\n", 1)
+    call SetMyManHost(choice)
+endfunction
+
 function! SetMyMan()
     let choice = confirm("Which provider?", "&Google\n&Duckduckgo\n&Cppman\n&man", 2)
-    if g:man_host_command ==? "tmux"
-        if choice == 0
-            echom "none"
-        elseif choice == 1
-            command! -nargs=+ MyMan exe "silent !tmux ".g:man_tmux_command." ".man_focus." '".man_sr_command." google \"" . expand(<q-args>) . "\"'"
-        elseif choice == 2
-            command! -nargs=+ MyMan exe "silent !tmux ".g:man_tmux_command." ".man_focus."'".man_sr_command." duckduckgo \"" . expand(<q-args>) . "\"'"
-        elseif choice == 3
-            command! -nargs=+ MyMan exe man_silent."!tmux ".g:man_tmux_command." 'cppman " . expand(<q-args>) . "'"
-        elseif choice == 4
-            command! -nargs=+ MyMan exe man_silent."!tmux ".g:man_tmux_command." 'man " . expand(<q-args>) . "'"
-        endif
-    else
-        if choice == 0
-            echom "none"
-        elseif choice == 1
-            let g:man_provider = "sr google"
-        elseif choice == 2
-            let g:man_provider = "sr duckduckgo"
-        elseif choice == 3
-            let g:man_provider = "cppman"
-        elseif choice == 4
-            let g:man_provider = "man"
-        endif
+    if choice == 0
+        echom "none"
+    elseif choice == 1
+        let g:man_provider = "sr google"
+    elseif choice == 2
+        let g:man_provider = "sr duckduckgo"
+    elseif choice == 3
+        let g:man_provider = "cppman"
+    elseif choice == 4
+        let g:man_provider = "man"
     endif
 endfunction
 
-if has('nvim')
-    let g:man_provider = "sr duckduckgo"
-    command! -nargs=+ MyMan exe "silent T ".g:man_provider." \"" . expand(<q-args>) . "\""
+if has("gui_running")
+    let g:man_tmux_command="new-window"
+    let g:man_focus="-d"
+    let g:man_silent="silent"
 else
     let g:man_host_command="tmux"
-    if has("gui_running")
-        let g:man_tmux_command="new-window"
-        let g:man_sr_command='sr'
-        let g:man_focus="-d"
-        let g:man_silent="silent"
-    else
-        let g:man_host_command="tmux"
-        let g:man_tmux_command="split-window"
-        let g:man_sr_command='sr -browser=w3m'
-        let g:man_focus=""
-        let g:man_silent=""
-    endif
-    let g:man_provider = "duckduckgo"
-    command! -nargs=+ MyMan exe "silent !tmux ".g:man_tmux_command." ".man_focus."'".man_sr_command." ".g:man_provider." \"" . expand(<q-args>) . "\"'"
+    let g:man_tmux_command="split-window"
+    let g:man_focus=""
+    let g:man_silent=""
+endif
+
+let g:man_provider = "sr duckduckgo"
+if has('nvim')
+    call SetMyManHost(2)
+else
+    call SetMyManHost(1)
 endif
 
 " Need to manually call copen first so that directories are correctly set
