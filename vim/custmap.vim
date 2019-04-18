@@ -87,6 +87,8 @@ noremap <leader>C :AsyncStop<cr>
 noremap <leader>d "_d
 noremap <leader>e :silent<space>e<space>`pwd`<tab>
 noremap <leader>ff :<c-u>Files<space>`pwd`<tab>
+noremap <leader>fe :<c-u>ALENext -error<cr>
+noremap <leader>fE :<c-u>ALEPrevious -error<cr>
 if executable('cquery') || executable('ccls')
     nnoremap <leader>fa :<c-u>call AutoAdjustQFWindow()<cr>
     nnoremap <leader>fd :<c-u>call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<cr>
@@ -109,12 +111,8 @@ vnoremap <leader>g "sy:AsyncRun -program=grep "<C-R>"" `pwd`<tab>
 nnoremap <leader>G :lcd<space>`pwd`<tab><space>\|<space>Ag<left><left><left><left><left><tab>
 vnoremap <leader>G "sy:lcd<space>`pwd`<tab><space>\|<space>Ag<space><C-R>"<C-f>F\|<left><C-c><tab>
 noremap <leader>h :<c-u>call File_flip()<cr>zz
-nnoremap <c-h> :<c-u>History<cr>
+nnoremap <leader>j J
 "noremap <leader>H :0r ~/.vim/.header_template<cr>
-noremap <leader>j :<c-u>tj <C-r><C-w><cr>
-noremap <leader>J :<c-u>tj /<C-r><C-w><C-b><right><right><right><right>
-vnoremap <leader>j "sy:tj /<C-R>"<cr>
-vnoremap <leader>J "sy:tj /<C-R>"
 " Use surfraw to search on the web
 noremap <leader>l :<c-u>let g:tagbar_left=IsLeftMostWindow()<cr>:TagbarOpen j<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
@@ -124,6 +122,7 @@ noremap <leader>o <c-w>w
 noremap <leader>O <esc>:only<cr>:vsp<cr>
 vnoremap <leader>p "_dP
 noremap <leader>q :<c-u>q<cr>
+noremap <leader>Q :<c-u>q!<cr>
 noremap <leader>r /\<<C-r><C-w>\><cr>:%s//<C-r><C-w>/g<left><left>
 vnoremap <leader>r "sy/<C-R>"<cr>:%s//<C-R>"/g<left><left>
 if has('nvim')
@@ -132,6 +131,10 @@ else
     " slime based?
 endif
 noremap <leader>S :<c-u>SemanticHighlightToggle<cr>
+noremap <leader>t :<c-u>tj <C-r><C-w><cr>
+noremap <leader>T :<c-u>tj /<C-r><C-w><C-b><right><right><right><right>
+vnoremap <leader>t "sy:tj /<C-R>"<cr>
+vnoremap <leader>T "sy:tj /<C-R>"
 nnoremap \| :<c-u>vsp<cr>
 nnoremap _ :<c-u>call SmartSplit()<cr>``zz
 noremap <leader>u :<c-u>UndotreeToggle<cr>:UndotreeFocus<cr>
@@ -170,14 +173,14 @@ inoremap <expr> " strpart(getline('.'), col('.')-1, 1) == "\"" ? "\<Right>" : "\
 inoremap <expr> { "{}\<Left>"
 inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
 
-inoremap <c-f> <c-x><c-f>
-inoremap <c-l> <c-x><c-l>
+nnoremap <c-h> :<c-u>History<cr>
 inoremap <c-k> <c-o>:call LanguageClient#textDocument_signatureHelp()<cr>
-nnoremap <silent> <c-k> <Esc>:Man <cword><CR>
-vnoremap <silent> <c-k> "sy:Man <C-R>"<CR>
+nnoremap <silent> <leader>k <Esc>:MyMan <cword><CR>
+vnoremap <silent> <leader>k "sy:MyMan <C-R>"<CR>
 
 " scroll remap
-nnoremap <c-j> J
+nnoremap <c-j> :call search('\%' . virtcol('.') . 'v\S', 'wW')<CR>
+nnoremap <c-k> :call search('\%' . virtcol('.') . 'v\S', 'bW')<CR>
 nnoremap K <c-y>
 nnoremap J <c-e>
 nnoremap <PageUp> :<c-u>call FixedScroll()<cr><c-b><c-y><c-y>M
@@ -230,32 +233,67 @@ if has('nvim')
     imap <c-v> <Plug>(extract-completeList)
 endif
 
-function! SetMan()
-    let choice = confirm("Which provider?", "&Google\n&Duckduckgo\n&Cppman\n&man", 2)
+function! SetMyManHost()
+    let choice = confirm("Which provider?", "&Tmux\n&Neoterm\n", 1)
     if choice == 0
         echom "none"
     elseif choice == 1
-        command! -nargs=+ Man exe "silent !tmux ".g:man_tmux_command." ".man_focus." '".man_sr_command." google \"" . expand(<q-args>) . "\"'"
+        let g:man_host_command="tmux"
+        command! -nargs=+ MyMan exe "silent !tmux ".g:man_tmux_command." ".man_focus."'".man_sr_command." ".g:man_provider." \"" . expand(<q-args>) . "\"'"
     elseif choice == 2
-        command! -nargs=+ Man exe "silent !tmux ".g:man_tmux_command." ".man_focus."'".man_sr_command." duckduckgo \"" . expand(<q-args>) . "\"'"
-    elseif choice == 3
-        command! -nargs=+ Man exe man_silent."!tmux ".g:man_tmux_command." 'cppman " . expand(<q-args>) . "'"
-    elseif choice == 4
-        command! -nargs=+ Man exe man_silent."!tmux ".g:man_tmux_command." 'man " . expand(<q-args>) . "'"
+        let g:man_host_command="neoterm"
+        command! -nargs=+ MyMan exe "silent T ".g:man_provider." \"" . expand(<q-args>) . "\""
     endif
 endfunction
-if has("gui_running")
-    let g:man_tmux_command="new-window"
-    let g:man_sr_command='sr'
-    let g:man_focus="-d"
-    let g:man_silent="silent"
+function! SetMyMan()
+    let choice = confirm("Which provider?", "&Google\n&Duckduckgo\n&Cppman\n&man", 2)
+    if g:man_host_command ==? "tmux"
+        if choice == 0
+            echom "none"
+        elseif choice == 1
+            command! -nargs=+ MyMan exe "silent !tmux ".g:man_tmux_command." ".man_focus." '".man_sr_command." google \"" . expand(<q-args>) . "\"'"
+        elseif choice == 2
+            command! -nargs=+ MyMan exe "silent !tmux ".g:man_tmux_command." ".man_focus."'".man_sr_command." duckduckgo \"" . expand(<q-args>) . "\"'"
+        elseif choice == 3
+            command! -nargs=+ MyMan exe man_silent."!tmux ".g:man_tmux_command." 'cppman " . expand(<q-args>) . "'"
+        elseif choice == 4
+            command! -nargs=+ MyMan exe man_silent."!tmux ".g:man_tmux_command." 'man " . expand(<q-args>) . "'"
+        endif
+    else
+        if choice == 0
+            echom "none"
+        elseif choice == 1
+            let g:man_provider = "sr google"
+        elseif choice == 2
+            let g:man_provider = "sr duckduckgo"
+        elseif choice == 3
+            let g:man_provider = "cppman"
+        elseif choice == 4
+            let g:man_provider = "man"
+        endif
+    endif
+endfunction
+
+if has('nvim')
+    let g:man_provider = "sr duckduckgo"
+    command! -nargs=+ MyMan exe "silent T ".g:man_provider." \"" . expand(<q-args>) . "\""
 else
-    let g:man_tmux_command="split-window"
-    let g:man_sr_command='sr -browser=w3m'
-    let g:man_focus=""
-    let g:man_silent=""
+    let g:man_host_command="tmux"
+    if has("gui_running")
+        let g:man_tmux_command="new-window"
+        let g:man_sr_command='sr'
+        let g:man_focus="-d"
+        let g:man_silent="silent"
+    else
+        let g:man_host_command="tmux"
+        let g:man_tmux_command="split-window"
+        let g:man_sr_command='sr -browser=w3m'
+        let g:man_focus=""
+        let g:man_silent=""
+    endif
+    let g:man_provider = "duckduckgo"
+    command! -nargs=+ MyMan exe "silent !tmux ".g:man_tmux_command." ".man_focus."'".man_sr_command." ".g:man_provider." \"" . expand(<q-args>) . "\"'"
 endif
-command! -nargs=+ Man exe "silent !tmux ".g:man_tmux_command." ".man_focus."'".man_sr_command." duckduckgo \"" . expand(<q-args>) . "\"'"
 
 " Need to manually call copen first so that directories are correctly set
 " (issue with asyncrun?)
@@ -365,7 +403,7 @@ endfunction
 
 noremap <F10> :<c-u>call ToggleSpell()<cr>
 inoremap <F10> <Esc>:call ToggleSpell()<cr>
-noremap <F11> :<c-u>call SetMan()<cr>
+noremap <F11> :<c-u>call SetMyMan()<cr>
 
 function Smart_TabComplete()
     let line = getline('.')                         " current line
