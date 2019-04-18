@@ -294,6 +294,7 @@ packadd termdebug
 
 if has('nvim')
     let g:neoterm_autoinsert=1
+    let g:neoterm_term_per_tab=1
     packadd neoterm
 
     let g:deoplete#enable_at_startup = 1

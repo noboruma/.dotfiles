@@ -1,5 +1,5 @@
 " Custom map
-nmap m <Plug>(easymotion-overwin-w)
+nmap s <Plug>(easymotion-overwin-w)
 nnoremap Q <nop>
 nnoremap x "_x
 vnoremap x "_d
@@ -126,10 +126,13 @@ vnoremap <leader>p "_dP
 noremap <leader>q :<c-u>q<cr>
 noremap <leader>r /\<<C-r><C-w>\><cr>:%s//<C-r><C-w>/g<left><left>
 vnoremap <leader>r "sy/<C-R>"<cr>:%s//<C-R>"/g<left><left>
-noremap <leader>s vi
-noremap <leader>s, vi,
+if has('nvim')
+    vnoremap <leader>s :<c-u>TREPLSendSelection<cr>
+else
+    " slime based?
+endif
 noremap <leader>S :<c-u>SemanticHighlightToggle<cr>
-nnoremap <leader>t :<c-u>vsp<cr>
+nnoremap \| :<c-u>vsp<cr>
 nnoremap _ :<c-u>call SmartSplit()<cr>``zz
 noremap <leader>u :<c-u>UndotreeToggle<cr>:UndotreeFocus<cr>
 noremap <leader>v <C-v>
@@ -219,8 +222,8 @@ if has('nvim')
     nmap <leader>p :ExtractPin<cr>
 
     " mappings for cycling
-    nmap s <Plug>(extract-sycle)
-    nmap S <Plug>(extract-Sycle)
+    nmap <c-s> <Plug>(extract-sycle)
+    nmap <c-S> <Plug>(extract-Sycle)
 
     " mappings for insert
     imap <m-v> <Plug>(extract-completeReg)
