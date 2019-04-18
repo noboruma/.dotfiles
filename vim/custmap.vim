@@ -211,7 +211,9 @@ noremap <F1> :<c-u>!git add %<cr>
 noremap <F2> :<c-u>set modifiable\|set noro\|set write<cr>
 
 if has('nvim')
-    tnoremap <Esc> <C-\><C-n>
+    au TermOpen * tnoremap <Esc> <c-\><c-n>
+    au FileType fzf tunmap <Esc>
+
     nnoremap <F3> :<c-u>let g:neoterm_size=winheight(0)/3 \| topleft Ttoggle<cr>
     tnoremap <F3> <C-\><C-n>: Ttoggle<cr>
 

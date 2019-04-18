@@ -1,7 +1,7 @@
 tabstop 4
 indent_incr 4
-pixel_per_char 7
-pixel_per_line 14
+pixel_per_char 8
+pixel_per_line 29
 frame 1
 target_self 0
 open_tab_blank 0
@@ -58,8 +58,6 @@ vi_prec_num 1
 mark_all_pages 0
 wrap_search 0
 ignorecase_search 1
-use_migemo 1
-migemo_command cmigemo -q -d /usr/share/cmigemo/utf-8/migemo-dict
 use_mouse 0
 reverse_mouse 0
 relative_wheel_scroll 0
@@ -80,7 +78,7 @@ urimethodmap ~/.w3m/urimethodmap, /etc/w3m/urimethodmap
 editor sensible-editor
 mailto_options 1
 mailer xdg-open mailto:%s
-extbrowser chromium %s &
+extbrowser qutebrowser %s &
 extbrowser2 
 extbrowser3 sensible-browser
 extbrowser4 epiphany %s &
@@ -114,7 +112,6 @@ max_news 50
 use_proxy 1
 http_proxy 
 https_proxy 
-gopher_proxy 
 ftp_proxy 
 no_proxy 
 noproxy_netaddr 0
