@@ -13,13 +13,16 @@ let username="Thomas Legris"
 set nocompatible
 
 "  If you need infrmation on parameters, use :h param
-if has("gui_running")
-    set guifont=Terminus\ 10
-    if &guifont != 'Terminus 10'
-        set guifont=Monospace\ 9
+if has("gui_running") || exists("g:gnvim")
+    if exists("g:gnvim")
+        set guifont=Terminus:h10
+    else
+        set guifont=Terminus\ 10
+        if &guifont != 'Terminus 10'
+            set guifont=Monospace\ 9
+        endif
+        set shell=bash " better support
     endif
-    set shell=bash " better support
-    " Gvim specific
     set lines=999
     set columns=999
     set guioptions=
