@@ -163,3 +163,6 @@
 [submodule "vim/pack/submodules/opt/neoterm"]
 	path = vim/pack/submodules/opt/neoterm
 	url = https://github.com/kassio/neoterm
+[submodule "vim/pack/submodules/opt/coc.nvim"]
+	path = vim/pack/submodules/opt/coc.nvim
+	url = https://github.com/neoclide/coc.nvim

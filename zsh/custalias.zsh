@@ -40,17 +40,20 @@ alias aS='aptitude search'
 alias saR='sudo apt remove'
 alias sau='sudo apt update'
 alias saup='sudo aptitude safe-upgrade'
-alias e=$IDE
-alias v=$EDITOR
+alias v='vim'
 alias nv="nvim"
-alias sv='sudo $EDITOR'
+alias sv='sudo vim'
+alias snv='sudo nvim'
 alias gcommit='git commit -am'
 alias gpush='git push'
 alias gpull='git pull'
 alias gchange='git checkout -'
 alias gconflicts='git diff --name-only --diff-filter=U'
+alias gup='git submodules update --recursive --remote --init'
 alias grep='grep --color'
 alias tree='tree -C'
+
+alias node='nodejs'
 
 alias smount="sudo mount"
 alias sumount="sudo umount"
@@ -90,10 +93,7 @@ alias trc="nvim ~/.tmux.conf"
 alias mrc="nvim ~/.mutt/neomuttrc"
 alias irc="nvim ~/.irssi/config"
 
-alias er="gvim --servername GVIM --remote"
-alias ers="gvim --servername GVIM"
-alias vdev="vim --servername VIM --remote"
-alias vimdev="vim --servername VIM"
+alias vdev="vim --servername DEV --remote"
 alias ff="fzf-fs"
 
 alias ttyw3m="TERM=fbterm w3m"

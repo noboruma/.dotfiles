@@ -135,3 +135,5 @@ let g:airline_extensions += ['ale', 'gutentags', 'languageclient', 'tagbar']
 
 packadd tagfinder
 packadd nvim-gdb
+
+packadd coc.nvim

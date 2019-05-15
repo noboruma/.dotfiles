@@ -299,3 +299,5 @@ PER_DIRECTORY_HISTORY_TOGGLE='^H'
 source $HOME/.zsh/plugins/per-directory-history/per-directory-history.zsh
 
 #zprof
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
