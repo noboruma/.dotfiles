@@ -313,10 +313,6 @@ if has('nvim')
     let g:neoterm_term_per_tab=1
     packadd neoterm
 
-    let g:deoplete#enable_at_startup = 1
-    packadd deoplete.nvim
-    call deoplete#custom#option('ignore_sources', {'_': ['buffer', 'around', 'memeber']})
-
     let g:extract_useDefaultMappings=0
     let g:extract_loadDeoplete=1
     let g:extract_maxCount = 8

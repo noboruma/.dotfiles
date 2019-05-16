@@ -80,7 +80,16 @@ imap <C-l> <Plug>(neosnippet_expand)
 smap <C-l> <Plug>(neosnippet_expand)
 xmap <C-l> <Plug>(neosnippet_expand_target)
 
+function! s:check_back_space() abort "{{{
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+
 if has('nvim') && !use_coc
+    let g:deoplete#enable_at_startup = 1
+    packadd deoplete.nvim
+    call deoplete#custom#option('ignore_sources', {'_': ['buffer', 'around', 'member']})
+
     call deoplete#custom#option({
                 \ 'auto_complete': v:true,
                 \ 'auto_complete_delay': 100,
@@ -92,10 +101,6 @@ if has('nvim') && !use_coc
                 \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
                 \ <SID>check_back_space() ? "\<TAB>"
                 \ : deoplete#mappings#manual_complete()
-    function! s:check_back_space() abort "{{{
-        let col = col('.') - 1
-        return !col || getline('.')[col - 1]  =~ '\s'
-    endfunction"}}}
 else
     " SuperTab like snippets behavior.
     " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
@@ -200,6 +205,12 @@ if has('nvim') && use_coc
         " Update signature help on jump placeholder
         autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     augroup end
+
+    imap <silent><expr> <TAB>
+                \ pumvisible() ? "\<lt>Down>" :
+                \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
+                \ <SID>check_back_space() ? "\<TAB>"
+                \ : coc#refresh()
 else
     let g:LanguageClient_autoStart=1
     let g:LanguageClient_diagnosticsEnable=1
