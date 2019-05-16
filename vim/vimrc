@@ -10,6 +10,12 @@ let use_gui=0
 let use_custhelp=0
 let username="Thomas Legris"
 
+if has('nvim')
+    let use_coc=1
+else
+    let use_coc=0
+endif
+
 set nocompatible
 
 "  If you need infrmation on parameters, use :h param
@@ -111,6 +117,9 @@ set hlsearch       " Highlight
 set mouse=a
 
 " ALE plugin
+if use_coc
+    let g:ale_enabled = 0
+endif
 let &runtimepath.=',~/.vim/bundle/ale'
 "let g:ale_linters = {
 "\   'cpp': ['cppcheck', 'clangtidy', 'clangcheck', 'flawfinder', 'gcc'],

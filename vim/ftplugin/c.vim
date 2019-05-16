@@ -3,59 +3,6 @@ source ~/.vim/bundle/coding_activator.vim
 " Make options
 let &makeprg='make'
 
-" LC
-" See ftplugin for tools setup
-if executable('ccls') || executable ('cquery')
-    let g:LanguageClient_diagnosticsEnable=1
-    let g:LanguageClient_hasSnippetSupport=1
-    let g:LanguageClient_selectionUI='quickfix'
-    let g:LanguageClient_diagnosticsList='Location'
-    if !exists('g:LanguageClient_serverCommands')
-        let g:LanguageClient_serverCommands = {}
-    endif
-    if executable('ccls')
-        let g:LanguageClient_serverCommands.c = ['ccls',
-                    "\ '--log-file=/tmp/cq.log',
-                    \ '--init={"cacheDirectory":"/tmp/cquery/cache/"}']
-        let g:LanguageClient_serverCommands.cpp = ['ccls',
-                    "\ '--log-file=/tmp/cq.log',
-                    \ '--init={"cacheDirectory":"/tmp/cquery/cache/"}']
-    elseif executable('cquery')
-        let g:LanguageClient_serverCommands.c = ['cquery',
-                    \ '--init={"cacheDirectory":"/tmp/cquery/cache/", "diagnostics": {"onParse": false, "onType": false}, "index": {"comments": 2}, "cacheFormat": "msgpack", "completion": {"filterAndSort": false}}']
-        let g:LanguageClient_serverCommands.cpp = ['cquery',
-                    \ '--init={"cacheDirectory":"/tmp/cquery/cache/", "diagnostics": {"onParse": true, "onType": true}, "index": {"comments": 2}, "cacheFormat": "msgpack", "completion": {"filterAndSort": true}}']
-    else
-        echom 'no ccls nor cquery executable'
-    endif
-    packadd LanguageClient-neovim
-    LanguageClientStart
-    "set formatexpr=LanguageClient_textDocument_rangeFormatting()
-    if has('nvim')
-        call deoplete#custom#source('LanguageClient',
-            \ 'min_pattern_length',
-            \ 2)
-        call deoplete#custom#filter('attrs_order', {
-                    \ 'cpp': {
-                    \     'kind': [
-                    \     'Method',
-                    \     'Function',
-                    \     'Property'
-                    \     ],
-                    \ },
-                    \ 'c': {
-                    \     'kind': [
-                    \     'Function',
-                    \     'Property'
-                    \     ]
-                    \ }
-                    \})
-    else
-        setlocal omnifunc=LanguageClient#complete
-    endif
-endif
-" !LC
-
 " Clang-format
 packadd vim-clang-format
 let g:clang_format#command="clang-format-3.5"

@@ -53,8 +53,6 @@ alias gup='git submodules update --recursive --remote --init'
 alias grep='grep --color'
 alias tree='tree -C'
 
-alias node='nodejs'
-
 alias smount="sudo mount"
 alias sumount="sudo umount"
 alias srcconf="sudo rcconf"

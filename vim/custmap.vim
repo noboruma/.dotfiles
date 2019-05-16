@@ -9,8 +9,6 @@ nnoremap ,, <nop>
 inoremap ,, <esc>
 inoremap jj <esc>j
 inoremap kk <esc>k
-inoremap JJ <esc>J
-inoremap KK <esc>K
 nnoremap // /\<<C-r><C-w>\><cr>
 vnoremap // "sy/<C-R>"<cr>
 nnoremap <leader>/ :nohlsearch<cr>
@@ -89,31 +87,18 @@ noremap <leader>e :silent<space>e<space>`pwd`<tab>
 noremap <leader>ff :<c-u>Files<space>`pwd`<tab>
 noremap <leader>fe :<c-u>ALENext -error<cr>
 noremap <leader>fE :<c-u>ALEPrevious -error<cr>
-if executable('cquery') || executable('ccls')
-    nnoremap <leader>fa :<c-u>call AutoAdjustQFWindow()<cr>
-    nnoremap <leader>fd :<c-u>call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<cr>
-    nnoremap <leader>fr :<c-u>call LanguageClient#textDocument_references()<cr>:call asyncrun#quickfix_toggle(0, 1)<cr>
-    nnoremap <leader>fh :<c-u>call LanguageClient#textDocument_hover()<cr>
-    nnoremap <leader>ft :<c-u>call LanguageClient#textDocument_signatureHelp()<cr>
-    nnoremap <leader>fg :<c-u>call LanguageClient_contextMenu()<cr>
-    nnoremap <leader>fc :<c-u>call LanguageClient#findLocations({'method':'$ccls/call'})<cr>
-    nnoremap <leader>fC :<c-u>call LanguageClient#findLocations({'method':'$ccls/call','callee':v:true})<cr>
-    nnoremap <leader>fx :<c-u>call LanguageClient#textDocument_codeAction()<cr>
-else
-    noremap <leader>f :botright pta <C-r><C-w><cr>
-    noremap <leader>F "sy:botright pta /<C-R>"
-    vnoremap <leader>f "sy:botright pta /<C-R>"<cr>
-    vnoremap <leader>F "sy:botright pta /<C-R>"
-endif
+nnoremap <leader>fa :<c-u>call AutoAdjustQFWindow()<cr>
+noremap <leader>f :botright pta <C-r><C-w><cr>
+noremap <leader>F "sy:botright pta /<C-R>"
+vnoremap <leader>f "sy:botright pta /<C-R>"<cr>
+vnoremap <leader>F "sy:botright pta /<C-R>"
 "Add --cpp or --type:
 noremap <leader>g :AsyncRun -program=grep "<C-r><C-w>" `pwd`<tab>
 vnoremap <leader>g "sy:AsyncRun -program=grep "<C-R>"" `pwd`<tab>
 nnoremap <leader>G :lcd<space>`pwd`<tab><space>\|<space>Ag<left><left><left><left><left><tab>
 vnoremap <leader>G "sy:lcd<space>`pwd`<tab><space>\|<space>Ag<space><C-R>"<C-f>F\|<left><C-c><tab>
 noremap <leader>h :<c-u>call File_flip()<cr>zz
-nnoremap <leader>j J
 "noremap <leader>H :0r ~/.vim/.header_template<cr>
-" Use surfraw to search on the web
 noremap <leader>l :<c-u>let g:tagbar_left=IsLeftMostWindow()<cr>:TagbarOpen j<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
 nnoremap <leader>m :Marks<cr>
@@ -181,8 +166,6 @@ vnoremap <silent> <leader>k "sy:MyMan <C-R>"<CR>
 " scroll remap
 nnoremap <c-j> :call search('\%' . virtcol('.') . 'v\S', 'wW')<CR>
 nnoremap <c-k> :call search('\%' . virtcol('.') . 'v\S', 'bW')<CR>
-nnoremap K <c-y>
-nnoremap J <c-e>
 nnoremap <PageUp> :<c-u>call FixedScroll()<cr><c-b><c-y><c-y>M
 nnoremap <PageDown> :<c-u>call FixedScroll()<cr><c-f><c-e><c-e>M
 nnoremap - <PageUp>
