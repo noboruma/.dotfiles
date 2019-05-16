@@ -1,0 +1,16 @@
+{
+    "java.home": "/local/usr/bin/brew/Cellar/openjdk/1.8.0-181",
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": ["c", "cpp", "objc", "objcpp"],
+            "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
+            }
+        }
+    },
+    "java.errors.incompleteClasspath.severity": "ignore"
+}
