@@ -221,7 +221,7 @@ zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
 # Sourcing part
-export PATH=~/usr/bin:~/.gem/ruby/current/bin:~/.local/bin:$PATH
+export PATH=~/usr/bin:/home/linuxbrew/.linuxbrew/bin:~/.gem/ruby/current/bin:~/.local/bin:$PATH
 export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
 
 export ANDROID_NDK_ROOT=$HOME'/workspace/android/android-ndk-r16b'

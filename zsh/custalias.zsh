@@ -49,7 +49,7 @@ alias gpush='git push'
 alias gpull='git pull'
 alias gchange='git checkout -'
 alias gconflicts='git diff --name-only --diff-filter=U'
-alias gup='git submodules update --recursive --remote --init'
+alias gup='git submodule update --recursive --remote --init'
 alias grep='grep --color'
 alias tree='tree -C'
 

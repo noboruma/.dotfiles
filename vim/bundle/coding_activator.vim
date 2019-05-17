@@ -146,7 +146,7 @@ if has('nvim') && use_coc
     inoremap <silent><expr> <c-space> coc#refresh()
     nmap <silent> [c <Plug>(coc-diagnostic-prev)
     nmap <silent> ]c <Plug>(coc-diagnostic-next)
-    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gd :<c-u>call CocAction('jumpDefinition', 'vsplit')<cr>
     nmap <silent> gy <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
@@ -209,8 +209,8 @@ if has('nvim') && use_coc
     imap <silent><expr> <TAB>
                 \ pumvisible() ? "\<lt>Down>" :
                 \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
-                \ <SID>check_back_space() ? "\<TAB>"
-                \ : coc#refresh()
+                \ <SID>check_back_space() ? "\<TAB>" :
+                \ coc#refresh()
 else
     let g:LanguageClient_autoStart=1
     let g:LanguageClient_diagnosticsEnable=1
