@@ -225,3 +225,4 @@
 [submodule "vim/bundle/colorizer"]
 	path = vim/bundle/colorizer
 	url = https://github.com/lilydjwg/colorizer
+	shallow = true
