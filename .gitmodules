@@ -22,9 +22,6 @@
 [submodule ".tmux/tpm"]
 	path = tmux/tpm
 	url = https://github.com/tmux-plugins/tpm
-[submodule "vim/bundle/unite.vim"]
-	path =vim/bundle/unite.vim
-	url = https://github.com/noboruma/unite.vim
 [submodule "vim/pack/submodules/opt/vim-clang-format"]
 	path = vim/pack/submodules/opt/vim-clang-format
 	url = https://github.com/rhysd/vim-clang-format
@@ -40,9 +37,6 @@
 [submodule "vim/pack/submodules/opt/vim-snippets"]
 	path = vim/pack/submodules/opt/vim-snippets
 	url = https://github.com/honza/vim-snippets
-[submodule "vim/pack/submodules/opt/vim-addon-mw-utils"]
-	path = vim/pack/submodules/opt/vim-addon-mw-utils
-	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
 [submodule "vim/bundle/tlib"]
 	path = vim/pack/submodules/opt/tlib
 	url = https://github.com/tomtom/tlib_vim.git
