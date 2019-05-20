@@ -141,7 +141,7 @@ let g:airline_mode_map = {
             \ 'S'  : '',
             \ '' : '',
             \ }
-let g:airline_section_z = '%3l:%2c%#__accent_bold#%3p%%%#__restore__#' "can add variable via %{g:airline_right_sep}
+let g:airline_section_z = '%#__accent_bold#%3p%%%#__restore__# %3l:%2c' "can add variable via %{g:airline_right_sep}
 let g:airline_extensions = ['quickfix', 'undotree', 'branch']
 let &runtimepath.=',~/.vim/bundle/airline'
 let &runtimepath.=',~/.vim/bundle/airline-themes'
