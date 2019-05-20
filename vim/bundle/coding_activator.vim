@@ -141,6 +141,23 @@ let g:airline_extensions += ['ale', 'gutentags', 'languageclient', 'tagbar']
 packadd tagfinder
 packadd nvim-gdb
 
+" ALE plugin
+if use_coc
+    let g:ale_enabled = 0
+endif
+packadd ale
+"let g:ale_linters = {
+"\   'cpp': ['cppcheck', 'clangtidy', 'clangcheck', 'flawfinder', 'gcc'],
+"\}
+let g:ale_cpp_gcc_options = '$(cat ~/.compiler_options)' "Options can be easily retrieved using 'bear' (github)
+let g:ale_echo_msg_error_str = 'Error'
+let g:ale_echo_msg_warning_str = 'Warning'
+let g:ale_echo_msg_format = '[%linter%]%s[%severity%]'
+let g:ale_set_loclist = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_cpp_cquery_cache_directory= '/tmp/cquery/cache'
+"!ALE
+
 if has('nvim') && use_coc
     packadd coc.nvim
     inoremap <silent><expr> <c-space> coc#refresh()

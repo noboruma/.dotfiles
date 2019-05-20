@@ -1,4 +1,5 @@
 " Custom map
+nmap f <Plug>(easymotion-overwin-f)
 nmap s <Plug>(easymotion-overwin-w)
 nnoremap Q <nop>
 nnoremap x "_x
@@ -53,7 +54,7 @@ function FixedScroll()
     let viewlines = winheight(0)
     let topviewline = line("w0")
 
-    let pagenum = curline / viewlines
+    let pagenum = curline / siewlines
     let pagestartline = pagenum * viewlines
     if topviewline < pagestartline
         let offset = pagestartline - topviewline
@@ -349,9 +350,15 @@ fun CurrWinOrQFError()
     endtry
 endfun
 
-noremap <expr> <F6> bufwinnr('!gdb') != -1 ? ":<c-u>Finish<cr>" : ":<c-u>call PrevWinOrQFError()<cr>"
-noremap <expr> <F7> bufwinnr('!gdb') != -1 ? ":<c-u>Over<cr>"   : ":<c-u>call NextWinOrQFError()<cr>"
-noremap <expr> <F8> bufwinnr('!gdb') != -1 ? ":<c-u>Step<cr>"   : ":<c-u>call CurrWinOrQFError()<cr>"
+if has('nvim')
+    noremap <expr> <F6> bufwinnr('gdb') != -1 ? ":<c-u>GdbFinish<cr>" : ":<c-u>call PrevWinOrQFError()<cr>"
+    noremap <expr> <F7> bufwinnr('gdb') != -1 ? ":<c-u>GdbNext<cr>"   : ":<c-u>call NextWinOrQFError()<cr>"
+    noremap <expr> <F8> bufwinnr('gdb') != -1 ? ":<c-u>GdbStep<cr>"   : ":<c-u>call CurrWinOrQFError()<cr>"
+else
+    noremap <expr> <F6> bufwinnr('!gdb') != -1 ? ":<c-u>Finish<cr>" : ":<c-u>call PrevWinOrQFError()<cr>"
+    noremap <expr> <F7> bufwinnr('!gdb') != -1 ? ":<c-u>Over<cr>"   : ":<c-u>call NextWinOrQFError()<cr>"
+    noremap <expr> <F8> bufwinnr('!gdb') != -1 ? ":<c-u>Step<cr>"   : ":<c-u>call CurrWinOrQFError()<cr>"
+endif
 
 function SetDebug()
     let choice = confirm("Debug mode", "&Yes\n&No", 2)
