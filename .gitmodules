@@ -1,162 +1,216 @@
 [submodule "vim/bundle/airline"]
 	path =vim/bundle/airline
 	url = https://github.com/vim-airline/vim-airline
+	shallow = true
 [submodule "vim/bundle/airline-themes"]
 	path =vim/bundle/airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes
+	shallow = true
 [submodule "vim/bundle/ale"]
 	path =vim/bundle/ale
 	url = https://github.com/w0rp/ale
+	shallow = true
 [submodule "vim/bundle/rainbow"]
 	path =vim/bundle/rainbow
 	url = https://github.com/luochen1990/rainbow
+	shallow = true
 [submodule "vim/pack/submodules/opt/tagbar"]
 	path = vim/pack/submodules/opt/tagbar
 	url = https://github.com/majutsushi/tagbar
+	shallow = true
 [submodule "vim/bundle/asyncrun"]
 	path =vim/bundle/asyncrun
 	url = https://github.com/skywind3000/asyncrun.vim
+	shallow = true
 [submodule "vim/bundle/vim-rest-console"]
 	path =vim/bundle/vim-rest-console
 	url = https://github.com/diepm/vim-rest-console
+	shallow = true
 [submodule ".tmux/tpm"]
 	path = tmux/tpm
 	url = https://github.com/tmux-plugins/tpm
+	shallow = true
 [submodule "vim/pack/submodules/opt/vim-clang-format"]
 	path = vim/pack/submodules/opt/vim-clang-format
 	url = https://github.com/rhysd/vim-clang-format
+	shallow = true
 [submodule "vim/pack/submodules/opt/vim-gutentags"]
 	path = vim/pack/submodules/opt/vim-gutentags
 	url = https://github.com/ludovicchabant/vim-gutentags
+	shallow = true
 [submodule "vim/bundle/undotree"]
 	path =vim/bundle/undotree
 	url = https://github.com/mbbill/undotree
+	shallow = true
 [submodule "vim/bundle/linediff.vim"]
 	path =vim/bundle/linediff.vim
 	url = https://github.com/AndrewRadev/linediff.vim
+	shallow = true
 [submodule "vim/pack/submodules/opt/vim-snippets"]
 	path = vim/pack/submodules/opt/vim-snippets
 	url = https://github.com/honza/vim-snippets
+	shallow = true
 [submodule "vim/bundle/tlib"]
 	path = vim/pack/submodules/opt/tlib
 	url = https://github.com/tomtom/tlib_vim.git
+	shallow = true
 [submodule "vim/bundle/vim-wordmotion"]
 	path =vim/bundle/vim-wordmotion
 	url = https://github.com/chaoren/vim-wordmotion
+	shallow = true
 [submodule "vim/bundle/vim-textobj-user"]
 	path =vim/bundle/vim-textobj-user
 	url = https://github.com/kana/vim-textobj-user
+	shallow = true
 [submodule "vim/bundle/vim-textobj-parameter"]
 	path =vim/bundle/vim-textobj-parameter
 	url = https://github.com/sgur/vim-textobj-parameter
+	shallow = true
 [submodule "vim/bundle/vim-textobj-xmlattr"]
 	path =vim/bundle/vim-textobj-xmlattr
 	url = https://github.com/whatyouhide/vim-textobj-xmlattr
+	shallow = true
 [submodule "vim/bundle/vim-textobj-variable-segment"]
 	path =vim/bundle/vim-textobj-variable-segment
 	url = https://github.com/Julian/vim-textobj-variable-segment
+	shallow = true
 [submodule "vim/bundle/vim-textobj-function"]
 	path =vim/bundle/vim-textobj-function
 	url = https://github.com/kana/vim-textobj-function
+	shallow = true
 [submodule "vim/bundle/tabular"]
 	path =vim/bundle/tabular
 	url = https://github.com/godlygeek/tabular
+	shallow = true
 [submodule "vim/bundle/vim-easymotion"]
 	path =vim/bundle/vim-easymotion
 	url = https://github.com/easymotion/vim-easymotion
+	shallow = true
 [submodule "vim/bundle/vim-repeat"]
 	path =vim/bundle/vim-repeat
 	url = https://github.com/tpope/vim-repeat
+	shallow = true
 [submodule ".gdb/bundle/gdb-dashboard"]
 	path = gdb/bundle/gdb-dashboard
 	url = https://github.com/cyrus-and/gdb-dashboard
+	shallow = true
 [submodule "vim/bundle/vim-notes"]
 	path =vim/bundle/vim-notes
 	url = https://github.com/xolox/vim-notes
+	shallow = true
 [submodule "vim/bundle/vim-misc"]
 	path =vim/bundle/vim-misc
 	url = https://github.com/xolox/vim-misc
+	shallow = true
 [submodule "vim/bundle/vim-ingo-library"]
 	path =vim/bundle/vim-ingo-library
 	url = https://github.com/inkarkat/vim-ingo-library
+	shallow = true
 [submodule "vim/pack/submodules/opt/vim-which-key"]
 	path = vim/pack/submodules/opt/vim-which-key
 	url = https://github.com/liuchengxu/vim-which-key
+	shallow = true
 [submodule ".zsh/plugins/fzf-marks"]
 	path = zsh/plugins/fzf-marks
 	url = https://github.com/urbainvaes/fzf-marks
+	shallow = true
 [submodule "vim/bundle/fzf.vim"]
 	path =vim/bundle/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
+	shallow = true
 [submodule "vim/pack/submodules/opt/LanguageClient-neovim"]
 	path = vim/pack/submodules/opt/LanguageClient-neovim
 	url = https://github.com/autozimu/LanguageClient-neovim.git
+	shallow = true
 [submodule ".tmux/tmux-notifications"]
 	path = tmux/tmux-notifications
 	url = https://github.com/tcreech/tmux-notifications
+	shallow = true
 [submodule "zsh/plugins/zsh-syntaz-highlighting"]
 	path = zsh/plugins/zsh-syntaz-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
+	shallow = true
 [submodule "zsh/plugins/zsh-autosuggestions"]
 	path = zsh/plugins/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
+	shallow = true
 [submodule "zsh/plugins/zsh-completions"]
 	path = zsh/plugins/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions
+	shallow = true
 [submodule "zsh/plugins/zsh-history-substring-search"]
 	path = zsh/plugins/zsh-history-substring-search
 	url = https://github.com/zsh-users/zsh-history-substring-search
+	shallow = true
 [submodule "vim/pack/submodules/opt/semantic-highlight.vim"]
 	path = vim/pack/submodules/opt/semantic-highlight.vim
 	url = https://github.com/jaxbot/semantic-highlight.vim
+	shallow = true
 [submodule "vim/pack/submodules/opt/vim-slime"]
 	path = vim/pack/submodules/opt/vim-slime
 	url = https://github.com/jpalardy/vim-slime
+	shallow = true
 [submodule "vim/pack/submodules/opt/rust.vim"]
 	path = vim/pack/submodules/opt/rust.vim
 	url = https://github.com/rust-lang/rust.vim
+	shallow = true
 [submodule "vim/pack/submodules/opt/tagfinder"]
 	path = vim/pack/submodules/opt/tagfinder
 	url = https://github.com/AndrewRadev/tagfinder.vim
+	shallow = true
 [submodule "vim/pack/submodules/opt/vim-snipmate"]
 	path = vim/pack/submodules/opt/vim-snipmate
 	url = https://github.com/garbas/vim-snipmate
+	shallow = true
 [submodule "vim/pack/submodules/opt/vim-javascript"]
 	path = vim/pack/submodules/opt/vim-javascript
 	url = https://github.com/pangloss/vim-javascript
+	shallow = true
 [submodule "vim/pack/submodules/opt/tlib"]
 	path = vim/pack/submodules/opt/tlib
 	url = https://github.com/tomtom/tlib_vim.git
+	shallow = true
 [submodule "vim/pack/submodules/opt/vim-ruby"]
 	path = vim/pack/submodules/opt/vim-ruby
 	url = https://github.com/vim-ruby/vim-ruby
+	shallow = true
 [submodule "zsh/plugins/zplug"]
 	path = zsh/plugins/zplug
 	url = https://github.com/zplug/zplug
+	shallow = true
 [submodule "vim/bundle/vim-fugitive"]
 	path = vim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive
+	shallow = true
 [submodule "vim/pack/submodules/opt/neosnippet.vim"]
 	path = vim/pack/submodules/opt/neosnippet.vim
 	url = https://github.com/Shougo/neosnippet.vim
+	shallow = true
 [submodule "zsh/plugins/per-directory-history"]
 	path = zsh/plugins/per-directory-history
 	url = https://github.com/jimhester/per-directory-history
+	shallow = true
 [submodule "qutebrowser/plugins/solarized-everything-css"]
 	path = qutebrowser/plugins/solarized-everything-css
 	url = https://github.com/alphapapa/solarized-everything-css
+	shallow = true
 [submodule "vim/pack/submodules/opt/deoplete.nvim"]
 	path = vim/pack/submodules/opt/deoplete.nvim
 	url = https://github.com/Shougo/deoplete.nvim
+	shallow = true
 [submodule "vim/pack/submodules/opt/nvim-gdb"]
 	path = vim/pack/submodules/opt/nvim-gdb
 	url = https://github.com/sakhnik/nvim-gdb
+	shallow = true
 [submodule "vim/pack/submodules/opt/Extract"]
 	path = vim/pack/submodules/opt/Extract
 	url = https://github.com/cyansprite/Extract
+	shallow = true
 [submodule "vim/pack/submodules/opt/neoterm"]
 	path = vim/pack/submodules/opt/neoterm
 	url = https://github.com/kassio/neoterm
+	shallow = true
 [submodule "vim/pack/submodules/opt/coc.nvim"]
 	path = vim/pack/submodules/opt/coc.nvim
 	url = https://github.com/neoclide/coc.nvim
+	shallow = true
