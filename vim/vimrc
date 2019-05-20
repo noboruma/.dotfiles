@@ -116,6 +116,11 @@ set hlsearch       " Highlight
 
 set mouse=a
 
+"Plugins
+let &runtimepath.=',~/.vim/bundle/vim-surround'
+let &runtimepath.=',~/.vim/bundle/vim-AutoAdapt'
+let &runtimepath.=',~/.vim/bundle/colorizer'
+
 " ALE plugin
 if use_coc
     let g:ale_enabled = 0

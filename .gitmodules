@@ -214,3 +214,14 @@
 	path = vim/pack/submodules/opt/coc.nvim
 	url = https://github.com/neoclide/coc.nvim
 	shallow = true
+[submodule "vim/bundle/vim-AutoAdapt"]
+	path = vim/bundle/vim-AutoAdapt
+	url = https://github.com/inkarkat/vim-AutoAdapt
+	shallow = true
+[submodule "vim/bundle/vim-surround"]
+	path = vim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround
+	shallow = true
+[submodule "vim/bundle/colorizer"]
+	path = vim/bundle/colorizer
+	url = https://github.com/lilydjwg/colorizer
