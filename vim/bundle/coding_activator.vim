@@ -163,9 +163,16 @@ if has('nvim') && use_coc
     nmap <silent> [c <Plug>(coc-diagnostic-prev)
     nmap <silent> ]c <Plug>(coc-diagnostic-next)
     nmap <silent> gd :<c-u>call CocAction('jumpDefinition', 'vsplit')<cr>
+    nmap <silent> gD <Plug>(coc-definition)
     nmap <silent> gy <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
+
+    " caller
+    nn <silent> gc :call CocLocations('ccls','$ccls/call')<cr>
+    " callee
+    nn <silent> gC :call CocLocations('ccls','$ccls/call',{'callee':v:true})<cr>
+
     xmap <leader>a  <Plug>(coc-codeaction-selected)
     nmap <leader>a  <Plug>(coc-codeaction-selected)
     " Remap for do codeAction of current line
@@ -211,8 +218,8 @@ if has('nvim') && use_coc
     nmap <leader>rn <Plug>(coc-rename)
 
     " Remap for format selected region
-    xmap <leader>f  <Plug>(coc-format-selected)
-    nmap <leader>f  <Plug>(coc-format-selected)
+    xmap <leader>F  <Plug>(coc-format-selected)
+    nmap <leader>F  <Plug>(coc-format-selected)
 
     augroup mygroup
         autocmd!
@@ -303,6 +310,9 @@ endif
 if has('nvim')
     packadd nvim-gdb
 endif
-let g:vebugger_leader='\'
 packadd vimproc.vim
+let g:vebugger_leader='\'
+let g:vebugger_breakpoint_text='**'
+let g:vebugger_currentline_text='->'
+let g:vebugger_view_source_cmd='edit'
 packadd vim-vebugger

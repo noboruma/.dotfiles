@@ -351,9 +351,9 @@ fun CurrWinOrQFError()
 endfun
 
 if has('nvim')
-    noremap <expr> <F6> bufwinnr('gdb') != -1 ? ":<c-u>GdbFinish<cr>" : ":<c-u>call PrevWinOrQFError()<cr>"
-    noremap <expr> <F7> bufwinnr('gdb') != -1 ? ":<c-u>GdbNext<cr>"   : ":<c-u>call NextWinOrQFError()<cr>"
-    noremap <expr> <F8> bufwinnr('gdb') != -1 ? ":<c-u>GdbStep<cr>"   : ":<c-u>call CurrWinOrQFError()<cr>"
+    noremap <expr> <F6> bufwinnr('Shell') != -1 ? ":<c-u>VBGstepOut<cr>"  : bufwinnr('gdb') != -1 ? ":<c-u>GdbFinish<cr>" : ":<c-u>call PrevWinOrQFError()<cr>"
+    noremap <expr> <F7> bufwinnr('Shell') != -1 ? ":<c-u>VBGstepOver<cr>" : bufwinnr('gdb') != -1 ? ":<c-u>GdbNext<cr>"   : ":<c-u>call NextWinOrQFError()<cr>"
+    noremap <expr> <F8> bufwinnr('Shell') != -1 ? ":<c-u>VBGstepIn<cr>"   : bufwinnr('gdb') != -1 ? ":<c-u>GdbStep<cr>"   : ":<c-u>call CurrWinOrQFError()<cr>"
 else
     noremap <expr> <F6> bufwinnr('!gdb') != -1 ? ":<c-u>Finish<cr>" : ":<c-u>call PrevWinOrQFError()<cr>"
     noremap <expr> <F7> bufwinnr('!gdb') != -1 ? ":<c-u>Over<cr>"   : ":<c-u>call NextWinOrQFError()<cr>"
