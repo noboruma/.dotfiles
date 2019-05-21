@@ -226,3 +226,11 @@
 	path = vim/bundle/colorizer
 	url = https://github.com/lilydjwg/colorizer
 	shallow = true
+[submodule "vim/pack/submodules/opt/vimproc.vim"]
+	path = vim/pack/submodules/opt/vimproc.vim
+	url = https://github.com/Shougo/vimproc.vim
+	shallow = true
+[submodule "vim/pack/submodules/opt/vim-vebugger"]
+	path = vim/pack/submodules/opt/vim-vebugger
+	url = https://github.com/idanarye/vim-vebugger
+	shallow = true

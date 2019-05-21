@@ -139,7 +139,6 @@ packadd tagbar
 let g:airline_extensions += ['ale', 'gutentags', 'languageclient', 'tagbar']
 
 packadd tagfinder
-packadd nvim-gdb
 
 " ALE plugin
 if use_coc
@@ -301,3 +300,9 @@ else
     nnoremap <leader>ac :<c-u>call LanguageClient#textDocument_codeAction()<cr>
 endif
 
+if has('nvim')
+    packadd nvim-gdb
+endif
+let g:vebugger_leader='\'
+packadd vimproc.vim
+packadd vim-vebugger
