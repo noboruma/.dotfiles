@@ -48,6 +48,8 @@ case `uname` in
         ;;
 esac
 
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+
 autoload -Uz copy-earlier-word
 zle -N copy-earlier-word
 

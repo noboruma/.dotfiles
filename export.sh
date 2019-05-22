@@ -1,42 +1,56 @@
 #!/bin/zsh
-DIR=$(cd $(dirname "$0"); pwd)
-cd $DIR 1>/dev/null
+
+XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+CURDIR=$(cd $(dirname "$0"); pwd)
+
+cd $CURDIR 1>/dev/null
 find ~ -maxdepth 1 -name ".vim*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".zsh*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".gdb*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".colorgcc*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".tmux*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".w3m*" -type l -exec rm -v {} \;
-rm ~/.config/ranger/rc.conf 2>/dev/null
-find ~/.w3m -maxdepth 1 -name "config" -type l -exec rm -v {} \;
+find ~ -maxdepth 1 -name ".irssi" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".irssi" -type l -exec rm -v {} \;
 
-ln -s $PWD/vim ~/.vim
-ln -s $PWD/vim/vimrc ~/.vimrc
-ln -s $PWD/zsh ~/.zsh
-ln -s $PWD/zsh/zshrc ~/.zshrc
-ln -s $PWD/gdb/bundle/gdb-dashboard/.gdbinit ~
-ln -s $PWD/gdb/gdbinit.d ~/.gdbinit.d
-ln -s $PWD/.colorgccrc ~
-ln -s $PWD/tmux/tmux.conf ~/.tmux.conf
-ln -s $PWD/tmux ~/.tmux
-ln -s $PWD/irssi/irssi-notify.sh ~/usr/bin
-ln -s $PWD/ranger/rc.conf ~/.config/ranger
-ln -s $PWD/w3m ~/.w3m
-ln -s $PWD/.inputrc ~
-ln -s $PWD/irssi ~/.irssi
-ln -s $PWD/mutt ~/.mutt
-ln -s $PWD/newsboat ~/.newsboat
-ln -s $PWD/mutt ~/.mutt
-ln -s $PWD/.irbrc ~
-ln -s $PWD/vimb ~/.config/vimb
-ln -s $PWD/qutebrowser/autoconfig.yml  ~/.config/qutebrowser/
-ln -s $PWD/nvim ~/.config/nvim
+find ~/usr/bin -maxdepth 1 -name ".irssi-notify.sh" -type l -exec rm -v {} \;
+find ~ -maxdepth 1 -name ".inputrc" -type l -exec rm -v {} \;
+find ~ -maxdepth 1 -name ".mutt*" -type l -exec rm -v {} \;
+find ~ -maxdepth 1 -name ".newsboat*" -type l -exec rm -v {} \;
+find ~ -maxdepth 1 -name ".irbrc" -type l -exec rm -v {} \;
+
+find $XDG_CONFIG_HOME -maxdepth 1 -name "ranger" -type l -exec rm -v {} \;
+find $XDG_CONFIG_HOME -maxdepth 1 -name "qutebrowser" -type l -exec rm -v {} \;
+find $XDG_CONFIG_HOME -maxdepth 1 -name "nvim" -type l -exec rm -v {} \;
+
+ln -s $CURDIR/vim ~/.vim
+ln -s $CURDIR/vim/vimrc ~/.vimrc
+ln -s $CURDIR/zsh ~/.zsh
+ln -s $CURDIR/zsh/zshrc ~/.zshrc
+ln -s $CURDIR/gdb/bundle/gdb-dashboard/.gdbinit ~
+ln -s $CURDIR/gdb/gdbinit.d ~/.gdbinit.d
+ln -s $CURDIR/.colorgccrc ~
+ln -s $CURDIR/tmux/tmux.conf ~/.tmux.conf
+ln -s $CURDIR/tmux ~/.tmux
+ln -s $CURDIR/irssi/irssi-notify.sh ~/usr/bin
+ln -s $CURDIR/ranger $XDG_CONFIG_HOME/ranger
+ln -s $CURDIR/w3m ~/.w3m
+ln -s $CURDIR/.inputrc ~
+ln -s $CURDIR/irssi ~/.irssi
+ln -s $CURDIR/newsboat ~/.newsboat
+ln -s $CURDIR/mutt ~/.mutt
+ln -s $CURDIR/.irbrc ~
+ln -s $CURDIR/qutebrowser  $XDG_CONFIG_HOME/qutebrowser
+ln -s $CURDIR/nvim $XDG_CONFIG_HOME/nvim
+
 cd - 1>/dev/null
 
-incrontab -l | grep -q fnotify
-if [ $? = 1 ];
-then
-    ( incrontab -l ; echo "$HOME/.irssi/fnotify IN_MODIFY $HOME/usr/bin/irssi-notify.sh" ) | incrontab -
+if [ -x "$(command -v incrontab)" ]; then
+    incrontab -l | grep -q fnotify
+    if [ $? = 1 ];
+    then
+        ( incrontab -l ; echo "$HOME/.irssi/fnotify IN_MODIFY $HOME/usr/bin/irssi-notify.sh" ) | incrontab -
+    fi
+else
+    echo "incontrab not installed: irssi notification disabled"
 fi
-
