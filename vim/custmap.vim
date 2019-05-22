@@ -71,6 +71,16 @@ endfunction
 
 command! AsyncCCL call asyncrun#quickfix_toggle(0, 0)
 
+function AsyncGrep(word, path)
+    call asyncrun#quickfix_toggle(0, 0)
+    execute "AsyncRun -program=grep \"".a:word."\" ".a:path
+    let @/ = a:word
+    set hls
+    redraw
+endfunction
+
+command! -nargs=* -complete=dir AsyncGrep call AsyncGrep(<f-args>)
+
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-h> <S-Left>
@@ -94,8 +104,8 @@ noremap <leader>F "sy:botright pta /<C-R>"
 vnoremap <leader>f "sy:botright pta /<C-R>"<cr>
 vnoremap <leader>F "sy:botright pta /<C-R>"
 "Add --cpp or --type:
-noremap <leader>g :AsyncRun -program=grep "<C-r><C-w>" `pwd`<tab>
-vnoremap <leader>g "sy:AsyncRun -program=grep "<C-R>"" `pwd`<tab>
+noremap <leader>g :AsyncGrep <C-r><C-w> `pwd`<tab>
+vnoremap <leader>g "sy:AsyncGrep <C-R>" `pwd`<tab>
 nnoremap <leader>G :lcd<space>`pwd`<tab><space>\|<space>Ag<left><left><left><left><left><tab>
 vnoremap <leader>G "sy:lcd<space>`pwd`<tab><space>\|<space>Ag<space><C-R>"<C-f>F\|<left><C-c><tab>
 noremap <leader>h :<c-u>call File_flip()<cr>zz

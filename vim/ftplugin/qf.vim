@@ -4,6 +4,7 @@ setlocal foldmethod=expr
 setlocal foldexpr=matchstr(getline(v:lnum),'^[^\|]\\+')==#matchstr(getline(v:lnum+1),'^[^\|]\\+')?1:'<1'
 setlocal foldtext=matchstr(substitute(getline(v:foldstart),'\|.*','',''),'^.*').'\ ['.(v:foldend-v:foldstart+1).'\ lines]'
 setlocal nomodifiable
+setlocal wrap
 
 if foldclosedend(1) == line('$') || line("$") < 25
   " When all matches come from a single file, do not close that single fold;
@@ -13,14 +14,28 @@ else
   setlocal foldlevel=0
 endif
 
-highlight errorcolor guibg=red
-syn match errorcolor "error:"
+call AnsiEsc#AnsiEsc(0)
 
-highlight warningcolor guibg=yellow
-syn match errorcolor "warning:"
+syn match errorcolor "[eE]rror"
+highlight errorcolor ctermbg=red guibg=red
 
-highlight pathcolor guifg=cyan
-syn match pathcolor "^[^|]*"
+syn match warningcolor "[wW]arning"
+highlight warningcolor ctermbg=yellow guibg=yellow
+
+syn match pathcolor "\v^[^|]+"
+highlight pathcolor ctermfg=cyan guifg=cyan
+
+syn match singlequote "\v'[^']*'"
+highlight singlequote ctermfg=cyan guifg=cyan
+
+syn match doublequote "\v\"[^\"]*\""
+highlight doublequote ctermfg=blue guifg=blue
+
+syn match numbers "\v[0-9]+"
+highlight numbers ctermfg=brown guifg=brown
+
+syn match linecol "\v\|[0-9]+ col [0-9]+\|"
+highlight linecol ctermfg=green guifg=green
 
 function! AdjustWindowHeight(minheight, maxheight)
     exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"

@@ -183,6 +183,8 @@ endif
 let &runtimepath.=',~/.vim/bundle/asyncrun'
 " !AsyncRun
 
+packadd vim-plugin-AnsiEsc
+
 " Restful-console
 let &runtimepath.=',~/.vim/bundle/vim-rest-console'
 let g:vrc_curl_opts = {
