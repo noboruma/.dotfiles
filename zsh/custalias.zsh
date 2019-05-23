@@ -50,6 +50,7 @@ alias gpull='git pull'
 alias gchange='git checkout -'
 alias gconflicts='git diff --name-only --diff-filter=U'
 alias gup='git submodule update --recursive --remote --init'
+alias gls='git ls-tree --name-only HEAD | ls'
 alias grep='grep --color'
 alias tree='tree -C'
 
