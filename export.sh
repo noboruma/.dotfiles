@@ -29,17 +29,17 @@ ln -s $CURDIR/zsh ~/.zsh
 ln -s $CURDIR/zsh/zshrc ~/.zshrc
 ln -s $CURDIR/gdb/bundle/gdb-dashboard/.gdbinit ~
 ln -s $CURDIR/gdb/gdbinit.d ~/.gdbinit.d
-ln -s $CURDIR/.colorgccrc ~
+ln -s $CURDIR/colorgccrc ~/.colorgcc
 ln -s $CURDIR/tmux/tmux.conf ~/.tmux.conf
 ln -s $CURDIR/tmux ~/.tmux
 ln -s $CURDIR/irssi/irssi-notify.sh ~/usr/bin
 ln -s $CURDIR/ranger $XDG_CONFIG_HOME/ranger
 ln -s $CURDIR/w3m ~/.w3m
-ln -s $CURDIR/.inputrc ~
+ln -s $CURDIR/inputrc ~/.inputrc
 ln -s $CURDIR/irssi ~/.irssi
 ln -s $CURDIR/newsboat ~/.newsboat
 ln -s $CURDIR/mutt ~/.mutt
-ln -s $CURDIR/.irbrc ~
+ln -s $CURDIR/irbrc ~/.irbrc
 ln -s $CURDIR/qutebrowser  $XDG_CONFIG_HOME/qutebrowser
 ln -s $CURDIR/nvim $XDG_CONFIG_HOME/nvim
 

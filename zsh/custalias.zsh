@@ -64,7 +64,6 @@ alias arduino="arduino-asm"
 alias m='make -j4'
 alias mc='make -j4 check'
 
-alias ranger='unique_ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 function l() {
     tree $1 -shDFCL 1 | grep --color=always -E '\[.*\]|$'
 }
@@ -120,14 +119,6 @@ function vgdb () {
 #function mwfindPath () {
 #    mw ch findPath -c $1 $2 -f DOT | dot -Tx11
 #}
-
-function unique_ranger() {
-    if [ -z "$RANGER_LEVEL" ]; then
-        ranger "$@"
-    else
-        exit
-    fi
-}
 
 # default tmux layout
 function tnetsession() {

@@ -2,7 +2,7 @@ git clone https://github.com/universal-ctags/ctags
 git clone https://github.com/rizsotto/Bear
 git clone https://github.com/junegunn/fzf.vim
 git clone https://github.com/sharkdp/fd
-git clone https://github.com/cquery-project/cquery
+git clone https://github.com/MaskRay/ccls
 git clone https://github.com/newsboat/newsboat
 git clone https://github.com/facebook/pathpicker
 
