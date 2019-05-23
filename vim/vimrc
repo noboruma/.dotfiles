@@ -10,12 +10,14 @@ let use_gui=0
 let use_custhelp=0
 let username="Thomas Legris"
 
+set nocompatible
+
 let use_coc=0
 if has('nvim')
     let use_coc=1
 endif
 
-set nocompatible
+set termguicolors
 
 "  If you need infrmation on parameters, use :h param
 if has("gui_running") || exists("g:gnvim")
