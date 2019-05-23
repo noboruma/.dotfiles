@@ -18,5 +18,8 @@ gem install terjira solargrpah
 pip install --user rtv urlscan
 pip3 install --user myougiden
 
+# neovim
+pip3 install --user neovim neovim-remote
+
 # tty specifics
 sai fbterm ium ium-mozc ium-fep
