@@ -141,13 +141,6 @@ function cd-or-accept-line() {
     fi
 };
 zle -N accept-line cd-or-accept-line
-## Mode at Prompt
-#function zle-line-init zle-keymap-select {
-#    # Show vim mode on the right
-#    RPS1="%{$fg_bold[yellow]%}${${KEYMAP/vicmd/ -- NORMAL --}/(main|viins)/}%f%b"
-#    zle reset-prompt
-#}
-#
 
 # Vars used later on by Zsh
 export EDITOR="nvim"
@@ -155,8 +148,11 @@ export VEDITOR="gvim -f"
 export GIT_EDITOR="$EDITOR"
 export IDE="gvim"
 export BROWSER="w3m"
+export TERMBROWSER="w3m"
 export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
 export PAGER="less -R"
+export FINDER="find"
+
 
 ##################################################################
 # Stuff to make life easier

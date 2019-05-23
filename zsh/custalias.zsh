@@ -18,7 +18,7 @@ case `uname` in
     FreeBSD)
         ;;
 esac
-alias fe='find -type f | xargs grep'
+alias fe='$FINDER -type f | xargs grep'
 alias c="clear"
 #alias irssi="irssi -c irc.freenode.net -n yyz"
 alias mem="free -m"
@@ -50,7 +50,7 @@ alias gpull='git pull'
 alias gchange='git checkout -'
 alias gconflicts='git diff --name-only --diff-filter=U'
 alias gup='git submodule update --recursive --remote --init'
-alias gls='git ls-tree --name-only HEAD | ls'
+alias gls='git ls-tree --name-only HEAD | xargs $aliases[ls] -d'
 alias grep='grep --color'
 alias tree='tree -C'
 
@@ -65,9 +65,10 @@ alias arduino="arduino-asm"
 alias m='make -j4'
 alias mc='make -j4 check'
 
-function l() {
+function t() {
     tree $1 -shDFCL 1 | grep --color=always -E '\[.*\]|$'
 }
+
 alias ll="ls -haltr"
 alias du="du -h"
 alias df="df -h"
@@ -95,8 +96,7 @@ alias vdev="vim --servername DEV --remote"
 alias ff="fzf-fs"
 
 alias ttyw3m="TERM=fbterm w3m"
-alias www="w3m https://google.com"
-alias tabbed-vimb="tabbed -c vimb -e"
+alias www="$TERMBROWSER https://google.com"
 alias news="newsboat --config-file=$HOME/.newsboat/config --url-file=$HOME/.newsboat/urls"
 alias nmutt='neomutt'
 
@@ -111,7 +111,19 @@ fi
 cdn () { pushd .; for ((i=1; i<=$1; i++)); do cd ..; done; pwd; }
 
 # Go up until reaching $1, ie: cdu home
-cdu () { cd "${PWD%/$1/*}/$1"; }
+function cdu { 
+    cd "${PWD%/$1/*}/$1";
+}
+function _cdu { 
+    _arguments -C '*::filename:->files'
+    case "$state" in
+        files)
+            pwd_list=(${(s:/:)PWD})
+            _wanted -V values expl 'files' compadd $pwd_list
+            ;;
+esac
+}
+compdef _cdu cdu
 
 function vgdb () {
     vim -c ":Termdebug "$1
