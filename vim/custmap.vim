@@ -139,6 +139,7 @@ noremap <leader>w :<c-u>up<cr>
 noremap <leader>x :<c-u>bp\|bd #<cr>
 noremap <leader>X :<c-u>bp\|bd! #<cr>
 noremap <leader>y "+y
+noremap <leader>Y :<c-u>let @*=expand("%:p")<cr>
 nnoremap <leader>z :<c-u>call FixedScroll()<cr>
 "noremap <leader>z zR
 "noremap <leader>Z zM
