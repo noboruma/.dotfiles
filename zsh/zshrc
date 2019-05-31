@@ -6,7 +6,7 @@
 # fdupes A/ --recurse: B | grep ^A/ | xargs rm
 
 #zmodload zsh/zprof
-#export TERM='screen-256color'
+export TERM='screen-256color'
 bindkey -e
 
 source ~/.zsh/plugins/zplug/init.zsh
@@ -188,6 +188,11 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 # http://mundy.yazzy.org/unix/zsh.php
 # http://www.zsh.org/mla/users/2000/msg00727.html
 
+
+case `uname` in
+    Darwin)
+        ;;
+    Linux)
 typeset -g -A key
 bindkey '^?' backward-delete-char
 bindkey '^[[1~' beginning-of-line
@@ -205,6 +210,10 @@ bindkey '^i' expand-or-complete-prefix
 bindkey '^r' history-incremental-search-backward
 bindkey '^w' backward-kill-word
 bindkey '^[[Z' send-break
+        ;;
+    FreeBSD)
+        ;;
+esac
 
 autoload -U select-word-style
 select-word-style bash
