@@ -272,9 +272,13 @@ endif
 "!vim-which-key
 
 "fzf
-if(isdirectory($HOME."/.fzf"))
-    "ln -s the fzf source directory for your own good
-    let &runtimepath.=',~/.fzf'
+if(executable('fzf'))
+    if(executable('brew'))
+        let &runtimepath.=',/usr/local/opt/fzf'
+    else
+        "ln -s the fzf source directory for your own good
+        let &runtimepath.=',~/.fzf'
+    endif
     let &runtimepath.=',~/.vim/bundle/fzf.vim'
     let g:fzf_buffers_jump = 1
     "   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
