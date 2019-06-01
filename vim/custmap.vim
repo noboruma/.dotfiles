@@ -6,6 +6,8 @@ nnoremap x "_x
 vnoremap x "_d
 nnoremap X "_X
 nnoremap , :
+nnoremap ; :
+nnoremap : ;
 nnoremap ,, <nop>
 inoremap ,, <esc>
 inoremap jj <esc>j

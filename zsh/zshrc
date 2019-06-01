@@ -191,8 +191,14 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 
 case `uname` in
     Darwin)
+        PYTHON_PATH="$HOME/Library/Python/3.7/bin"
+        HOMEBREW_PATH="/usr/local/bin"
+        RUBY_PATH="~/.gem/ruby/current/bin"
         ;;
     Linux)
+        PYTHON_PATH="$HOME/.local/bin"
+        HOMEBREW_PATH="/home/linuxbrew/.linuxbrew/bin"
+        RUBY_PATH="~/.gem/ruby/current/bin"
 typeset -g -A key
 bindkey '^?' backward-delete-char
 bindkey '^[[1~' beginning-of-line
@@ -228,7 +234,7 @@ zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
 # Sourcing part
-export PATH=~/usr/bin:/home/linuxbrew/.linuxbrew/bin:~/.gem/ruby/current/bin:~/.local/bin:$PATH
+export PATH=~/usr/bin:$HOMEBREW_PATH:$RUBY_PATH:$PYTHON_PATH:$PATH
 export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
 
 export ANDROID_NDK_ROOT=$HOME'/workspace/android/android-ndk-r16b'
