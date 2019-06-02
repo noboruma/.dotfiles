@@ -45,7 +45,16 @@ alias nv="nvim"
 alias sv='sudo vim'
 alias snv='sudo nvim'
 alias e='gvim --servername DEV --remote'
+case `uname` in
+    Darwin)
+alias ne="nvr"
+        ;;
+    Linux)
 alias ne="xterm -fa 'Terminus' -fs 11 -e nvr"
+        ;;
+    FreeBSD)
+        ;;
+esac
 alias gcommit='git commit -am'
 alias gpush='git push'
 alias gpull='git pull'
