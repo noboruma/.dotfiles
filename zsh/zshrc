@@ -143,7 +143,11 @@ function cd-or-accept-line() {
 zle -N accept-line cd-or-accept-line
 
 # Vars used later on by Zsh
-export EDITOR="nvim"
+if ! type "nvim" > /dev/null; then
+    export EDITOR="vim"
+else
+    export EDITOR="nvim"
+fi
 export VEDITOR="gvim -f"
 export WEDITOR="xterm -fa 'Terminus' -fs 11 -e nvim"
 export GIT_EDITOR="$EDITOR"
