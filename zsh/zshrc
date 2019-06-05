@@ -198,28 +198,30 @@ case `uname` in
         PYTHON_PATH="$HOME/Library/Python/3.7/bin"
         HOMEBREW_PATH="/usr/local/bin"
         RUBY_PATH="~/.gem/ruby/current/bin"
+        bindkey '^[[1~' beginning-of-line
+        bindkey '^[[4~' end-of-line
         ;;
     Linux)
         PYTHON_PATH="$HOME/.local/bin"
         HOMEBREW_PATH="/home/linuxbrew/.linuxbrew/bin"
         RUBY_PATH="~/.gem/ruby/current/bin"
-typeset -g -A key
-bindkey '^?' backward-delete-char
-bindkey '^[[1~' beginning-of-line
-bindkey '^[[5~' up-line-or-history
-bindkey '^[[3~' delete-char
-bindkey '^[[4~' end-of-line
-bindkey '^[[5~' history-search-backward
-bindkey '^[[6~' down-line-or-history
-bindkey '^[[D' backward-char
-bindkey '^[[A' up-line-or-search
-bindkey '^[[B' down-line-or-search
-bindkey '^[[C' forward-char
-# completion in the middle of a line
-bindkey '^i' expand-or-complete-prefix
-bindkey '^r' history-incremental-search-backward
-bindkey '^w' backward-kill-word
-bindkey '^[[Z' send-break
+        typeset -g -A key
+        bindkey '^?' backward-delete-char
+        bindkey '^[[1~' beginning-of-line
+        bindkey '^[[5~' up-line-or-history
+        bindkey '^[[3~' delete-char
+        bindkey '^[[4~' end-of-line
+        bindkey '^[[5~' history-search-backward
+        bindkey '^[[6~' down-line-or-history
+        bindkey '^[[D' backward-char
+        bindkey '^[[A' up-line-or-search
+        bindkey '^[[B' down-line-or-search
+        bindkey '^[[C' forward-char
+        # completion in the middle of a line
+        bindkey '^i' expand-or-complete-prefix
+        bindkey '^r' history-incremental-search-backward
+        bindkey '^w' backward-kill-word
+        bindkey '^[[Z' send-break
         ;;
     FreeBSD)
         ;;
