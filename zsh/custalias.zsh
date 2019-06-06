@@ -114,6 +114,8 @@ alias nmutt='neomutt'
 alias alert_helper='history|tail -n1|sed -e "s/^\s*[0-9]\+\s*//" -e "s/;\s*alert$//"'
 alias alert='notify-send -i /usr/share/icons/gnome/32x32/apps/gnome-terminal.png "[$?] $(alert_helper)"'
 
+alias hist="history -i | tail -n "
+
 if which colordiff >/dev/null 2>&1; then
   alias diff="colordiff"
 fi
