@@ -3,6 +3,8 @@ source ~/.vim/bundle/coding_activator.vim
 " Make options
 let &makeprg='nvm'
 
+compiler ant
+
 " Surround
 let g:surround_{char2nr(">")} = "\1template: \1<\r>"
 
@@ -30,24 +32,18 @@ setlocal complete-=i
 " stop use ctags, only used for jump
 setlocal complete-=t
 
+setlocal foldlevel=1
+setlocal foldnestmax=2
+
 function! CFold1Lay()
     if getline(v:lnum) =~? '^\s*}$'
-        if indent(v:lnum) == g:CFolderindent
-            let g:CFolderClosed=1
-            let g:CFolderindent=0
-            return '<1'
-        endif
-    elseif getline(v:lnum) =~? '^\s*{$'
-        if getline(v:lnum-1) =~? '^.*)$' || getline(v:lnum-1) =~? '^.*)\s*const$' || getline(v:lnum-1) =~? '^.*)\s*volatile$'
-            if g:CFolderClosed == 1
-                let g:CFolderClosed=0
-                let g:CFolderindent=indent(v:lnum)
-                return '>1'
-            endif
-        endif
+        return '<1'
+    elseif getline(v:lnum-1) =~? '^.*)\s*{$'
+        return '>1'
     endif
     return '='
 endfunction
+
 if &diff
     " keep default folding if diff'ing
 else
