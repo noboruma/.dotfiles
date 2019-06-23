@@ -298,3 +298,6 @@
 	url = https://github.com/powerman/vim-plugin-AnsiEsc
 	shallow = true
     branch = master
+[submodule "vim/pack/submodules/opt/vim-test"]
+	path = vim/pack/submodules/opt/vim-test
+	url = https://github.com/janko/vim-test

@@ -44,7 +44,9 @@ alias v='vim'
 alias nv="nvim"
 alias sv='sudo vim'
 alias snv='sudo nvim'
-alias e='gvim --servername DEV --remote'
+"alias e='gvim --servername DEV --remote'
+alias e='nv `fzf`'
+
 case `uname` in
     Darwin)
 alias ne="nvr"

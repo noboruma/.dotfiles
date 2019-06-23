@@ -5,6 +5,12 @@ let &makeprg='nvm'
 
 compiler ant
 
+function! StartDB()
+    call vebugger#jdb#attach('9999')
+    echom "jdb called"
+endfunction
+
+
 " Surround
 let g:surround_{char2nr(">")} = "\1template: \1<\r>"
 

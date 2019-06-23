@@ -168,17 +168,20 @@ if has('nvim') && use_coc
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
 
+    let g:coc_auto_copen = 0
+    autocmd User CocQuickfixChange call asyncrun#quickfix_toggle(0, 1) -cwd=`pwd`
+
     " caller
     nn <silent> gc :call CocLocations('ccls','$ccls/call')<cr>
     " callee
     nn <silent> gC :call CocLocations('ccls','$ccls/call',{'callee':v:true})<cr>
 
-    xmap <leader>a  <Plug>(coc-codeaction-selected)
-    nmap <leader>a  <Plug>(coc-codeaction-selected)
+    xmap <leader>ac  <Plug>(coc-codeaction-selected)
+    nmap <leader>ac  <Plug>(coc-codeaction-selected)
     " Remap for do codeAction of current line
     nmap <leader>ac  <Plug>(coc-codeaction)
     " Fix autofix problem of current line
-    nmap <leader>qf  <Plug>(coc-fix-current)
+    nmap <leader>af  <Plug>(coc-fix-current)
 
     let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
     let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
@@ -234,6 +237,10 @@ if has('nvim') && use_coc
                 \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
                 \ <SID>check_back_space() ? "\<TAB>" :
                 \ coc#refresh()
+
+    " use `:OR` for organize import of current buffer
+    command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
 else
     let g:LanguageClient_autoStart=1
     let g:LanguageClient_diagnosticsEnable=1
@@ -315,4 +322,13 @@ let g:vebugger_leader='\'
 let g:vebugger_breakpoint_text='**'
 let g:vebugger_currentline_text='->'
 let g:vebugger_view_source_cmd='edit'
+nnoremap <leader>\\ :<c-u>call StartDB()<cr>
 packadd vim-vebugger
+
+packadd vim-test
+let test#strategy = "neoterm"
+let test#custom_runners = {'java': ['Brazil']}
+let test#enabled_runners = ["java#brazil"]
+nmap <leader>t ;<c-u>TestNearest<cr>
+nmap <leader>T ;<c-u>TestNFile<cr>
+
