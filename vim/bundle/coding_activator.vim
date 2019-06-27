@@ -329,6 +329,6 @@ packadd vim-test
 let test#strategy = "neoterm"
 let test#custom_runners = {'java': ['Brazil']}
 let test#enabled_runners = ["java#brazil"]
-nmap <leader>t ;<c-u>TestNearest<cr>
-nmap <leader>T ;<c-u>TestNFile<cr>
+nmap <leader>t :<c-u>TestNearest<cr>
+nmap <leader>T :<c-u>TestNFile<cr>
 

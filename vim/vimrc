@@ -76,7 +76,7 @@ set whichwrap=<,>,[,]          " Ok let's use arrow to naviguate
 set showcmd                    " Show cmd on status bar
 set showmatch                  " Show paried symbols
 set startofline
-set wildmode=list:full:longest
+set wildmode=list:full,full
 set autoindent
 set smartindent
 set cino+=j1,(0,b1,+0,t0,<0      " C file option

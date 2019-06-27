@@ -17,6 +17,7 @@ nnoremap <leader>/ :nohlsearch<cr>
 nnoremap <S-Insert> q/p<cr>
 " insert clipboard into command
 cnoremap <S-Insert> <c-r>0
+cnoremap <C-R> <esc>:History:<cr>
 
 function! IsLeftMostWindow()
     let curNr = winnr()
@@ -73,7 +74,7 @@ command! AsyncCCL call asyncrun#quickfix_toggle(0, 0)
 
 function AsyncGrep(word, path)
     call asyncrun#quickfix_toggle(0, 0)
-    execute "AsyncRun -program=grep \"".a:word."\" ".a:path
+    execute "AsyncRun -cwd=".a:path." -program=grep \"".a:word."\" ."
     let @/ = a:word
     set hls
     redraw
@@ -85,7 +86,7 @@ cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-h> <S-Left>
 cnoremap <C-l> <S-Right>
-cnoremap <C-k> <C-w><C-w>
+"cnoremap <C-k> <C-w><C-w>
 
 "noremap <leader>a :set scb<cr> " just use vimdiff or Linediff
 "noremap <leader>A :set scb!<cr>
@@ -127,9 +128,9 @@ else
     " slime based?
 endif
 noremap <leader>S :<c-u>SemanticHighlightToggle<cr>
-noremap <leader>t :<c-u>tj <C-r><C-w><cr>
+"noremap <leader>t :<c-u>tj <C-r><C-w><cr>
 noremap <leader>T :<c-u>tj /<C-r><C-w><C-b><right><right><right><right>
-vnoremap <leader>t "sy:tj /<C-R>"<cr>
+"vnoremap <leader>t "sy:tj /<C-R>"<cr>
 vnoremap <leader>T "sy:tj /<C-R>"
 nnoremap \| :<c-u>vsp<cr>
 nnoremap _ :<c-u>call SmartSplit()<cr>``zz

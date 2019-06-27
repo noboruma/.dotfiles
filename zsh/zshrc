@@ -110,8 +110,8 @@ export PS2=`print '%{\e[0;34m%}>'$NOCOLOR`
 
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' check-for-changes false
-zstyle ':vcs_info:*' check-for-staged-changes false
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' check-for-staged-changes true
 zstyle ':vcs_info:*' formats " (%s) [%r: %b] %a%m%u%c"
 
 # zsh hooks: precmd, chpwd, preexec, ...
