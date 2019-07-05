@@ -22,6 +22,7 @@ find ~ -maxdepth 1 -name ".irbrc" -type l -exec rm -v {} \;
 find $XDG_CONFIG_HOME -maxdepth 1 -name "ranger" -type l -exec rm -v {} \;
 find $XDG_CONFIG_HOME -maxdepth 1 -name "qutebrowser" -type l -exec rm -v {} \;
 find $XDG_CONFIG_HOME -maxdepth 1 -name "nvim" -type l -exec rm -v {} \;
+find $XDG_CONFIG_HOME -maxdepth 1 -name "vifm" -type l -exec rm -v {} \;
 
 ln -s $CURDIR/vim ~/.vim
 ln -s $CURDIR/vim/vimrc ~/.vimrc
@@ -42,6 +43,7 @@ ln -s $CURDIR/mutt ~/.mutt
 ln -s $CURDIR/irbrc ~/.irbrc
 ln -s $CURDIR/qutebrowser  $XDG_CONFIG_HOME/qutebrowser
 ln -s $CURDIR/nvim $XDG_CONFIG_HOME/nvim
+ln -s $CURDIR/vifm $XDG_CONFIG_HOME/vifm
 
 cd - 1>/dev/null
 
