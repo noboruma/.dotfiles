@@ -12,7 +12,7 @@ let username="Thomas Legris"
 
 set nocompatible
 
-let use_coc=0
+let use_coc=1
 if has('nvim')
     let use_coc=1
 endif
@@ -76,10 +76,11 @@ set whichwrap=<,>,[,]          " Ok let's use arrow to naviguate
 set showcmd                    " Show cmd on status bar
 set showmatch                  " Show paried symbols
 set startofline
+set wildmenu
 set wildmode=list:full,full
 set autoindent
 set smartindent
-set cino+=j1,(0,b1,+0,t0,<0      " C file option
+set cino+=(0,b1,+0,t0,<0,j1      " C file option
 set autoread
 set clipboard=unnamed          " ^=
 set showcmd                    " visual count
@@ -315,6 +316,7 @@ if has('nvim')
     let g:extract_useDefaultMappings=0
     let g:extract_loadDeoplete=1
     let g:extract_maxCount = 8
+    " TODO: Remove submodule?
     packadd Extract
 endif
 

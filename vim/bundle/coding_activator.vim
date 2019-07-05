@@ -157,16 +157,16 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_cpp_cquery_cache_directory= '/tmp/cquery/cache'
 "!ALE
 
-if has('nvim') && use_coc
+if use_coc
     packadd coc.nvim
     inoremap <silent><expr> <c-space> coc#refresh()
     nmap <silent> [c <Plug>(coc-diagnostic-prev)
     nmap <silent> ]c <Plug>(coc-diagnostic-next)
-    nmap <silent> gd :<c-u>call CocAction('jumpDefinition', 'vsplit')<cr>
-    nmap <silent> gD <Plug>(coc-definition)
+    nmap <silent> gD :<c-u>call CocAction('jumpDefinition', 'vsplit')<cr>
+    nmap <silent> gd <Plug>(coc-definition)
     nmap <silent> gy <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr <Plug>(coc-references)
+    nmap <silent> gr :<c-u>call asyncrun#quickfix_toggle(0,1) \| call CocAction('jumpReferences')<cr>
 
     let g:coc_auto_copen = 0
     autocmd User CocQuickfixChange call asyncrun#quickfix_toggle(0, 1) -cwd=`pwd`
@@ -241,6 +241,7 @@ if has('nvim') && use_coc
     " use `:OR` for organize import of current buffer
     command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
+    command! -nargs=0 CocDetail :call CocAction('diagnosticInfo')
 else
     let g:LanguageClient_autoStart=1
     let g:LanguageClient_diagnosticsEnable=1
@@ -326,7 +327,12 @@ nnoremap <leader>\\ :<c-u>call StartDB()<cr>
 packadd vim-vebugger
 
 packadd vim-test
-let test#strategy = "neoterm"
+if has('nvim')
+    let test#strategy = "neoterm"
+else
+    " Untested, use asynrun otherwise
+    let test#strategy = 'tslime'
+endif
 let test#custom_runners = {'java': ['Brazil']}
 let test#enabled_runners = ["java#brazil"]
 nmap <leader>t :<c-u>TestNearest<cr>

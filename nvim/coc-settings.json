@@ -14,4 +14,6 @@
     },
      "java.errors.incompleteClasspath.severity": "ignore",
      "coc.preferences.useQuickfixForLocations": true,
+     "diagnostic.checkCurrentLine": true,
+     "java.format.enabled": false
 }

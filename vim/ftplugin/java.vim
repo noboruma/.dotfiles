@@ -38,6 +38,7 @@ setlocal complete-=i
 " stop use ctags, only used for jump
 setlocal complete-=t
 
+
 setlocal foldlevel=1
 setlocal foldnestmax=2
 
@@ -113,9 +114,20 @@ function! CppNoNamespaceAndTemplateIndent()
     return l:retv
 endfunction
 
+setlocal indentexpr=CppNoNamespaceAndTemplateIndent()
+
 if &diff
     " keep default folding if diff'ing
 else
     setlocal foldmethod=expr
     setlocal foldexpr=CFold1Lay()
 endif
+
+" Order matters
+set efm=\[checkstyle\]\ \[ERROR\]\ %f:%l:%c:%m
+set efm+=\[checkstyle\]\ \[ERROR\]\ %f:%l:%m
+set efm+=%f:%l:%c:%m
+
+" For some reasons, need to turn that off
+filetype indent off
+setlocal cino+=(0,b1,+0,t0,<0,j1      " C file option

@@ -14,7 +14,11 @@ else
   setlocal foldlevel=0
 endif
 
-call AnsiEsc#AnsiEsc(0)
+" Need to happen only once
+if !exists('g:ansiesc')
+    "call AnsiEsc#AnsiEsc(0)
+    let g:ansiesc=1
+endif
 
 syn match errorcolor "[eE]rror"
 highlight errorcolor ctermbg=red guibg=red
