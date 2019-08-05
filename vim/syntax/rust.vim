@@ -54,7 +54,7 @@ syn region    rustBoxPlacementBalance start="\[" end="\]" containedin=rustBoxPla
 syn keyword   rustReservedKeyword alignof be do offsetof priv pure sizeof typeof unsized yield
 
 " Built-in types {{{2
-syn keyword   rustType        int uint float char bool u8 u16 u32 u64 f32
+syn keyword   rustType        int uint float char bool u8 u16 u32 u64 f32 usize
 syn keyword   rustType        f64 i8 i16 i32 i64 str Self
 
 " Things from the prelude (src/libstd/prelude.rs) {{{2

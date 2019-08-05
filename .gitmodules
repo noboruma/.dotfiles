@@ -301,3 +301,6 @@
 [submodule "vim/pack/submodules/opt/vim-test"]
 	path = vim/pack/submodules/opt/vim-test
 	url = https://github.com/janko/vim-test
+[submodule "zsh/plugins/forgit"]
+	path = zsh/plugins/forgit
+	url = https://github.com/wfxr/forgit

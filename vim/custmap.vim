@@ -12,6 +12,8 @@ inoremap jj <esc>j
 inoremap kk <esc>k
 nnoremap // /\<<C-r><C-w>\><cr>
 vnoremap // "sy/<C-R>"<cr>
+nnoremap ( :<c-u>call search("(", "bes")<cr>
+nnoremap ) :<c-u>call search("(", "es")<cr>
 nnoremap <leader>/ :nohlsearch<cr>
 " search clipboard
 nnoremap <S-Insert> q/p<cr>

@@ -410,4 +410,7 @@ nnoremap <f8> :delete<cr>
 "
 " let $VIFM_SERVER_NAME = v:servername
 
-command! fzfD :execute 'cd "'.system('cat ~/.vifm/fzf-read/locate |  fzf 2>/dev/tty').'"'
+command! FZFlocate :set noquickview | :execute 'goto "'.system('locate $HOME | fzf --height 10 2>/dev/tty ').'"%IU' | redraw
+command! FZFfind :set noquickview | :execute 'goto "'.system('find | fzf --height 10 2>/dev/tty ').'"%IU' | redraw
+nnoremap <c-l> :FZFlocate<cr>
+nnoremap <c-f> :FZFfind<cr>

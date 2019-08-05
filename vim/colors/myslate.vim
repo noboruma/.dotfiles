@@ -16,7 +16,8 @@ let colors_name = "myslate"
 
 hi   Normal         guifg=White            guibg=black
 hi   Cursor         guibg=khaki            guifg=slategrey
-hi   CursorLine                                                cterm=underline   ctermbg=NONE         guibg=grey15
+hi   MatchParen     gui=underline guibg=black     cterm=underline        ctermbg=blue        ctermfg=blue
+hi   CursorLine                                                cterm=underline   ctermbg=NONE         guibg=grey11
 hi   VertSplit      guibg=#c2bfa5          guifg=grey40        gui=none          cterm=reverse
 hi   Folded         guibg=black            guifg=grey40        ctermfg=grey      ctermbg=darkgrey
 hi   FoldColumn     guibg=black            guifg=grey20        ctermfg=4         ctermbg=7

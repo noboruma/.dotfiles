@@ -293,6 +293,21 @@ _fzf_compgen_dir() {
     fd --type d --hidden --follow --exclude ".git" . "$1" --color=always
 }
 
+# Git edit
+ge() {
+ local files
+ IFS=$'\n' files=($(git diff --name-only $@ | fzf -m -0))
+ [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+}
+
+# Git checkout
+gbc() {
+  local branches branch
+  branches=$(git --no-pager branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # FZF marks
@@ -312,6 +327,8 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[builtin]='fg=33'
 ZSH_HIGHLIGHT_STYLES[command]='fg=33'
 source $HOME/.zsh/plugins/zsh-syntaz-highlighting/zsh-syntax-highlighting.zsh
+
+source $HOME/.zsh/plugins/forgit/forgit.plugin.zsh
 
 # zsh per directory history
 PER_DIRECTORY_HISTORY_TOGGLE='^H'

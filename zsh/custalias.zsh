@@ -18,7 +18,7 @@ case `uname` in
     FreeBSD)
         ;;
 esac
-alias fe='$FINDER -type f | xargs grep'
+#alias fe='$FINDER -type f | xargs grep'
 alias c="clear"
 #alias irssi="irssi -c irc.freenode.net -n yyz"
 alias mem="free -m"
@@ -155,3 +155,49 @@ function tnetsession() {
     tmux new-window -d -k -t netclients:2 'irssi'
     tmux new-window -d -k -t netclients:3 'newsboat --config-file=$HOME/.newsboat/config --url-file=$HOME/.newsboat/urls'
 }
+<<<<<<< Updated upstream
+=======
+
+alias bb="brazil-build"
+alias bball="brazil-recursive-cmd-parallel --allPackages brazil-build"
+
+alias bbup='cd brazil-path packge-src-root brazil-path package-src-root'
+alias proot='cd `brazil-path package-src-root 2>/dev/null`'
+
+export REMOTE_DSK=dev-dsk-legrist-1e-ca0423e1.us-east-1.amazon.com
+function rssh() {
+    ssh -tt $REMOTE_DSK "$@ ; exit" ; exit
+}
+
+function rbb() {
+    cwd=`brazil-path package-src-root` || return 1
+    remote_cwd=`echo $cwd | sed -e "s/^.*"${USER}"\///"`
+    ssh -tt $REMOTE_DSK <<+
+    /apollo/env/envImprovement/var/bin/zsh -c ". ~/.zshrc ; cd $remote_cwd ; brazil-build $@ ; exit" ; exit
++
+}
+
+function servebuild() {
+    cwd=`brazil-path package-build-root` || return 1
+    remote_cwd=`echo $cwd | sed -e "s/^.*"${USER}"\///"`
+    ssh -tt $REMOTE_DSK <<+
+    /apollo/env/envImprovement/var/bin/zsh -c ". ~/.zshrc ; /apollo/env/StaticFileServer/bin/serve -port=${1:-8000} -path=$remote_cwd; exit" ; exit
++
+}
+
+function bbws() {
+    cwd=`brazil-path package-src-root` || return 1
+    remote_cwd=`echo $cwd | sed -e "s/^.*"${USER}"\///"`
+    ssh -tt $REMOTE_DSK <<+
+    /apollo/env/envImprovement/var/bin/zsh -c ". ~/.zshrc ; cd $remote_cwd ; brazil-recursive-cmd-parallel --allPackages brazil-build release ; exit" ; exit
++
+}
+
+function serveexp() {
+    cwd=`brazil-path package-src-root` || return 1
+    remote_cwd=`echo $cwd | sed -e "s/^.*"${USER}"\///"`
+    ssh -tt $REMOTE_DSK <<+
+    /apollo/env/envImprovement/var/bin/zsh -c ". ~/.zshrc ; cd $remote_cwd ; brazil workspace env attach --alias $1/AlexaShoppingMultiModalTransformers --activate; exit" ; exit
++
+}
+>>>>>>> Stashed changes

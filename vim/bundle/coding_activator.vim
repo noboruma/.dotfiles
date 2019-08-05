@@ -158,7 +158,9 @@ let g:ale_cpp_cquery_cache_directory= '/tmp/cquery/cache'
 "!ALE
 
 if use_coc
-    packadd coc.nvim
+    "u will have bad experience for diagnostic messages when it's default 4000.
+    set updatetime=300
+
     inoremap <silent><expr> <c-space> coc#refresh()
     nmap <silent> [c <Plug>(coc-diagnostic-prev)
     nmap <silent> ]c <Plug>(coc-diagnostic-next)
@@ -167,6 +169,8 @@ if use_coc
     nmap <silent> gy <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr :<c-u>call asyncrun#quickfix_toggle(0,1) \| call CocAction('jumpReferences')<cr>
+    nmap <silent> gL <Plug>(coc-codelens-action) 
+    nmap <silent> gl :<c-u>CocList<cr>
 
     let g:coc_auto_copen = 0
     autocmd User CocQuickfixChange call asyncrun#quickfix_toggle(0, 1) -cwd=`pwd`
@@ -242,6 +246,10 @@ if use_coc
     command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
     command! -nargs=0 CocDetail :call CocAction('diagnosticInfo')
+
+    " Add status line support, for integration with other plugin, checkout `:h coc-status`
+    set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
 else
     let g:LanguageClient_autoStart=1
     let g:LanguageClient_diagnosticsEnable=1

@@ -17,6 +17,11 @@ if has('nvim')
     let use_coc=1
 endif
 
+if exists('use_coc')
+    " Get gitgutter like git support
+    packadd coc.nvim
+endif
+
 set termguicolors
 
 "  If you need infrmation on parameters, use :h param
@@ -323,12 +328,8 @@ endif
 set ruler          " Relative cursor position
 set is             " inc search
 
-if has("gui_running")
-    set cul        " Highlight current line
-    hi CursosLine gui=underline
-else
-    set nocul      " Speed up vim
-endif
+set cul            " Highlight current line
+"hi CursosLine gui=underline cterm=underline ctermfg=None guifg=None
 
 set spelllang=en
 set nospell
@@ -448,3 +449,7 @@ endif
 filetype on
 filetype plugin on
 filetype indent on
+
+set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+            \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+            \,sm:block-blinkwait175-blinkoff150-blinkon175
