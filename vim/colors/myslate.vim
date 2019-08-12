@@ -26,7 +26,7 @@ hi   ModeMsg        guifg=goldenrod        cterm=none          ctermfg=brown
 hi   MoreMsg        guifg=SeaGreen         ctermfg=darkgreen
 hi   NonText        guifg=RoyalBlue        guibg=black         cterm=bold        ctermfg=blue
 hi   Question       guifg=springgreen      ctermfg=green
-hi   Search         guibg=peru             guifg=wheat         cterm=none        ctermfg=grey         ctermbg=blue
+hi   Search         guibg=purple           guifg=grey          cterm=none        ctermfg=grey         ctermbg=blue
 hi   SpecialKey     guifg=yellowgreen      ctermfg=darkgreen
 hi   StatusLine     guibg=#c2bfa5          guifg=black         gui=none          cterm=bold,reverse
 hi   StatusLineNC   guibg=#c2bfa5          guifg=grey40        gui=none          cterm=reverse

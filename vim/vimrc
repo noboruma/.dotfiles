@@ -5,7 +5,7 @@
 " redir @* | cmd | redir END
 set shell=zsh
 " Script Setting
-let use_arrow=0
+let use_arrow=1
 let use_gui=0
 let use_custhelp=0
 let username="Thomas Legris"
@@ -20,6 +20,8 @@ endif
 if exists('use_coc')
     " Get gitgutter like git support
     packadd coc.nvim
+
+    packadd vim-dadbod
 endif
 
 set termguicolors
@@ -45,9 +47,12 @@ if has("gui_running") || exists("g:gnvim")
     endif
 endif
 
-set ttyfast
-set re=1
-set lazyredraw
+"set ttyfast
+"set re=1
+"set lazyredraw
+set synmaxcol=140
+syntax sync minlines=1024
+
 set scrolloff=0 " Keep no lines after/before the cursor
 set scrolljump=0
 set noequalalways
@@ -111,9 +116,10 @@ augroup vimrc
     " Prevent RO file editing: use 'set modifiable' manually if needed
     autocmd BufEnter * let &modifiable = !&readonly
     " Fix FZF Buffer
-    autocmd BufEnter * try | silent cd %:p:h | catch | endtry
+    "autocmd BufEnter * try | silent cd %:p:h | catch | endtry
 augroup END
-set autochdir
+
+set noautochdir
 
 set foldlevel=99
 set foldnestmax=0
@@ -131,6 +137,7 @@ let g:colorizer_nomap = 1
 let g:colorizer_startup = 0
 let &runtimepath.=',~/.vim/bundle/colorizer'
 
+set showtabline=0
 " airline plugin
 set laststatus=2 "status bar
 let g:airline_theme='light'
@@ -150,7 +157,7 @@ let g:airline_mode_map = {
             \ '' : '',
             \ }
 let g:airline_section_z = '%#__accent_bold#%3p%%%#__restore__# %3l:%2c' "can add variable via %{g:airline_right_sep}
-let g:airline_extensions = ['quickfix', 'undotree', 'branch']
+"let g:airline_extensions = ['quickfix', 'undotree', 'branch']
 let &runtimepath.=',~/.vim/bundle/airline'
 let &runtimepath.=',~/.vim/bundle/airline-themes'
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
@@ -192,6 +199,31 @@ let &runtimepath.=',~/.vim/bundle/asyncrun'
 " !AsyncRun
 
 packadd vim-plugin-AnsiEsc
+
+packadd Tabmerge
+
+packadd file-line
+
+let NERDTreeCascadeSingleChildDir=1
+let NERDTreeHighlightCursorline=1
+let g:NERDTreeShowIgnoredStatus = 1
+let NERDTreeWinPos="right"
+let NERDTreeWinSize=42
+let NERDTreeMinimalUI=1
+packadd nerdtree
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "+",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "u",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : 'i',
+    \ "Unknown"   : "?"
+    \ }
+packadd nerdtree-git-plugin
 
 " Restful-console
 let &runtimepath.=',~/.vim/bundle/vim-rest-console'
@@ -295,12 +327,57 @@ if(executable('fzf'))
                 \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
                 \                 <bang>0)
 
+    command! -bang -nargs=* Buffers
+                \ call fzf#vim#buffers(<q-args>,
+                \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+                \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+                \                 <bang>0)
+
     " Likewise, Files command with preview window
     command! -bang -nargs=* -complete=dir Files
-                \ call fzf#vim#files(<q-args>,
+                \ call fzf#vim#files(<q-args>, {'options': ['--delimiter', '/', '--with-nth', '-1', '--preview', 'echo {};echo;cat {}']}, <bang>0)
+
+    command! -bang -nargs=* -complete=dir GFiles
+                \ call fzf#vim#gitfiles(<q-args>,
                 \                    <bang>0 ? fzf#vim#with_preview('up:70%')
                 \                            : fzf#vim#with_preview('right:50%:hidden', '?'),
                 \                    <bang>0)
+
+    if has('nvim')
+        "Let the input go up and the search list go down
+        "let $FZF_DEFAULT_OPTS = '--layout=reverse'
+
+        "Open FZF and choose floating window
+        "let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
+
+        "function! OpenFloatingWin()
+        "    let height = &lines - 3
+        "    let width = &columns - 1
+
+        "    "Set the position, size, etc. of the floating window.
+        "    "The size configuration here may not be so flexible, and there's room for further improvement.
+        "    let opts = {
+        "                \ 'relative': 'editor',
+        "                \ 'row': height * 0.1,
+        "                \ 'col': width * 0.1,
+        "                \ 'width': float2nr(width * 0.8),
+        "                \ 'height': float2nr(height * 0.9)
+        "                \ }
+
+        "    let buf = nvim_create_buf(v:false, v:true)
+        "    let win = nvim_open_win(buf, v:true, opts)
+
+        "    "Set Floating Window Highlighting
+        "    call setwinvar(win, '&winhl', 'Normal:Pmenu')
+
+        "    setlocal buftype=nofile
+        "                \ nobuflisted
+        "                \ bufhidden=hide
+        "                \ nonumber
+        "                \ norelativenumber
+        "                \ signcolumn=no
+        "endfunction
+    endif
 else
     echom 'fzf not installed'
 endif
@@ -319,9 +396,9 @@ if has('nvim')
     packadd neoterm
 
     let g:extract_useDefaultMappings=0
-    let g:extract_loadDeoplete=1
-    let g:extract_maxCount = 8
-    " TODO: Remove submodule?
+    "let g:extract_loadDeoplete=1
+    let g:extract_maxCount = 3
+    "" TODO: Remove submodule?
     packadd Extract
 endif
 
@@ -369,10 +446,14 @@ source ~/.vim/custmap.vim
 
 " Explorer options
 let g:netrw_liststyle=3
+let g:netrw_preview = 1
+let g:netrw_banner = 0
+let g:netrw_browse_split = 3
+let g:netrw_mnousemaps = 0
 autocmd FileType netrw setl bufhidden=delete
 
 " Ced: for auto-completion popup menu
-highlight Pmenu    guifg=black  guibg=grey
+highlight Pmenu    guifg=grey  guibg=#222222
 highlight PmenuSel guifg=grey guibg=black gui=bold
 " Thomas: let's change it for term as well
 highlight Pmenu    ctermbg=grey gui=bold

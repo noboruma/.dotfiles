@@ -6,10 +6,10 @@
 # fdupes A/ --recurse: B | grep ^A/ | xargs rm
 
 #zmodload zsh/zprof
-export TERM='screen-256color'
+export TERM='tmux-256color'
 bindkey -e
 
-source ~/.zsh/plugins/zplug/init.zsh
+#source ~/.zsh/plugins/zplug/init.zsh
 
 # Root allow X?
 # xhost + > /dev/null 2> /dev/null || true
@@ -36,6 +36,7 @@ case `uname` in
         if xset q &>/dev/null; then
             if which setxkbmap >/dev/null 2>&1; then
                 setxkbmap -option ctrl:nocaps
+                xmodmap -e "keycode 47 = colon semicolon"
                 #setxkbmap -option to enable
             fi
             # i18n
@@ -113,11 +114,29 @@ zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' check-for-staged-changes true
 zstyle ':vcs_info:*' formats " (%s) [%r: %b] %a%m%u%c"
+#zstyle ':vcs_info:git*+set-message:*' hooks git-st
+#function +vi-git-st() {
+#    local ahead behind
+#    local -a gitstatus
+#
+#    # for git prior to 1.7
+#    # ahead=$(git rev-list origin/${hook_com[branch]}..HEAD | wc -l)
+#    ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
+#    (( $ahead )) && gitstatus+=( "+${ahead}" )
+#
+#    # for git prior to 1.7
+#    # behind=$(git rev-list HEAD..origin/${hook_com[branch]} | wc -l)
+#    behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
+#    (( $behind )) && gitstatus+=( "-${behind}" )
+#
+#    hook_com[misc]+=${(j:/:)gitstatus}
+#}
 
 # zsh hooks: precmd, chpwd, preexec, ...
 precmd(){
     #Needed for tmux splitting
     vcs_info
+    echo -n -e "\a"
 }
 chpwd() {
     emulate -L zsh
@@ -170,6 +189,7 @@ zstyle ':completion:*:*:cd:*' local-directories
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
 
+FPATH=$HOME/.zfunc:$FPATH
 autoload -Uz compinit
 if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
     compinit;
@@ -192,6 +212,10 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 # http://mundy.yazzy.org/unix/zsh.php
 # http://www.zsh.org/mla/users/2000/msg00727.html
 
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
 
 case `uname` in
     Darwin)
@@ -200,10 +224,13 @@ case `uname` in
         RUBY_PATH="~/.gem/ruby/current/bin"
         bindkey '^[[1~' beginning-of-line
         bindkey '^[[4~' end-of-line
+        bindkey "^[[3~" delete-char
+        bindkey "^[[A" up-line-or-beginning-search # Up
+        bindkey "^[[B" down-line-or-beginning-search # Down
         ;;
     Linux)
         PYTHON_PATH="$HOME/.local/bin"
-        HOMEBREW_PATH="/home/linuxbrew/.linuxbrew/bin"
+        #HOMEBREW_PATH="/home/linuxbrew/.linuxbrew/bin"
         RUBY_PATH="~/.gem/ruby/current/bin"
         typeset -g -A key
         bindkey '^?' backward-delete-char
@@ -214,8 +241,8 @@ case `uname` in
         bindkey '^[[5~' history-search-backward
         bindkey '^[[6~' down-line-or-history
         bindkey '^[[D' backward-char
-        bindkey '^[[A' up-line-or-search
-        bindkey '^[[B' down-line-or-search
+        bindkey "^[[A" up-line-or-beginning-search # Up
+        bindkey "^[[B" down-line-or-beginning-search # Down
         bindkey '^[[C' forward-char
         # completion in the middle of a line
         bindkey '^i' expand-or-complete-prefix
@@ -280,9 +307,10 @@ bindkey '^[OB' down-line-or-search
 
 # FZF
 export FZF_DEFAULT_COMMAND="fd --type file --color=always --follow --exclude .git"
-export FZF_DEFAULT_OPTS="--ansi"
+export FZF_DEFAULT_OPTS='--ansi --height 40% --layout=reverse --border --bind "tab:down,btab:up,shift-right:toggle-out,right:toggle"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d --color=always --exclude .git --follow"
+export FORGIT_DIFF_FZF_OPTS="--bind=\"enter:execute(tmux split $HOME/.zsh/bin/nvrw {-1})\""
 
 _fzf_compgen_path() {
     fd --hidden --follow --exclude ".git" . "$1" --color=always
@@ -311,7 +339,7 @@ gbc() {
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # FZF marks
-source $HOME/.zsh/plugins/fzf-marks/init.zsh
+#source $HOME/.zsh/plugins/fzf-marks/init.zsh
 
 # zsh autosuggestions
 ZSH_AUTOSUGGEST_USE_ASYNC=1
@@ -320,6 +348,8 @@ source $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # zsh completions
 source $HOME/.zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
+source <(kubectl completion zsh)
+[ -f /usr/share/google-cloud-sdk/completion.zsh.inc ] && source /usr/share/google-cloud-sdk/completion.zsh.inc
 
 # zsh syntax highlighting
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
@@ -330,10 +360,20 @@ source $HOME/.zsh/plugins/zsh-syntaz-highlighting/zsh-syntax-highlighting.zsh
 
 source $HOME/.zsh/plugins/forgit/forgit.plugin.zsh
 
+source $HOME/.zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+
 # zsh per directory history
-PER_DIRECTORY_HISTORY_TOGGLE='^H'
-source $HOME/.zsh/plugins/per-directory-history/per-directory-history.zsh
+#PER_DIRECTORY_HISTORY_TOGGLE='^H'
+#source $HOME/.zsh/plugins/per-directory-history/per-directory-history.zsh
 
+export PATH="$HOME/.zsh/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+#export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home"
+source $HOME/.cargo/env
+
+if [[ -a $HOME/.work.zsh ]]; then
+    source $HOME/.work.zsh
+fi
+
+#source ~/.dntw/dntw.sh
 #zprof
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

@@ -36,14 +36,14 @@ ln -s $CURDIR/tmux ~/.tmux
 ln -s $CURDIR/irssi/irssi-notify.sh ~/usr/bin
 ln -s $CURDIR/ranger $XDG_CONFIG_HOME/ranger
 ln -s $CURDIR/w3m ~/.w3m
+ln -s $CURDIR/git ~/.gitconf
 ln -s $CURDIR/inputrc ~/.inputrc
 ln -s $CURDIR/irssi ~/.irssi
 ln -s $CURDIR/newsboat ~/.newsboat
 ln -s $CURDIR/mutt ~/.mutt
-ln -s $CURDIR/irbrc ~/.irbrc
-ln -s $CURDIR/qutebrowser  $XDG_CONFIG_HOME/qutebrowser
+ln -s $CURDIR/ruby/irbrc ~/.irbrc
 ln -s $CURDIR/nvim $XDG_CONFIG_HOME/nvim
-ln -s $CURDIR/vifm $XDG_CONFIG_HOME/vifm
+ln -s $CURDIR/surfraw.conf $XDG_CONFIG_HOME/.surfraw.conf
 
 cd - 1>/dev/null
 
@@ -56,3 +56,5 @@ if [ -x "$(command -v incrontab)" ]; then
 else
     echo "incontrab not installed: irssi notification disabled"
 fi
+
+git config --global core.hooksPath $HOME/.gitconf/hooks

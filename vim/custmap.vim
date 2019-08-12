@@ -5,9 +5,6 @@ nnoremap Q <nop>
 nnoremap x "_x
 vnoremap x "_d
 nnoremap X "_X
-nnoremap , :
-nnoremap ,, <nop>
-inoremap ,, <esc>
 inoremap jj <esc>j
 inoremap kk <esc>k
 nnoremap // /\<<C-r><C-w>\><cr>
@@ -15,11 +12,12 @@ vnoremap // "sy/<C-R>"<cr>
 nnoremap ( :<c-u>call search("(", "bes")<cr>
 nnoremap ) :<c-u>call search("(", "es")<cr>
 nnoremap <leader>/ :nohlsearch<cr>
+nnoremap <s-tab> :NERDTreeToggle<cr>
 " search clipboard
 nnoremap <S-Insert> q/p<cr>
 " insert clipboard into command
 cnoremap <S-Insert> <c-r>0
-cnoremap <C-R> <esc>:History:<cr>
+cnoremap <C-R> <esc>:<c-u>History:<cr>
 
 function! IsLeftMostWindow()
     let curNr = winnr()
@@ -53,23 +51,39 @@ function SmartSplit()
 endfunction
 
 function FixedScroll()
-    let curline   = line(".")
+    let curline   = line(".") - 1
     let viewlines = winheight(0)
-    let topviewline = line("w0")
+    let topviewline = line("w0") - 1
+    "let line_pos = screenrow()
 
-    let pagenum = curline / siewlines
+    let pagenum = curline / viewlines
     let pagestartline = pagenum * viewlines
     if topviewline < pagestartline
         let offset = pagestartline - topviewline
-        for i in range(1, offset)
-            normal J
-        endfor
+        exe "normal ".offset."\<c-n>"
     elseif topviewline > pagestartline
         let offset = topviewline - pagestartline
-        for i in range(1, offset)
-            normal K
-        endfor
+        exe "normal ".offset."\<c-y>"
     endif
+endfunction
+
+function FixedScrollKeepCursor(scrollCommand)
+    let curline   = line(".")
+    let topviewline = line("w0")
+    call FixedScroll()
+    exe "normal ".a:scrollCommand
+    if curline != topviewline
+        let offset = curline - topviewline
+        execute "normal H".offset."j"
+    endif
+endfunction
+
+function FixedScrollUp()
+    call FixedScrollKeepCursor("\<c-b>\<c-y>\<c-y>")
+endfunction
+
+function FixedScrollDown()
+    call FixedScrollKeepCursor("\<c-f>\<c-n>\<c-n>")
 endfunction
 
 command! AsyncCCL call asyncrun#quickfix_toggle(0, 0)
@@ -82,6 +96,45 @@ function AsyncGrep(word, path)
     redraw
 endfunction
 
+function! WhichTab(filename)
+    " Try to determine whether file is open in any tab.  
+    " Return number of tab it's open in
+    let buffername = bufname(a:filename)
+    if buffername == ""
+        return -1
+    endif
+    let buffernumber = bufnr(buffername)
+
+    " tabdo will loop through pages and leave you on the last one;
+    " this is to make sure we don't leave the current page
+    let currenttab = tabpagenr()
+    let tab_arr = []
+    tabdo let tab_arr += tabpagebuflist()
+
+    " return to current page
+    exec "tabnext ".currenttab
+
+    " Start checking tab numbers for matches
+    let i = 0
+    for tnum in tab_arr
+        let i += 1
+        if tnum == buffernumber
+            return i
+        endif
+    endfor
+endfunction
+
+function OpenExplorer()
+    let tabnum=WhichTab('NetrwTreeListing')
+    if tabnum == -1
+        exec "0tabnew"
+        exec "Explore ."
+    else
+        let tabnum += 1
+        exec "tabnext ".tabnum
+    endif
+endfunction
+
 command! -nargs=* -complete=dir AsyncGrep call AsyncGrep(<f-args>)
 
 cnoremap <C-a> <Home>
@@ -89,37 +142,54 @@ cnoremap <C-e> <End>
 cnoremap <C-h> <S-Left>
 cnoremap <C-l> <S-Right>
 "cnoremap <C-k> <C-w><C-w>
+"nnoremap <C-e> :<c-u>Files<cr>
+"
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+
+nnoremap <C-n> <C-e>
+nnoremap <c-e> :<c-u>Files<cr>
+nnoremap <C-n> <C-e>
+nnoremap <C-g> :<c-u>Ag<cr>
 
 "noremap <leader>a :set scb<cr> " just use vimdiff or Linediff
 "noremap <leader>A :set scb!<cr>
 "noremap <leader>b :FufBuffer<cr>
+nnoremap <leader>a :<c-u>call AutoAdjustQFWindow()<cr>
 noremap <leader>b :<c-u>Buffers<cr>
 noremap <leader>c :<c-u>AsyncCCL<cr>:ccl\|lcl\|pcl<cr>
 noremap <leader>C :AsyncStop<cr>
 noremap <leader>d "_d
-noremap <leader>e :silent<space>e<space>`pwd`<tab>
-noremap <leader>ff :<c-u>Files<space>`pwd`<tab>
-noremap <leader>fe :<c-u>ALENext -error<cr>
-noremap <leader>fE :<c-u>ALEPrevious -error<cr>
-nnoremap <leader>fa :<c-u>call AutoAdjustQFWindow()<cr>
-noremap <leader>f :botright pta <C-r><C-w><cr>
-noremap <leader>F "sy:botright pta /<C-R>"
-vnoremap <leader>f "sy:botright pta /<C-R>"<cr>
-vnoremap <leader>F "sy:botright pta /<C-R>"
+"noremap <leader>E :silent e <c-r>=expand("%:p:h")."/"<cr>
+noremap <leader>e :<c-u>Files <c-r>=expand("%:p:h")<cr><cr>
+noremap <leader>t :botright pta <C-r><C-w><cr>
+noremap <leader>T "sy:botright pta /<C-R>"
+vnoremap <leader>t "sy:botright pta /<C-R>"<cr>
+vnoremap <leader>T "sy:botright pta /<C-R>"
+nnoremap <leader>j :call coc#util#float_jump()<cr>
 "Add --cpp or --type:
-noremap <leader>g :AsyncGrep <C-r><C-w> `pwd`<tab>
-vnoremap <leader>g "sy:AsyncGrep <C-R>" `pwd`<tab>
-nnoremap <leader>G :lcd<space>`pwd`<tab><space>\|<space>Ag<left><left><left><left><left><tab>
-vnoremap <leader>G "sy:lcd<space>`pwd`<tab><space>\|<space>Ag<space><C-R>"<C-f>F\|<left><C-c><tab>
+noremap <leader>g :Ag <C-r><C-w><cr>
+vnoremap <silent> <leader>g "sy:Ag<space><C-R>"<C-f>
+noremap <leader>ge :<c-u>ALENext -error<cr>
+noremap <leader>gE :<c-u>ALEPrevious -error<cr>
+noremap <leader>gg :AsyncGrep <C-r><C-w> `pwd`<tab>
+vnoremap <leader>gg "sy:AsyncGrep <C-R>" `runcached brazil-path package-src-root`<tab>
+nnoremap <silent> <leader>G <c-g>
+vnoremap <leader>G "sy:AsyncGrep <C-R>" `pwd`<tab>
+noremap gl :CocList<cr>
 noremap <leader>h :<c-u>call File_flip()<cr>zz
 "noremap <leader>H :0r ~/.vim/.header_template<cr>
 noremap <leader>l :<c-u>let g:tagbar_left=IsLeftMostWindow()<cr>:TagbarOpen j<cr>
+noremap <leader>L :<c-u>call OpenExplorer()<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
 nnoremap <leader>m :Marks<cr>
 noremap <leader>mm <esc>:SlimeSend1 cppman <C-r><C-w>
 noremap <leader>o <c-w>w
 noremap <leader>O <esc>:only<cr>:vsp<cr>
-vnoremap <leader>p "_dP
+vnoremap <leader>pp "_dP
+nnoremap <leader>ph "hp
+nnoremap <leader>pj "jp
+nnoremap <leader>pk "kp
+nnoremap <leader>pl "lp
 noremap <leader>q :<c-u>q<cr>
 noremap <leader>Q :<c-u>q!<cr>
 noremap <leader>r /\<<C-r><C-w>\><cr>:%s//<C-r><C-w>/g<left><left>
@@ -138,20 +208,42 @@ nnoremap \| :<c-u>vsp<cr>
 nnoremap _ :<c-u>call SmartSplit()<cr>``zz
 noremap <leader>u :<c-u>UndotreeToggle<cr>:UndotreeFocus<cr>
 noremap <leader>v <C-v>
-noremap <leader>w :<c-u>up<cr>
+nnoremap <leader>w :lcd %:p:h<cr>:pwd<cr>
+nnoremap <leader>W :lcd -<cr>:pwd<cr>
 noremap <leader>x :<c-u>bp\|bd #<cr>
 noremap <leader>X :<c-u>bp\|bd! #<cr>
-noremap <leader>y "+y
+vnoremap <leader>yy "+y
+vnoremap <leader>yh "hy
+vnoremap <leader>yj "jy
+vnoremap <leader>yk "ky
+vnoremap <leader>yl "ly
 noremap <leader>Y :<c-u>let @*=expand("%:p")<cr>
 nnoremap <leader>z :<c-u>call FixedScroll()<cr>
 "noremap <leader>z zR
 "noremap <leader>Z zM
 
-vnoremap <leader>=, :Tab /,\zs/l1r0<cr>gv=
+"vnoremap <leader>=, :Tab /,\zs/l1r0<cr>gv=
 vnoremap <leader>== :Tab /=<cr>gv=
 vnoremap <leader>=<space> :Tab /\s\zs/l1r0<cr>gv=
 vnoremap <leader>=; :Tabularize /\S\+;$/l1<cr>gv=
 vnoremap <leader>=( :Tabularize /\S\+($/l1<cr>gv=
+vnoremap <leader>=. :call BreakDotHere()<cr>
+vnoremap <leader>=, :call BreakCommaHere()<cr>
+
+nnoremap <leader>=. V<esc>:call BreakDotHere()<cr>
+nnoremap <leader>=, V<esc>:call BreakCommaHere()<cr>
+
+function! BreakDotHere()
+    '<,'>s/\./\r\./g
+    normal V``=
+    call histdel("/", -1)
+endfunction
+
+function! BreakCommaHere()
+    '<,'>s/,/,\r/g
+    normal V``=
+    call histdel("/", -1)
+endfunction
 
 noremap <leader>1 "1
 noremap <leader>2 "2
@@ -181,12 +273,15 @@ vnoremap <silent> <leader>k "sy:MyMan <C-R>"<CR>
 " scroll remap
 nnoremap <c-j> :call search('\%' . virtcol('.') . 'v\S', 'wW')<CR>
 nnoremap <c-k> :call search('\%' . virtcol('.') . 'v\S', 'bW')<CR>
-nnoremap <PageUp> :<c-u>call FixedScroll()<cr><c-b><c-y><c-y>M
-nnoremap <PageDown> :<c-u>call FixedScroll()<cr><c-f><c-e><c-e>M
+nnoremap <PageUp> :<c-u>call FixedScrollUp()<cr>
+nnoremap <PageDown> :<c-u>call FixedScrollDown()<cr>
 nnoremap - <PageUp>
 nnoremap + <PageDown>
 nmap <S-ScrollWheelUp> <PageUp>
 nmap <S-ScrollWheelDown> <PageDown>
+
+map <ScrollWheelUp> <C-Y>
+map <ScrollWheelDown> <C-N>
 
 " Simulate <down> after CTRL-N
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
@@ -216,21 +311,22 @@ if has('nvim')
     tnoremap <F3> <C-\><C-n>: Ttoggle<cr>
 
     " mappings for putting
-    nmap p <Plug>(extract-put)
-    nmap P <Plug>(extract-Put)
-    " mappings for visual
-    vmap p <Plug>(extract-put)
-    vmap P <Plug>(extract-Put)
+    "nmap p <Plug>(extract-put)
+    "nmap P <Plug>(extract-Put)
+    "" mappings for visual
+    "vmap p <Plug>(extract-put)
+    "vmap P <Plug>(extract-Put)
 
-    nmap <leader>p :ExtractPin<cr>
+    nmap <leader>y :ExtractPin<cr>
 
-    " mappings for cycling
-    nmap <c-s> <Plug>(extract-sycle)
-    nmap <c-S> <Plug>(extract-Sycle)
+    "" mappings for cycling
+    "nmap <c-s> <Plug>(extract-sycle)
+    "nmap <c-S> <Plug>(extract-Sycle)
 
-    " mappings for insert
-    imap <m-v> <Plug>(extract-completeReg)
-    imap <c-v> <Plug>(extract-completeList)
+    "" mappings for insert
+    "imap <m-v> <Plug>(extract-completeReg)
+    "imap <c-v> <Plug>(extract-completeList)
+
 endif
 
 function! SetMyManHost(choice)
@@ -276,7 +372,7 @@ else
     let g:man_silent=""
 endif
 
-let g:man_provider = "sr duckduckgo"
+let g:man_provider = "sr duckduckgo "
 if has('nvim')
     call SetMyManHost(2)
 else
@@ -434,6 +530,8 @@ endfunction
 "      \ let &filetype=getbufvar('#', '&filetype') |
 "      \ execute 'autocmd BufWipeout <buffer> diffoff!' |
 "      \ diffthis
+
+nnoremap <silent> <2-LeftMouse> :let @/='\V\<'.escape(expand('<cword>'), '\').'\>'<cr>:set hls<cr>viw
 
 if &diff
 endif

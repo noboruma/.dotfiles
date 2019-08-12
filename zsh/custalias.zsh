@@ -5,7 +5,6 @@
 alias -s net=$BROWSER
 alias -s gz=tar -xzvf
 alias -s PKGBUILD=$EDITOR
-alias xterm='xterm -fg white -bg black'
 
 # Normal aliases
 case `uname` in
@@ -19,6 +18,7 @@ case `uname` in
         ;;
 esac
 #alias fe='$FINDER -type f | xargs grep'
+alias xterm='xterm -fg white -bg black'
 alias c="clear"
 #alias irssi="irssi -c irc.freenode.net -n yyz"
 alias mem="free -m"
@@ -34,6 +34,7 @@ alias spi='sudo pacman -S'
 alias spu='sudo pacman -Syu'
 alias sps='pacman -Ss'
 alias spr='sudo pacman -Rcns'
+alias sapt='sudo aptitude'
 # makepkg -sri
 alias sai='sudo apt install'
 alias aS='aptitude search'
@@ -45,25 +46,72 @@ alias nv="nvim"
 alias sv='sudo vim'
 alias snv='sudo nvim'
 #alias e='gvim --servername DEV --remote'
-alias e='nv `fzf`'
+#alias e='nv $(fzf)'
+alias e='$EDITOR'
+alias ee='$EDITOR -c "set noautochdir" -c "Files"'
+alias eg='$EDITOR -c "set noautochdir" -c "Ag"'
+alias eh='$EDITOR -c "set noautochdir" -c "History"'
+
+function fzfvim() {
+  local files
+  IFS=$'\n' files=($(fzf-tmux --query="$@" --multi --select-1 --exit-0))
+  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+}
+#function prepend_vim() {
+#    BUFFER="fzfvim $BUFFER"
+#    zle accept-line-and-down-history
+#}
+#zle -N prepend_vim
+
+# Add character directly:
+#bindkey -s '^e' '\n'
+
+function replace_vim_eg {
+    BUFFER=" eg"
+    zle accept-line-and-down-history
+}
+function replace_vim_ee {
+    BUFFER=" ee"
+    zle accept-line-and-down-history
+}
+function replace_vim_eh {
+    BUFFER=" eh"
+    zle accept-line-and-down-history
+}
+function replace_gd_origin {
+    BUFFER=" gd origin"
+    zle accept-line-and-down-history
+}
+zle -N replace_vim_ee
+zle -N replace_vim_eg
+zle -N replace_vim_eh
+zle -N replace_gd_origin
+
+bindkey '^g' replace_vim_eg
+bindkey '^e' replace_vim_ee
+bindkey '^h' replace_vim_eh
+bindkey '^f' replace_gd_origin
 
 case `uname` in
     Darwin)
-alias ne="nvr"
+alias ew="nvrw"
         ;;
     Linux)
-alias ne="xterm -fa 'Terminus' -fs 11 -e nvr"
+alias ew="xterm -fa 'Terminus' -fs 11 -e nvrw"
         ;;
     FreeBSD)
         ;;
 esac
+alias gcheck='git checkout'
+alias gamend='git commit -a --amend'
 alias gcommit='git commit -am'
 alias gpush='git push'
-alias gpull='git pull'
-alias gchange='git checkout -'
+alias gpull='git pull --rebase'
+alias gswitch='git checkout -'
 alias gconflicts='git diff --name-only --diff-filter=U'
-alias gup='git submodule update --recursive --remote --init'
+alias gup='git submodule foreach "(git checkout master; git pull)"'
 alias gls='git ls-tree --name-only HEAD | xargs $aliases[ls] -d'
+alias gtree='git log --graph --oneline --all'
 alias grep='grep --color'
 alias tree='tree -C'
 
@@ -116,7 +164,7 @@ alias nmutt='neomutt'
 alias alert_helper='history|tail -n1|sed -e "s/^\s*[0-9]\+\s*//" -e "s/;\s*alert$//"'
 alias alert='notify-send -i /usr/share/icons/gnome/32x32/apps/gnome-terminal.png "[$?] $(alert_helper)"'
 
-alias hist="history -i | tail -n "
+alias hist='f() { echo "`history -i | tail -n $1`\n`date "+ NOW: %Y-%m-%d %H:%M"`" | grep -E --color "[0-9]+-[0-9]+-[0-9]+ [0-9]+:[0-9]+"};f'
 
 if which colordiff >/dev/null 2>&1; then
   alias diff="colordiff"
@@ -140,8 +188,8 @@ esac
 }
 compdef _cdu cdu
 
-function vgdb () {
-    vim -c ":Termdebug "$1
+function vdb () {
+    $EDITOR -c ":Termdebug "$1
 }
 
 #function mwfindPath () {
@@ -155,49 +203,3 @@ function tnetsession() {
     tmux new-window -d -k -t netclients:2 'irssi'
     tmux new-window -d -k -t netclients:3 'newsboat --config-file=$HOME/.newsboat/config --url-file=$HOME/.newsboat/urls'
 }
-<<<<<<< Updated upstream
-=======
-
-alias bb="brazil-build"
-alias bball="brazil-recursive-cmd-parallel --allPackages brazil-build"
-
-alias bbup='cd brazil-path packge-src-root brazil-path package-src-root'
-alias proot='cd `brazil-path package-src-root 2>/dev/null`'
-
-export REMOTE_DSK=dev-dsk-legrist-1e-ca0423e1.us-east-1.amazon.com
-function rssh() {
-    ssh -tt $REMOTE_DSK "$@ ; exit" ; exit
-}
-
-function rbb() {
-    cwd=`brazil-path package-src-root` || return 1
-    remote_cwd=`echo $cwd | sed -e "s/^.*"${USER}"\///"`
-    ssh -tt $REMOTE_DSK <<+
-    /apollo/env/envImprovement/var/bin/zsh -c ". ~/.zshrc ; cd $remote_cwd ; brazil-build $@ ; exit" ; exit
-+
-}
-
-function servebuild() {
-    cwd=`brazil-path package-build-root` || return 1
-    remote_cwd=`echo $cwd | sed -e "s/^.*"${USER}"\///"`
-    ssh -tt $REMOTE_DSK <<+
-    /apollo/env/envImprovement/var/bin/zsh -c ". ~/.zshrc ; /apollo/env/StaticFileServer/bin/serve -port=${1:-8000} -path=$remote_cwd; exit" ; exit
-+
-}
-
-function bbws() {
-    cwd=`brazil-path package-src-root` || return 1
-    remote_cwd=`echo $cwd | sed -e "s/^.*"${USER}"\///"`
-    ssh -tt $REMOTE_DSK <<+
-    /apollo/env/envImprovement/var/bin/zsh -c ". ~/.zshrc ; cd $remote_cwd ; brazil-recursive-cmd-parallel --allPackages brazil-build release ; exit" ; exit
-+
-}
-
-function serveexp() {
-    cwd=`brazil-path package-src-root` || return 1
-    remote_cwd=`echo $cwd | sed -e "s/^.*"${USER}"\///"`
-    ssh -tt $REMOTE_DSK <<+
-    /apollo/env/envImprovement/var/bin/zsh -c ". ~/.zshrc ; cd $remote_cwd ; brazil workspace env attach --alias $1/AlexaShoppingMultiModalTransformers --activate; exit" ; exit
-+
-}
->>>>>>> Stashed changes

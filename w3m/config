@@ -1,7 +1,6 @@
 tabstop 4
 indent_incr 4
 pixel_per_char 8
-pixel_per_line 29
 frame 1
 target_self 0
 open_tab_blank 0
@@ -22,14 +21,8 @@ fold_textarea 1
 display_ins_del 1
 ignore_null_img_alt 1
 view_unseenobject 0
-display_image 1
+display_image 0
 pseudo_inlines 1
-auto_image 1
-max_load_image 4
-ext_image_viewer 1
-image_scale 100
-imgdisplay w3mimgdisplay
-image_map_list 1
 fold_line 0
 show_lnum 0
 show_srch_str 1
@@ -78,7 +71,7 @@ urimethodmap ~/.w3m/urimethodmap, /etc/w3m/urimethodmap
 editor sensible-editor
 mailto_options 1
 mailer xdg-open mailto:%s
-extbrowser qutebrowser %s &
+extbrowser open -a "Google Chrome" %s
 extbrowser2 
 extbrowser3 sensible-browser
 extbrowser4 epiphany %s &

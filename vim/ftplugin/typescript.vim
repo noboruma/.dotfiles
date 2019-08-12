@@ -1,6 +1,7 @@
-packadd vim-javascript
-
 source ~/.vim/bundle/coding_activator.vim
+packadd vim-typescript
+
+set makeprg=tsc
 
 "if !exists('g:LanguageClient_serverCommands')
 "    let g:LanguageClient_serverCommands = {}
@@ -10,3 +11,5 @@ source ~/.vim/bundle/coding_activator.vim
 "
 "setlocal omnifunc=LanguageClient#complete
 "let g:LanguageClient_autoStop = 0
+"
+exe "SemanticHighlightToggle"

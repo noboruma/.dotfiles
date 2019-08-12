@@ -80,10 +80,10 @@ imap <C-l> <Plug>(neosnippet_expand)
 smap <C-l> <Plug>(neosnippet_expand)
 xmap <C-l> <Plug>(neosnippet_expand_target)
 
-function! s:check_back_space() abort "{{{
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 if has('nvim') && !use_coc
     let g:deoplete#enable_at_startup = 1
@@ -136,7 +136,7 @@ let g:tagbar_sort = 0
 packadd tagbar
 " !Tagbar
 
-let g:airline_extensions += ['ale', 'gutentags', 'languageclient', 'tagbar']
+"let g:airline_extensions += ['ale', 'gutentags', 'languageclient', 'tagbar']
 
 packadd tagfinder
 
@@ -161,15 +161,20 @@ if use_coc
     "u will have bad experience for diagnostic messages when it's default 4000.
     set updatetime=300
 
+    " don't give |ins-completion-menu| messages.
+    set shortmess+=c
+
     inoremap <silent><expr> <c-space> coc#refresh()
-    nmap <silent> [c <Plug>(coc-diagnostic-prev)
-    nmap <silent> ]c <Plug>(coc-diagnostic-next)
+    nmap <silent> [g <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]g <Plug>(coc-diagnostic-next)
+    nmap <silent> ga :<c-u>CocAction<cr>
     nmap <silent> gD :<c-u>call CocAction('jumpDefinition', 'vsplit')<cr>
     nmap <silent> gd <Plug>(coc-definition)
     nmap <silent> gy <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr :<c-u>call asyncrun#quickfix_toggle(0,1) \| call CocAction('jumpReferences')<cr>
-    nmap <silent> gL <Plug>(coc-codelens-action) 
+    nmap <silent> gr <Plug>(coc-references)
+    nmap <silent> gR :<c-u>call asyncrun#quickfix_toggle(0,1) \| call CocAction('jumpReferences')<cr>
+    nmap <silent> gL <Plug>(coc-codelens-action)
     nmap <silent> gl :<c-u>CocList<cr>
 
     let g:coc_auto_copen = 0
@@ -186,6 +191,12 @@ if use_coc
     nmap <leader>ac  <Plug>(coc-codeaction)
     " Fix autofix problem of current line
     nmap <leader>af  <Plug>(coc-fix-current)
+
+    " Create mappings for function text object, requires document symbols feature of languageserver.
+    xmap if <Plug>(coc-funcobj-i)
+    xmap af <Plug>(coc-funcobj-a)
+    omap if <Plug>(coc-funcobj-i)
+    omap af <Plug>(coc-funcobj-a)
 
     let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
     let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
@@ -225,13 +236,10 @@ if use_coc
     nmap <leader>rn <Plug>(coc-rename)
 
     " Remap for format selected region
-    xmap <leader>F  <Plug>(coc-format-selected)
-    nmap <leader>F  <Plug>(coc-format-selected)
+    xmap <leader>f  <Plug>(coc-format-selected)
+    nmap <leader>f  <Plug>(coc-format-selected)
 
     augroup mygroup
-        autocmd!
-        " Setup formatexpr specified filetype(s).
-        autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
         " Update signature help on jump placeholder
         autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     augroup end
@@ -242,10 +250,16 @@ if use_coc
                 \ <SID>check_back_space() ? "\<TAB>" :
                 \ coc#refresh()
 
+    command! -nargs=0 CocDetail :call CocAction('diagnosticInfo')
+
+    " Use `:Format` to format current buffer
+    command! -nargs=0 Format :call CocAction('format')
+
+    " Use `:Fold` to fold current buffer
+    command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
     " use `:OR` for organize import of current buffer
     command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-    command! -nargs=0 CocDetail :call CocAction('diagnosticInfo')
 
     " Add status line support, for integration with other plugin, checkout `:h coc-status`
     set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
@@ -346,3 +360,5 @@ let test#enabled_runners = ["java#brazil"]
 nmap <leader>t :<c-u>TestNearest<cr>
 nmap <leader>T :<c-u>TestNFile<cr>
 
+packadd Vim-code-browse
+packadd neoformat

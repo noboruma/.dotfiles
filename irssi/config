@@ -154,7 +154,10 @@ channels = (
   { name = "##japanese"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#debian"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#tmux"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#ruby"; chatnet = "freenode"; autojoin = "yes"; }
+  { name = "#ruby"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#economics"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#docker"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#python"; chatnet = "freenode"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -385,7 +388,8 @@ statusbar = {
       visible = "always";
 
       items = {
-        uberprompt = { priority = "-1"; };
+        prompt = { priority = "-1"; };
+        prompt_empty = { priority = "-1"; };
         input = { priority = "10"; };
       };
     };

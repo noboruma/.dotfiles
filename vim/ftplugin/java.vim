@@ -5,6 +5,8 @@ let &makeprg='nvm'
 
 compiler ant
 
+set noautochdir
+
 function! StartDB()
     call vebugger#jdb#attach('9999')
     echom "jdb called"
@@ -71,16 +73,21 @@ if !exists("*File_flip")
 endif
 
 function! CppNoNamespaceAndTemplateIndent()
+    let l:retv = cindent('.')
     let l:cline_num = line('.')
     let l:cline = getline(l:cline_num)
     let l:pline_num = prevnonblank(l:cline_num - 1)
     let l:pline = getline(l:pline_num)
+    let l:last_equal = stridx(l:pline, ' =')
+    if l:last_equal != -1 && l:retv < l:last_equal && stridx(l:pline, ';') == -1 && stridx(l:pline, '//') == -1
+        let l:retv = l:last_equal + 2 + 1
+    endif
+    " go up until non blank
     while l:pline =~# '\(^\s*//\|^\s*/\*\|\*/\s*$\)'
         let l:pline_num = prevnonblank(l:pline_num - 1)
         let l:pline = getline(l:pline_num)
     endwhile
-    let l:retv = cindent('.')
-    let l:pindent = indent(l:pline_num)
+    "let l:pindent = indent(l:pline_num)
 
     let l:commas= strlen(substitute(l:pline, "[^,]", "","g"))
     let l:left= strlen(substitute(l:pline, "[^<]", "","g"))
@@ -114,13 +121,19 @@ function! CppNoNamespaceAndTemplateIndent()
     return l:retv
 endfunction
 
-setlocal indentexpr=CppNoNamespaceAndTemplateIndent()
+"setlocal indentexpr=CppNoNamespaceAndTemplateIndent()
+"Take care of indents for Java.
+setlocal autoindent
+setlocal si
+setlocal shiftwidth=4
+"Java anonymous classes. Sometimes, you have to use them.
+setlocal cinoptions+=j1
 
 if &diff
     " keep default folding if diff'ing
 else
-    setlocal foldmethod=expr
-    setlocal foldexpr=CFold1Lay()
+    "setlocal foldmethod=expr
+    "setlocal foldexpr=CFold1Lay()
 endif
 
 " Order matters
@@ -129,5 +142,7 @@ set efm+=\[checkstyle\]\ \[ERROR\]\ %f:%l:%m
 set efm+=%f:%l:%c:%m
 
 " For some reasons, need to turn that off
-filetype indent off
-setlocal cino+=(0,b1,+0,t0,<0,j1      " C file option
+"filetype indent off
+"setlocal cino+=(0,b1,+0,t0,<0,j1      " C file option
+
+exe "SemanticHighlightToggle"

@@ -6,6 +6,8 @@ setlocal foldtext=matchstr(substitute(getline(v:foldstart),'\|.*','',''),'^.*').
 setlocal nomodifiable
 setlocal wrap
 
+setlocal synmaxcol=0
+
 if foldclosedend(1) == line('$') || line("$") < 25
   " When all matches come from a single file, do not close that single fold;
   " the user probably is interested in the contents.  Likewise if few results.
