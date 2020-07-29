@@ -1,0 +1,5 @@
+--sort=true
+--c++-kinds=+plAUz+{template}
+--fields=+iaS
+--extra=+q
+--language-force=C++

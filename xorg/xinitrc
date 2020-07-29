@@ -1,0 +1,6 @@
+#!/bin/sh
+#xsetroot -solid black&
+feh --bg-scale /home/zackel/pictures/nu-ct.png
+setxkbmap jp
+yakuake&
+LANG=ja_JP.UTF8 exec dwm

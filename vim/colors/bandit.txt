@@ -1,0 +1,92 @@
+# Saving this file will update the current colour scheme.
+Basis:slate
+Colours:
+	Violet:#EE82EE
+	CoralRed:#FF4040
+	DavysGrey:#555555
+Dark:
+	Normal:White,Black
+	Comment:DarkGrey
+	DoxygenComment:#008800
+	DoxygenKeyword:#88ffdd
+	DoxygenLink:#8888ff
+	DoxygenTable:#00bb00
+	DoxygenTableLines:#88ffdd
+	LintComment:#00ff88
+	Constant:#ffff66
+#	String:LightYellow
+	Character:DarkYellow
+	PreProc:Red,Style=Bold
+	Include:Red
+	Define,Macro:@PreProc 
+	#5555FF,Style=Bold
+#	PreCondit:#8888FF,Style=Bold
+#	Statement:@PreProc
+#	Conditional:#5555FF
+#	Repeat:#8888FF
+#	Label:#2222FF
+	Exception:#5555AA
+	Operator:Red
+	Identifier:Cyan
+	Function:#007777
+	Method:#009966
+	Class:Purple
+	DefinedName:Violet
+	EnumerationValue:#C000C0
+	EnumerationName:#FF22FF
+	Member:DarkGrey
+	Union:Grey
+	GlobalVariable:#666600
+	LocalVariable:#AAA14C
+	GlobalConstant:#BBBB00
+	Type:#FF8000
+	StorageClass:CoralRed
+	Structure:#FF8080
+	Special:Red
+	SpecialChar:#AA0000
+	SpecialKey:DavysGrey
+	NonText:DavysGrey
+	MatchParen:Yellow,Style=Underline
+	Error:White,Red
+	NonIndentTabError:SP=#FFAA00,Style=Undercurl
+	Todo:Blue,Yellow
+	FoldColumn:DarkBlue,Grey
+	Pmenu:#442206,#FFFF77
+	LineNr:Purple,LightGrey
+	StatusLine:Black,LightGrey
+	StatusLineNC:Black,DarkGrey
+	VertSplit:Black,White
+	SpellBad:Style=Undercurl,SP=Red
+	SignColumn:BG=#222222
+	Title:Blue,Style=Bold
+	htmlH1:Blue
+	htmlH2:#8888FF
+	htmlH3:#9999DD
+	htmlH4:#5555AA
+	htmlH5:#8888AA
+	htmlH6:#888888
+	Delimiter:DarkCyan
+	hlLevel0:@Delimiter
+	hlLevel1:#bfbf00
+	hlLevel2:#990033
+	hlLevel3:#334488
+	hlLevel4:#996622
+	hlLevel5:#ff2222
+	hlLevel6:#4444ff
+	hlLevel7:#ffff44
+	hlLevel8:#96cdcd
+	hlLevel9:#698b22
+LightAuto:True
+LightOverride:
+	Comment:DarkGreen
+	String:#663300
+	Union:DarkGrey
+	Identifier:Blue
+	Operator:#222288
+	LineNr:BG=Grey
+	StatusLine:White,Black
+	SignColumn:BG=LightGrey
+	SpecialKey:#AAAAAA
+	NonText:#AAAAAA
+
+# vim: ff=unix:noet:ft=EasyColour

@@ -1,0 +1,121 @@
+diff --git a/autoload/omni/cpp/items.vim b/autoload/omni/cpp/items.vim
+index fd79131..5f79671 100644
+--- a/autoload/omni/cpp/items.vim
++++ b/autoload/omni/cpp/items.vim
+@@ -2,7 +2,7 @@
+ "
+ " This file is a part of the omnicppcomplete plugin for vim
+ "
+-" Copyright (C) 2006-2012 by Vissale Neang<fromtonrouge at gmail dot com>
++" Copyright (C) 2006-2018 by Vissale Neang<fromtonrouge at gmail dot com>
+ "
+ " This program is free software; you can redistribute it and/or
+ " modify it under the terms of the GNU General Public License as
+@@ -236,14 +236,27 @@ function! omni#cpp#items#ResolveItemsTypeInfo(contextStack, items)
+                 let typeInfo = s:GetTypeInfoOfReturnedType(tmpContextStack, szSymbol)
+             endif
+ 
++            " handle the auto case
++            if typeInfo.value == 'auto'
++                let tagList = omni#common#utils#TagListNoThrow('^'.szSymbol.'$')
++                let functionName = substitute(tagList[0].cmd,  '^.*=\s*', '', '')
++                let functionName = substitute(functionName,  '(.*$', '', '')
++                let typeInfo = s:GetTypeInfoOfReturnedType(tmpContextStack, functionName)
++            endif
++
+             " typeinfo could be a type that's a typeref. CTAGS uses typeref for tagging structs.
+             " Before it gets assigned as context, check if typeref is
+             " struct and use it instead
+             let tagItem = s:ResolveSymbol(tmpContextStack, typeInfo.value, "v:val.kind=='t'")
+             if has_key(tagItem,'typeref')
+-                if matchstr(tagItem.typeref,'struct') >= 0
+                 " Hack typeInfo.value
+-                    let typeInfo.value = substitute(tagItem.typeref,'struct:','','')
++                let typename = substitute(tagItem.typeref, '^\w\+:', '', 'g')
++                let typename = substitute(typename,'<.*>','','')
++                if has_key(tagItem, 'namespace')
++                    let namespace = tagItem.namespace
++                    let typeInfo.value = namespace ."::". typename
++                else
++                    let typeInfo.value = typename
+                 endif
+             endif
+ 
+@@ -392,11 +405,12 @@ endfunc
+ " Gets the first symbol found in the context stack
+ function! s:ResolveSymbol(contextStack, szSymbol, szTagFilter)
+     let tagItem = {}
++    let szSymbol = substitute(a:szSymbol, '^::', '', 'g')
+     for szCurrentContext in a:contextStack
+         if szCurrentContext != '::'
+-            let szTagQuery = substitute(szCurrentContext, '^::', '', 'g').'::'.a:szSymbol
++            let szTagQuery = substitute(szCurrentContext, '^::', '', 'g').'::'.szSymbol
+         else
+-            let szTagQuery = a:szSymbol
++            let szTagQuery = szSymbol
+         endif
+ 
+         let tagList = omni#common#utils#TagListNoThrow('^'.szTagQuery.'$')
+diff --git a/autoload/omni/cpp/namespaces.vim b/autoload/omni/cpp/namespaces.vim
+index c2adef4..fc46a2a 100644
+--- a/autoload/omni/cpp/namespaces.vim
++++ b/autoload/omni/cpp/namespaces.vim
+@@ -25,7 +25,7 @@
+ let g:omni#cpp#namespaces#CacheResolve = {}
+ let g:omni#cpp#namespaces#CacheUsing = {}
+ " TODO: For the next release
+-"let g:omni#cpp#namespaces#CacheAlias = {}
++let g:omni#cpp#namespaces#CacheAlias = {}
+ 
+ " Get the using namespace list from a line
+ function! s:GetNamespaceAliasListFromLine(szLine)
+@@ -523,8 +523,8 @@ function! omni#cpp#namespaces#GetUsingNamespaces()
+ 
+     " Resolving alias in the namespace list
+     " TODO: For the next release
+-    "let g:omni#cpp#namespaces#CacheAlias= s:GetNamespaceAliasMap()
+-    "call s:ResolveAliasInNamespaceList(g:omni#cpp#namespaces#CacheAlias, result)
++    let g:omni#cpp#namespaces#CacheAlias= s:GetNamespaceAliasMap()
++    call s:ResolveAliasInNamespaceList(g:omni#cpp#namespaces#CacheAlias, result)
+ 
+     return ['::'] + result
+ endfunc
+diff --git a/autoload/omni/cpp/utils.vim b/autoload/omni/cpp/utils.vim
+index 31aac8b..8bd3bbd 100644
+--- a/autoload/omni/cpp/utils.vim
++++ b/autoload/omni/cpp/utils.vim
+@@ -2,7 +2,7 @@
+ "
+ " This file is a part of the omnicppcomplete plugin for vim
+ "
+-" Copyright (C) 2006-2012 by Vissale Neang<fromtonrouge at gmail dot com>
++" Copyright (C) 2006-2018 by Vissale Neang<fromtonrouge at gmail dot com>
+ "
+ " This program is free software; you can redistribute it and/or
+ " modify it under the terms of the GNU General Public License as
+@@ -341,7 +341,7 @@ function! omni#cpp#utils#GetResolvedTagItem(namespaces, typeInfo)
+ 
+     " Resolving namespace alias
+     " TODO: For the next release
+-    "let szTypeInfo = omni#cpp#namespaces#ResolveAlias(g:omni#cpp#namespaces#CacheAlias, szTypeInfo)
++    let szTypeInfo = omni#cpp#namespaces#ResolveAlias(g:omni#cpp#namespaces#CacheAlias, szTypeInfo)
+ 
+     if szTypeInfo=='::'
+         return result
+@@ -417,6 +417,7 @@ function! omni#cpp#utils#GetResolvedTagItem(namespaces, typeInfo)
+                 let szTypeInfo = omni#cpp#utils#ExtractTypeInfoFromTokens(omni#cpp#tokenizer#Tokenize(szCode))
+                 let result = omni#cpp#utils#GetResolvedTagItem(namespaces, omni#cpp#utils#CreateTypeInfo(szTypeInfo))
+                 " TODO: Namespace resolution for result
++                let result = omni#cpp#namespaces#ResolveAlias(g:omni#cpp#namespaces#CacheAlias, result)
+             endif
+         endif
+     endif
+@@ -537,7 +538,7 @@ function! omni#cpp#utils#ExtractTypeInfoFromTokens(tokens)
+                 elseif token.kind == 'cppWord'
+                     let szResult = token.value.szResult
+                     let state=2
+-                elseif index(['*', '&'], token.value)<0
++                elseif token.value != 'const' && index(['*', '&'], token.value)<0
+                     break
+                 endif
+             elseif state==1

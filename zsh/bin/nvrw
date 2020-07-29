@@ -1,0 +1,11 @@
+#!/bin/zsh
+if test -z $TMUX; then
+    nvr "$@"
+else
+    local -x NVIM_LISTEN_ADDRESS=/tmp/nvimsocket.`tmux display -p '#S.#I'`
+    if test -e "$NVIM_LISTEN_ADDRESS"; then
+        nvr -s "$@"
+    else
+        nvim "$@"
+    fi
+fi

@@ -1,0 +1,379 @@
+# Useful commands
+# find . -name "*" -exec grep -n hello /dev/null {} \; # {} is find file
+# sed -r 's/.* token_start (.+) token_end .*/\1/'
+# sed ':a;N;$!ba;s/\n/ /g' merge two lines to check pattern
+# <(cmd) <(cmd) For asynchron piping
+# fdupes A/ --recurse: B | grep ^A/ | xargs rm
+
+#zmodload zsh/zprof
+export TERM='tmux-256color'
+bindkey -e
+
+#source ~/.zsh/plugins/zplug/init.zsh
+
+# Root allow X?
+# xhost + > /dev/null 2> /dev/null || true
+
+# Let's reset caps lock (setxkbmap -option to re-enable)
+# setxkbmap -option ctrl:nocaps
+# Best layout ever:
+# setxkbmap -layout us -variant intl
+# For console, use:
+# loadkeys jp106 or whatever
+
+###########################################################
+# Options for Zsh
+
+export HISTFILE=~/.zsh_history
+export HISTSIZE=50000
+export SAVEHIST=50000
+
+case `uname` in
+    Darwin)
+        ;;
+    Linux)
+        #eval `dircolors -b`
+        if xset q &>/dev/null; then
+            if which setxkbmap >/dev/null 2>&1; then
+                setxkbmap -option ctrl:nocaps
+                xmodmap -e "keycode 47 = colon semicolon"
+                #setxkbmap -option to enable
+            fi
+            # i18n
+            export GTK_IM_MODULE=ibus
+            export XMODIFIERS=@im=ibus
+            export QT_IM_MODULE=ibus
+        fi
+        ;;
+    FreeBSD)
+        ;;
+esac
+
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+
+autoload -Uz copy-earlier-word
+zle -N copy-earlier-word
+
+bindkey "^y" copy-earlier-word
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+#kill the lag
+export KEYTIMEOUT=1
+
+setopt autopushd pushdminus pushdsilent pushdtohome
+setopt autocd
+#setopt cdablevars
+#setopt ignoreeof
+setopt interactivecomments
+#setopt nobanghist
+setopt noclobber # Use >! to override file
+setopt SH_WORD_SPLIT
+setopt nohup
+#setopt transientrprompt
+#setopt PRINT_EXIT_VALUE
+#history
+setopt histignorespace
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_SPACE
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_FIND_NO_DUPS
+setopt CORRECT
+setopt correct_all
+
+#print colors
+autoload -U colors && colors
+local CREDOR='%{\e[1;31m%}'
+local CREDORNORM='%{\e[0;31m%}'
+local CBROWN='%{\e[0;33m%}'
+local BOLDNOC='%{\e[1;0m%}'
+local NOCOLOR='%{\e[0m%}'
+local MCOLOR='%{\e[0;35m%}'
+local CBLUE='%{\e[1;34m%}'
+local CGREEN='%{\e[1;32m%}'
+local PROMPT_EOL_MARK='$'
+setopt prompt_subst
+
+# PS1 and PS2
+local ret_code='%(?..[%B%?%b]\n)'
+#local date=$CBROWN'(%D{%H:%M:%S})\n'
+local ppath=$MCOLOR'%~%b'
+local vcs=$CGREEN'${vcs_info_msg_0_}%f%b'
+local prompt=$CREDOR'%(!.#.$) %f%b'
+
+if [ -n "$TMUX" ]; then
+    export PS1=`print $ret_code$date$CREDORNORM'┌─'$CREDOR'['$CBLUE'%n'$CREDOR':'$ppath$CREDOR']'$vcs'\n'$CREDORNORM'└'$prompt`
+else
+    export PS1=`print $ret_code$data$CREDORNORM'┌─'$CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR':'$ppath$CREDOR']'$vcs'\n'$CREDORNORM'└'$prompt`
+fi
+export PS2=`print '%{\e[0;34m%}>'$NOCOLOR`
+
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' check-for-staged-changes true
+zstyle ':vcs_info:*' formats " (%s) [%r: %b] %a%m%u%c"
+#zstyle ':vcs_info:git*+set-message:*' hooks git-st
+#function +vi-git-st() {
+#    local ahead behind
+#    local -a gitstatus
+#
+#    # for git prior to 1.7
+#    # ahead=$(git rev-list origin/${hook_com[branch]}..HEAD | wc -l)
+#    ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
+#    (( $ahead )) && gitstatus+=( "+${ahead}" )
+#
+#    # for git prior to 1.7
+#    # behind=$(git rev-list HEAD..origin/${hook_com[branch]} | wc -l)
+#    behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
+#    (( $behind )) && gitstatus+=( "-${behind}" )
+#
+#    hook_com[misc]+=${(j:/:)gitstatus}
+#}
+
+# zsh hooks: precmd, chpwd, preexec, ...
+precmd(){
+    #Needed for tmux splitting
+    vcs_info
+    echo -n -e "\a"
+}
+chpwd() {
+    emulate -L zsh
+    vcs_info
+}
+
+# From Mikachu
+function cd-or-accept-line() {
+    local success=0;
+    args=(${(z)BUFFER});
+    if ([ $#args -eq 2 ] && [[ ${(Q)args[1]} == cd* ]]) || ([ $#args -eq 1 ] && [[ ${(Q)args[1]} == cd ]]); then
+        ${(Q)args[1]} ${(Q)args[2]} 1>/dev/null 2>/dev/null
+        if [ $? -eq 0 ]; then
+            zle .kill-buffer;
+            zle reset-prompt;
+            success=1;
+        fi
+    fi
+    if [ $success -eq 0 ]; then
+        zle .$WIDGET;
+    fi
+};
+zle -N accept-line cd-or-accept-line
+
+# Vars used later on by Zsh
+if ! type "nvim" > /dev/null; then
+    export EDITOR="vim"
+else
+    export EDITOR="nvim"
+fi
+export VEDITOR="gvim -f"
+export WEDITOR="xterm -fa 'Terminus' -fs 11 -e nvim"
+export GIT_EDITOR="$EDITOR"
+export BROWSER="w3m"
+export TERMBROWSER="w3m"
+export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
+export PAGER="less -R"
+export FINDER="find"
+
+
+##################################################################
+# Stuff to make life easier
+
+# allow approximate
+#zstyle ':completion:*' completer _complete _match _approximate
+zstyle ':completion:*:match:*' original only
+zstyle ':completion:*:approximate:*' max-errors 1 numeric
+zstyle ':completion:*:*:cd:*' local-directories
+# cd not select parent dir
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+
+FPATH=$HOME/.zfunc:$FPATH
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+    compinit;
+else
+    compinit -C;
+fi;
+
+# This sets the case insensitivity
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
+
+zstyle ':completion:*' menu select
+#setopt menu_complete # complete first
+
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
+##################################################################
+# Key bindings
+# http://mundy.yazzy.org/unix/zsh.php
+# http://www.zsh.org/mla/users/2000/msg00727.html
+
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+case `uname` in
+    Darwin)
+        PYTHON_PATH="$HOME/Library/Python/3.7/bin"
+        HOMEBREW_PATH="/usr/local/bin"
+        RUBY_PATH="~/.gem/ruby/current/bin"
+        bindkey '^[[1~' beginning-of-line
+        bindkey '^[[4~' end-of-line
+        bindkey "^[[3~" delete-char
+        bindkey "^[[A" up-line-or-beginning-search # Up
+        bindkey "^[[B" down-line-or-beginning-search # Down
+        ;;
+    Linux)
+        PYTHON_PATH="$HOME/.local/bin"
+        #HOMEBREW_PATH="/home/linuxbrew/.linuxbrew/bin"
+        RUBY_PATH="~/.gem/ruby/current/bin"
+        typeset -g -A key
+        bindkey '^?' backward-delete-char
+        bindkey '^[[1~' beginning-of-line
+        bindkey '^[[5~' up-line-or-history
+        bindkey '^[[3~' delete-char
+        bindkey '^[[4~' end-of-line
+        bindkey '^[[5~' history-search-backward
+        bindkey '^[[6~' down-line-or-history
+        bindkey '^[[D' backward-char
+        bindkey "^[[A" up-line-or-beginning-search # Up
+        bindkey "^[[B" down-line-or-beginning-search # Down
+        bindkey '^[[C' forward-char
+        # completion in the middle of a line
+        bindkey '^i' expand-or-complete-prefix
+        bindkey '^r' history-incremental-search-backward
+        bindkey '^w' backward-kill-word
+        bindkey '^[[Z' send-break
+        ;;
+    FreeBSD)
+        ;;
+esac
+
+autoload -U select-word-style
+select-word-style bash
+
+source ~/.zsh/custalias.zsh
+
+set inc
+
+# Enable v inside command
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
+
+# Sourcing part
+export PATH=~/usr/bin:$HOMEBREW_PATH:$RUBY_PATH:$PYTHON_PATH:$PATH
+export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
+
+export ANDROID_NDK_ROOT=$HOME'/workspace/android/android-ndk-r16b'
+export ANDROID_NDK_HOME=$HOME'/workspace/android/android-ndk-r16b'
+export ANDROID_HOME=$HOME'/usr/adt-bundle-linux-x86_64-20131030/sdk'
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+export NPM_PACKAGES="${HOME}/usr/npm-packages"
+export PATH="$NPM_PACKAGES/bin:$PATH"
+#source ~/usr/emsdk-portable/emsdk_env.sh
+#source ~/.sdkman/bin/sdkman-init.sh
+
+# vim CTRL-Z helper
+fancy-ctrl-z () {
+if [[ $#BUFFER -eq 0 ]]; then
+    fg
+    zle redisplay
+else
+    zle push-input
+    zle clear-screen
+fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
+# Plugin part
+export ZBEEP=''
+
+# History
+source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+
+bindkey '^[OA' up-line-or-search
+bindkey '^[OB' down-line-or-search
+
+# FZF
+export FZF_DEFAULT_COMMAND="fd --type file --color=always --follow --exclude .git"
+export FZF_DEFAULT_OPTS='--ansi --height 40% --layout=reverse --border --bind "tab:down,btab:up,shift-right:toggle-out,right:toggle"'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type d --color=always --exclude .git --follow"
+export FORGIT_DIFF_FZF_OPTS="--bind=\"enter:execute(tmux split $HOME/.zsh/bin/nvrw {-1})\""
+
+_fzf_compgen_path() {
+    fd --hidden --follow --exclude ".git" . "$1" --color=always
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+    fd --type d --hidden --follow --exclude ".git" . "$1" --color=always
+}
+
+# Git edit
+ge() {
+ local files
+ IFS=$'\n' files=($(git diff --name-only $@ | fzf -m -0))
+ [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+}
+
+# Git checkout
+gbc() {
+  local branches branch
+  branches=$(git --no-pager branch -vv) &&
+  branch=$(echo "$branches" | fzf +m) &&
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# FZF marks
+#source $HOME/.zsh/plugins/fzf-marks/init.zsh
+
+# zsh autosuggestions
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8, bold'
+source $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# zsh completions
+source $HOME/.zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
+source <(kubectl completion zsh)
+[ -f /usr/share/google-cloud-sdk/completion.zsh.inc ] && source /usr/share/google-cloud-sdk/completion.zsh.inc
+
+# zsh syntax highlighting
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=33'
+ZSH_HIGHLIGHT_STYLES[command]='fg=33'
+source $HOME/.zsh/plugins/zsh-syntaz-highlighting/zsh-syntax-highlighting.zsh
+
+source $HOME/.zsh/plugins/forgit/forgit.plugin.zsh
+
+source $HOME/.zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+
+# zsh per directory history
+#PER_DIRECTORY_HISTORY_TOGGLE='^H'
+#source $HOME/.zsh/plugins/per-directory-history/per-directory-history.zsh
+
+export PATH="$HOME/.zsh/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+#export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home"
+source $HOME/.cargo/env
+
+if [[ -a $HOME/.work.zsh ]]; then
+    source $HOME/.work.zsh
+fi
+
+#source ~/.dntw/dntw.sh
+#zprof

@@ -1,0 +1,25 @@
+git clone https://github.com/universal-ctags/ctags
+git clone https://github.com/rizsotto/Bear
+git clone https://github.com/junegunn/fzf.vim
+git clone https://github.com/sharkdp/fd
+git clone https://github.com/MaskRay/ccls
+git clone https://github.com/newsboat/newsboat
+git clone https://github.com/facebook/pathpicker
+
+# linux
+sai silversearcher-ag surfraw hub taskwarrior urlview libtext-aspell-perl libcrypt-cbc-perl irssi neomutt ttf-ancient-fonts
+# python
+pip3 install --user pygments
+
+# ruby
+gem install terjira solargrpah
+
+# news
+pip install --user rtv urlscan
+pip3 install --user myougiden
+
+# neovim
+pip3 install --user neovim neovim-remote
+
+# tty specifics
+sai fbterm ium ium-mozc ium-fep

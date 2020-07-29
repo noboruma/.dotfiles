@@ -1,0 +1,25 @@
+snippet ac
+	auto const&
+snippet str
+	std::string
+snippet strc
+	std::string const &
+snippet sc
+	static_cast<${1}>(${2})
+snippet fe
+	for(auto const &e : ${1}) {
+		${2}
+	}
+snippet beg
+	std::begin(${1})
+snippet end
+	std::end(${2})
+snippet cbeg
+	std::cbegin(${1})
+snippet cend
+	std::cend(${2})
+snippet ns
+	namespace ${1:`vim_snippets#Filename('', 'my')`} {
+		${0}
+	} //!$1
+

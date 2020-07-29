@@ -1,0 +1,5 @@
+URxvt*background: black
+URxvt*foreground: white
+URxvt*font: xft:Terminus:size=12,\
+            xft:sazanami-gothic:antialias=false
+URxvt*scrollBar: false

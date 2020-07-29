@@ -1,0 +1,12 @@
+"\e[1;5C": forward-word   # ctrl + right
+"\e[1;5D": backward-word  # ctrl + left
+set bind-tty-special-chars Off
+$if Gdb
+"\e[17~": "reverse-next\n"
+"\e[18~": "next\n"
+"\e[19~": "bt\n"
+"\e[1;5A": "up\n"
+"\e[1;5B": "next\n"
+"\e[1;5C": "step\n"
+"\e[1;5D": "finish\n"
+$endif
