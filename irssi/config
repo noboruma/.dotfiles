@@ -18,7 +18,7 @@ servers = (
     chatnet = "Freenode";
     port = "6697";
     use_tls = "yes";
-    tls_cert = "~/.irssi/irssi.pem";
+    tls_cert = "~/.irssi/certs/freenode.pem";
     tls_verify = "yes";
     autoconnect = "yes";
   },
@@ -157,7 +157,9 @@ channels = (
   { name = "#ruby"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#economics"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#docker"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#python"; chatnet = "freenode"; autojoin = "yes"; }
+  { name = "#python"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#kernelnewbies"; chatnet = "OFTC"; autojoin = "yes"; },
+  { name = "##rust"; chatnet = "freenode"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -388,8 +390,7 @@ statusbar = {
       visible = "always";
 
       items = {
-        prompt = { priority = "-1"; };
-        prompt_empty = { priority = "-1"; };
+        uberprompt = { priority = "-1"; };
         input = { priority = "10"; };
       };
     };

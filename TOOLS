@@ -7,12 +7,12 @@ git clone https://github.com/newsboat/newsboat
 git clone https://github.com/facebook/pathpicker
 
 # linux
-sai silversearcher-ag surfraw hub taskwarrior urlview libtext-aspell-perl libcrypt-cbc-perl irssi neomutt ttf-ancient-fonts
+sai silversearcher-ag surfraw hub taskwarrior urlview libtext-aspell-perl libcrypt-cbc-perl irssi neomutt ttf-ancient-fonts mosh
 # python
 pip3 install --user pygments
 
 # ruby
-gem install terjira solargrpah
+gem install terjira solargraph
 
 # news
 pip install --user rtv urlscan

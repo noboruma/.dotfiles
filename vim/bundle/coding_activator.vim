@@ -130,8 +130,8 @@ endif
 
 " Tagbar options
 let g:tagbar_compact = 1
-let g:tagbar_autofocus = 1
-let g:tagbar_autoclose = 1
+let g:tagbar_autofocus = 0
+let g:tagbar_autoclose = 0
 let g:tagbar_sort = 0
 packadd tagbar
 " !Tagbar
@@ -168,7 +168,7 @@ if use_coc
     nmap <silent> [g <Plug>(coc-diagnostic-prev)
     nmap <silent> ]g <Plug>(coc-diagnostic-next)
     nmap <silent> ga :<c-u>CocAction<cr>
-    nmap <silent> gD :<c-u>call CocAction('jumpDefinition', 'vsplit')<cr>
+    nmap <silent> gD :<c-u>call CocAction('jumpDefinition', 'vsplit')<cr><c-w>=
     nmap <silent> gd <Plug>(coc-definition)
     nmap <silent> gy <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
@@ -337,16 +337,7 @@ else
     nnoremap <leader>ac :<c-u>call LanguageClient#textDocument_codeAction()<cr>
 endif
 
-if has('nvim')
-    packadd nvim-gdb
-endif
-packadd vimproc.vim
-let g:vebugger_leader='\'
-let g:vebugger_breakpoint_text='**'
-let g:vebugger_currentline_text='->'
-let g:vebugger_view_source_cmd='edit'
-nnoremap <leader>\\ :<c-u>call StartDB()<cr>
-packadd vim-vebugger
+"packadd vimproc.vim
 
 packadd vim-test
 if has('nvim')
@@ -362,3 +353,5 @@ nmap <leader>T :<c-u>TestNFile<cr>
 
 packadd Vim-code-browse
 packadd neoformat
+
+packadd splitjoin.vim

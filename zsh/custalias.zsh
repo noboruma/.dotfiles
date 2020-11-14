@@ -23,40 +23,49 @@ alias c="clear"
 #alias irssi="irssi -c irc.freenode.net -n yyz"
 alias mem="free -m"
 
-alias -g V='|vim -'
-alias -g N='1> /dev/null'
+alias mux="tmuxinator"
+
+alias -g _E='|$EDITOR -'
+alias -g _N='1> /dev/null'
+alias -g _A=';~/.tmux/tmux-notifications/bin/tmux-notify "Alert"'
 
 alias sshfs='sshfs -C -o reconnect -o workaround=all'
 
 alias sifconfig='sudo ifconfig'
 alias siptables='sudo iptables'
-alias spi='sudo pacman -S'
-alias spu='sudo pacman -Syu'
-alias sps='pacman -Ss'
-alias spr='sudo pacman -Rcns'
-alias sapt='sudo aptitude'
-# makepkg -sri
-alias sai='sudo apt install'
-alias aS='aptitude search'
-alias saR='sudo apt remove'
-alias sau='sudo apt update'
-alias saup='sudo aptitude safe-upgrade'
+
+if type "pacman" > /dev/null; then
+    alias spi='sudo pacman -S'
+    alias spu='sudo pacman -Syu'
+    alias sps='pacman -Ss'
+    alias spr='sudo pacman -Rcns'
+elif type "aptitude" > /dev/null; then
+    alias sapt='sudo aptitude'
+    alias sai='sudo apt install'
+    alias aS='aptitude search'
+    alias saR='sudo apt remove'
+    alias sau='sudo apt update'
+    alias saup='sudo aptitude safe-upgrade'
+    alias sapti='sudo aptitude'
+fi
+
 alias v='vim'
 alias nv="nvim"
 alias sv='sudo vim'
 alias snv='sudo nvim'
-#alias e='gvim --servername DEV --remote'
-#alias e='nv $(fzf)'
+# makepkg -sri
 alias e='$EDITOR'
 alias ee='$EDITOR -c "set noautochdir" -c "Files"'
 alias eg='$EDITOR -c "set noautochdir" -c "Ag"'
 alias eh='$EDITOR -c "set noautochdir" -c "History"'
 
-function fzfvim() {
-  local files
-  IFS=$'\n' files=($(fzf-tmux --query="$@" --multi --select-1 --exit-0))
-  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
-}
+alias ipy='ipython --no-autoindent'
+
+#function fzfvim() {
+#  local files
+#  IFS=$'\n' files=($(fzf-tmux --query="$@" --multi --select-1 --exit-0))
+#  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+#}
 #function prepend_vim() {
 #    BUFFER="fzfvim $BUFFER"
 #    zle accept-line-and-down-history
@@ -102,18 +111,42 @@ alias ew="xterm -fa 'Terminus' -fs 11 -e nvrw"
     FreeBSD)
         ;;
 esac
+
+## Git
 alias gcheck='git checkout'
-alias gamend='git commit -a --amend'
-alias gcommit='git commit -am'
+alias gam='git commit -a --amend'
+alias glog='git --no-pager log --pretty="format:%C(auto,yellow)%h%C(auto,magenta)% G? %C(auto,blue)%>(30,trunc)%ad %C(auto,green)%<(15,trunc)%aN%C(auto,reset)%s%C(auto)%d" --reverse'
+alias gcom='git commit -am'
 alias gpush='git push'
 alias gpull='git pull --rebase'
-alias gswitch='git checkout -'
 alias gconflicts='git diff --name-only --diff-filter=U'
-alias gup='git submodule foreach "(git checkout master; git pull)"'
+alias gup='git submodule foreach "git pull"'
 alias gls='git ls-tree --name-only HEAD | xargs $aliases[ls] -d'
 alias gtree='git log --graph --oneline --all'
+alias gurl='git remote get-url origin'
+
 alias grep='grep --color'
 alias tree='tree -C'
+
+## Docker
+alias dkill='docker kill'
+alias dbuild='docker build . -t'
+alias dls='docker container ls'
+alias dim='docker images'
+alias dtop='docker stats'
+
+function dsh {
+    docker exec -ti $1 sh
+}
+function _dsh {
+    _arguments -C '*::containerid:->ids'
+    case "$state" in
+        ids)
+            val_list=($(docker container ls -q))
+            _wanted tag expl 'containers' compadd $val_list
+esac
+}
+compdef _dsh dsh
 
 alias smount="sudo mount"
 alias sumount="sudo umount"
@@ -123,15 +156,19 @@ alias sshut="sudo shutdown -h 0"
 alias sreboot="sudo reboot"
 
 alias arduino="arduino-asm"
-alias m='make -j4'
-alias mc='make -j4 check'
+alias mj='make -j4'
+alias mjc='make -j4 check'
+alias cbr='cargo build --release'
+alias crr='cargo run --release'
+alias cbd='cargo build'
+alias crd='cargo run'
 
 function t() {
     tree $1 -shDFCL 1 | grep --color=always -E '\[.*\]|$'
 }
 
 alias ll="ls -haltr"
-alias du="du -h"
+alias du="du -d 1 -h"
 alias df="df -h"
 
 alias d='dirs -v | head -10'
@@ -153,11 +190,7 @@ alias trc="$EDITOR ~/.tmux.conf"
 alias mrc="$EDITOR ~/.mutt/neomuttrc"
 alias irc="$EDITOR ~/.irssi/config"
 
-alias vdev="vim --servername DEV --remote"
-alias ff="fzf-fs"
-
 alias ttyw3m="TERM=fbterm w3m"
-alias www="$TERMBROWSER https://google.com"
 alias news="newsboat --config-file=$HOME/.newsboat/config --url-file=$HOME/.newsboat/urls"
 alias nmutt='neomutt'
 
@@ -166,7 +199,7 @@ alias alert='notify-send -i /usr/share/icons/gnome/32x32/apps/gnome-terminal.png
 
 alias hist='f() { echo "`history -i | tail -n $1`\n`date "+ NOW: %Y-%m-%d %H:%M"`" | grep -E --color "[0-9]+-[0-9]+-[0-9]+ [0-9]+:[0-9]+"};f'
 
-if which colordiff >/dev/null 2>&1; then
+if type "colordiff" > /dev/null; then
   alias diff="colordiff"
 fi
 
@@ -174,10 +207,10 @@ fi
 cdn () { pushd .; for ((i=1; i<=$1; i++)); do cd ..; done; pwd; }
 
 # Go up until reaching $1, ie: cdu home
-function cdu { 
+function cdu {
     cd "${PWD%/$1/*}/$1";
 }
-function _cdu { 
+function _cdu {
     _arguments -C '*::filename:->files'
     case "$state" in
         files)
@@ -187,10 +220,6 @@ function _cdu {
 esac
 }
 compdef _cdu cdu
-
-function vdb () {
-    $EDITOR -c ":Termdebug "$1
-}
 
 #function mwfindPath () {
 #    mw ch findPath -c $1 $2 -f DOT | dot -Tx11

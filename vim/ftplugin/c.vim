@@ -1,7 +1,10 @@
 source ~/.vim/bundle/coding_activator.vim
 
 " Make options
-let &makeprg='make'
+if (&ft == 'c')
+    let &makeprg='make'
+    let g:make_extra='@ -j4 -O3 -C .'
+endif
 
 " Clang-format
 packadd vim-clang-format

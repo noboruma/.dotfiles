@@ -6,7 +6,7 @@
 # fdupes A/ --recurse: B | grep ^A/ | xargs rm
 
 #zmodload zsh/zprof
-export TERM='tmux-256color'
+#export TERM='tmux-256color'
 bindkey -e
 
 #source ~/.zsh/plugins/zplug/init.zsh
@@ -27,6 +27,7 @@ bindkey -e
 export HISTFILE=~/.zsh_history
 export HISTSIZE=50000
 export SAVEHIST=50000
+export HISTORY_IGNORE="(dkill|kill)"
 
 case `uname` in
     Darwin)
@@ -114,27 +115,10 @@ zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' check-for-staged-changes true
 zstyle ':vcs_info:*' formats " (%s) [%r: %b] %a%m%u%c"
-#zstyle ':vcs_info:git*+set-message:*' hooks git-st
-#function +vi-git-st() {
-#    local ahead behind
-#    local -a gitstatus
-#
-#    # for git prior to 1.7
-#    # ahead=$(git rev-list origin/${hook_com[branch]}..HEAD | wc -l)
-#    ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
-#    (( $ahead )) && gitstatus+=( "+${ahead}" )
-#
-#    # for git prior to 1.7
-#    # behind=$(git rev-list HEAD..origin/${hook_com[branch]} | wc -l)
-#    behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
-#    (( $behind )) && gitstatus+=( "-${behind}" )
-#
-#    hook_com[misc]+=${(j:/:)gitstatus}
-#}
 
 # zsh hooks: precmd, chpwd, preexec, ...
 precmd(){
-    #Needed for tmux splitting
+    # Needed for tmux splitting
     vcs_info
     echo -n -e "\a"
 }
@@ -163,18 +147,18 @@ zle -N accept-line cd-or-accept-line
 
 # Vars used later on by Zsh
 if ! type "nvim" > /dev/null; then
-    export EDITOR="vim"
+    export EDITOR='vim'
 else
-    export EDITOR="nvim"
+    export EDITOR='nvim'
 fi
 export VEDITOR="gvim -f"
-export WEDITOR="xterm -fa 'Terminus' -fs 11 -e nvim"
-export GIT_EDITOR="$EDITOR"
-export BROWSER="w3m"
-export TERMBROWSER="w3m"
-export MANPAGER="/bin/sh -c \"col -b | vim -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
-export PAGER="less -R"
-export FINDER="find"
+export WEDITOR='xterm -fa 'Terminus' -fs 11 -e $EDITOR'
+export GIT_EDITOR='$EDITOR'
+export BROWSER='w3m'
+export TERMBROWSER='w3m'
+export MANPAGER="/bin/sh -c \"col -b | $EDITOR -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
+export PAGER='less -R'
+export FINDER='find'
 
 
 ##################################################################
@@ -188,14 +172,18 @@ zstyle ':completion:*:*:cd:*' local-directories
 # cd not select parent dir
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+zstyle ":completion:*:git-checkout:*" sort false
+zstyle ':completion:*:descriptions' format '[%d]'
+
+setopt extendedglob
 
 FPATH=$HOME/.zfunc:$FPATH
 autoload -Uz compinit
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
-    compinit;
+if [[ -n  ${ZDOTDIR:-${HOME}}/.zcompdump(#qN.mh+24) ]]; then
+    compinit
 else
-    compinit -C;
-fi;
+    compinit -C
+fi
 
 # This sets the case insensitivity
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
@@ -254,6 +242,10 @@ case `uname` in
         ;;
 esac
 
+export NPM_PACKAGES_PATH="${HOME}/usr/npm-packages"
+export ZSH_PATH=$HOME/.zsh/bin
+export YARN_PATH=$HOME/.yarn
+
 autoload -U select-word-style
 select-word-style bash
 
@@ -266,19 +258,7 @@ autoload edit-command-line
 zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
-# Sourcing part
-export PATH=~/usr/bin:$HOMEBREW_PATH:$RUBY_PATH:$PYTHON_PATH:$PATH
-export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
-
-export ANDROID_NDK_ROOT=$HOME'/workspace/android/android-ndk-r16b'
-export ANDROID_NDK_HOME=$HOME'/workspace/android/android-ndk-r16b'
-export ANDROID_HOME=$HOME'/usr/adt-bundle-linux-x86_64-20131030/sdk'
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-export NPM_PACKAGES="${HOME}/usr/npm-packages"
-export PATH="$NPM_PACKAGES/bin:$PATH"
-#source ~/usr/emsdk-portable/emsdk_env.sh
-#source ~/.sdkman/bin/sdkman-init.sh
 
 # vim CTRL-Z helper
 fancy-ctrl-z () {
@@ -297,7 +277,7 @@ bindkey '^Z' fancy-ctrl-z
 export ZBEEP=''
 
 # History
-source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+[ -f ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ] && source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
@@ -307,10 +287,10 @@ bindkey '^[OB' down-line-or-search
 
 # FZF
 export FZF_DEFAULT_COMMAND="fd --type file --color=always --follow --exclude .git"
-export FZF_DEFAULT_OPTS='--ansi --height 40% --layout=reverse --border --bind "tab:down,btab:up,shift-right:toggle-out,right:toggle"'
+export FZF_DEFAULT_OPTS='--ansi --layout=reverse --border --bind "tab:down,btab:up,shift-right:toggle-out,right:toggle"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d --color=always --exclude .git --follow"
-export FORGIT_DIFF_FZF_OPTS="--bind=\"enter:execute(tmux split $HOME/.zsh/bin/nvrw {-1})\""
+export FORGIT_DIFF_FZF_OPTS="--bind=\"enter:execute(tmux split $ZSH_PATH/nvrw {-1})\""
 
 _fzf_compgen_path() {
     fd --hidden --follow --exclude ".git" . "$1" --color=always
@@ -339,41 +319,47 @@ gbc() {
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # FZF marks
-#source $HOME/.zsh/plugins/fzf-marks/init.zsh
+#[ -f $HOME/.zsh/plugins/fzf-marks/init.zsh ] && source $HOME/.zsh/plugins/fzf-marks/init.zsh
+
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
+[ -f $HOME/.zsh/plugins/fzf-tab/fzf-tab.plugin.zsh ] && source $HOME/.zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # zsh autosuggestions
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8, bold'
-source $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+[ -f $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # zsh completions
-source $HOME/.zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
-source <(kubectl completion zsh)
+#[ -f $HOME/.zsh/plugins/zsh-completions/zsh-completions.plugin.zsh ] && source $HOME/.zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
 [ -f /usr/share/google-cloud-sdk/completion.zsh.inc ] && source /usr/share/google-cloud-sdk/completion.zsh.inc
-
-# zsh syntax highlighting
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-typeset -A ZSH_HIGHLIGHT_STYLES
-ZSH_HIGHLIGHT_STYLES[builtin]='fg=33'
-ZSH_HIGHLIGHT_STYLES[command]='fg=33'
-source $HOME/.zsh/plugins/zsh-syntaz-highlighting/zsh-syntax-highlighting.zsh
-
-source $HOME/.zsh/plugins/forgit/forgit.plugin.zsh
-
-source $HOME/.zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+[ -f $HOME/.zsh/plugins/forgit/forgit.plugin.zsh ] && source $HOME/.zsh/plugins/forgit/forgit.plugin.zsh
+[ -f $HOME/.zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh ] && source $HOME/.zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # zsh per directory history
 #PER_DIRECTORY_HISTORY_TOGGLE='^H'
 #source $HOME/.zsh/plugins/per-directory-history/per-directory-history.zsh
 
-export PATH="$HOME/.zsh/bin:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+[ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
+[ -f $HOME/.work.zsh ] && source $HOME/.work.zsh
+[ -f ~/workspace/src/emsdk/emsdk_env.sh ] && source ~/workspace/src/emsdk/emsdk_env.sh
+[ -f ~/.sdkman/bin/sdkman-init.sh ] && source ~/.sdkman/bin/sdkman-init.sh
+[ -f ~/.dntw/dntw.sh ] && source ~/.dntw/dntw.sh
+# added by travis gem
+[ ! -s /Users/legrist/.travis/travis.sh ] || source /Users/legrist/.travis/travis.sh
 
-#export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home"
-source $HOME/.cargo/env
+# Sourcing part
+export PATH=~/usr/bin:$ZSH_PATH:$HOME/.config/yarn/global/node_modules/.bin:$YARN_PATH/bin:$NPM_PACKAGES_PATH/bin:$HOMEBREW_PATH:$RUBY_PATH:$PYTHON_PATH:$PATH
+export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
 
-if [[ -a $HOME/.work.zsh ]]; then
-    source $HOME/.work.zsh
-fi
+typeset -U path
 
-#source ~/.dntw/dntw.sh
 #zprof

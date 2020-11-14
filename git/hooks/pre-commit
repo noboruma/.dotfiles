@@ -3,6 +3,16 @@
 branch="$(git rev-parse --abbrev-ref HEAD)"
 
 if [ "$branch" = "mainline" ]; then
-  echo "You can't commit directly to mainline branch"
-  exit 1
+  echo ""
+  while true; do
+      read -p "[pre-commit hook] Are you sure you want to commit to mainline? (y/N) " yn
+      if [ "$yn" = "" ]; then
+          yn='N'
+      fi
+      case $yn in
+          [Yy] ) break;;
+          [Nn] ) exit 1;;
+          * ) echo "Please answer y or n for yes or no.";;
+      esac
+  done
 fi

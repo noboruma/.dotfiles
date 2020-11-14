@@ -1,5 +1,5 @@
 " Custom map
-nmap f <Plug>(easymotion-overwin-f)
+nmap S <Plug>(easymotion-overwin-f)
 nmap s <Plug>(easymotion-overwin-w)
 nnoremap Q <nop>
 nnoremap x "_x
@@ -18,6 +18,10 @@ nnoremap <S-Insert> q/p<cr>
 " insert clipboard into command
 cnoremap <S-Insert> <c-r>0
 cnoremap <C-R> <esc>:<c-u>History:<cr>
+
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 function! IsLeftMostWindow()
     let curNr = winnr()
@@ -90,10 +94,19 @@ command! AsyncCCL call asyncrun#quickfix_toggle(0, 0)
 
 function AsyncGrep(word, path)
     call asyncrun#quickfix_toggle(0, 0)
-    execute "AsyncRun -cwd=".a:path." -program=grep \"".a:word."\" ."
+    let g:asyncrun_gotoend = 0
+    execute "AsyncRun! -cwd=".a:path." -program=grep \"".a:word."\" ."
+    execute "lcd ".a:path
     let @/ = a:word
     set hls
     redraw
+endfunction
+
+function AsyncMake(path)
+    call asyncrun#quickfix_toggle(0, 0)
+    let g:asyncrun_gotoend = 1
+    execute "AsyncRun -cwd=".a:path." -program=make ".get(g:, 'make_extra', '')
+    execute "lcd ".a:path
 endfunction
 
 function! WhichTab(filename)
@@ -136,6 +149,7 @@ function OpenExplorer()
 endfunction
 
 command! -nargs=* -complete=dir AsyncGrep call AsyncGrep(<f-args>)
+command! -nargs=* -complete=dir AsyncMake call AsyncMake(<f-args>)
 
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
@@ -150,6 +164,7 @@ nnoremap <C-n> <C-e>
 nnoremap <c-e> :<c-u>Files<cr>
 nnoremap <C-n> <C-e>
 nnoremap <C-g> :<c-u>Ag<cr>
+vnoremap <silent> <C-g> "sy:Ag<space><C-R>"<C-f><cr>
 
 "noremap <leader>a :set scb<cr> " just use vimdiff or Linediff
 "noremap <leader>A :set scb!<cr>
@@ -160,46 +175,51 @@ noremap <leader>c :<c-u>AsyncCCL<cr>:ccl\|lcl\|pcl<cr>
 noremap <leader>C :AsyncStop<cr>
 noremap <leader>d "_d
 "noremap <leader>E :silent e <c-r>=expand("%:p:h")."/"<cr>
-noremap <leader>e :<c-u>Files <c-r>=expand("%:p:h")<cr><cr>
+noremap <leader>e :<c-u>EFiles <c-r>=expand("%:p:h")<cr><tab>
 noremap <leader>t :botright pta <C-r><C-w><cr>
 noremap <leader>T "sy:botright pta /<C-R>"
 vnoremap <leader>t "sy:botright pta /<C-R>"<cr>
 vnoremap <leader>T "sy:botright pta /<C-R>"
 nnoremap <leader>j :call coc#util#float_jump()<cr>
 "Add --cpp or --type:
-noremap <leader>g :Ag <C-r><C-w><cr>
-vnoremap <silent> <leader>g "sy:Ag<space><C-R>"<C-f>
+"noremap <leader>g :Ag <C-r><C-w><cr>
+"vnoremap <silent> <leader>g "sy:Ag<space><C-R>"<C-f>
 noremap <leader>ge :<c-u>ALENext -error<cr>
 noremap <leader>gE :<c-u>ALEPrevious -error<cr>
-noremap <leader>gg :AsyncGrep <C-r><C-w> `pwd`<tab>
-vnoremap <leader>gg "sy:AsyncGrep <C-R>" `runcached brazil-path package-src-root`<tab>
+noremap <leader>g :AsyncGrep <C-r><C-w> `pwd`<tab>
+vnoremap <leader>g "sy:AsyncGrep <C-R>" `pwd`<tab>
 nnoremap <silent> <leader>G <c-g>
 vnoremap <leader>G "sy:AsyncGrep <C-R>" `pwd`<tab>
 noremap gl :CocList<cr>
 noremap <leader>h :<c-u>call File_flip()<cr>zz
 "noremap <leader>H :0r ~/.vim/.header_template<cr>
-noremap <leader>l :<c-u>let g:tagbar_left=IsLeftMostWindow()<cr>:TagbarOpen j<cr>
+noremap <leader>l :<c-u>let g:tagbar_left=IsLeftMostWindow()<cr>:TagbarToggle<cr>
 noremap <leader>L :<c-u>call OpenExplorer()<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
 nnoremap <leader>m :Marks<cr>
-noremap <leader>mm <esc>:SlimeSend1 cppman <C-r><C-w>
+vnoremap <leader>mm <esc>:SlimeSend1 cppman <C-r>"<cr>
 noremap <leader>o <c-w>w
 noremap <leader>O <esc>:only<cr>:vsp<cr>
-vnoremap <leader>pp "_dP
-nnoremap <leader>ph "hp
-nnoremap <leader>pj "jp
-nnoremap <leader>pk "kp
-nnoremap <leader>pl "lp
+vnoremap <leader>p "_dP
+nnoremap <leader>p "+p
+nnoremap <leader>p1 "1p
+nnoremap <leader>p2 "2p
+nnoremap <leader>p3 "3p
+nnoremap <leader>p4 "4p
 noremap <leader>q :<c-u>q<cr>
 noremap <leader>Q :<c-u>q!<cr>
 noremap <leader>r /\<<C-r><C-w>\><cr>:%s//<C-r><C-w>/g<left><left>
 vnoremap <leader>r "sy/<C-R>"<cr>:%s//<C-R>"/g<left><left>
 if has('nvim')
-    vnoremap <leader>s :<c-u>TREPLSendSelection<cr>
+    "vnoremap <leader>s :TREPLSendSelection<cr>
+    "nnoremap <leader>s :<c-u>TREPLSendFile<cr>
+    vnoremap <leader>s :SlimeSend<cr>
+    nnoremap <leader>s :<c-u>%SlimeSend<cr>
 else
-    " slime based?
+    vnoremap <leader>s :SlimeSend<cr>
+    nnoremap <leader>s :<c-u>%SlimeSend<cr>
 endif
-noremap <leader>S :<c-u>SemanticHighlightToggle<cr>
+nnoremap <leader>S :<c-u>SemanticHighlightToggle<cr>
 "noremap <leader>t :<c-u>tj <C-r><C-w><cr>
 noremap <leader>T :<c-u>tj /<C-r><C-w><C-b><right><right><right><right>
 "vnoremap <leader>t "sy:tj /<C-R>"<cr>
@@ -212,11 +232,11 @@ nnoremap <leader>w :lcd %:p:h<cr>:pwd<cr>
 nnoremap <leader>W :lcd -<cr>:pwd<cr>
 noremap <leader>x :<c-u>bp\|bd #<cr>
 noremap <leader>X :<c-u>bp\|bd! #<cr>
-vnoremap <leader>yy "+y
-vnoremap <leader>yh "hy
-vnoremap <leader>yj "jy
-vnoremap <leader>yk "ky
-vnoremap <leader>yl "ly
+vnoremap <leader>y "+y
+vnoremap <leader>y1 "1y
+vnoremap <leader>y2 "2y
+vnoremap <leader>y3 "3y
+vnoremap <leader>y4 "4y
 noremap <leader>Y :<c-u>let @*=expand("%:p")<cr>
 nnoremap <leader>z :<c-u>call FixedScroll()<cr>
 "noremap <leader>z zR
@@ -232,6 +252,8 @@ vnoremap <leader>=, :call BreakCommaHere()<cr>
 
 nnoremap <leader>=. V<esc>:call BreakDotHere()<cr>
 nnoremap <leader>=, V<esc>:call BreakCommaHere()<cr>
+
+nnoremap <leader>% :ISwap<cr>
 
 function! BreakDotHere()
     '<,'>s/\./\r\./g
@@ -300,7 +322,7 @@ function! CaptureExtOutputInNewBuffer(cmd)
 endfunction
 command! -nargs=+ -complete=command CaptureExtOutputInNewBuffer call CaptureExtOutputInNewBuffer(<q-args>)
 
-noremap <F1> :<c-u>!git add %<cr>
+noremap <F1> :<c-u>set formatoptions-=cro<cr>
 noremap <F2> :<c-u>set modifiable\|set noro\|set write<cr>
 
 if has('nvim')
@@ -311,8 +333,8 @@ if has('nvim')
     tnoremap <F3> <C-\><C-n>: Ttoggle<cr>
 
     " mappings for putting
-    "nmap p <Plug>(extract-put)
-    "nmap P <Plug>(extract-Put)
+    nmap p <Plug>(extract-put)
+    nmap P <Plug>(extract-Put)
     "" mappings for visual
     "vmap p <Plug>(extract-put)
     "vmap P <Plug>(extract-Put)
@@ -320,8 +342,8 @@ if has('nvim')
     nmap <leader>y :ExtractPin<cr>
 
     "" mappings for cycling
-    "nmap <c-s> <Plug>(extract-sycle)
-    "nmap <c-S> <Plug>(extract-Sycle)
+    nmap <c-s> <Plug>(extract-sycle)
+    nmap <c-S> <Plug>(extract-Sycle)
 
     "" mappings for insert
     "imap <m-v> <Plug>(extract-completeReg)
@@ -382,9 +404,8 @@ endif
 " Need to manually call copen first so that directories are correctly set
 " (issue with asyncrun?)
 
-noremap <expr> <F4> exists('g:debug') ? ":<c-u>AsyncRun -program=make @ -j4 DEBUG=1 -C `pwd`/<tab><tab>" : ":<c-u>AsyncRun -program=make @ -j4 -C `pwd`/<tab><tab>"
-nnoremap <F5> :<c-u>AsyncCCL<cr>:up<cr>:AsyncRun -program=make<Up><cr>
-inoremap <F5> <esc>:<c-u>AsyncCCL<cr>:up<cr>:AsyncRun -program=make<Up><cr>
+nnoremap <F4> :<c-u>AsyncMake `pwd`/<tab><tab>
+nnoremap <F5> :<c-u>AsyncCCL<cr>:up<cr>:AsyncMake<up><cr>
 
 fun IsQFOrLocOrTagOpen()
     silent exec 'redir @a | ls | redir END'
@@ -475,9 +496,11 @@ function SetDebug()
     if choice == 0
     elseif choice == 1
         let g:debug=1
+        let g:make_extra='@ -j4 DEBUG=1 -C .'
     elseif choice == 2
         let g:debug=1
         unlet g:debug
+        let g:make_extra='@ -j4 -O3 -C .'
     endif
 endfunction
 

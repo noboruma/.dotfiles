@@ -1,10 +1,11 @@
 # Folder hooks
+folder-hook 'account.yand' 'source ~/.mutt/account.yand'
 folder-hook 'account.perso' 'source ~/.mutt/account.perso'
 folder-hook 'account.com.$WORK_PLACE.$WORK_USERNAME' 'source ~/.mutt/account.com.$WORK_PLACE.$WORK_USERNAME'
 folder-hook . "exec collapse-all"
 
 # Default account
-source ~/.mutt/account.perso
+source ~/.mutt/account.yand
 
 # Macros for switching accounts
 macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/account.perso<enter><change-folder>!<enter>'

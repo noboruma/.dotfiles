@@ -47,15 +47,18 @@ function! AdjustWindowHeight(minheight, maxheight)
     exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
 
+let g:asyncrun_gotoend = 0
+
 fun! AutoAdjustQFWindow()
   try
       let l:prev = winnr()
       for winnr in range(1, winnr('$'))
           if getwinvar(winnr, '&syntax') == 'qf'
               exe winnr . "wincmd w"
-              call AdjustWindowHeight(1, 10)
-              normal gg
-              normal G
+              call AdjustWindowHeight(5, 10)
+              if g:asyncrun_gotoend == 1
+                  normal G
+              endif
               exe l:prev . "wincmd w"
               normal :cfirst<cr>
               return 0

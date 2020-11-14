@@ -1,6 +1,20 @@
 source ~/.vim/bundle/coding_activator.vim
 packadd rust.vim
 
+let g:tagbar_type_rust = {
+    \ 'ctagstype' : 'rust',
+    \ 'kinds' : [
+        \'T:types,type definitions',
+        \'f:functions,function definitions',
+        \'g:enum,enumeration names',
+        \'s:structure names',
+        \'m:modules,module names',
+        \'c:consts,static constants',
+        \'t:traits',
+        \'i:impls,trait implementations',
+    \]
+\}
+
 " Surround
 let g:surround_{char2nr("t")} = "\1template: \1<\r>"
 
@@ -16,8 +30,8 @@ inoremap <<cr> <<cr>><c-o>O<tab>
 " Make options
 let &makeprg='cargo'
 "--manifest-path `pwd`/<tab><tab>
-noremap <F4>  :botright copen\|AsyncRun -program=make @ build -j4
-noremap <F5>  :botright copen\|AsyncRun -program=make @ build -j4<cr>
+"
+let g:make_extra='@ build -j4'
 
 set expandtab
 set tabstop=4

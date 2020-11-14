@@ -2,6 +2,7 @@
 
 " Plugins
 packadd tagfinder
+packadd mesonic
 " !Plugins
 
 " set nonumber relativenumber
@@ -16,8 +17,9 @@ inoremap <<cr> <<cr>><c-o>O<tab>
 inoremap <expr> <> "<>\<Left>"
 inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
 
+
+let &makeprg='meson compile'
 "Makeprg erroformat
-"compiler gcc
 "! see c.vim for efm
 if !exists("*File_flip")
     function! File_flip()
