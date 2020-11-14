@@ -155,6 +155,7 @@ let g:ale_echo_msg_format = '[%linter%]%s[%severity%]'
 let g:ale_set_loclist = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_cpp_cquery_cache_directory= '/tmp/cquery/cache'
+let g:ale_linters = {'rust': ['analyzer']}
 "!ALE
 
 if use_coc
@@ -170,33 +171,27 @@ if use_coc
     nmap <silent> ga :<c-u>CocAction<cr>
     nmap <silent> gD :<c-u>call CocAction('jumpDefinition', 'vsplit')<cr><c-w>=
     nmap <silent> gd <Plug>(coc-definition)
-    nmap <silent> gy <Plug>(coc-type-definition)
+    nmap <silent> gt <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
     nmap <silent> gR :<c-u>call asyncrun#quickfix_toggle(0,1) \| call CocAction('jumpReferences')<cr>
     nmap <silent> gL <Plug>(coc-codelens-action)
-    nmap <silent> gl :<c-u>CocList<cr>
+    nmap <silent> gl :<c-u>CocList symbols<cr>
 
     let g:coc_auto_copen = 0
     autocmd User CocQuickfixChange call asyncrun#quickfix_toggle(0, 1) -cwd=`pwd`
-
-    " caller
-    nn <silent> gc :call CocLocations('ccls','$ccls/call')<cr>
-    " callee
-    nn <silent> gC :call CocLocations('ccls','$ccls/call',{'callee':v:true})<cr>
-
-    xmap <leader>ac  <Plug>(coc-codeaction-selected)
-    nmap <leader>ac  <Plug>(coc-codeaction-selected)
-    " Remap for do codeAction of current line
-    nmap <leader>ac  <Plug>(coc-codeaction)
-    " Fix autofix problem of current line
-    nmap <leader>af  <Plug>(coc-fix-current)
 
     " Create mappings for function text object, requires document symbols feature of languageserver.
     xmap if <Plug>(coc-funcobj-i)
     xmap af <Plug>(coc-funcobj-a)
     omap if <Plug>(coc-funcobj-i)
     omap af <Plug>(coc-funcobj-a)
+
+    xmap <silent>g?  <Plug>(coc-codeaction-selected)
+    " Remap for do codeAction of current line
+    nmap <silent>g?  <Plug>(coc-codeaction-cursor)
+    " Fix autofix problem of current line
+    nmap <silent>g!  <Plug>(coc-fix-current)
 
     let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
     let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
@@ -215,6 +210,7 @@ if use_coc
     " Do default action for next item.
     nnoremap <silent> <leader>lj :<C-u>CocNext<CR>
     " Do default action for previous item.
+
     nnoremap <silent> <leader>lk :<C-u>CocPrev<CR>
     " Resume latest coc list
     nnoremap <silent> <leader>lp :<C-u>CocListResume<CR>
@@ -346,12 +342,10 @@ else
     " Untested, use asynrun otherwise
     let test#strategy = 'tslime'
 endif
-let test#custom_runners = {'java': ['Brazil']}
-let test#enabled_runners = ["java#brazil"]
 nmap <leader>t :<c-u>TestNearest<cr>
 nmap <leader>T :<c-u>TestNFile<cr>
 
-packadd Vim-code-browse
-packadd neoformat
+"packadd Vim-code-browse
+"packadd neoformat
 
 packadd splitjoin.vim

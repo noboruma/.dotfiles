@@ -90,6 +90,20 @@ imap <expr> {<cr> "{<cr>}<esc>O"
 inoremap [<cr> [<cr>]<c-o>O<tab>
 inoremap (<cr> (<cr>)<c-o>O<tab>
 
+function SetDebug()
+    let choice = confirm("Debug mode", "&Yes\n&No", 2)
+    if choice == 0
+    elseif choice == 1
+        let g:debug=1
+        let g:make_extra='@ -j4 DEBUG=1 -C .'
+    elseif choice == 2
+        let g:debug=1
+        unlet g:debug
+        let g:make_extra='@ -j4 -O3 -C .'
+    endif
+endfunction
+
+noremap <expr> <F9> "<esc>:<c-u>call SetDebug()<cr>"
 
 if !exists("*File_flip")
     function! File_flip()

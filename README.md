@@ -1,4 +1,4 @@
 config
 ======
 
-Vim, zsh config files
+Vim, zsh, tmux config files

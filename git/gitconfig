@@ -1,0 +1,45 @@
+[push]
+	default = simple
+[core]
+	hooksPath = /home/zackel/.gitconf/hooks
+[pull]
+	rebase = true
+[alias]
+	conflicts = diff --name-only --diff-filter=U
+[credential]
+	credentialStore = gpg
+	helper = cache
+
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true  # use n and N to move between diff sections
+	paging=always
+	line-numbers = true
+	syntax-theme = TwoDark
+	width = 1
+	minus-style = syntax "#450a15"
+	minus-emph-style = syntax "#600818"
+	plus-style = syntax "#0b4820"
+	plus-emph-style = syntax "#175c2e"
+	git-moved-from-style = bold purple     # An ad-hoc named style (must end in "-style")
+	map-styles = "git-moved-from-style => white #350a15, bold cyan => syntax #094020"
+	hunk-header-style = syntax bold
+	hunk-header-decoration-style = omit
+	file-style = yellow
+	file-decoration-style = yellow ul
+	line-numbers-zero-style = "#4b5263"
+	line-numbers-left-format = "{nm:^4} "
+	line-numbers-right-format = "{np:^4} "
+[merge]
+	conflictstyle = diff3
+[diff]
+	colorMoved = default
+
+[include]
+	path = ~/.gituserinfo/gitconfig
+
+[includeIf "gitdir:~/workspace/deepfence/"]
+	path = ~/.gituserinfo/deepfence

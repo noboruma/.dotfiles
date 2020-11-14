@@ -20,7 +20,6 @@ esac
 #alias fe='$FINDER -type f | xargs grep'
 alias xterm='xterm -fg white -bg black'
 alias c="clear"
-#alias irssi="irssi -c irc.freenode.net -n yyz"
 alias mem="free -m"
 
 alias mux="tmuxinator"
@@ -29,7 +28,10 @@ alias -g _E='|$EDITOR -'
 alias -g _N='1> /dev/null'
 alias -g _A=';~/.tmux/tmux-notifications/bin/tmux-notify "Alert"'
 
-alias sshfs='sshfs -C -o reconnect -o workaround=all'
+#alias sshfs='sshfs -C -o reconnect'
+alias sshports="netstat -tpln | grep ssh"
+alias ssshports="sudo netstat -tpln | grep ssh"
+alias scp="scp -C"
 
 alias sifconfig='sudo ifconfig'
 alias siptables='sudo iptables'
@@ -113,27 +115,45 @@ alias ew="xterm -fa 'Terminus' -fs 11 -e nvrw"
 esac
 
 ## Git
-alias gcheck='git checkout'
 alias gam='git commit -a --amend'
 alias glog='git --no-pager log --pretty="format:%C(auto,yellow)%h%C(auto,magenta)% G? %C(auto,blue)%>(30,trunc)%ad %C(auto,green)%<(15,trunc)%aN%C(auto,reset)%s%C(auto)%d" --reverse'
 alias gcom='git commit -am'
 alias gpush='git push'
 alias gpull='git pull --rebase'
-alias gconflicts='git diff --name-only --diff-filter=U'
-alias gup='git submodule foreach "git pull"'
+alias gfetch='git fetch'
+alias gsw='git switch'
+alias gconf='git conflicts'
+alias ginit='git submodule update --init --recursive'
+alias gup='git submodule foreach "git fetch && git pull"'
 alias gls='git ls-tree --name-only HEAD | xargs $aliases[ls] -d'
 alias gtree='git log --graph --oneline --all'
 alias gurl='git remote get-url origin'
+alias gstat='git diff --stat --color'
+alias gcontrib='git shortlog -s -n'
+alias gpatch='git --no-pager diff'
 
 alias grep='grep --color'
 alias tree='tree -C'
 
+## Kubernetes
+alias kapply="kubectl apply -f"
+alias kdelete="kubectl delete -f"
+alias kpods="kubectl get pod"
+alias kdesc="kubectl describe pod"
+
+alias aggo="ag --ignore-dir vendor"
+
 ## Docker
-alias dkill='docker kill'
 alias dbuild='docker build . -t'
-alias dls='docker container ls'
-alias dim='docker images'
+alias dls='docker container ls --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Image}}" -a'
+alias dkill='docker kill'
+alias drm='docker rm'
+alias dims='docker image ls --format "table {{.Repository}}:{{.Tag}}\t{{.ID}}\t{{.CreatedSince}}\t{{.Size}}"'
 alias dtop='docker stats'
+alias dports='docker container ls --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}" -a'
+alias dclean='docker volume prune ; docker system prune'
+
+export DOCKER_SHARE_HIST_ARGS="-v $HOME/.docker/ash_history:/root/.ash_history -v $HOME/.docker/sh_history:/root/.sh_history -v $HOME/.docker/bash_history:/root/.bash_history -v $HOME/.docker/zsh_history:/root/.zsh_history"
 
 function dsh {
     docker exec -ti $1 sh
@@ -142,11 +162,26 @@ function _dsh {
     _arguments -C '*::containerid:->ids'
     case "$state" in
         ids)
-            val_list=($(docker container ls -q))
-            _wanted tag expl 'containers' compadd $val_list
+            val_list=($(docker container ls -a --format "{{.ID}}"))
+            disp_list=($(docker container ls -a --format "table {{.Names}}\t{{.Image}}\t{{.Status}}" | sed 1d | sed 's/\s/_/g'))
+            _wanted tag expl 'containers' compadd -o nosort -d disp_list $val_list
 esac
 }
 compdef _dsh dsh
+
+function dish {
+    docker run $DOCKER_SHARE_HIST_ARGS -ti --entrypoint sh $1
+}
+function _dish {
+    _arguments -C '*::imageid:->ids'
+    case "$state" in
+        ids)
+            val_list=($(docker image list --format "{{.ID}}"))
+            disp_list=($(docker image list --format "table {{.Repository}}:{{.Tag}}\t{{.Size}}\t{{.CreatedSince}}" | sed 1d | sed 's/\s/_/g'))
+            _wanted tag expl 'image' compadd -o nosort -d disp_list $val_list
+esac
+}
+compdef _dish dish
 
 alias smount="sudo mount"
 alias sumount="sudo umount"
@@ -156,12 +191,10 @@ alias sshut="sudo shutdown -h 0"
 alias sreboot="sudo reboot"
 
 alias arduino="arduino-asm"
-alias mj='make -j4'
-alias mjc='make -j4 check'
-alias cbr='cargo build --release'
-alias crr='cargo run --release'
-alias cbd='cargo build'
-alias crd='cargo run'
+alias cb='cargo build'
+alias cr='cargo run'
+alias cx='cargo xtask'
+alias ct='RUST_MIN_STACK=8388608 cargo test'
 
 function t() {
     tree $1 -shDFCL 1 | grep --color=always -E '\[.*\]|$'

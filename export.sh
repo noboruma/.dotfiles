@@ -10,13 +10,13 @@ find ~ -maxdepth 1 -name ".gdb*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".tmux*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".w3m*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".irssi" -type l -exec rm -v {} \;
-find ~ -maxdepth 1 -name ".irssi" -type l -exec rm -v {} \;
 
 find ~/usr/bin -maxdepth 1 -name ".irssi-notify.sh" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".inputrc" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".mutt*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".newsboat*" -type l -exec rm -v {} \;
 find ~ -maxdepth 1 -name ".irbrc" -type l -exec rm -v {} \;
+find ~ -maxdepth 1 -name ".gitconfig" -type l -exec rm -v {} \;
 
 find $XDG_CONFIG_HOME -maxdepth 1 -name "ranger" -type l -exec rm -v {} \;
 find $XDG_CONFIG_HOME -maxdepth 1 -name "qutebrowser" -type l -exec rm -v {} \;
@@ -42,6 +42,7 @@ ln -s $CURDIR/mutt ~/.mutt
 ln -s $CURDIR/ruby/irbrc ~/.irbrc
 ln -s $CURDIR/nvim $XDG_CONFIG_HOME/nvim
 ln -s $CURDIR/etc/surfraw.conf $XDG_CONFIG_HOME/.surfraw.conf
+ln -s $CURDIR/git/gitconfig ~/.gitconfig
 
 cd - 1>/dev/null
 
@@ -56,3 +57,11 @@ else
 fi
 
 git config --global core.hooksPath $HOME/.gitconf/hooks
+git config --global alias.conflicts "diff --name-only --diff-filter=U"
+
+# Docker related setup
+mkdir $HOME/.docker 2>/dev/null
+touch $HOME/.docker/sh_history
+touch $HOME/.docker/ash_history
+touch $HOME/.docker/bash_history
+touch $HOME/.docker/zsh_history

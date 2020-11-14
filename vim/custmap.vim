@@ -102,10 +102,11 @@ function AsyncGrep(word, path)
     redraw
 endfunction
 
-function AsyncMake(path)
+function AsyncMake(path, ...)
+    let extra_arg1 = get(a:, 1, '')
     call asyncrun#quickfix_toggle(0, 0)
     let g:asyncrun_gotoend = 1
-    execute "AsyncRun -cwd=".a:path." -program=make ".get(g:, 'make_extra', '')
+    execute "AsyncRun -cwd=".a:path." -program=make ".get(g:, 'make_extra', '').' '.extra_arg1
     execute "lcd ".a:path
 endfunction
 
@@ -162,20 +163,22 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 nnoremap <C-n> <C-e>
 nnoremap <c-e> :<c-u>Files<cr>
+nnoremap <c-f> :<c-u>GFiles?<cr>
 nnoremap <C-n> <C-e>
 nnoremap <C-g> :<c-u>Ag<cr>
 vnoremap <silent> <C-g> "sy:Ag<space><C-R>"<C-f><cr>
+nnoremap <c-b> :<c-u>Buffers<cr>
 
 "noremap <leader>a :set scb<cr> " just use vimdiff or Linediff
 "noremap <leader>A :set scb!<cr>
 "noremap <leader>b :FufBuffer<cr>
-nnoremap <leader>a :<c-u>call AutoAdjustQFWindow()<cr>
+nnoremap <leader>aa :<c-u>call AutoAdjustQFWindow()<cr>
 noremap <leader>b :<c-u>Buffers<cr>
 noremap <leader>c :<c-u>AsyncCCL<cr>:ccl\|lcl\|pcl<cr>
 noremap <leader>C :AsyncStop<cr>
 noremap <leader>d "_d
-"noremap <leader>E :silent e <c-r>=expand("%:p:h")."/"<cr>
 noremap <leader>e :<c-u>EFiles <c-r>=expand("%:p:h")<cr><tab>
+noremap <leader>E :<c-u>Files <c-r>=expand("%:p:h")<cr><tab>
 noremap <leader>t :botright pta <C-r><C-w><cr>
 noremap <leader>T "sy:botright pta /<C-R>"
 vnoremap <leader>t "sy:botright pta /<C-R>"<cr>
@@ -194,18 +197,19 @@ noremap gl :CocList<cr>
 noremap <leader>h :<c-u>call File_flip()<cr>zz
 "noremap <leader>H :0r ~/.vim/.header_template<cr>
 noremap <leader>l :<c-u>let g:tagbar_left=IsLeftMostWindow()<cr>:TagbarToggle<cr>
-noremap <leader>L :<c-u>call OpenExplorer()<cr>
+"noremap <leader>L :<c-u>call OpenExplorer()<cr>
 "noremap <leader>mk :mksession ~/mysession.vim
 nnoremap <leader>m :Marks<cr>
 vnoremap <leader>mm <esc>:SlimeSend1 cppman <C-r>"<cr>
 noremap <leader>o <c-w>w
 noremap <leader>O <esc>:only<cr>:vsp<cr>
 vnoremap <leader>p "_dP
+nnoremap p "*p
 nnoremap <leader>p "+p
-nnoremap <leader>p1 "1p
-nnoremap <leader>p2 "2p
-nnoremap <leader>p3 "3p
-nnoremap <leader>p4 "4p
+nnoremap 1 "1p
+nnoremap 2 "2p
+nnoremap 3 "3p
+nnoremap 4 "4p
 noremap <leader>q :<c-u>q<cr>
 noremap <leader>Q :<c-u>q!<cr>
 noremap <leader>r /\<<C-r><C-w>\><cr>:%s//<C-r><C-w>/g<left><left>
@@ -232,11 +236,12 @@ nnoremap <leader>w :lcd %:p:h<cr>:pwd<cr>
 nnoremap <leader>W :lcd -<cr>:pwd<cr>
 noremap <leader>x :<c-u>bp\|bd #<cr>
 noremap <leader>X :<c-u>bp\|bd! #<cr>
+vnoremap y "*y
 vnoremap <leader>y "+y
-vnoremap <leader>y1 "1y
-vnoremap <leader>y2 "2y
-vnoremap <leader>y3 "3y
-vnoremap <leader>y4 "4y
+vnoremap 1 "1y
+vnoremap 2 "2y
+vnoremap 3 "3y
+vnoremap 4 "4y
 noremap <leader>Y :<c-u>let @*=expand("%:p")<cr>
 nnoremap <leader>z :<c-u>call FixedScroll()<cr>
 "noremap <leader>z zR
@@ -275,7 +280,6 @@ noremap <leader>> x<esc>wP
 noremap <leader>< x<esc>bep
 
 nnoremap <bs> <C-O>
-nnoremap <leader><bs> <C-I>
 
 " Custom hard remap
 inoremap        [ []<Left>
@@ -311,7 +315,10 @@ inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
 inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
 inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
-inoremap <expr> <tab>      pumvisible() ? "\<lt>Down>" : "\<c-r>=Smart_TabComplete()\<CR>"
+
+if !exists('g:coding_activator_loaded')
+    inoremap <expr> <tab>      pumvisible() ? "\<lt>Down>" : "\<c-r>=Smart_TabComplete()\<CR>"
+endif
 inoremap <expr> <s-tab>    pumvisible() ? "\<lt>Up>" : "\<s-tab>"
 
 function! CaptureExtOutputInNewBuffer(cmd)
@@ -490,21 +497,6 @@ else
     noremap <expr> <F7> bufwinnr('!gdb') != -1 ? ":<c-u>Over<cr>"   : ":<c-u>call NextWinOrQFError()<cr>"
     noremap <expr> <F8> bufwinnr('!gdb') != -1 ? ":<c-u>Step<cr>"   : ":<c-u>call CurrWinOrQFError()<cr>"
 endif
-
-function SetDebug()
-    let choice = confirm("Debug mode", "&Yes\n&No", 2)
-    if choice == 0
-    elseif choice == 1
-        let g:debug=1
-        let g:make_extra='@ -j4 DEBUG=1 -C .'
-    elseif choice == 2
-        let g:debug=1
-        unlet g:debug
-        let g:make_extra='@ -j4 -O3 -C .'
-    endif
-endfunction
-
-noremap <expr> <F9> "<esc>:<c-u>call SetDebug()<cr>"
 
 function ToggleSpell()
     if &spell

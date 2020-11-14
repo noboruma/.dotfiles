@@ -3,6 +3,9 @@ packadd vim-typescript
 
 set makeprg=tsc
 
+set nolist
+set noexpandtab
+
 "if !exists('g:LanguageClient_serverCommands')
 "    let g:LanguageClient_serverCommands = {}
 "endif
@@ -12,4 +15,4 @@ set makeprg=tsc
 "setlocal omnifunc=LanguageClient#complete
 "let g:LanguageClient_autoStop = 0
 "
-exe "SemanticHighlightToggle"
+"exe "SemanticHighlightToggle"

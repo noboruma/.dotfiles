@@ -17,15 +17,6 @@ if has('nvim')
     let use_coc=1
 endif
 
-if exists('use_coc')
-    " Get gitgutter like git support
-    packadd coc.nvim
-
-    packadd vim-dadbod
-    packadd nvim-bqf
-
-endif
-
 set termguicolors
 
 "  If you need infrmation on parameters, use :h param
@@ -193,6 +184,8 @@ let &runtimepath.=',~/.vim/bundle/undotree'
 
 " vim-fugitive
 let &runtimepath.=',~/.vim/bundle/vim-fugitive'
+let &runtimepath.=',~/.vim/pack/submodules/opt/vim-gitgutter'
+set updatetime=500
 " !vim-fugitive
 
 " AsyncRun
@@ -396,6 +389,7 @@ endif
 
 "Debugger
 packadd! vimspector
+nnoremap \ll :<c-u>call vimspector#LaunchWithSettings({"configuration": "debug"})<cr>
 nnoremap \l :<c-u>call vimspector#Launch()<cr>
 nnoremap \z :<c-u>call vimspector#Reset()<cr>
 nnoremap \L :<c-u>call vimspector#Restart()<cr>
@@ -417,6 +411,15 @@ if has('nvim')
     let g:extract_maxCount = 3
     "" TODO: Remove submodule?
     packadd Extract
+
+    packadd nvim-treesitter
+    packadd iswap.nvim
+
+    " Get gitgutter like git support
+    packadd coc.nvim
+
+    packadd vim-dadbod
+    packadd nvim-bqf
 endif
 
 set ruler          " Relative cursor position
@@ -467,6 +470,8 @@ let g:netrw_preview = 1
 let g:netrw_banner = 0
 let g:netrw_browse_split = 3
 let g:netrw_mnousemaps = 0
+let g:netrw_sort_by = 'name'
+"let g:netrw_sort_direction = 'reverse'
 autocmd FileType netrw setl bufhidden=delete
 
 " Ced: for auto-completion popup menu
@@ -541,7 +546,6 @@ if executable('ag')
 endif
 
 if &diff
-    "syntax off
     set undolevels=-1
 endif
 

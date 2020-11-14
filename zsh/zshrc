@@ -37,7 +37,7 @@ case `uname` in
         if xset q &>/dev/null; then
             if which setxkbmap >/dev/null 2>&1; then
                 setxkbmap -option ctrl:nocaps
-                xmodmap -e "keycode 47 = colon semicolon"
+                #xmodmap -e "keycode 47 = colon semicolon"
                 #setxkbmap -option to enable
             fi
             # i18n
@@ -177,7 +177,8 @@ zstyle ':completion:*:descriptions' format '[%d]'
 
 setopt extendedglob
 
-FPATH=$HOME/.zfunc:$FPATH
+fpath+=$HOME/.zfunc
+[ -f $HOME/.zsh/plugins/zsh-completions/zsh-completions.plugin.zsh ] && source $HOME/.zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
 autoload -Uz compinit
 if [[ -n  ${ZDOTDIR:-${HOME}}/.zcompdump(#qN.mh+24) ]]; then
     compinit
@@ -209,7 +210,8 @@ case `uname` in
     Darwin)
         PYTHON_PATH="$HOME/Library/Python/3.7/bin"
         HOMEBREW_PATH="/usr/local/bin"
-        RUBY_PATH="~/.gem/ruby/current/bin"
+        RUBY_PATH="$HOME/.gem/ruby/current/bin:$HOME/.gem/bin"
+        export GEM_HOME="$HOME/.gem"
         bindkey '^[[1~' beginning-of-line
         bindkey '^[[4~' end-of-line
         bindkey "^[[3~" delete-char
@@ -219,7 +221,7 @@ case `uname` in
     Linux)
         PYTHON_PATH="$HOME/.local/bin"
         #HOMEBREW_PATH="/home/linuxbrew/.linuxbrew/bin"
-        RUBY_PATH="~/.gem/ruby/current/bin"
+        RUBY_PATH="$HOME/.gem/ruby/current/bin"
         typeset -g -A key
         bindkey '^?' backward-delete-char
         bindkey '^[[1~' beginning-of-line
@@ -245,6 +247,9 @@ esac
 export NPM_PACKAGES_PATH="${HOME}/usr/npm-packages"
 export ZSH_PATH=$HOME/.zsh/bin
 export YARN_PATH=$HOME/.yarn
+export GOPATH=$HOME/go
+
+export GO111MODULE=on
 
 autoload -U select-word-style
 select-word-style bash
@@ -287,7 +292,7 @@ bindkey '^[OB' down-line-or-search
 
 # FZF
 export FZF_DEFAULT_COMMAND="fd --type file --color=always --follow --exclude .git"
-export FZF_DEFAULT_OPTS='--ansi --layout=reverse --border --bind "tab:down,btab:up,shift-right:toggle-out,right:toggle"'
+export FZF_DEFAULT_OPTS='--ansi --layout=reverse --border --bind "tab:down,btab:up,shift-right:toggle-out,right:toggle" --no-sort'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d --color=always --exclude .git --follow"
 export FORGIT_DIFF_FZF_OPTS="--bind=\"enter:execute(tmux split $ZSH_PATH/nvrw {-1})\""
@@ -303,26 +308,34 @@ _fzf_compgen_dir() {
 
 # Git edit
 ge() {
- local files
- IFS=$'\n' files=($(git diff --name-only $@ | fzf -m -0))
- [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+    local files
+    IFS=$'\n' files=($(git diff --name-only $@ | fzf -m -0))
+    [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
 }
 
 # Git checkout
 gbc() {
-  local branches branch
-  branches=$(git --no-pager branch -vv) &&
-  branch=$(echo "$branches" | fzf +m) &&
-  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+    local branches branch
+    branches=$(git --no-pager branch -vv) &&
+    branch=$(echo "$branches" | fzf +m) &&
+    git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
+
+fixssh() {
+    eval $(tmux show-env -s |grep '^SSH_')
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # FZF marks
 #[ -f $HOME/.zsh/plugins/fzf-marks/init.zsh ] && source $HOME/.zsh/plugins/fzf-marks/init.zsh
-
+# disable sort when completing options of any command
+zstyle ':completion:*' sort false
+zstyle ':completion:*' file-sort modification
+zstyle ':completion:complete:*:options' sort false
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:*:git-switch:*' sort false
 # set descriptions format to enable group support
 zstyle ':completion:*:descriptions' format '[%d]'
 # set list-colors to enable filename colorizing
@@ -331,6 +344,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 [ -f $HOME/.zsh/plugins/fzf-tab/fzf-tab.plugin.zsh ] && source $HOME/.zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # zsh autosuggestions
@@ -339,7 +353,6 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8, bold'
 [ -f $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source $HOME/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # zsh completions
-#[ -f $HOME/.zsh/plugins/zsh-completions/zsh-completions.plugin.zsh ] && source $HOME/.zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
 [ -f /usr/share/google-cloud-sdk/completion.zsh.inc ] && source /usr/share/google-cloud-sdk/completion.zsh.inc
 [ -f $HOME/.zsh/plugins/forgit/forgit.plugin.zsh ] && source $HOME/.zsh/plugins/forgit/forgit.plugin.zsh
 [ -f $HOME/.zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh ] && source $HOME/.zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
@@ -350,16 +363,19 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8, bold'
 
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
 [ -f $HOME/.work.zsh ] && source $HOME/.work.zsh
-[ -f ~/workspace/src/emsdk/emsdk_env.sh ] && source ~/workspace/src/emsdk/emsdk_env.sh
-[ -f ~/.sdkman/bin/sdkman-init.sh ] && source ~/.sdkman/bin/sdkman-init.sh
+#[ -f ~/workspace/src/emsdk/emsdk_env.sh ] && source ~/workspace/src/emsdk/emsdk_env.sh
+#[ -f ~/.sdkman/bin/sdkman-init.sh ] && source ~/.sdkman/bin/sdkman-init.sh
 [ -f ~/.dntw/dntw.sh ] && source ~/.dntw/dntw.sh
 # added by travis gem
 [ ! -s /Users/legrist/.travis/travis.sh ] || source /Users/legrist/.travis/travis.sh
 
 # Sourcing part
-export PATH=~/usr/bin:$ZSH_PATH:$HOME/.config/yarn/global/node_modules/.bin:$YARN_PATH/bin:$NPM_PACKAGES_PATH/bin:$HOMEBREW_PATH:$RUBY_PATH:$PYTHON_PATH:$PATH
+export PATH=:~/usr/bin:$GOPATH/bin:$ZSH_PATH:$HOME/.config/yarn/global/node_modules/.bin:$YARN_PATH/bin:$NPM_PACKAGES_PATH/bin:$HOMEBREW_PATH:$RUBY_PATH:$PYTHON_PATH:$PATH
 export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
 
 typeset -U path
 
+hash -d ws=$HOME/workspace/
+hash -d dots=$HOME/.dotfiles
+hash -d vopt=$HOME/.dotfiles/vim/pack/submodules/opt
 #zprof

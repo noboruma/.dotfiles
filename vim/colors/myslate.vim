@@ -4,7 +4,7 @@
 
 hi clear
 
-:set background=dark
+set background=dark
 
 if version > 580
     hi clear
@@ -53,10 +53,6 @@ hi   Directory      ctermfg=darkcyan
 hi   ErrorMsg       cterm=bold             guifg=White         guibg=Red         cterm=bold           ctermfg=7       ctermbg=1
 hi   VisualNOS      cterm=bold,underline
 hi   WildMenu       ctermfg=0              ctermbg=3
-hi   DiffAdd                                                                     ctermbg=22
-hi   DiffChange     ctermbg=94
-hi   DiffDelete     ctermbg=88
-hi   DiffText                                                  ctermbg=106
 hi   Underlined     cterm=underline        ctermfg=5
 hi   Error          guifg=White            guibg=Red           cterm=bold        ctermfg=7            ctermbg=1
 hi   SpellErrors    guifg=White            guibg=Red           cterm=bold        ctermfg=7            ctermbg=1
@@ -67,3 +63,9 @@ if has("spell")
     hi SpellLocal  guisp=#70F0F0 gui=undercurl
     hi SpellRare   guisp=#FFFFFF gui=undercurl
 endif
+hi DiffText    ctermbg=NONE ctermfg=Yellow cterm=NONE guibg=NONE guifg=#FFFF00 gui=NONE
+hi DiffChange  ctermbg=NONE ctermfg=brown  cterm=NONE guibg=NONE guifg=#A52A2A gui=NONE
+hi DiffAdd     ctermbg=NONE ctermfg=46     cterm=NONE guibg=NONE guifg=#00FF00 gui=NONE
+hi DiffDelete  ctermbg=NONE ctermfg=196    cterm=NONE guibg=NONE guifg=#FF0000 gui=NONE
+hi diffAdded   ctermbg=NONE ctermfg=46     cterm=NONE guibg=NONE guifg=#00FF00 gui=NONE
+hi diffRemoved ctermbg=NONE ctermfg=196    cterm=NONE guibg=NONE guifg=#FF0000 gui=NONE

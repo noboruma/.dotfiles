@@ -1,5 +1,7 @@
 source ~/.vim/bundle/coding_activator.vim
+
 packadd rust.vim
+let g:rustfmt_autosave = 0
 
 let g:tagbar_type_rust = {
     \ 'ctagstype' : 'rust',
@@ -18,15 +20,6 @@ let g:tagbar_type_rust = {
 " Surround
 let g:surround_{char2nr("t")} = "\1template: \1<\r>"
 
-inoremap <expr> ' "\'"
-inoremap <expr> <> "<>\<Left>"
-inoremap <expr> > strpart(getline('.'), col('.')-1, 1) == ">" ? "\<Right>" : ">"
-
-imap <expr> {<cr> "{<cr>}<esc>O"
-inoremap [<cr> [<cr>]<c-o>O<tab>
-inoremap (<cr> (<cr>)<c-o>O<tab>
-inoremap <<cr> <<cr>><c-o>O<tab>
-
 " Make options
 let &makeprg='cargo'
 "--manifest-path `pwd`/<tab><tab>
@@ -40,14 +33,24 @@ set shiftwidth=4
 DefineLocalTagFinder TagFindStruct s,struct
 DefineLocalTagFinder TagFindTrait t,trait
 
-" Ignored patterns, and blank lines
-set efm=%-G
-set efm+=%-Gerror:\ aborting\ %.%#
-set efm+=%-Gerror:\ Could\ not\ compile\ %.%#
-
-" Meaningful lines (errors, notes, warnings, contextual information)
-set efm+=%Eerror:\ %m
-set efm+=%Eerror[E%n]:\ %m
-set efm+=%Wwarning:\ %m
-set efm+=%Inote:\ %m
-set efm+=%C\ %#-->\ %f:%l:%c
+"let &efm = ''
+"" Random non issue stuff
+"let &efm .= '%-G%.%#aborting due to previous error%.%#,'
+"let &efm .= '%-G%.%#test failed, to rerun pass%.%#,'
+"" Capture enter directory events for doc tests
+"let &efm .= '%D%*\sDoc-tests %f%.%#,'
+"" Doc Tests
+"let &efm .= '%E---- %f - %o (line %l) stdout ----,'
+"let &efm .= '%Cerror%m,'
+"let &efm .= '%-Z%*\s--> %f:%l:%c,'
+"" Unit tests && `tests/` dir failures
+"" This pattern has to come _after_ the doc test one
+"let &efm .= '%E---- %o stdout ----,'
+"let &efm .= '%Zthread %.%# panicked at %m\, %f:%l:%c,'
+"let &efm .= '%Cthread %.%# panicked at %m,'
+"let &efm .= '%+C%*\sleft: %.%#,'
+"let &efm .= '%+Z%*\sright: %.%#\, %f:%l:%c,'
+"" Compiler Errors and Warnings
+"let &efm .= '%Eerror%m,'
+"let &efm .= '%Wwarning: %m,'
+"let &efm .= '%-Z%*\s--> %f:%l:%c,'
