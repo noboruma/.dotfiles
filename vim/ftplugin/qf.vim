@@ -44,7 +44,7 @@ syn match linecol "\v\|[0-9]+ col [0-9]+\|"
 highlight linecol ctermfg=green guifg=green
 
 function! AdjustWindowHeight(minheight, maxheight)
-    exe max([min([line("$"), a:maxheight]), a:minheight]) . "wincmd _"
+    exe min([max([line("$"), a:minheight]), a:maxheight]) . "wincmd _"
 endfunction
 
 let g:asyncrun_gotoend = 0
@@ -55,7 +55,7 @@ fun! AutoAdjustQFWindow()
       for winnr in range(1, winnr('$'))
           if getwinvar(winnr, '&syntax') == 'qf'
               exe winnr . "wincmd w"
-              call AdjustWindowHeight(5, 10)
+              call AdjustWindowHeight(&lines/6, &lines/3)
               if g:asyncrun_gotoend == 1
                   normal G
               endif

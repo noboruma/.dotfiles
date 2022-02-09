@@ -14,7 +14,7 @@ set nocompatible
 
 let use_coc=1
 if has('nvim')
-    let use_coc=1
+    let use_coc=0
 endif
 
 set termguicolors
@@ -43,7 +43,7 @@ endif
 "set ttyfast
 "set re=1
 set lazyredraw
-set synmaxcol=200
+set synmaxcol=255
 syntax sync minlines=150
 
 set scrolloff=0 " Keep no lines after/before the cursor
@@ -60,9 +60,13 @@ if !use_arrow
     nnoremap <Right> <NOP>
 endif
 
+if has('nvim')
+set cmdheight=0
+else
 set cmdheight=1
+syntax enable                      " enable
+endif
 set vb                         " visual bell
-syntax on                      " enable
 set background=dark
 colorscheme myslate
 
@@ -97,8 +101,7 @@ endif
 
 " Show space and tab as blue
 set list
-set listchars=tab:>-,trail:-
-set listchars=trail:-
+set listchars=tab:▶\ ,trail:·,extends:\#,nbsp:.
 
 set smartcase " As 'ignorecase' but activate case if contains Capital letter
 
@@ -133,6 +136,72 @@ let &runtimepath.=',~/.vim/bundle/colorizer'
 
 set showtabline=0
 " airline plugin
+if has("nvim")
+    packadd lualine.nvim
+    packadd nvim-web-devicons
+lua << END
+    local status, lualine = pcall(require, "lualine")
+    if (not status) then return end
+
+    local custom_fname = require('lualine.components.filename'):extend()
+    local highlight = require'lualine.highlight'
+    local default_status_colors = { saved = '#202020', modified = '#C70039' }
+
+    -- functions for making modified filename background diff color
+    function custom_fname:init(options)
+        custom_fname.super.init(self, options)
+        self.status_colors = {
+            saved = highlight.create_component_highlight_group(
+            {bg = default_status_colors.saved}, 'filename_status_saved', self.options),
+            modified = highlight.create_component_highlight_group(
+            {bg = default_status_colors.modified}, 'filename_status_modified', self.options),
+            }
+        if self.options.color == nil then self.options.color = '' end
+    end
+
+    function custom_fname:update_status()
+        local data = custom_fname.super.update_status(self)
+        data = highlight.component_format_highlight(vim.bo.modified
+        and self.status_colors.modified
+        or self.status_colors.saved) .. data
+        return data
+    end
+    -- !modified
+
+    lualine.setup {
+        options = {
+            icons_enabled = true,
+            theme = 'powerline_dark',
+            section_separators = {'', ''},
+            component_separators = {'', ''},
+            disabled_filetypes = {}
+        },
+        sections = {
+            lualine_a = {'g:asyncrun_status'},
+            lualine_b = {'branch'},
+            lualine_c = {{'filename', file_status=true, path=1}},
+            lualine_x = {
+                { 'diagnostics', sources = {"nvim_lsp"}, symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '} },
+                'encoding',
+                'filetype'
+                },
+            lualine_y = {'progress'},
+            lualine_z = {'location'}
+        },
+        inactive_sections = {
+            lualine_a = {},
+            lualine_b = {},
+            lualine_c = {custom_fname},
+            lualine_x = {'location'},
+            lualine_y = {},
+            lualine_z = {}
+        },
+        tabline = {},
+        extensions = {'fugitive'}
+    }
+END
+
+else
 set laststatus=2 "status bar
 let g:airline_theme='light'
 let g:airline_highlighting_cache=1
@@ -155,6 +224,7 @@ let g:airline_section_z = '%#__accent_bold#%3p%%%#__restore__# %3l:%2c' "can add
 let &runtimepath.=',~/.vim/bundle/airline'
 let &runtimepath.=',~/.vim/bundle/airline-themes'
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+endif
 "!Airline
 
 "Rainbow plugin
@@ -184,6 +254,7 @@ let &runtimepath.=',~/.vim/bundle/undotree'
 
 " vim-fugitive
 let &runtimepath.=',~/.vim/bundle/vim-fugitive'
+packadd vim-rhubarb.git
 let &runtimepath.=',~/.vim/pack/submodules/opt/vim-gitgutter'
 set updatetime=500
 " !vim-fugitive
@@ -409,14 +480,9 @@ if has('nvim')
     let g:extract_useDefaultMappings=0
     "let g:extract_loadDeoplete=1
     let g:extract_maxCount = 3
-    "" TODO: Remove submodule?
-    packadd Extract
 
     packadd nvim-treesitter
     packadd iswap.nvim
-
-    " Get gitgutter like git support
-    packadd coc.nvim
 
     packadd vim-dadbod
     packadd nvim-bqf
@@ -556,3 +622,5 @@ filetype indent on
 set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
             \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
             \,sm:block-blinkwait175-blinkoff150-blinkon175
+
+source ~/.vim/bundle/coding_activator.vim

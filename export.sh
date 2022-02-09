@@ -43,6 +43,7 @@ ln -s $CURDIR/ruby/irbrc ~/.irbrc
 ln -s $CURDIR/nvim $XDG_CONFIG_HOME/nvim
 ln -s $CURDIR/etc/surfraw.conf $XDG_CONFIG_HOME/.surfraw.conf
 ln -s $CURDIR/git/gitconfig ~/.gitconfig
+ln -s $CURDIR/ssh/rc ~/.ssh/rc
 
 cd - 1>/dev/null
 

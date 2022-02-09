@@ -1,10 +1,33 @@
+packadd nvim-treesitter
 source ~/.vim/bundle/coding_activator.vim
 
-set nolist
-set noexpandtab
+setlocal nolist
+setlocal noexpandtab
+
+let g:go_gopls_enabled = 0
+let g:go_code_completion_enabled = 0
+let g:go_fmt_command = 'gofmt'
+let g:go_def_mapping_enabled = 0
+let g:go_doc_keywordprg_enabled = 0
+packadd vim-go
 
 compiler go
 let &makeprg='go build'
+
+function! GoFormatBuffer()
+    if &modifiable == 1
+        let l:curw=winsaveview()
+        let l:tmpname=tempname()
+        call writefile(getline(1,'$'), l:tmpname)
+        call system("gofmt " . l:tmpname ." > /dev/null 2>&1")
+        if v:shell_error == 0
+            try | silent undojoin | catch | endtry
+            silent %!gofmt -tabwidth=4
+        endif
+        call delete(l:tmpname)
+        call winrestview(l:curw)
+    endif
+endfunction
 
 let g:tagbar_type_go = {
             \ 'ctagstype' : 'go',
@@ -53,13 +76,17 @@ if !exists("*File_flip")
         try
             if match(expand("%:t"),"_test\\.go") > 0
                 let s:flipname = substitute(expand("%:t"),'_test\.go','\.go',"")
-                exe ":find " s:flipname
             elseif match(expand("%:t"),"\\.go") > 0
                 let s:flipname = substitute(expand("%:t"),'\.go','_test\.go',"")
-                exe ":find " s:flipname
             endif
+            exe ":find " s:flipname
         catch
-            echohl ErrorMsg | echo "/!\\ Could not find matching file"
+            if match(expand("%:t"),"_test\\.go") > 0
+                let s:flipname = substitute(expand("%:p"),'_test\.go','\.go',"")
+            elseif match(expand("%:t"),"\\.go") > 0
+                let s:flipname = substitute(expand("%:p"),'\.go','_test\.go',"")
+            endif
+            exe ":edit " s:flipname
         endtry
         let &path=oldpath
     endfun

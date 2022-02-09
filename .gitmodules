@@ -73,6 +73,7 @@
 [submodule "vim/bundle/vim-textobj-variable-segment"]
 	path =vim/bundle/vim-textobj-variable-segment
 	url = https://github.com/Julian/vim-textobj-variable-segment
+	branch = main
 	shallow = true
 [submodule "vim/bundle/vim-textobj-function"]
 	path =vim/bundle/vim-textobj-function
@@ -306,3 +307,48 @@
 [submodule "vim/pack/submodules/opt/vim-gitgutter"]
 	path = vim/pack/submodules/opt/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
+[submodule "vim/pack/submodules/opt/nvim-lspconfig"]
+	path = vim/pack/submodules/opt/nvim-lspconfig
+	url = https://github.com/neovim/nvim-lspconfig
+[submodule "vim/pack/submodules/opt/lsp-status.nvim"]
+	path = vim/pack/submodules/opt/lsp-status.nvim
+	url = https://github.com/nvim-lua/lsp-status.nvim
+[submodule "vim/pack/submodules/opt/vim-rhubarb.git"]
+	path = vim/pack/submodules/opt/vim-rhubarb.git
+	url = https://github.com/tpope/vim-rhubarb.git
+[submodule "vim/pack/submodules/opt/rust-tools.nvim"]
+	path = vim/pack/submodules/opt/rust-tools.nvim
+	url = https://github.com/simrat39/rust-tools.nvim
+[submodule "vim/pack/submodules/opt/nvim-cmp"]
+	path = vim/pack/submodules/opt/nvim-cmp
+	url = https://github.com/hrsh7th/nvim-cmp
+[submodule "vim/pack/submodules/opt/cmp-nvim-lsp"]
+	path = vim/pack/submodules/opt/cmp-nvim-lsp
+	url = https://github.com/hrsh7th/cmp-nvim-lsp
+[submodule "vim/pack/submodules/opt/cmp-vsnip"]
+	path = vim/pack/submodules/opt/cmp-vsnip
+	url = https://github.com/hrsh7th/cmp-vsnip
+[submodule "vim/pack/submodules/opt/vim-vsnip"]
+	path = vim/pack/submodules/opt/vim-vsnip
+	url = https://github.com/hrsh7th/vim-vsnip
+[submodule "vim/pack/submodules/opt/lualine.nvim"]
+	path = vim/pack/submodules/opt/lualine.nvim
+	url = https://github.com/nvim-lualine/lualine.nvim
+[submodule "vim/pack/submodules/opt/nvim-web-devicons"]
+	path = vim/pack/submodules/opt/nvim-web-devicons
+	url = https://github.com/kyazdani42/nvim-web-devicons
+[submodule "vim/pack/submodules/opt/cmp-path"]
+	path = vim/pack/submodules/opt/cmp-path
+	url = https://github.com/hrsh7th/cmp-path
+[submodule "vim/pack/submodules/opt/cmp-buffer"]
+	path = vim/pack/submodules/opt/cmp-buffer
+	url = https://github.com/hrsh7th/cmp-buffer
+[submodule "vim/pack/submodules/opt/cmp-cmdline"]
+	path = vim/pack/submodules/opt/cmp-cmdline
+	url = https://github.com/hrsh7th/cmp-cmdline
+[submodule "vim/pack/submodules/opt/godbolt.nvim"]
+	path = vim/pack/submodules/opt/godbolt.nvim
+	url = https://github.com/p00f/godbolt.nvim
+[submodule "vim/pack/submodules/opt/vim-go"]
+	path = vim/pack/submodules/opt/vim-go
+	url = https://github.com/fatih/vim-go

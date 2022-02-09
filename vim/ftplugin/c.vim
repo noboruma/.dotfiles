@@ -8,7 +8,7 @@ endif
 
 " Clang-format
 packadd vim-clang-format
-let g:clang_format#command="clang-format-3.5"
+let g:clang_format#command="clang-format"
 let g:clang_format#detect_style_file=0
 let g:clang_format#style_options = {
             \ "AlwaysBreakTemplateDeclarations" : "true",
@@ -73,9 +73,10 @@ else
     setlocal foldexpr=CFold1Lay()
 endif
 
-set expandtab
-set tabstop=4
-set shiftwidth=4
+setlocal noexpandtab
+setlocal nolist
+setlocal tabstop=4
+setlocal shiftwidth=4
 
 " Stop parsing include files
 setlocal complete-=i

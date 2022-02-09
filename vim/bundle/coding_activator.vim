@@ -3,6 +3,9 @@ if exists('g:coding_activator_loaded')
 endif
 let g:coding_activator_loaded = 1
 
+" Surround
+let g:surround_{char2nr("t")} = "\1template: \1<\r>"
+
 " Semantic Highlight
 let g:semanticGUIColors = [
             \'#5fd7ff',
@@ -32,38 +35,36 @@ let g:semanticTermColors = [195,3,4,5,6,7,8,9,10,11,12,13,14,15,22,44,61,77,211,
 let g:semanticPersistCache = 1
 packadd semantic-highlight.vim
 
-"if has("gui_running")
-    if !&diff
-        au BufEnter <buffer> if (!exists('b:created')) | exe "SemanticHighlightToggle" | let b:created=1 | endif
-        "Triggered by :doautocmd
-        "au User <buffer> :SemanticHighlight
-        au BufWritePost <buffer> :SemanticHighlight
-    endif
-"endif
+if !&diff
+    "au BufEnter <buffer> if (!exists('b:created')) | exe "SemanticHighlight" | let b:created=1 | endif
+    "Triggered by :doautocmd
+    au BufEnter * :SemanticHighlight
+    au BufWritePost * :SemanticHighlight
+endif
 " !Semantic Highlight
 
 " Gutentags
-if executable('ctags')
-    let g:gutentags_project_root=['.git']
-    let g:gutentags_file_list_command = {
-                \ 'markers': {
-                \ '.git': 'git ls-files',
-                \ '.hg': 'hg files',
-                \ },
-                \ }
-    set statusline+=%{gutentags#statusline()}
-    set tags=./tags;,tags;
-    let g:gutentags_cache_dir='~/.tags.auto'
-    " /!\ Change plugin from setlocal to set
-    "let g:gutentags_trace=1
-    packadd vim-gutentags
-    call gutentags#setup_gutentags()
-    if(exists('b:gutentags_files'))
-        exe 'set tags^='.b:gutentags_files['ctags']
-    endif
-else
-    echom 'no ctags executable'
-endif
+"if executable('ctags')
+"    let g:gutentags_project_root=['.git']
+"    let g:gutentags_file_list_command = {
+"                \ 'markers': {
+"                \ '.git': 'git ls-files',
+"                \ '.hg': 'hg files',
+"                \ },
+"                \ }
+"    set statusline+=%{gutentags#statusline()}
+"    set tags=./tags;,tags;
+"    let g:gutentags_cache_dir='~/.tags.auto'
+"    " /!\ Change plugin from setlocal to set
+"    "let g:gutentags_trace=1
+"    packadd vim-gutentags
+"    call gutentags#setup_gutentags()
+"    if(exists('b:gutentags_files'))
+"        exe 'set tags^='.b:gutentags_files['ctags']
+"    endif
+"else
+"    echom 'no ctags executable'
+"endif
 " !Gutentags
 
 " neosnippet
@@ -85,30 +86,30 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-if has('nvim') && !use_coc
-    let g:deoplete#enable_at_startup = 1
-    packadd deoplete.nvim
-    call deoplete#custom#option('ignore_sources', {'_': ['buffer', 'around', 'member']})
-
-    call deoplete#custom#option({
-                \ 'auto_complete': v:true,
-                \ 'auto_complete_delay': 100,
-                \ 'smart_case': v:true,
-                \ })
-    let g:deoplete#file#enable_buffer_path=1
-    imap <silent><expr> <TAB>
-                \ pumvisible() ? "\<lt>Down>" :
-                \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
-                \ <SID>check_back_space() ? "\<TAB>"
-                \ : deoplete#mappings#manual_complete()
-else
+"if has('nvim') && !use_coc
+"    let g:deoplete#enable_at_startup = 1
+"    packadd deoplete.nvim
+"    call deoplete#custom#option('ignore_sources', {'_': ['buffer', 'around', 'member']})
+"
+"    call deoplete#custom#option({
+"                \ 'auto_complete': v:true,
+"                \ 'auto_complete_delay': 100,
+"                \ 'smart_case': v:true,
+"                \ })
+"    let g:deoplete#file#enable_buffer_path=1
+"    imap <silent><expr> <TAB>
+"                \ pumvisible() ? "\<lt>Down>" :
+"                \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
+"                \ <SID>check_back_space() ? "\<TAB>"
+"                \ : deoplete#mappings#manual_complete()
+"else
     " SuperTab like snippets behavior.
     " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-    imap <expr><TAB>
-         \ pumvisible() ? "\<lt>Down>" :
-         \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)"
-         \ : "\<c-r>=Smart_TabComplete()\<CR>"
-endif
+    "imap <expr><TAB>
+    "     \ pumvisible() ? "\<lt>Down>" :
+    "     \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)"
+    "     \ : "\<c-r>=Smart_TabComplete()\<CR>"
+"endif
 
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
  \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
@@ -140,6 +141,7 @@ packadd tagbar
 
 packadd tagfinder
 
+let g:ale_enabled = 0
 " ALE plugin
 if use_coc
     let g:ale_enabled = 0
@@ -159,6 +161,8 @@ let g:ale_linters = {'rust': ['analyzer']}
 "!ALE
 
 if use_coc
+
+    packadd coc.nvim
     "u will have bad experience for diagnostic messages when it's default 4000.
     set updatetime=300
 
@@ -168,7 +172,7 @@ if use_coc
     inoremap <silent><expr> <c-space> coc#refresh()
     nmap <silent> [g <Plug>(coc-diagnostic-prev)
     nmap <silent> ]g <Plug>(coc-diagnostic-next)
-    nmap <silent> ga :<c-u>CocAction<cr>
+    nmap <silent> g? :<c-u>CocAction<cr>
     nmap <silent> gD :<c-u>call CocAction('jumpDefinition', 'vsplit')<cr><c-w>=
     nmap <silent> gd <Plug>(coc-definition)
     nmap <silent> gt <Plug>(coc-type-definition)
@@ -216,7 +220,7 @@ if use_coc
     nnoremap <silent> <leader>lp :<C-u>CocListResume<CR>
 
     " Use K to show documentation in preview window
-    nnoremap <silent> K :call <SID>show_documentation()<CR>
+    "nnoremap <silent> K :call <SID>show_documentation()<CR>
     function! s:show_documentation()
         if (index(['vim','help'], &filetype) >= 0)
             execute 'h '.expand('<cword>')
@@ -261,86 +265,97 @@ if use_coc
     set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 else
-    let g:LanguageClient_autoStart=1
-    let g:LanguageClient_diagnosticsEnable=1
-    let g:LanguageClient_hasSnippetSupport=1
-    let g:LanguageClient_selectionUI='quickfix'
-    let g:LanguageClient_diagnosticsList='Location'
-    " See ftplugin for tools setup
-    if executable('ccls') || executable ('cquery')
-        let g:LanguageClient_serverCommands = {}
-        if executable('rls')
-            let g:LanguageClient_serverCommands.rust = ['rustup', 'run', 'nightly', 'rls']
-        endif
-        if executable('jdtls')
-            let g:LanguageClient_serverCommands.java = ['$HOME/usr/bin/jdtls', '-data', getcwd()]
-        endif
-        if executable('ccls')
-            let g:LanguageClient_serverCommands.c = ['ccls',
-                        \ '--log-file=/tmp/cc.log',
-                        \ '--init={"cacheDirectory":"/tmp/cquery/cache/"}']
-            let g:LanguageClient_serverCommands.cpp = ['ccls',
-                        \ '--log-file=/tmp/cc.log',
-                        \ '--init={"cacheDirectory":"/tmp/cquery/cache/"}']
-        elseif executable('cquery')
-            let g:LanguageClient_serverCommands.c = ['cquery',
-                        \ '--init={"cacheDirectory":"/tmp/cquery/cache/",
-                        \ "diagnostics": {"onParse": false, "onType": false},
-                        \ "index": {"comments": 2},
-                        \ "cacheFormat": "msgpack",
-                        \ "completion": {"filterAndSort": false}}']
-            let g:LanguageClient_serverCommands.cpp = ['cquery',
-                        \ '--init={"cacheDirectory":"/tmp/cquery/cache/",
-                        \ "diagnostics": {"onParse": true, "onType": true},
-                        \ "index": {"comments": 2},
-                        \ "cacheFormat": "msgpack",
-                        \ "completion": {"filterAndSort": true}}']
-        endif
-    endif
+    packadd nvim-lspconfig
+    packadd nvim-cmp
+    packadd cmp-nvim-lsp
+    packadd cmp-vsnip
+    packadd cmp-path
+    packadd cmp-buffer
+    packadd vim-vsnip
 
-    packadd LanguageClient-neovim
+    nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+    nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+    nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
+    nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+    nnoremap <silent> gt    <cmd>lua vim.lsp.buf.type_definition()<CR>
+    nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+    nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+    nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+    nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+    nnoremap <silent> g?    <cmd>lua vim.lsp.buf.code_action()<CR>
+    nnoremap <silent> [g    <cmd>lua vim.diagnostic.goto_prev()<CR>
+    nnoremap <silent> ]g    <cmd>lua vim.diagnostic.goto_next()<CR>
 
-    if has('nvim')
-        call deoplete#custom#source('LanguageClient',
-                    \ 'min_pattern_length',
-                    \ 2)
-        call deoplete#custom#filter('attrs_order', {
-                    \ 'cpp': {
-                    \     'kind': [
-                    \     'Method',
-                    \     'Function',
-                    \     'Property'
-                    \     ],
-                    \ },
-                    \ 'c': {
-                    \     'kind': [
-                    \     'Function',
-                    \     'Property'
-                    \     ]
-                    \ }
-                    \})
-    else
-        setlocal omnifunc=LanguageClient#complete
-        "set formatexpr=LanguageClient_textDocument_rangeFormatting()
-    endif
-    LanguageClientStart
-    nnoremap <silent>gd :<c-u>call LanguageClient#textDocument_definition({'gotoCmd': 'vsplit'})<cr>
-    nnoremap <silent>gr :<c-u>call LanguageClient#textDocument_references()<cr>:call asyncrun#quickfix_toggle(0, 1)<cr>
-    nnoremap <silent>K :<c-u>call LanguageClient#textDocument_hover()<cr>
-    nnoremap <silent>gy :<c-u>call LanguageClient#textDocument_signatureHelp()<cr>
-    nnoremap <silent>gc :<c-u>call LanguageClient#findLocations({'method':'$ccls/call'})<cr>
-    nnoremap <silent>gC :<c-u>call LanguageClient#findLocations({'method':'$ccls/call','callee':v:true})<cr>
-    nnoremap <leader>ac :<c-u>call LanguageClient#textDocument_codeAction()<cr>
+lua <<EOF
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+end
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+local nvim_lsp = require('lspconfig')
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { 'pyright', 'rust_analyzer', 'tsserver', 'gopls', 'yamlls', 'dockerls', 'bashls', 'clangd'}
+for _, lsp in pairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = {
+      -- This will be the default in neovim 0.7+
+      debounce_text_changes = 150,
+    }
+  }
+end
+
+
+local cmp = require('cmp')
+cmp.setup({
+  -- Enable LSP snippets
+  snippet = {
+    expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  -- Installed sources
+  sources = {
+    { name = 'nvim_lsp', priority = 100 },
+    { name = 'vsnip' },
+    { name = 'path' },
+    { name = 'buffer' },
+  },
+  mapping = {
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<Up>'] = cmp.mapping.select_prev_item(),
+    ['<Down>'] = cmp.mapping.select_next_item(),
+    -- Add tab support
+    ["<Tab>"] = cmp.mapping.select_next_item({behavior=cmp.SelectBehavior.Insert}),
+    ["<S-Tab>"] = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Insert}),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = true,
+    })
+  },
+})
+EOF
+
 endif
 
 "packadd vimproc.vim
 
 packadd vim-test
 if has('nvim')
-    let test#strategy = "neoterm"
-else
     " Untested, use asynrun otherwise
-    let test#strategy = 'tslime'
+    let test#strategy = 'neovim'
 endif
 nmap <leader>t :<c-u>TestNearest<cr>
 nmap <leader>T :<c-u>TestNFile<cr>
@@ -349,3 +364,42 @@ nmap <leader>T :<c-u>TestNFile<cr>
 "packadd neoformat
 
 packadd splitjoin.vim
+
+if has('nvim')
+packadd nvim-treesitter
+packadd godbolt.nvim
+lua << EOF
+require("godbolt").setup({
+    languages = {
+        c = { compiler = "cg112", options = {} },
+        cpp = { compiler = "g112", options = {} },
+        rust = { compiler = "r1600", options = {} },
+        go = { compiler = "gccgo113", options = {} },
+        -- any_additional_filetype = { compiler = ..., options = ... },
+        },
+    quickfix = {
+        enable = true, -- whether to populate the quickfix list in case of errors
+        auto_open = false -- whether to open the quickfix list if the compiler outputs errors
+        },
+    url = "https://godbolt.org" -- can be changed to a different godbolt instance
+})
+
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "c", "lua", "rust", "cpp", "yaml", "json", "go" },
+  highlight = {
+    enable = true,
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+  indent = {
+      enable = true
+  },
+}
+EOF
+endif
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()

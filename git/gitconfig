@@ -43,3 +43,5 @@
 
 [includeIf "gitdir:~/workspace/deepfence/"]
 	path = ~/.gituserinfo/deepfence
+[rebase]
+	instructionFormat = (%an <%ae>) %s

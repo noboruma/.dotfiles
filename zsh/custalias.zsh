@@ -23,11 +23,25 @@ alias c="clear"
 alias mem="free -m"
 
 alias mux="tmuxinator"
+alias mjn="make -j$(nproc)"
+
+export SSH_JOB_FINISH_PORT=2222
 
 alias -g _E='|$EDITOR -'
 alias -g _N='1> /dev/null'
-alias -g _A=';~/.tmux/tmux-notifications/bin/tmux-notify "Alert"'
+alias -g _T=';~/.tmux/tmux-notifications/bin/tmux-notify "Alert"'
+alias -g _A='; echo "done on $PWD" | netcat 127.0.0.1 $SSH_JOB_FINISH_PORT -q 0'
 
+function ssh_job_listen() {
+    PORT=${1:-$SSH_JOB_FINISH_PORT}
+    while true;
+    do
+        SUM=$(netcat -l -p $PORT)
+        notify-send "$SUM"
+    done
+}
+
+alias ssh='ssh -R $SSH_JOB_FINISH_PORT:127.0.0.1:$SSH_JOB_FINISH_PORT'
 #alias sshfs='sshfs -C -o reconnect'
 alias sshports="netstat -tpln | grep ssh"
 alias ssshports="sudo netstat -tpln | grep ssh"
@@ -39,16 +53,14 @@ alias siptables='sudo iptables'
 if type "pacman" > /dev/null; then
     alias spi='sudo pacman -S'
     alias spu='sudo pacman -Syu'
-    alias sps='pacman -Ss'
+    alias pS='pacman -Ss'
     alias spr='sudo pacman -Rcns'
 elif type "aptitude" > /dev/null; then
-    alias sapt='sudo aptitude'
     alias sai='sudo apt install'
     alias aS='aptitude search'
     alias saR='sudo apt remove'
     alias sau='sudo apt update'
-    alias saup='sudo aptitude safe-upgrade'
-    alias sapti='sudo aptitude'
+    alias saup='sudo apt upgrade'
 fi
 
 alias v='vim'
@@ -57,9 +69,10 @@ alias sv='sudo vim'
 alias snv='sudo nvim'
 # makepkg -sri
 alias e='$EDITOR'
-alias ee='$EDITOR -c "set noautochdir" -c "Files"'
+alias ee='nvr --servername `tmux display -p "/tmp/nvimsocket.#S.#I"` -c "set noautochdir" -c "Files"'
 alias eg='$EDITOR -c "set noautochdir" -c "Ag"'
 alias eh='$EDITOR -c "set noautochdir" -c "History"'
+alias ew='nvr --servername `tmux display -p "/tmp/nvimsocket.#S.#I"`'
 
 alias ipy='ipython --no-autoindent'
 
@@ -103,28 +116,19 @@ bindkey '^e' replace_vim_ee
 bindkey '^h' replace_vim_eh
 bindkey '^f' replace_gd_origin
 
-case `uname` in
-    Darwin)
-alias ew="nvrw"
-        ;;
-    Linux)
-alias ew="xterm -fa 'Terminus' -fs 11 -e nvrw"
-        ;;
-    FreeBSD)
-        ;;
-esac
-
 ## Git
 alias gam='git commit -a --amend'
 alias glog='git --no-pager log --pretty="format:%C(auto,yellow)%h%C(auto,magenta)% G? %C(auto,blue)%>(30,trunc)%ad %C(auto,green)%<(15,trunc)%aN%C(auto,reset)%s%C(auto)%d" --reverse'
 alias gcom='git commit -am'
 alias gpush='git push'
 alias gpull='git pull --rebase'
+alias gclone='git clone --depth 1'
 alias gfetch='git fetch'
 alias gsw='git switch'
 alias gconf='git conflicts'
-alias ginit='git submodule update --init --recursive'
-alias gup='git submodule foreach "git fetch && git pull"'
+#alias ginit='git submodule update --init --recursive'
+#alias gup='git submodule foreach "git fetch && git pull"'
+alias gup='git submodule update --init --recursive --remote'
 alias gls='git ls-tree --name-only HEAD | xargs $aliases[ls] -d'
 alias gtree='git log --graph --oneline --all'
 alias gurl='git remote get-url origin'
@@ -138,8 +142,15 @@ alias tree='tree -C'
 ## Kubernetes
 alias kapply="kubectl apply -f"
 alias kdelete="kubectl delete -f"
-alias kpods="kubectl get pod"
+alias kpods="kubectl get pod -o wide"
+alias ksvcs="kubectl get services -o wide"
 alias kdesc="kubectl describe pod"
+function kexec {
+    kubectl exec -n $1 -it $2 -- sh
+}
+function ktop {
+    watch -n 1 kubectl top pods $1
+}
 
 alias aggo="ag --ignore-dir vendor"
 
@@ -152,6 +163,9 @@ alias dims='docker image ls --format "table {{.Repository}}:{{.Tag}}\t{{.ID}}\t{
 alias dtop='docker stats'
 alias dports='docker container ls --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}" -a'
 alias dclean='docker volume prune ; docker system prune'
+
+alias clean='go clean --modcache ; go clean --cache ; cargo cache --gc --autoclean'
+alias update='saup && rustup update && cargo install-update --all && goup update'
 
 export DOCKER_SHARE_HIST_ARGS="-v $HOME/.docker/ash_history:/root/.ash_history -v $HOME/.docker/sh_history:/root/.sh_history -v $HOME/.docker/bash_history:/root/.bash_history -v $HOME/.docker/zsh_history:/root/.zsh_history"
 
@@ -222,6 +236,8 @@ alias zrc="$EDITOR ~/.zshrc"
 alias trc="$EDITOR ~/.tmux.conf"
 alias mrc="$EDITOR ~/.mutt/neomuttrc"
 alias irc="$EDITOR ~/.irssi/config"
+
+alias fd="fd -H"
 
 alias ttyw3m="TERM=fbterm w3m"
 alias news="newsboat --config-file=$HOME/.newsboat/config --url-file=$HOME/.newsboat/urls"

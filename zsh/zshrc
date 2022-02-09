@@ -27,7 +27,7 @@ bindkey -e
 export HISTFILE=~/.zsh_history
 export HISTSIZE=50000
 export SAVEHIST=50000
-export HISTORY_IGNORE="(dkill|kill)"
+export HISTORY_IGNORE="(dkill|kill|dsh|dish)"
 
 case `uname` in
     Darwin)
@@ -97,16 +97,17 @@ local PROMPT_EOL_MARK='$'
 setopt prompt_subst
 
 # PS1 and PS2
-local ret_code='%(?..[%B%?%b]\n)'
-#local date=$CBROWN'(%D{%H:%M:%S})\n'
+local ret_code='%(?..[%B%?%b])'
+local date=$CBROWN'(%D{%H:%M:%S})\n'
 local ppath=$MCOLOR'%~%b'
 local vcs=$CGREEN'${vcs_info_msg_0_}%f%b'
 local prompt=$CREDOR'%(!.#.$) %f%b'
+local jobcnt=$CBROWN' %(1j.%jj.)'
 
 if [ -n "$TMUX" ]; then
-    export PS1=`print $ret_code$date$CREDORNORM'┌─'$CREDOR'['$CBLUE'%n'$CREDOR':'$ppath$CREDOR']'$vcs'\n'$CREDORNORM'└'$prompt`
+    export PS1=`print $ret_code$date$CREDORNORM'┌─'$CREDOR'['$CBLUE'%n'$CREDOR':'$ppath$CREDOR']'$vcs$jobcnt'\n'$CREDORNORM'└'$prompt`
 else
-    export PS1=`print $ret_code$data$CREDORNORM'┌─'$CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR':'$ppath$CREDOR']'$vcs'\n'$CREDORNORM'└'$prompt`
+    export PS1=`print $ret_code$data$CREDORNORM'┌─'$CREDOR'['$CBLUE'%n'$CREDOR'@'$CGREEN'%M'$CREDOR':'$ppath$CREDOR']'$vcs$jobcnt'\n'$CREDORNORM'└'$prompt`
 fi
 export PS2=`print '%{\e[0;34m%}>'$NOCOLOR`
 
@@ -143,6 +144,7 @@ function cd-or-accept-line() {
         zle .$WIDGET;
     fi
 };
+# Keep prompt on cd
 zle -N accept-line cd-or-accept-line
 
 # Vars used later on by Zsh
@@ -160,7 +162,7 @@ export MANPAGER="/bin/sh -c \"col -b | $EDITOR -c 'set ft=man ts=8 nomod nolist 
 export PAGER='less -R'
 export FINDER='find'
 
-
+export LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.swp=00;90:*.tmp=00;90:*.dpkg-dist=00;90:*.dpkg-old=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:'
 ##################################################################
 # Stuff to make life easier
 
@@ -244,10 +246,16 @@ case `uname` in
         ;;
 esac
 
-export NPM_PACKAGES_PATH="${HOME}/usr/npm-packages"
+export NPM_PACKAGES_PATH=$HOME/usr/npm-packages
 export ZSH_PATH=$HOME/.zsh/bin
 export YARN_PATH=$HOME/.yarn
-export GOPATH=$HOME/go
+export GOPATH=$HOME/usr/go
+export RUSTUP_HOME=$HOME/usr/rustup
+export CARGO_HOME=$HOME/usr/cargo
+export GOCACHE=$HOME/usr/go/cache
+export SCCACHE_DIR=$HOME/usr/sccache
+export SCCACHE_CACHE_SIZE="2G"
+export YARN_CACHE_FOLDER=$HOME/usr/yarn
 
 export GO111MODULE=on
 
@@ -268,11 +276,11 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 # vim CTRL-Z helper
 fancy-ctrl-z () {
 if [[ $#BUFFER -eq 0 ]]; then
-    fg
-    zle redisplay
+    BUFFER="fg"
+    zle accept-line -w
 else
-    zle push-input
-    zle clear-screen
+    zle push-input -w
+    zle clear-screen -w
 fi
 }
 zle -N fancy-ctrl-z
@@ -344,7 +352,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+#zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 [ -f $HOME/.zsh/plugins/fzf-tab/fzf-tab.plugin.zsh ] && source $HOME/.zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
 
 # zsh autosuggestions
@@ -356,26 +364,63 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8, bold'
 [ -f /usr/share/google-cloud-sdk/completion.zsh.inc ] && source /usr/share/google-cloud-sdk/completion.zsh.inc
 [ -f $HOME/.zsh/plugins/forgit/forgit.plugin.zsh ] && source $HOME/.zsh/plugins/forgit/forgit.plugin.zsh
 [ -f $HOME/.zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh ] && source $HOME/.zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+if [ -f $HOME/downloads/google-cloud-sdk/completion.zsh.inc ]; then . $HOME/downloads/google-cloud-sdk/completion.zsh.inc; fi
 
 # zsh per directory history
 #PER_DIRECTORY_HISTORY_TOGGLE='^H'
 #source $HOME/.zsh/plugins/per-directory-history/per-directory-history.zsh
 
-[ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
+[ -f $CARGO_HOME/env ] && source $CARGO_HOME/env
 [ -f $HOME/.work.zsh ] && source $HOME/.work.zsh
 #[ -f ~/workspace/src/emsdk/emsdk_env.sh ] && source ~/workspace/src/emsdk/emsdk_env.sh
 #[ -f ~/.sdkman/bin/sdkman-init.sh ] && source ~/.sdkman/bin/sdkman-init.sh
-[ -f ~/.dntw/dntw.sh ] && source ~/.dntw/dntw.sh
-# added by travis gem
-[ ! -s /Users/legrist/.travis/travis.sh ] || source /Users/legrist/.travis/travis.sh
+[ -f $HOME/.dntw/dntw.sh ] && source $HOME/.dntw/dntw.sh
 
 # Sourcing part
-export PATH=:~/usr/bin:$GOPATH/bin:$ZSH_PATH:$HOME/.config/yarn/global/node_modules/.bin:$YARN_PATH/bin:$NPM_PACKAGES_PATH/bin:$HOMEBREW_PATH:$RUBY_PATH:$PYTHON_PATH:$PATH
-export LD_LIBRARY_PATH=~/usr/lib:$LD_LIBRARY_PATH
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f $HOME/downloads/google-cloud-sdk/path.zsh.inc ]; then . $HOME/downloads/google-cloud-sdk/path.zsh.inc; fi
+export PATH=:$HOME/usr/bin:$GOPATH/bin:$CARGO_HOME/bin:$ZSH_PATH:$HOME/.config/yarn/global/node_modules/.bin:$YARN_PATH/bin:$NPM_PACKAGES_PATH/bin:$HOMEBREW_PATH:$RUBY_PATH:$PYTHON_PATH:$PATH
+export LD_LIBRARY_PATH=$HOME/usr/lib:$LD_LIBRARY_PATH
 
 typeset -U path
 
-hash -d ws=$HOME/workspace/
+hash -d ws=$HOME/workspace
+hash -d usr=$HOME/usr
 hash -d dots=$HOME/.dotfiles
-hash -d vopt=$HOME/.dotfiles/vim/pack/submodules/opt
+hash -d vpack=$HOME/.dotfiles/vim/pack/submodules/opt
+hash -d linux=$HOME/workspace/src/linux
 #zprof
+
+# setting for gup command (auto generate)
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
+
+source /home/zackel/.config/broot/launcher/bash/br
+
+#function powerline_precmd() {
+#    PS1="$($GOPATH/bin/powerline-go -hostname-only-if-ssh -newline -cwd-mode plain -error $? -jobs $(jobs -p | wc -l) -time '15:04:05' -static-prompt-indicator -modules time,user,direnv,cwd,git,host,jobs,perms,venv,shell-var,exit -theme $HOME/.dotfiles/powerline.json)"
+#
+#    # Uncomment the following line to automatically clear errors after showing
+#    # them once. This not only clears the error for powerline-go, but also for
+#    # everything else you run in that shell. Don't enable this if you're not
+#    # sure this is what you want.
+#
+#     #set "?"
+# }
+#
+# function install_powerline_precmd() {
+#     for s in "${precmd_functions[@]}"; do
+#         if [ "$s" = "powerline_precmd" ]; then
+#             return
+#         fi
+#     done
+#     precmd_functions+=(powerline_precmd)
+# }
+#
+# if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
+#     install_powerline_precmd
+# fi
+
+# Wasmer
+export WASMER_DIR="/home/zackel/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"

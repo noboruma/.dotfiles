@@ -73,6 +73,7 @@ channels = (
   { name = "##rust"; chatnet = "liberachat"; autojoin = "Yes"; },
   { name = "#linux"; chatnet = "liberachat"; autojoin = "Yes"; },
   { name = "#kernel"; chatnet = "liberachat"; autojoin = "Yes"; },
+  { name = "#llvm"; chatnet = "liberachat"; autojoin = "Yes"; },
   { name = "#bpftrace"; chatnet = "OFTC"; autojoin = "Yes"; }
 );
 

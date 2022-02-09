@@ -7,7 +7,7 @@ vnoremap x "_d
 nnoremap X "_X
 inoremap jj <esc>j
 inoremap kk <esc>k
-nnoremap // /\<<C-r><C-w>\><cr>
+"nnoremap // /\<<C-r><C-w>\><cr>
 vnoremap // "sy/<C-R>"<cr>
 nnoremap ( :<c-u>call search("(", "bes")<cr>
 nnoremap ) :<c-u>call search("(", "es")<cr>
@@ -16,8 +16,9 @@ nnoremap <s-tab> :NERDTreeToggle<cr>
 " search clipboard
 nnoremap <S-Insert> q/p<cr>
 " insert clipboard into command
-cnoremap <S-Insert> <c-r>0
+cnoremap <c-v> <c-r>0
 cnoremap <C-R> <esc>:<c-u>History:<cr>
+nnoremap <c-s> <esc>:SlimeSend0 "<c-r>=expand("%:p")<cr>"<cr>
 
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -218,10 +219,10 @@ if has('nvim')
     "vnoremap <leader>s :TREPLSendSelection<cr>
     "nnoremap <leader>s :<c-u>TREPLSendFile<cr>
     vnoremap <leader>s :SlimeSend<cr>
-    nnoremap <leader>s :<c-u>%SlimeSend<cr>
+    "nnoremap <leader>s :<c-u>%SlimeSend<cr>
 else
     vnoremap <leader>s :SlimeSend<cr>
-    nnoremap <leader>s :<c-u>%SlimeSend<cr>
+    "nnoremap <leader>s :<c-u>%SlimeSend<cr>
 endif
 nnoremap <leader>S :<c-u>SemanticHighlightToggle<cr>
 "noremap <leader>t :<c-u>tj <C-r><C-w><cr>
@@ -236,6 +237,7 @@ nnoremap <leader>w :lcd %:p:h<cr>:pwd<cr>
 nnoremap <leader>W :lcd -<cr>:pwd<cr>
 noremap <leader>x :<c-u>bp\|bd #<cr>
 noremap <leader>X :<c-u>bp\|bd! #<cr>
+nnoremap y "*y
 vnoremap y "*y
 vnoremap <leader>y "+y
 vnoremap 1 "1y
@@ -299,8 +301,8 @@ vnoremap <silent> <leader>k "sy:MyMan <C-R>"<CR>
 " scroll remap
 nnoremap <c-j> :call search('\%' . virtcol('.') . 'v\S', 'wW')<CR>
 nnoremap <c-k> :call search('\%' . virtcol('.') . 'v\S', 'bW')<CR>
-nnoremap <PageUp> :<c-u>call FixedScrollUp()<cr>
-nnoremap <PageDown> :<c-u>call FixedScrollDown()<cr>
+"nnoremap <PageUp> :<c-u>call FixedScrollUp()<cr>
+"nnoremap <PageDown> :<c-u>call FixedScrollDown()<cr>
 nnoremap - <PageUp>
 nnoremap + <PageDown>
 nmap <S-ScrollWheelUp> <PageUp>
@@ -317,7 +319,7 @@ inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDow
 inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 
 if !exists('g:coding_activator_loaded')
-    inoremap <expr> <tab>      pumvisible() ? "\<lt>Down>" : "\<c-r>=Smart_TabComplete()\<CR>"
+    "inoremap <expr> <tab>      pumvisible() ? "\<lt>Down>" : "\<c-r>=Smart_TabComplete()\<CR>"
 endif
 inoremap <expr> <s-tab>    pumvisible() ? "\<lt>Up>" : "\<s-tab>"
 
@@ -338,24 +340,6 @@ if has('nvim')
 
     nnoremap <F3> :<c-u>let g:neoterm_size=winheight(0)/3 \| topleft Ttoggle<cr>
     tnoremap <F3> <C-\><C-n>: Ttoggle<cr>
-
-    " mappings for putting
-    nmap p <Plug>(extract-put)
-    nmap P <Plug>(extract-Put)
-    "" mappings for visual
-    "vmap p <Plug>(extract-put)
-    "vmap P <Plug>(extract-Put)
-
-    nmap <leader>y :ExtractPin<cr>
-
-    "" mappings for cycling
-    nmap <c-s> <Plug>(extract-sycle)
-    nmap <c-S> <Plug>(extract-Sycle)
-
-    "" mappings for insert
-    "imap <m-v> <Plug>(extract-completeReg)
-    "imap <c-v> <Plug>(extract-completeList)
-
 endif
 
 function! SetMyManHost(choice)
