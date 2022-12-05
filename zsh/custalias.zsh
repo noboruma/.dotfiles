@@ -152,7 +152,7 @@ function ktop {
     watch -n 1 kubectl top pods $1
 }
 
-alias aggo="ag --ignore-dir vendor"
+alias ag="ag --path-to-ignore ~/.ignore"
 
 ## Docker
 alias dbuild='docker build . -t'

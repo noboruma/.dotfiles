@@ -253,7 +253,7 @@ export GOPATH=$HOME/usr/go
 export RUSTUP_HOME=$HOME/usr/rustup
 export CARGO_HOME=$HOME/usr/cargo
 export GOCACHE=$HOME/usr/go/cache
-export SCCACHE_DIR=$HOME/usr/sccache
+export SCCACHE_DIR=$HOME/downloads/sccache
 export SCCACHE_CACHE_SIZE="2G"
 export YARN_CACHE_FOLDER=$HOME/usr/yarn
 
