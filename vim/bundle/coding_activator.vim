@@ -265,13 +265,14 @@ if use_coc
     set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 else
+    packadd vscode-go
+    packadd vim-vsnip
     packadd nvim-lspconfig
     packadd nvim-cmp
     packadd cmp-nvim-lsp
     packadd cmp-vsnip
     packadd cmp-path
     packadd cmp-buffer
-    packadd vim-vsnip
 
     nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
     nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
@@ -285,6 +286,7 @@ else
     nnoremap <silent> g?    <cmd>lua vim.lsp.buf.code_action()<CR>
     nnoremap <silent> [g    <cmd>lua vim.diagnostic.goto_prev()<CR>
     nnoremap <silent> ]g    <cmd>lua vim.diagnostic.goto_next()<CR>
+
 
 lua <<EOF
 
@@ -312,6 +314,14 @@ for _, lsp in pairs(servers) do
   }
 end
 
+local t = function(str)
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+local check_back_space = function()
+    local col = vim.fn.col(".") - 1
+    return col == 0 or vim.fn.getline("."):sub(col, col):match("%s") ~= nil
+end
 
 local cmp = require('cmp')
 cmp.setup({
@@ -334,8 +344,26 @@ cmp.setup({
     ['<Up>'] = cmp.mapping.select_prev_item(),
     ['<Down>'] = cmp.mapping.select_next_item(),
     -- Add tab support
-    ["<Tab>"] = cmp.mapping.select_next_item({behavior=cmp.SelectBehavior.Insert}),
-    ["<S-Tab>"] = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Insert}),
+    ["<Tab>"] = cmp.mapping(function(fallback)
+    if vim.fn.pumvisible() == 1 then
+        vim.fn.feedkeys(t("<cr>"), "")
+    elseif vim.fn["vsnip#available"](1) == 1 then
+        vim.fn.feedkeys(t("<Plug>(vsnip-expand-or-jump)"), "")
+    elseif check_back_space() then
+        vim.fn.feedkeys(t("<tab>"), "n")
+    else
+        fallback()
+    end
+    end, { "i", "s"}),
+    ["<S-Tab>"] = cmp.mapping(function()
+    if cmp.visible() then
+        cmp.select_prev_item()
+    elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+        vim.fn.feedkeys(t("<Plug>(vsnip-jump-prev)"), "")
+    else
+        fallback()
+    end
+    end, {"i", "s"}),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
@@ -346,6 +374,15 @@ cmp.setup({
     })
   },
 })
+
+ cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
 EOF
 
 endif
