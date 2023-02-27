@@ -380,7 +380,7 @@ if [ -f $HOME/downloads/google-cloud-sdk/completion.zsh.inc ]; then . $HOME/down
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f $HOME/downloads/google-cloud-sdk/path.zsh.inc ]; then . $HOME/downloads/google-cloud-sdk/path.zsh.inc; fi
 export PATH=:$HOME/usr/bin:$GOPATH/bin:$CARGO_HOME/bin:$ZSH_PATH:$HOME/.config/yarn/global/node_modules/.bin:$YARN_PATH/bin:$NPM_PACKAGES_PATH/bin:$HOMEBREW_PATH:$RUBY_PATH:$PYTHON_PATH:$PATH
-export LD_LIBRARY_PATH=$HOME/usr/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$HOME/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH
 
 typeset -U path
 

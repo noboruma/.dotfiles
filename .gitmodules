@@ -372,3 +372,6 @@
 	path = vim/pack/submodules/opt/vscode-go
 	url = https://github.com/golang/vscode-go
 	shallow = true
+[submodule "vim/pack/submodules/opt/vscode-go2"]
+	path = vim/pack/submodules/opt/vscode-go2
+	url = https://github.com/golang/vscode-go

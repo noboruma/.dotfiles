@@ -273,6 +273,7 @@ else
     packadd cmp-vsnip
     packadd cmp-path
     packadd cmp-buffer
+    packadd cmp-cmdline
 
     nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
     nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
@@ -337,6 +338,8 @@ cmp.setup({
     { name = 'vsnip' },
     { name = 'path' },
     { name = 'buffer' },
+    { name = 'buffer' },
+    { name = 'cmdline' },
   },
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
@@ -350,7 +353,7 @@ cmp.setup({
     elseif vim.fn["vsnip#available"](1) == 1 then
         vim.fn.feedkeys(t("<Plug>(vsnip-expand-or-jump)"), "")
     elseif check_back_space() then
-        vim.fn.feedkeys(t("<tab>"), "n")
+        vim.fn.feedkeys(t("<Tab>"), "")
     else
         fallback()
     end
@@ -375,14 +378,26 @@ cmp.setup({
   },
 })
 
- cmp.setup.cmdline(':', {
+cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
-      { name = 'cmdline' }
+        { name = 'path' }
+      }, {
+        {
+            name = 'cmdline',
+            option = {
+                ignore_cmds = { 'Man', '!' }
+            }
+        }
     })
-  })
+})
+
+cmp.setup.cmdline('/', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+                { name = 'buffer' }
+        }
+})
 EOF
 
 endif
