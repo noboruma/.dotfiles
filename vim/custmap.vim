@@ -204,7 +204,7 @@ nnoremap <leader>m :Marks<cr>
 vnoremap <leader>mm <esc>:SlimeSend1 cppman <C-r>"<cr>
 noremap <leader>o <c-w>w
 noremap <leader>O <esc>:only<cr>:vsp<cr>
-vnoremap <leader>p "_dP
+vnoremap <leader>p "_d"+P
 nnoremap p "*p
 nnoremap <leader>p "+p
 nnoremap 1 "1p

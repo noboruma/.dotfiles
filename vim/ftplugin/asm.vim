@@ -1,1 +1,1 @@
-set nolist autoindent noexpandtab tabstop=4 shiftwidth=4
+setlocal nolist autoindent noexpandtab tabstop=4 shiftwidth=4

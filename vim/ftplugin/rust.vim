@@ -7,9 +7,9 @@ let &makeprg='cargo'
 "
 let g:make_extra='@ build -j4'
 
-set expandtab
-set tabstop=4
-set shiftwidth=4
+setlocal expandtab
+setlocal tabstop=4
+setlocal shiftwidth=4
 
 packadd rust.vim
 let g:rustfmt_autosave = 0

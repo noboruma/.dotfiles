@@ -145,8 +145,9 @@ let g:ale_enabled = 0
 " ALE plugin
 if use_coc
     let g:ale_enabled = 0
+else
+    packadd ale
 endif
-packadd ale
 "let g:ale_linters = {
 "\   'cpp': ['cppcheck', 'clangtidy', 'clangcheck', 'flawfinder', 'gcc'],
 "\}

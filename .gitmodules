@@ -372,3 +372,9 @@
 	path = vim/pack/submodules/opt/vscode-go
 	url = https://github.com/golang/vscode-go
 	shallow = true
+[submodule "zsh/plugins/zsh-fzf-history-search"]
+	path = zsh/plugins/zsh-fzf-history-search
+	url = https://github.com/joshskidmore/zsh-fzf-history-search
+[submodule "zsh/plugins/zsh-autocomplete"]
+	path = zsh/plugins/zsh-autocomplete
+	url = https://github.com/marlonrichert/zsh-autocomplete

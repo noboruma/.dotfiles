@@ -69,10 +69,10 @@ alias sv='sudo vim'
 alias snv='sudo nvim'
 # makepkg -sri
 alias e='$EDITOR'
-alias ee='nvr --servername `tmux display -p "/tmp/nvimsocket.#S.#I"` -c "set noautochdir" -c "Files"'
+alias ee='nvim --listen `tmux display -p "/tmp/nvimsocket.#S.#I"` -c "set noautochdir" -c "Files"'
 alias eg='$EDITOR -c "set noautochdir" -c "Ag"'
 alias eh='$EDITOR -c "set noautochdir" -c "History"'
-alias ew='nvr --servername `tmux display -p "/tmp/nvimsocket.#S.#I"`'
+alias ew='nvim --server `tmux display -p "/tmp/nvimsocket.#S.#I"` --remote'
 
 alias ipy='ipython --no-autoindent'
 

@@ -121,11 +121,11 @@ if !exists("*File_flip")
     endfun
 endif
 
-set efm=%f:%l:%c:%m
-set efm+=%Dmake:\ Entering\ directory\ '%f'
-set efm+=%Xmake:\ Leaving\ directory\ '%f'
-set efm+=%Dmake[%*\\d]:\ Entering\ directory\ '%f'
-set efm+=%Xmake[%*\\d]:\ Leaving\ directory\ '%f'
-set grepformat=%f:%l:%c:%m
+setlocal efm=%f:%l:%c:%m
+setlocal efm+=%Dmake:\ Entering\ directory\ '%f'
+setlocal efm+=%Xmake:\ Leaving\ directory\ '%f'
+setlocal efm+=%Dmake[%*\\d]:\ Entering\ directory\ '%f'
+setlocal efm+=%Xmake[%*\\d]:\ Leaving\ directory\ '%f'
+setlocal grepformat=%f:%l:%c:%m
 
 DefineLocalTagFinder TagFindStruct s,struct

@@ -125,7 +125,7 @@ setlocal indentexpr=CppNoNamespaceAndTemplateIndent()
 
 DefineLocalTagFinder TagFindClass c,class
 
-set tags+=$HOME/.tags/boost
-set tags+=$HOME/.tags/cppstd
-set tags+=$HOME/.tags/poco
-set tags+=$HOME/.tags/cppus
+setlocal tags+=$HOME/.tags/boost
+setlocal tags+=$HOME/.tags/cppstd
+setlocal tags+=$HOME/.tags/poco
+setlocal tags+=$HOME/.tags/cppus

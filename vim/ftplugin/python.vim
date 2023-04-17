@@ -27,4 +27,4 @@ nnoremap <leader>! :w<cr>:!python %<cr>
 nnoremap <leader>!! :update all<cr>:!ipython -i %<cr>
 nnoremap ;b Oimport pdb; pdb.set_trace()<esc>
 
-set complete-=i
+setlocal complete-=i

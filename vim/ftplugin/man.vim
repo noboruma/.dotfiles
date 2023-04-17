@@ -1,2 +1,3 @@
-set shortmess=a
-set cmdheight=2
+setlocal shortmess=a
+setlocal cmdheight=0
+setlocal noma

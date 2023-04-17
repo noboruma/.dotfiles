@@ -6,7 +6,7 @@ source ~/.vim/bundle/coding_activator.vim
 compiler ant
 let &makeprg='rbbmake'
 
-set noautochdir
+setlocal noautochdir
 
 function! StartDB()
     call vebugger#jdb#attach('9999')
@@ -33,9 +33,9 @@ inoremap <expr> { "{}\<Left>"
 " Surround
 let g:surround_{char2nr("c")} = "\/*\r*\/"
 
-set expandtab
-set tabstop=4
-set shiftwidth=4
+setlocal expandtab
+setlocal tabstop=4
+setlocal shiftwidth=4
 
 if !exists("*File_flip")
     function! File_flip()
@@ -66,9 +66,9 @@ if !exists("*File_flip")
 endif
 
 " Order matters
-set efm=\ \ \ \ \[javac\]\ %f:%l:%m
-set efm+=\[checkstyle\]\ \[ERROR\]\ %f:%l:%c:%m
-set efm+=\[checkstyle\]\ \[ERROR\]\ %f:%l:%m
-set efm+=%f:%l:%c:%m
+setlocal efm=\ \ \ \ \[javac\]\ %f:%l:%m
+setlocal efm+=\[checkstyle\]\ \[ERROR\]\ %f:%l:%c:%m
+setlocal efm+=\[checkstyle\]\ \[ERROR\]\ %f:%l:%m
+setlocal efm+=%f:%l:%c:%m
 
 exe "SemanticHighlightToggle"

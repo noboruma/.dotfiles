@@ -5,7 +5,7 @@ let &makeprg='nvm'
 
 compiler ant
 
-set noautochdir
+setlocal noautochdir
 
 function! StartDB()
     call vebugger#jdb#attach('9999')
@@ -31,9 +31,9 @@ inoremap <expr> { "{}\<Left>"
 " Surround
 let g:surround_{char2nr("c")} = "\/*\r*\/"
 
-set expandtab
-set tabstop=4
-set shiftwidth=4
+setlocal expandtab
+setlocal tabstop=4
+setlocal shiftwidth=4
 
 " Stop parsing include files
 setlocal complete-=i
@@ -137,9 +137,9 @@ else
 endif
 
 " Order matters
-set efm=\[checkstyle\]\ \[ERROR\]\ %f:%l:%c:%m
-set efm+=\[checkstyle\]\ \[ERROR\]\ %f:%l:%m
-set efm+=%f:%l:%c:%m
+setlocal efm=\[checkstyle\]\ \[ERROR\]\ %f:%l:%c:%m
+setlocal efm+=\[checkstyle\]\ \[ERROR\]\ %f:%l:%m
+setlocal efm+=%f:%l:%c:%m
 
 " For some reasons, need to turn that off
 "filetype indent off

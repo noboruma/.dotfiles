@@ -5,6 +5,11 @@
 # <(cmd) <(cmd) For asynchron piping
 # fdupes A/ --recurse: B | grep ^A/ | xargs rm
 
+source ~/.fzf/shell/completion.zsh
+#zstyle ':autocomplete:*' fzf-completion yes
+#source $HOME/.zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+#skip_global_compinit=1
+
 #zmodload zsh/zprof
 #export TERM='tmux-256color'
 bindkey -e
@@ -80,6 +85,7 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
 setopt HIST_FIND_NO_DUPS
+setopt EXTENDED_HISTORY
 setopt CORRECT
 setopt correct_all
 
@@ -168,25 +174,29 @@ export LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;
 
 # allow approximate
 #zstyle ':completion:*' completer _complete _match _approximate
-zstyle ':completion:*:match:*' original only
-zstyle ':completion:*:approximate:*' max-errors 1 numeric
-zstyle ':completion:*:*:cd:*' local-directories
-# cd not select parent dir
-zstyle ':completion:*:cd:*' ignore-parents parent pwd
-zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
-zstyle ":completion:*:git-checkout:*" sort false
-zstyle ':completion:*:descriptions' format '[%d]'
+#zstyle ':completion:*:match:*' original only
+#zstyle ':completion:*:approximate:*' max-errors 1 numeric
+#zstyle ':completion:*:*:cd:*' local-directories
+## cd not select parent dir
+#zstyle ':completion:*:cd:*' ignore-parents parent pwd
+#zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+#zstyle ":completion:*:git-checkout:*" sort false
+#zstyle ':completion:*:descriptions' format '[%d]'
 
 setopt extendedglob
 
+# setting for gup command (auto generate)
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
+
 fpath+=$HOME/.zfunc
 [ -f $HOME/.zsh/plugins/zsh-completions/zsh-completions.plugin.zsh ] && source $HOME/.zsh/plugins/zsh-completions/zsh-completions.plugin.zsh
-autoload -Uz compinit
-if [[ -n  ${ZDOTDIR:-${HOME}}/.zcompdump(#qN.mh+24) ]]; then
-    compinit
-else
-    compinit -C
-fi
+#autoload -Uz compinit
+#if [[ -n  ${ZDOTDIR:-${HOME}}/.zcompdump(#qN.mh+24) ]]; then
+#    compinit
+#else
+#    compinit -C
+#fi
 
 # This sets the case insensitivity
 zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
@@ -295,12 +305,12 @@ export ZBEEP=''
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
-bindkey '^[OA' up-line-or-search
-bindkey '^[OB' down-line-or-search
+#bindkey '^[OA' up-line-or-search
+#bindkey '^[OB' down-line-or-search
 
 # FZF
 export FZF_DEFAULT_COMMAND="fd --type file --color=always --follow --exclude .git"
-export FZF_DEFAULT_OPTS='--ansi --layout=reverse --border --bind "tab:down,btab:up,shift-right:toggle-out,right:toggle" --no-sort'
+export FZF_DEFAULT_OPTS='--ansi --layout=reverse --border --bind "tab:down,btab:up,shift-right:toggle-out,right:toggle" --no-sort --cycle'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d --color=always --exclude .git --follow"
 export FORGIT_DIFF_FZF_OPTS="--bind=\"enter:execute(tmux split $ZSH_PATH/nvrw {-1})\""
@@ -352,8 +362,21 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'
-#zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+# all Tab widgets
+#zstyle ':autocomplete:*complete*:*' insert-unambiguous yes
+#zstyle ':autocomplete:menu-search:*' insert-unambiguous yes
+#zstyle ':autocomplete:tab:*' fzf-completion yes
+zstyle ':fzf-tab:*' fzf-command fzf-tmux
 [ -f $HOME/.zsh/plugins/fzf-tab/fzf-tab.plugin.zsh ] && source $HOME/.zsh/plugins/fzf-tab/fzf-tab.plugin.zsh
+
+export ZSH_FZF_HISTORY_SEARCH_FZF_EXTRA_ARGS='--layout=default'
+export ZSH_FZF_HISTORY_SEARCH_BIND='^[OA'
+[ -f ~/.zsh/plugins/zsh-fzf-history-search/zsh-fzf-history-search.zsh ] && source ~/.zsh/plugins/zsh-fzf-history-search/zsh-fzf-history-search.zsh
+
+#
+#bindkey '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
+#bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
+#bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
 
 # zsh autosuggestions
 ZSH_AUTOSUGGEST_USE_ASYNC=1
@@ -391,11 +414,7 @@ hash -d vpack=$HOME/.dotfiles/vim/pack/submodules/opt
 hash -d linux=$HOME/workspace/src/linux
 #zprof
 
-# setting for gup command (auto generate)
-fpath=(~/.zsh/completion $fpath)
-autoload -Uz compinit && compinit -i
-
-source /home/zackel/.config/broot/launcher/bash/br
+#source /home/zackel/.config/broot/launcher/bash/br
 
 #function powerline_precmd() {
 #    PS1="$($GOPATH/bin/powerline-go -hostname-only-if-ssh -newline -cwd-mode plain -error $? -jobs $(jobs -p | wc -l) -time '15:04:05' -static-prompt-indicator -modules time,user,direnv,cwd,git,host,jobs,perms,venv,shell-var,exit -theme $HOME/.dotfiles/powerline.json)"

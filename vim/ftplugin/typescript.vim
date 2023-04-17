@@ -1,10 +1,10 @@
 source ~/.vim/bundle/coding_activator.vim
 packadd vim-typescript
 
-set makeprg=tsc
+setlocal makeprg=tsc
 
-set nolist
-set noexpandtab
+setlocal nolist
+setlocal noexpandtab
 
 "if !exists('g:LanguageClient_serverCommands')
 "    let g:LanguageClient_serverCommands = {}
