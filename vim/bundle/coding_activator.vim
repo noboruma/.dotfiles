@@ -275,6 +275,8 @@ else
     packadd cmp-path
     packadd cmp-buffer
     packadd cmp-cmdline
+    packadd mason.nvim
+    packadd mason-lspconfig.nvim
 
     nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
     nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
@@ -292,6 +294,17 @@ else
 
 lua <<EOF
 
+require("mason").setup({
+    ui = {
+        icons = {
+            package_installed = "",
+            package_pending = "",
+            package_uninstalled = "",
+        },
+    }
+})
+require("mason-lspconfig").setup()
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -304,7 +317,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local nvim_lsp = require('lspconfig')
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'rust_analyzer', 'tsserver', 'gopls', 'yamlls', 'dockerls', 'bashls', 'clangd'}
+local servers = { 'pyright', 'tsserver', 'gopls', 'yamlls', 'dockerls', 'bashls', 'clangd'}
 for _, lsp in pairs(servers) do
   nvim_lsp[lsp].setup {
     on_attach = on_attach,
@@ -315,6 +328,28 @@ for _, lsp in pairs(servers) do
     }
   }
 end
+
+nvim_lsp.rust_analyzer.setup {
+    on_attach = on_attach,
+    flags = {
+      -- This will be the default in neovim 0.7+
+      debounce_text_changes = 150,
+    },
+    cmd = {vim.fn.stdpath('data')..'/mason/bin/rust-analyzer'},
+    settings = {
+        ["rust-analyzer"] = {
+            checkOnSave = true,
+            cargo = {
+                autoReload = true,
+                buildScripts = {useRustcWrapper = false},
+            },
+            check = {
+                command = "clippy",
+                extraArgs = { "--", "-W", "clippy::all", "-D", "warnings" },
+            },
+        },
+    },
+}
 
 local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)

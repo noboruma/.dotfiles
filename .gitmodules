@@ -378,3 +378,12 @@
 [submodule "zsh/plugins/zsh-autocomplete"]
 	path = zsh/plugins/zsh-autocomplete
 	url = https://github.com/marlonrichert/zsh-autocomplete
+[submodule "vim/pack/submodules/opt/mason.nvim"]
+	path = vim/pack/submodules/opt/mason.nvim
+	url = https://www.github.com/williamboman/mason.nvim
+[submodule "vim/pack/submodules/opt/mason-lspconfig.nvim"]
+	path = vim/pack/submodules/opt/mason-lspconfig.nvim
+	url = https://www.github.com/williamboman/mason-lspconfig.nvim
+[submodule "vim/pack/submodules/opt/nvim-dap"]
+	path = vim/pack/submodules/opt/nvim-dap
+	url = https://github.com/mfussenegger/nvim-dap
