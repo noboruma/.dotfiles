@@ -338,10 +338,9 @@ nvim_lsp.rust_analyzer.setup {
     cmd = {vim.fn.stdpath('data')..'/mason/bin/rust-analyzer'},
     settings = {
         ["rust-analyzer"] = {
-            checkOnSave = true,
             cargo = {
-                autoReload = true,
-                buildScripts = {useRustcWrapper = false},
+                -- FIXME: make generic
+                target = "x86_64-unknown-linux-gnu"
             },
             check = {
                 command = "clippy",
