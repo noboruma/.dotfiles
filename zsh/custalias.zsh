@@ -76,6 +76,10 @@ alias ew='nvim --server `tmux display -p "/tmp/nvimsocket.#S.#I"` --remote'
 
 alias ipy='ipython --no-autoindent'
 
+function ag_histo {
+    ag -o --nofilename --nobreak "$1" | sort | uniq -c | sort -nrk1
+}
+
 #function fzfvim() {
 #  local files
 #  IFS=$'\n' files=($(fzf-tmux --query="$@" --multi --select-1 --exit-0))

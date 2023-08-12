@@ -91,3 +91,40 @@ if !exists("*File_flip")
         let &path=oldpath
     endfun
 endif
+
+"lua <<EOM
+"local dap = require('dap')
+"
+"dap.adapters.dlv = {
+"  type = 'server',
+"  port = "${port}",
+"  executable = {
+"    command = vim.fn.stdpath('data')..'/mason/bin/dlv',
+"    args = {"dap", "-l", "127.0.0.1:${port}"},
+"  },
+"  options = {
+"    initialize_timeout_sec = 20,
+"  },
+"}
+"
+"dap.configurations.go = {
+"  {
+"    name = "Debug",
+"    type = "dlv",
+"    request = "launch",
+"    program = function()
+"      return vim.fn.input('Path to executable: ', vim.fn.getcwd(), 'file')
+"    end,
+"    cwd = '${workspaceFolder}',
+"    buildFlags = "",
+"  },
+"  {
+"    name = "Attach",
+"    type = "dlv",
+"    mode = "local",
+"    request = "attach",
+"    processId = require("dap.utils").pick_process,
+"    buildFlags = "",
+"  },
+"}
+"EOM

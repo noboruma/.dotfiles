@@ -3,7 +3,6 @@ source ~/.vim/bundle/coding_activator.vim
 
 " Make options
 let &makeprg='cargo'
-"--manifest-path `pwd`/<tab><tab>
 "
 let g:make_extra='@ build -j4'
 
@@ -42,7 +41,7 @@ dap.adapters.codelldb = {
 
 dap.configurations.rust = {
   {
-    name = "Rust debug",
+    name = "Debug",
     type = "codelldb",
     request = "launch",
     program = function()
@@ -52,32 +51,15 @@ dap.configurations.rust = {
     stopOnEntry = true,
     showDisassembly = "never",
   },
+  {
+    name = "Attach",
+    type = "codelldb",
+    mode = "local",
+    request = "attach",
+    processId = require("dap.utils").pick_process,
+    stopOnEntry = true,
+    showDisassembly = "never",
+  },
+
 }
 EOM
-
-"" Copied from built-in compiler/{rustc,cargo}.vim
-setlocal errorformat=
-			\%f:%l:%c:\ %t%*[^:]:\ %m,
-			\%f:%l:%c:\ %*\\d:%*\\d\ %t%*[^:]:\ %m,
-			\%-G%f:%l\ %s,
-			\%-G%*[\ ]^,
-			\%-G%*[\ ]^%*[~],
-			\%-G%*[\ ]...
-
-" New errorformat (after nightly 2016/08/10)
-setlocal errorformat+=
-			\%-G,
-			\%-Gerror:\ aborting\ %.%#,
-			\%-Gerror:\ Could\ not\ compile\ %.%#,
-			\%Eerror:\ %m,
-			\%Eerror[E%n]:\ %m,
-			\%Wwarning:\ %m,
-			\%Inote:\ %m,
-			\%C\ %#-->\ %f:%l:%c
-
-setlocal errorformat+=
-			\%-G%\\s%#Downloading%.%#,
-			\%-G%\\s%#Compiling%.%#,
-			\%-G%\\s%#Finished%.%#,
-			\%-G%\\s%#error:\ Could\ not\ compile\ %.%#,
-			\%-G%\\s%#To\ learn\ more\\,%.%#

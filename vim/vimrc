@@ -458,25 +458,15 @@ else
 endif
 "!fzf
 
+"Debugger
 packadd! nvim-dap
 nnoremap \b :lua require'dap'.toggle_breakpoint()<cr>
+nnoremap \r :lua require'dap'.run()<cr>
 nnoremap \c :lua require'dap'.continue()<cr>
 nnoremap \n :lua require'dap'.step_over()<cr>
-nnoremap \s :lua require'dap'.step_into()<cr>
+nnoremap \> :lua require'dap'.step_into()<cr>
+nnoremap \< :lua require'dap'.step_out()<cr>
 nnoremap \C :lua require'dap'.repl.open()<cr>
-
-"Debugger
-"packadd! vimspector
-"nnoremap \ll :<c-u>call vimspector#LaunchWithSettings({"configuration": "debug"})<cr>
-"nnoremap \l :<c-u>call vimspector#Launch()<cr>
-"nnoremap \z :<c-u>call vimspector#Reset()<cr>
-"nnoremap \L :<c-u>call vimspector#Restart()<cr>
-"nnoremap \b :<c-u>call vimspector#ToggleBreakpoint()<cr>
-"nnoremap \r :<c-u>call vimspector#Continue()<cr>
-"nnoremap \R :<c-u>call vimspector#Pause()<cr>
-"nnoremap \\ :<c-u>call vimspector#StepOver()<cr>
-"nnoremap \> :<c-u>call vimspector#StepInto()<cr>
-nnoremap \< :<c-u>call vimspector#StepOut()<cr>
 "!Debugger
 
 if has('nvim')
