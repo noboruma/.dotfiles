@@ -64,9 +64,9 @@ elif type "aptitude" > /dev/null; then
 fi
 
 alias v='vim'
-alias nv="nvim"
+alias e="nvim"
 alias sv='sudo vim'
-alias snv='sudo nvim'
+alias se='sudo nvim'
 # makepkg -sri
 alias e='$EDITOR'
 alias ee='nvim --listen `tmux display -p "/tmp/nvimsocket.#S.#I"` -c "set noautochdir" -c "Files"'
@@ -129,7 +129,7 @@ alias gpull='git pull --rebase'
 alias gclone='git clone --depth 1'
 alias gfetch='git fetch'
 alias gsw='git switch'
-alias gconf='git conflicts'
+alias gconf='git status --short | grep -E "^(.U|U.|AA|DD) "'
 #alias ginit='git submodule update --init --recursive'
 #alias gup='git submodule foreach "git fetch && git pull"'
 alias gup='git submodule update --init --recursive --remote'
@@ -144,7 +144,7 @@ alias grep='grep --color'
 alias tree='tree -C'
 
 ## Kubernetes
-alias kapply="kubectl apply -f"
+alias k="kubectl"
 alias kdelete="kubectl delete -f"
 alias kpods="kubectl get pod -o wide"
 alias ksvcs="kubectl get services -o wide"

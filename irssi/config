@@ -60,7 +60,7 @@ channels = (
   { name = "#python"; chatnet = "freenode"; autojoin = "No"; },
   { name = "#kernelnewbies"; chatnet = "OFTC"; autojoin = "No"; },
   { name = "##rust"; chatnet = "freenode"; autojoin = "No"; },
-  { name = "##c++"; chatnet = "liberachat"; autojoin = "Yes"; },
+  { name = "#c++"; chatnet = "liberachat"; autojoin = "Yes"; },
   { name = "##asm"; chatnet = "liberachat"; autojoin = "Yes"; },
   { name = "#security"; chatnet = "Freenode"; autojoin = "Yes"; },
   { name = "#go-nuts"; chatnet = "liberachat"; autojoin = "Yes"; },

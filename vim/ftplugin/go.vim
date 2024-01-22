@@ -46,11 +46,11 @@ let g:tagbar_type_go = {
             \ ],
             \ 'sro' : '.',
             \ 'kind2scope' : {
-                    \ 't' : 'ctype',
+                \ 't' : 'ctype',
                 \ 'n' : 'ntype'
             \ },
             \ 'scope2kind' : {
-                    \ 'ctype' : 't',
+                \ 'ctype' : 't',
                 \ 'ntype' : 'n'
             \ },
             \ 'ctagsbin'  : 'gotags',
@@ -63,7 +63,7 @@ function DebugNearest()
 endfunction
 
 command! DebugNearest call DebugNearest()
-command! GoCheck AsyncRun golangci-lint run --tests=false
+command! GoCheck AsyncRun golangci-lint run ./... --tests=false
 
 let test#go#gotest#options = {
       \ 'all':   '-v',
