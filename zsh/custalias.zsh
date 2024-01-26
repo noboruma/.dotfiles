@@ -64,17 +64,16 @@ elif type "aptitude" > /dev/null; then
 fi
 
 alias v='vim'
-alias e="nvim"
+alias e="$EDITOR"
 alias sv='sudo vim'
 alias se='sudo nvim'
 # makepkg -sri
-alias e='$EDITOR'
 alias ee='nvim --listen `tmux display -p "/tmp/nvimsocket.#S.#I"` -c "set noautochdir" -c "Files"'
 alias eg='$EDITOR -c "set noautochdir" -c "Ag"'
 alias eh='$EDITOR -c "set noautochdir" -c "History"'
 alias ew='nvim --server `tmux display -p "/tmp/nvimsocket.#S.#I"` --remote'
 
-alias ipy='ipython --no-autoindent'
+alias ipy='python3'
 
 function ag_histo {
     ag -o --nofilename --nobreak "$1" | sort | uniq -c | sort -nrk1
@@ -122,6 +121,7 @@ bindkey '^f' replace_gd_origin
 
 ## Git
 alias gam='git commit -a --amend'
+# Usage: glog -10 to see last 10
 alias glog='git --no-pager log --pretty="format:%C(auto,yellow)%h%C(auto,magenta)% G? %C(auto,blue)%>(30,trunc)%ad %C(auto,green)%<(15,trunc)%aN%C(auto,reset)%s%C(auto)%d" --reverse'
 alias gcom='git commit -am'
 alias gpush='git push'

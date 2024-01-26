@@ -411,39 +411,3 @@ hash -d dots=$HOME/.dotfiles
 hash -d vpack=$HOME/.dotfiles/vim/pack/submodules/opt
 hash -d linux=$HOME/workspace/src/linux
 #zprof
-
-#source /home/zackel/.config/broot/launcher/bash/br
-
-#function powerline_precmd() {
-#    PS1="$($GOPATH/bin/powerline-go -hostname-only-if-ssh -newline -cwd-mode plain -error $? -jobs $(jobs -p | wc -l) -time '15:04:05' -static-prompt-indicator -modules time,user,direnv,cwd,git,host,jobs,perms,venv,shell-var,exit -theme $HOME/.dotfiles/powerline.json)"
-#
-#    # Uncomment the following line to automatically clear errors after showing
-#    # them once. This not only clears the error for powerline-go, but also for
-#    # everything else you run in that shell. Don't enable this if you're not
-#    # sure this is what you want.
-#
-#     #set "?"
-# }
-#
-# function install_powerline_precmd() {
-#     for s in "${precmd_functions[@]}"; do
-#         if [ "$s" = "powerline_precmd" ]; then
-#             return
-#         fi
-#     done
-#     precmd_functions+=(powerline_precmd)
-# }
-#
-# if [ "$TERM" != "linux" ] && [ -f "$GOPATH/bin/powerline-go" ]; then
-#     install_powerline_precmd
-# fi
-
-# Wasmer
-export WASMER_DIR="/home/zackel/.wasmer"
-[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/zackel/workspace/deepfence/ThreatStrykerV2/google-cloud-sdk/path.zsh.inc' ]; then . '/home/zackel/workspace/deepfence/ThreatStrykerV2/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/zackel/workspace/deepfence/ThreatStrykerV2/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/zackel/workspace/deepfence/ThreatStrykerV2/google-cloud-sdk/completion.zsh.inc'; fi
