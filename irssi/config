@@ -74,6 +74,13 @@ channels = (
   { name = "#linux"; chatnet = "liberachat"; autojoin = "Yes"; },
   { name = "#kernel"; chatnet = "liberachat"; autojoin = "Yes"; },
   { name = "#llvm"; chatnet = "liberachat"; autojoin = "Yes"; },
+  { name = "#c"; chatnet = "liberachat"; autojoin = "Yes"; },
+  { name = "#hardware"; chatnet = "liberachat"; autojoin = "Yes"; },
+  { name = "##programming"; chatnet = "liberachat"; autojoin = "Yes"; },
+  { name = "#kubernetes"; chatnet = "liberachat"; autojoin = "Yes"; },
+  { name = "##re"; chatnet = "liberachat"; autojoin = "Yes"; },
+  { name = "#ai"; chatnet = "liberachat"; autojoin = "Yes"; },
+  { name = "##llm"; chatnet = "liberachat"; autojoin = "Yes"; },
   { name = "#bpftrace"; chatnet = "OFTC"; autojoin = "Yes"; }
 );
 
