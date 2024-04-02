@@ -120,6 +120,7 @@ bindkey '^h' replace_vim_eh
 bindkey '^f' replace_gd_origin
 
 ## Git
+alias gbranch='git branch --sort=-committerdate'
 alias gam='git commit -a --amend'
 # Usage: glog -10 to see last 10
 alias glog='git --no-pager log --pretty="format:%C(auto,yellow)%h%C(auto,magenta)% G? %C(auto,blue)%>(30,trunc)%ad %C(auto,green)%<(15,trunc)%aN%C(auto,reset)%s%C(auto)%d" --reverse'
@@ -135,7 +136,7 @@ alias gconf='git status --short | grep -E "^(.U|U.|AA|DD) "'
 alias gup='git submodule update --init --recursive --remote'
 alias gls='git ls-tree --name-only HEAD | xargs $aliases[ls] -d'
 alias gtree='git log --graph --oneline --all'
-alias gurl='git remote get-url origin'
+alias gurl='git remote get-url'
 alias gstat='git diff --stat --color'
 alias gcontrib='git shortlog -s -n'
 alias gpatch='git --no-pager diff'
