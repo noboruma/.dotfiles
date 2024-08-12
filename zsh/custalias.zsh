@@ -169,8 +169,9 @@ alias dtop='docker stats'
 alias dports='docker container ls --format "table {{.ID}}\t{{.Names}}\t{{.Ports}}" -a'
 alias dclean='docker volume prune ; docker system prune'
 
-alias clean='go clean --modcache ; go clean --cache ; cargo cache --gc --autoclean'
-alias update='saup && rustup update && cargo install-update --all && goup update'
+#alias clean='go clean --modcache ; go clean --cache ; cargo cache --gc --autoclean'
+alias clean='go clean --modcache ; go clean --cache'
+alias update='saup && goup update'
 
 export DOCKER_SHARE_HIST_ARGS="-v $HOME/.docker/ash_history:/root/.ash_history -v $HOME/.docker/sh_history:/root/.sh_history -v $HOME/.docker/bash_history:/root/.bash_history -v $HOME/.docker/zsh_history:/root/.zsh_history"
 

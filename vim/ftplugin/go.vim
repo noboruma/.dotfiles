@@ -92,6 +92,15 @@ if !exists("*File_flip")
     endfun
 endif
 
+lua << EOF
+    -- Set files under /vendor/ as readonly
+    local path = vim.fn.expand('%:p')
+    if string.find(path, "/vendor/") ~= nil then
+        local buf = vim.api.nvim_win_get_buf(0)
+        vim.bo[buf].readonly = true
+    end
+EOF
+
 "lua <<EOM
 "local dap = require('dap')
 "

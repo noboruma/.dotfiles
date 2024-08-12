@@ -174,7 +174,7 @@ nnoremap <c-b> :<c-u>Buffers<cr>
 "noremap <leader>A :set scb!<cr>
 "noremap <leader>b :FufBuffer<cr>
 nnoremap <leader>aa :<c-u>call AutoAdjustQFWindow()<cr>
-noremap <leader>b :<c-u>Buffers<cr>
+noremap <leader>b :<c-u>FzfxBuffers<cr>
 noremap <leader>c :<c-u>AsyncCCL<cr>:ccl\|lcl\|pcl<cr>
 noremap <leader>C :AsyncStop<cr>
 noremap <leader>d "_d
