@@ -4,8 +4,9 @@
 # sed ':a;N;$!ba;s/\n/ /g' merge two lines to check pattern
 # <(cmd) <(cmd) For asynchron piping
 # fdupes A/ --recurse: B | grep ^A/ | xargs rm
+setxkbmap -layout us -variant intl
 
-source ~/.fzf/shell/completion.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
 #zstyle ':autocomplete:*' fzf-completion yes
 #source $HOME/.zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 #skip_global_compinit=1
@@ -400,8 +401,9 @@ if [ -f $HOME/downloads/google-cloud-sdk/completion.zsh.inc ]; then . $HOME/down
 [ -f $HOME/.dntw/dntw.sh ] && source $HOME/.dntw/dntw.sh
 
 # Sourcing path
-export PATH=:$HOME/usr/bin:$GOPATH/bin:$CARGO_HOME/bin:$ZSH_PATH:$HOME/.config/yarn/global/node_modules/.bin:$YARN_PATH/bin:$NPM_PACKAGES_PATH/bin:$HOMEBREW_PATH:$RUBY_PATH:$PYTHON_PATH:$PATH
+export PATH=$HOME/usr/go/bin:$HOME/usr/bin:/usr/local/go/bin:$CARGO_HOME/bin:$ZSH_PATH:$HOME/.config/yarn/global/node_modules/.bin:$YARN_PATH/bin:$NPM_PACKAGES_PATH/bin:$HOMEBREW_PATH:$RUBY_PATH:$PYTHON_PATH:$PATH
 export LD_LIBRARY_PATH=$HOME/usr/lib:/usr/local/lib:$LD_LIBRARY_PATH
+export NDK_HOME=/home/zackel/workspace/android/android-ndk-r27c
 
 typeset -U path
 
@@ -411,3 +413,13 @@ hash -d dots=$HOME/.dotfiles
 hash -d vpack=$HOME/.dotfiles/vim/pack/submodules/opt
 hash -d linux=$HOME/workspace/src/linux
 #zprof
+
+. "/home/zackel/.wasmedge/env"
+
+# Wasmer
+export WASMER_DIR="/home/zackel/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
+
+export WASMTIME_HOME="$HOME/.wasmtime"
+
+export PATH="$WASMTIME_HOME/bin:$PATH"

@@ -312,7 +312,8 @@ statusbar = {
       visible = "always";
 
       items = {
-        uberprompt = { priority = "-1"; };
+        prompt = { priority = "-1"; };
+        prompt_empty = { priority = "-1"; };
         input = { priority = "10"; };
       };
     };
@@ -359,18 +360,6 @@ settings = {
     neat_staircase_shrink = "yes";
     trackbar_style = "%K";
     awl_shared_sbar = "OFF";
-    awl_viewer = "yes";
-    awl_viewer_launch = "yes";
-    awl_viewer_tmux_position = "top";
-    awl_sort = "refnum";
   };
 };
-hilights = ( { text = "nick"; nick = "yes"; word = "yes"; } );
-ignores = ( { level = "JOINS PARTS QUITS"; } );
 logs = { };
-mainwindows = { 1 = { first_line = "1"; lines = "39"; }; };
-keyboard = (
-  { key = "^G"; id = "command"; data = "ido_switch_start "; },
-  { key = "^H"; id = "command"; data = "window 1"; },
-  { key = "^[[23~"; id = "command"; data = "spellcheck "; }
-);

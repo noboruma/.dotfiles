@@ -55,9 +55,9 @@ if type "pacman" > /dev/null; then
     alias spu='sudo pacman -Syu'
     alias pS='pacman -Ss'
     alias spr='sudo pacman -Rcns'
-elif type "aptitude" > /dev/null; then
+elif type "apt" > /dev/null; then
     alias sai='sudo apt install'
-    alias aS='aptitude search'
+    alias aS='apt search'
     alias saR='sudo apt remove'
     alias sau='sudo apt update'
     alias saup='sudo apt upgrade'
