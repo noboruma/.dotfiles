@@ -387,3 +387,6 @@
 [submodule "vim/pack/submodules/opt/nvim-dap"]
 	path = vim/pack/submodules/opt/nvim-dap
 	url = https://github.com/mfussenegger/nvim-dap
+[submodule "vim/pack/submodules/opt/avante.nvim"]
+	path = vim/pack/submodules/opt/avante.nvim
+	url = https://github.com/yetone/avante.nvim

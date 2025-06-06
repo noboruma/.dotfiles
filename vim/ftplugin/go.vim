@@ -9,6 +9,7 @@ let g:go_code_completion_enabled = 0
 let g:go_fmt_command = 'gofmt'
 let g:go_def_mapping_enabled = 0
 let g:go_doc_keywordprg_enabled = 0
+let g:go_diagnostics_level = 2
 packadd vim-go
 
 compiler go
@@ -99,6 +100,12 @@ lua << EOF
         local buf = vim.api.nvim_win_get_buf(0)
         vim.bo[buf].readonly = true
     end
+
+    --vim.lsp.enable("ast_grep")
+    vim.lsp.enable("gopls")
+    vim.lsp.enable("golangci_lint_ls")
+    vim.lsp.enable("harper_ls")
+    vim.lsp.enable("templ")
 EOF
 
 "lua <<EOM

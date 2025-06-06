@@ -165,7 +165,7 @@ export WEDITOR='xterm -fa 'Terminus' -fs 11 -e $EDITOR'
 export GIT_EDITOR='$EDITOR'
 #export BROWSER='w3m'
 export TERMBROWSER='w3m'
-export MANPAGER="/bin/sh -c \"col -b | $EDITOR -c 'set ft=man ts=8 nomod nolist nonu noma' -\""
+export MANPAGER="nvim +Man!"
 export PAGER='less -R'
 export FINDER='find'
 

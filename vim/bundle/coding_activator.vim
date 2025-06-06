@@ -288,12 +288,11 @@ else
     nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
     nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
     nnoremap <silent> g?    <cmd>lua vim.lsp.buf.code_action()<CR>
-    nnoremap <silent> [g    <cmd>lua vim.diagnostic.goto_prev()<CR>
-    nnoremap <silent> ]g    <cmd>lua vim.diagnostic.goto_next()<CR>
+    nnoremap <silent> [g    <cmd>lua vim.diagnostic.jump({count=-1, float=true})<CR>
+    nnoremap <silent> ]g    <cmd>lua vim.diagnostic.jump({count=1, float=true})<CR>
 
 
 lua <<EOF
-
 require("mason").setup({
     ui = {
         icons = {
@@ -314,41 +313,42 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-local nvim_lsp = require('lspconfig')
+vim.lsp.enable("gopls")
+--local nvim_lsp = require('lspconfig')
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'pyright', 'ts_ls', 'gopls', 'yamlls', 'dockerls', 'bashls', 'clangd', 'asm_lsp', 'zls', 'lua_ls', 'html', 'typos_lsp', 'cssls', 'jqls', 'harper_ls', 'ast_grep', 'golangci_lint_ls', 'yamlls'}
-for _, lsp in pairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    flags = {
-      -- This will be the default in neovim 0.7+
-      debounce_text_changes = 150,
-    }
-  }
-end
+--local servers = { 'pyright', 'ts_ls', 'gopls', 'yamlls', 'dockerls', 'bashls', 'clangd', 'asm_lsp', 'zls', 'lua_ls', 'html', 'typos_lsp', 'cssls', 'jqls', 'harper_ls', 'ast_grep', 'golangci_lint_ls', 'yamlls'}
+--for _, lsp in pairs(servers) do
+--  nvim_lsp[lsp].setup {
+--    on_attach = on_attach,
+--    capabilities = capabilities,
+--    flags = {
+--      -- This will be the default in neovim 0.7+
+--      debounce_text_changes = 150,
+--    }
+--  }
+--end
 
-nvim_lsp.rust_analyzer.setup {
-    on_attach = on_attach,
-    flags = {
-      -- This will be the default in neovim 0.7+
-      debounce_text_changes = 150,
-    },
-    cmd = {vim.fn.stdpath('data')..'/mason/bin/rust-analyzer'},
-    settings = {
-        ["rust-analyzer"] = {
-            cargo = {
-                -- FIXME: make generic
-                target = "x86_64-unknown-linux-gnu"
-            },
-            check = {
-                command = "clippy",
-                extraArgs = { "--", "-W", "clippy::all", "-D", "warnings" },
-            },
-        },
-    },
-}
+--nvim_lsp.rust_analyzer.setup {
+--    on_attach = on_attach,
+--    flags = {
+--      -- This will be the default in neovim 0.7+
+--      debounce_text_changes = 150,
+--    },
+--    cmd = {vim.fn.stdpath('data')..'/mason/bin/rust-analyzer'},
+--    settings = {
+--        ["rust-analyzer"] = {
+--            cargo = {
+--                -- FIXME: make generic
+--                target = "x86_64-unknown-linux-gnu"
+--            },
+--            check = {
+--                command = "clippy",
+--                extraArgs = { "--", "-W", "clippy::all", "-D", "warnings" },
+--            },
+--        },
+--    },
+--}
 
 local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)

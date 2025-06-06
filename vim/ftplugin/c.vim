@@ -129,3 +129,9 @@ setlocal efm+=%Xmake[%*\\d]:\ Leaving\ directory\ '%f'
 setlocal grepformat=%f:%l:%c:%m
 
 DefineLocalTagFinder TagFindStruct s,struct
+
+lua <<EOF
+    vim.lsp.enable("ast_grep")
+    vim.lsp.enable("clangd")
+    vim.lsp.enable("harper_ls")
+EOF
