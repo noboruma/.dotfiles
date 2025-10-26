@@ -101,7 +101,7 @@ lua << EOF
         vim.bo[buf].readonly = true
     end
 
-    --vim.lsp.enable("ast_grep")
+    vim.lsp.enable("ast_grep")
     vim.lsp.enable("gopls")
     vim.lsp.enable("golangci_lint_ls")
     vim.lsp.enable("harper_ls")

@@ -390,3 +390,6 @@
 [submodule "vim/pack/submodules/opt/avante.nvim"]
 	path = vim/pack/submodules/opt/avante.nvim
 	url = https://github.com/yetone/avante.nvim
+[submodule "vim/pack/submodules/opt/conform.nvim"]
+	path = vim/pack/submodules/opt/conform.nvim
+	url = https://github.com/stevearc/conform.nvim

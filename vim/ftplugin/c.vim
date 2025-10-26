@@ -7,31 +7,7 @@ if (&ft == 'c')
 endif
 
 " Clang-format
-packadd vim-clang-format
-let g:clang_format#command="clang-format"
-let g:clang_format#detect_style_file=0
-let g:clang_format#style_options = {
-            \ "AlwaysBreakTemplateDeclarations" : "true",
-            \ "Standard" : "C++11",
-            \ "BasedOnStyle": "Google",
-            \ "IndentWidth": 4,
-            \ "AccessModifierOffset": -2,
-            \ "IndentCaseLabels": "false",
-            \ "MaxEmptyLinesToKeep": 3,
-            \ "KeepEmptyLinesAtTheStartOfBlocks": "true",
-            \ "SpacesBeforeTrailingComments": 1,
-            \ "AllowShortFunctionsOnASingleLine": "None",
-            \ "DerivePointerAlignment": "false",
-            \ "BinPackParameters": "false",
-            \ "AllowAllParametersOfDeclarationOnNextLine": "false",
-            \ "BreakConstructorInitializersBeforeComma": "true",
-            \ "ConstructorInitializerAllOnOneLineOrOnePerLine": "false",
-            \ "AllowShortIfStatementsOnASingleLine": "false",
-            \ "AllowShortLoopsOnASingleLine": "false",
-            \ "BreakBeforeBraces": "Linux",
-            \ "ColumnLimit": 140,
-            \ "NamespaceIndentation": "All"}
-vnoremap <buffer><Leader>= :ClangFormat<CR>
+packadd conform.nvim
 " !Clang-format
 
 "Makeprg erroformat
@@ -131,7 +107,31 @@ setlocal grepformat=%f:%l:%c:%m
 DefineLocalTagFinder TagFindStruct s,struct
 
 lua <<EOF
+    require('conform').setup({
+        formatters_by_ft = {
+            c = { 'clang-format' },
+            cpp = { 'clang-format' },
+        },
+        format_on_save = {
+            timeout_ms = 500,
+            lsp_format = "fallback",
+        },
+        formatters = {
+            ["clang-format"] = {
+                command = "clang-format",
+                args = { "--style={BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 100, SortIncludes: CaseSensitive, BinPackParameters: false, AllowAllParametersOfDeclarationOnNextLine: false, AllowShortIfStatementsOnASingleLine: false, AllowShortLoopsOnASingleLine: false, DerivePointerAlignment: true, PointerAlignment: Left }" },
+            },
+            },
+    })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*",
+        callback = function(args)
+        require("conform").format({ bufnr = args.buf })
+        end,
+    })
     vim.lsp.enable("ast_grep")
     vim.lsp.enable("clangd")
     vim.lsp.enable("harper_ls")
+    vim.lsp.enable("cpptools")
+    vim.lsp.enable("cpplint")
 EOF

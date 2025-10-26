@@ -362,3 +362,4 @@ settings = {
   };
 };
 logs = { };
+ignores = ( { level = "JOINS QUITS"; } );

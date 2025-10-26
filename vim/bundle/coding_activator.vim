@@ -302,7 +302,7 @@ require("mason").setup({
         },
     }
 })
-require("mason-lspconfig").setup()
+require("mason-lspconfig").setup{}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -313,7 +313,7 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-vim.lsp.enable("gopls")
+--vim.lsp.enable("gopls")
 --local nvim_lsp = require('lspconfig')
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
