@@ -165,6 +165,7 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 nnoremap <C-n> <C-e>
 nnoremap <c-e> :<c-u>Files<cr>
 nnoremap <c-f> :<c-u>GFiles?<cr>
+nnoremap <c-t> :<c-u>Tags<cr>
 nnoremap <C-n> <C-e>
 nnoremap <C-g> :<c-u>Ag<cr>
 vnoremap <silent> <C-g> "sy:Ag<space><C-R>"<C-f><cr>
