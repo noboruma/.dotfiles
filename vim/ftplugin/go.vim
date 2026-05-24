@@ -13,7 +13,7 @@ let g:go_diagnostics_level = 2
 packadd vim-go
 
 compiler go
-let &makeprg='go build'
+let &makeprg='make'
 
 function! GoFormatBuffer()
     if &modifiable == 1

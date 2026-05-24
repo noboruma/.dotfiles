@@ -172,10 +172,6 @@
 	path = vim/pack/submodules/opt/vim-ruby
 	url = https://github.com/vim-ruby/vim-ruby
 	shallow = true
-[submodule "zsh/plugins/zplug"]
-	path = zsh/plugins/zplug
-	url = https://github.com/zplug/zplug
-	shallow = true
 [submodule "vim/bundle/vim-fugitive"]
 	path = vim/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive
@@ -393,3 +389,8 @@
 [submodule "vim/pack/submodules/opt/conform.nvim"]
 	path = vim/pack/submodules/opt/conform.nvim
 	url = https://github.com/stevearc/conform.nvim
+[submodule "zsh/plugins/zplug"]
+	path = zsh/plugins/zplug
+	url = https://github.com/zplug/zplug
+	branch = main
+	shallow = true

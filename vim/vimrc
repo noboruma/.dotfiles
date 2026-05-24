@@ -272,8 +272,6 @@ packadd vim-plugin-AnsiEsc
 
 packadd Tabmerge
 
-packadd file-line
-
 let NERDTreeCascadeSingleChildDir=1
 let NERDTreeHighlightCursorline=1
 let g:NERDTreeShowIgnoredStatus = 1
