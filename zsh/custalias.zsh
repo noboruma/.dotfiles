@@ -243,6 +243,20 @@ alias trc="$EDITOR ~/.tmux.conf"
 alias mrc="$EDITOR ~/.mutt/neomuttrc"
 alias irc="$EDITOR ~/.irssi/config"
 
+record() {
+  eval "$(slop -f 'X=%x Y=%y W=%w H=%h')" || return
+
+  ffmpeg \
+    -f x11grab \
+    -video_size "${W}x${H}" \
+    -i "${DISPLAY:-:0.0}+${X},${Y}" \
+    -r 30 \
+    -c:v libx264 \
+    -preset ultrafast \
+    -crf 23 \
+    "recording_$(date +%s).mkv"
+}
+
 alias fd="fd -H"
 
 alias ttyw3m="TERM=fbterm w3m"

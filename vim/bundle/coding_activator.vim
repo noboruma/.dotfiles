@@ -471,7 +471,7 @@ require("godbolt").setup({
     url = "https://godbolt.org" -- can be changed to a different godbolt instance
 })
 
-require'nvim-treesitter.configs'.setup {
+require'nvim-treesitter'.setup {
   ensure_installed = { "c", "lua", "rust", "cpp", "yaml", "json", "go" },
   highlight = {
     enable = true,

@@ -292,6 +292,7 @@
 	path = vim/pack/submodules/opt/nvim-treesitter
 	url = https://github.com/nvim-treesitter/nvim-treesitter
 	shallow = true
+	branch = main
 [submodule "vim/pack/submodules/opt/nvim-treesitter-textobjects"]
 	path = vim/pack/submodules/opt/nvim-treesitter-textobjects
 	url = https://github.com/nvim-treesitter/nvim-treesitter-textobjects
@@ -394,3 +395,6 @@
 	url = https://github.com/zplug/zplug
 	branch = main
 	shallow = true
+[submodule "vim/pack/submodules/opt/videre.nvim"]
+	path = vim/pack/submodules/opt/videre.nvim
+	url = https://github.com/Owen-Dechow/videre.nvim
