@@ -137,8 +137,8 @@ let &runtimepath.=',~/.vim/bundle/colorizer'
 set showtabline=0
 " airline plugin
 if has("nvim")
-    packadd lualine.nvim
-    packadd nvim-web-devicons
+    packadd! lualine.nvim
+    packadd! nvim-web-devicons
 lua << END
     vim.pack.add {
         "https://github.com/Owen-Dechow/videre.nvim",
@@ -169,6 +169,11 @@ lua << END
         if self.options.color == nil then self.options.color = '' end
     end
 
+    local function current_func()
+        local ok, tag = pcall(vim.fn['tagbar#currenttag'], '%s', '', 'f')
+        return ok and tag or ''
+    end
+
     function custom_fname:update_status()
         local data = custom_fname.super.update_status(self)
         data = highlight.component_format_highlight(vim.bo.modified
@@ -182,16 +187,16 @@ lua << END
         options = {
             icons_enabled = true,
             theme = 'powerline_dark',
-            section_separators = {'', ''},
-            component_separators = {'', ''},
+            section_separators   = { left = '', right = '' },
+            component_separators = { left = '', right = '' },
             disabled_filetypes = {}
         },
         sections = {
             lualine_a = {'g:asyncrun_status'},
             lualine_b = {'branch'},
-            lualine_c = {{'filename', file_status=true, path=1}},
+            lualine_c = {{'filename', file_status=true, path=1}, current_func},
             lualine_x = {
-                { 'diagnostics', sources = {"nvim_lsp"}, symbols = {error = ' ', warn = ' ', info = ' ', hint = ' '} },
+                { 'diagnostics', sources = {"nvim_lsp"}, symbols = { error = '\243\176\133\154 ',  warn  = '\243\176\128\170 ', info  = '\243\176\139\189 ',  hint  = '\243\176\140\182 ' } },
                 'encoding',
                 'filetype'
                 },
@@ -264,7 +269,7 @@ let &runtimepath.=',~/.vim/bundle/undotree'
 
 " vim-fugitive
 let &runtimepath.=',~/.vim/bundle/vim-fugitive'
-packadd vim-rhubarb.git
+packadd! vim-rhubarb.git
 let &runtimepath.=',~/.vim/pack/submodules/opt/vim-gitgutter'
 set updatetime=500
 " !vim-fugitive
@@ -278,18 +283,18 @@ endif
 let &runtimepath.=',~/.vim/bundle/asyncrun'
 " !AsyncRun
 
-packadd vim-plugin-AnsiEsc
+packadd! vim-plugin-AnsiEsc
 
-packadd Tabmerge
+packadd! Tabmerge
 
 let NERDTreeCascadeSingleChildDir=1
 let NERDTreeHighlightCursorline=1
-let g:NERDTreeShowIgnoredStatus = 1
+let g:NERDTreeGitStatusShowIgnored = 1
 let NERDTreeWinPos="right"
 let NERDTreeWinSize=42
 let NERDTreeMinimalUI=1
-packadd nerdtree
-let g:NERDTreeIndicatorMapCustom = {
+packadd! nerdtree
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "+",
     \ "Staged"    : "✚",
     \ "Untracked" : "u",
@@ -301,7 +306,7 @@ let g:NERDTreeIndicatorMapCustom = {
     \ 'Ignored'   : 'i',
     \ "Unknown"   : "?"
     \ }
-packadd nerdtree-git-plugin
+packadd! nerdtree-git-plugin
 
 " Restful-console
 let &runtimepath.=',~/.vim/bundle/vim-rest-console'
@@ -382,7 +387,7 @@ let g:AutoAdapt_Rules = [
 "vim-which-key
 let mapleader="\<Space>"
 if use_custhelp
-    packadd vim-which-key
+    packadd! vim-which-key
     nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 endif
 "!vim-which-key
@@ -552,17 +557,17 @@ nnoremap \C :lua require'dap'.repl.open()<cr>
 if has('nvim')
     let g:neoterm_autoinsert=1
     let g:neoterm_term_per_tab=1
-    packadd neoterm
+    packadd! neoterm
 
     let g:extract_useDefaultMappings=0
     "let g:extract_loadDeoplete=1
     let g:extract_maxCount = 3
 
-    packadd nvim-treesitter
-    packadd iswap.nvim
+    packadd! nvim-treesitter
+    packadd! iswap.nvim
 
-    packadd vim-dadbod
-    packadd nvim-bqf
+    packadd! vim-dadbod
+    packadd! nvim-bqf
 endif
 
 set ruler          " Relative cursor position

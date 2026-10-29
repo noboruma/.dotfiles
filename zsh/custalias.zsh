@@ -22,7 +22,6 @@ alias xterm='xterm -fg white -bg black'
 alias c="clear"
 alias mem="free -m"
 
-alias mux="tmuxinator"
 alias mjn="make -j$(nproc)"
 
 export SSH_JOB_FINISH_PORT=2222

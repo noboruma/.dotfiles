@@ -33,7 +33,20 @@ let g:semanticGUIColors = [
             \'#ffb74d' ]
 let g:semanticTermColors = [195,3,4,5,6,7,8,9,10,11,12,13,14,15,22,44,61,77,211, 229]
 let g:semanticPersistCache = 1
-packadd semantic-highlight.vim
+" Warn when the cache gets big: it is read and rewritten on every start/quit
+let s:semhl_cache = get(g:, 'semanticPersistCacheLocation', $HOME . '/.semantic-highlight-cache')
+function! s:SemhlCacheWarn(...) abort
+    echohl WarningMsg
+    " keep it on one line, a wrapped message triggers the hit-enter prompt
+    echomsg strpart(printf('semhl cache %.1f MB (%s): slow start/quit',
+                \ getfsize(s:semhl_cache) / 1048576.0, fnamemodify(s:semhl_cache, ':~')), 0, &columns - 12)
+    echohl None
+endfunction
+if getfsize(s:semhl_cache) > 1024 * 1024
+    " deferred: a message echoed during startup is wiped by the first redraw
+    autocmd VimEnter * ++once call timer_start(300, function('s:SemhlCacheWarn'))
+endif
+packadd! semantic-highlight.vim
 
 if !&diff
     "au BufEnter <buffer> if (!exists('b:created')) | exe "SemanticHighlight" | let b:created=1 | endif
@@ -76,7 +89,7 @@ let g:neosnippet#enable_snipmate_compatibility = 1
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory=['~/.vim/pack/submodules/opt/vim-snippets/snippets', '~/.vim/bundle/custom-snippets']
 
-packadd neosnippet.vim
+packadd! neosnippet.vim
 imap <C-l> <Plug>(neosnippet_expand)
 smap <C-l> <Plug>(neosnippet_expand)
 xmap <C-l> <Plug>(neosnippet_expand_target)
@@ -85,31 +98,6 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-
-"if has('nvim') && !use_coc
-"    let g:deoplete#enable_at_startup = 1
-"    packadd deoplete.nvim
-"    call deoplete#custom#option('ignore_sources', {'_': ['buffer', 'around', 'member']})
-"
-"    call deoplete#custom#option({
-"                \ 'auto_complete': v:true,
-"                \ 'auto_complete_delay': 100,
-"                \ 'smart_case': v:true,
-"                \ })
-"    let g:deoplete#file#enable_buffer_path=1
-"    imap <silent><expr> <TAB>
-"                \ pumvisible() ? "\<lt>Down>" :
-"                \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
-"                \ <SID>check_back_space() ? "\<TAB>"
-"                \ : deoplete#mappings#manual_complete()
-"else
-    " SuperTab like snippets behavior.
-    " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-    "imap <expr><TAB>
-    "     \ pumvisible() ? "\<lt>Down>" :
-    "     \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)"
-    "     \ : "\<c-r>=Smart_TabComplete()\<CR>"
-"endif
 
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
  \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
@@ -134,19 +122,19 @@ let g:tagbar_compact = 1
 let g:tagbar_autofocus = 0
 let g:tagbar_autoclose = 0
 let g:tagbar_sort = 0
-packadd tagbar
+packadd! tagbar
 " !Tagbar
 
 "let g:airline_extensions += ['ale', 'gutentags', 'languageclient', 'tagbar']
 
-packadd tagfinder
+packadd! tagfinder
 
 let g:ale_enabled = 0
 " ALE plugin
 if use_coc
     let g:ale_enabled = 0
 else
-    packadd ale
+    packadd! ale
 endif
 "let g:ale_linters = {
 "\   'cpp': ['cppcheck', 'clangtidy', 'clangcheck', 'flawfinder', 'gcc'],
@@ -161,136 +149,30 @@ let g:ale_cpp_cquery_cache_directory= '/tmp/cquery/cache'
 let g:ale_linters = {'rust': ['analyzer']}
 "!ALE
 
-if use_coc
+packadd! vscode-go
+packadd! vim-vsnip
+packadd! nvim-lspconfig
+packadd! nvim-cmp
+packadd! cmp-nvim-lsp
+packadd! cmp-vsnip
+packadd! cmp-path
+packadd! cmp-buffer
+packadd! cmp-cmdline
+packadd! mason.nvim
+packadd! mason-lspconfig.nvim
 
-    packadd coc.nvim
-    "u will have bad experience for diagnostic messages when it's default 4000.
-    set updatetime=300
-
-    " don't give |ins-completion-menu| messages.
-    set shortmess+=c
-
-    inoremap <silent><expr> <c-space> coc#refresh()
-    nmap <silent> [g <Plug>(coc-diagnostic-prev)
-    nmap <silent> ]g <Plug>(coc-diagnostic-next)
-    nmap <silent> g? :<c-u>CocAction<cr>
-    nmap <silent> gD :<c-u>call CocAction('jumpDefinition', 'vsplit')<cr><c-w>=
-    nmap <silent> gd <Plug>(coc-definition)
-    nmap <silent> gt <Plug>(coc-type-definition)
-    nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr <Plug>(coc-references)
-    nmap <silent> gR :<c-u>call asyncrun#quickfix_toggle(0,1) \| call CocAction('jumpReferences')<cr>
-    nmap <silent> gL <Plug>(coc-codelens-action)
-    nmap <silent> gl :<c-u>CocList symbols<cr>
-
-    let g:coc_auto_copen = 0
-    autocmd User CocQuickfixChange call asyncrun#quickfix_toggle(0, 1) -cwd=`pwd`
-
-    " Create mappings for function text object, requires document symbols feature of languageserver.
-    xmap if <Plug>(coc-funcobj-i)
-    xmap af <Plug>(coc-funcobj-a)
-    omap if <Plug>(coc-funcobj-i)
-    omap af <Plug>(coc-funcobj-a)
-
-    xmap <silent>g?  <Plug>(coc-codeaction-selected)
-    " Remap for do codeAction of current line
-    nmap <silent>g?  <Plug>(coc-codeaction-cursor)
-    " Fix autofix problem of current line
-    nmap <silent>g!  <Plug>(coc-fix-current)
-
-    let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-    let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
-
-    " Using CocList
-    " Show all diagnostics
-    nnoremap <silent> <leader>la :<C-u>CocList diagnostics<cr>
-    " Manage extensions
-    nnoremap <silent> <leader>le :<C-u>CocList extensions<cr>
-    " Show commands
-    nnoremap <silent> <leader>lc :<C-u>CocList commands<cr>
-    " Find symbol of current document
-    nnoremap <silent> <leader>lo :<C-u>CocList outline<cr>
-    " Search workleader symbols
-    nnoremap <silent> <leader>ls :<C-u>CocList -I symbols<cr>
-    " Do default action for next item.
-    nnoremap <silent> <leader>lj :<C-u>CocNext<CR>
-    " Do default action for previous item.
-
-    nnoremap <silent> <leader>lk :<C-u>CocPrev<CR>
-    " Resume latest coc list
-    nnoremap <silent> <leader>lp :<C-u>CocListResume<CR>
-
-    " Use K to show documentation in preview window
-    "nnoremap <silent> K :call <SID>show_documentation()<CR>
-    function! s:show_documentation()
-        if (index(['vim','help'], &filetype) >= 0)
-            execute 'h '.expand('<cword>')
-        else
-            call CocAction('doHover')
-        endif
-    endfunction
-
-    " Highlight symbol under cursor on CursorHold
-    autocmd CursorHold * silent call CocActionAsync('highlight')
-
-    " Remap for rename current word
-    nmap <leader>rn <Plug>(coc-rename)
-
-    " Remap for format selected region
-    xmap <leader>f  <Plug>(coc-format-selected)
-    nmap <leader>f  <Plug>(coc-format-selected)
-
-    augroup mygroup
-        " Update signature help on jump placeholder
-        autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-    augroup end
-
-    imap <silent><expr> <TAB>
-                \ pumvisible() ? "\<lt>Down>" :
-                \ neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" :
-                \ <SID>check_back_space() ? "\<TAB>" :
-                \ coc#refresh()
-
-    command! -nargs=0 CocDetail :call CocAction('diagnosticInfo')
-
-    " Use `:Format` to format current buffer
-    command! -nargs=0 Format :call CocAction('format')
-
-    " Use `:Fold` to fold current buffer
-    command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-    " use `:OR` for organize import of current buffer
-    command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-    " Add status line support, for integration with other plugin, checkout `:h coc-status`
-    set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-else
-    packadd vscode-go
-    packadd vim-vsnip
-    packadd nvim-lspconfig
-    packadd nvim-cmp
-    packadd cmp-nvim-lsp
-    packadd cmp-vsnip
-    packadd cmp-path
-    packadd cmp-buffer
-    packadd cmp-cmdline
-    packadd mason.nvim
-    packadd mason-lspconfig.nvim
-
-    nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-    nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-    nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
-    nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-    nnoremap <silent> gt    <cmd>lua vim.lsp.buf.type_definition()<CR>
-    nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-    nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-    nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-    nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
-    nnoremap <silent> g?    <cmd>lua vim.lsp.buf.code_action()<CR>
-    nnoremap <silent> [g    <cmd>lua vim.diagnostic.jump({count=-1, float=true})<CR>
-    nnoremap <silent> ]g    <cmd>lua vim.diagnostic.jump({count=1, float=true})<CR>
-
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> gt    <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> g?    <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> [g    <cmd>lua vim.diagnostic.jump({count=-1, float=true})<CR>
+nnoremap <silent> ]g    <cmd>lua vim.diagnostic.jump({count=1, float=true})<CR>
 
 lua <<EOF
 require("mason").setup({
@@ -312,43 +194,6 @@ local on_attach = function(client, bufnr)
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
---vim.lsp.enable("gopls")
---local nvim_lsp = require('lspconfig')
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
---local servers = { 'pyright', 'ts_ls', 'gopls', 'yamlls', 'dockerls', 'bashls', 'clangd', 'asm_lsp', 'zls', 'lua_ls', 'html', 'typos_lsp', 'cssls', 'jqls', 'harper_ls', 'ast_grep', 'golangci_lint_ls', 'yamlls'}
---for _, lsp in pairs(servers) do
---  nvim_lsp[lsp].setup {
---    on_attach = on_attach,
---    capabilities = capabilities,
---    flags = {
---      -- This will be the default in neovim 0.7+
---      debounce_text_changes = 150,
---    }
---  }
---end
-
---nvim_lsp.rust_analyzer.setup {
---    on_attach = on_attach,
---    flags = {
---      -- This will be the default in neovim 0.7+
---      debounce_text_changes = 150,
---    },
---    cmd = {vim.fn.stdpath('data')..'/mason/bin/rust-analyzer'},
---    settings = {
---        ["rust-analyzer"] = {
---            cargo = {
---                -- FIXME: make generic
---                target = "x86_64-unknown-linux-gnu"
---            },
---            check = {
---                command = "clippy",
---                extraArgs = { "--", "-W", "clippy::all", "-D", "warnings" },
---            },
---        },
---    },
---}
 
 local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -435,11 +280,9 @@ cmp.setup.cmdline('/', {
 })
 EOF
 
-endif
-
 "packadd vimproc.vim
 
-packadd vim-test
+packadd! vim-test
 if has('nvim')
     " Untested, use asynrun otherwise
     let test#strategy = 'neovim'
@@ -450,11 +293,11 @@ nmap <leader>T :<c-u>TestNFile<cr>
 "packadd Vim-code-browse
 "packadd neoformat
 
-packadd splitjoin.vim
+packadd! splitjoin.vim
 
 if has('nvim')
-packadd nvim-treesitter
-packadd godbolt.nvim
+packadd! nvim-treesitter
+packadd! godbolt.nvim
 lua << EOF
 require("godbolt").setup({
     languages = {
@@ -472,7 +315,6 @@ require("godbolt").setup({
 })
 
 require'nvim-treesitter'.setup {
-  ensure_installed = { "c", "lua", "rust", "cpp", "yaml", "json", "go" },
   highlight = {
     enable = true,
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
@@ -485,8 +327,16 @@ require'nvim-treesitter'.setup {
       enable = true
   },
 }
+require("nvim-treesitter").install({
+    "c", "lua", "rust", "cpp", "yaml", "json", "go", "solidity",
+})
 EOF
 endif
 
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+
+augroup LargeFileFolding
+    autocmd!
+    autocmd BufReadPre * if getfsize(expand('<afile>')) > 1 * 1024 * 1024 | setlocal foldmethod=manual | endif
+augroup END
